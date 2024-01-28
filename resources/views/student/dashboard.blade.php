@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
-    <!-- FAVICON -->
-    <link rel="icon" href="{{ url('assets/logo.png') }}">
     @vite('resources/css/app.css')
     <title>Dashboard</title>
 </head>
@@ -63,14 +61,14 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto">
+    <div class="w-full lg:container mx-auto lg:max-w-screen-xl  mt-8 p-12 h-auto">
 
-        <div class="grid grid-rows-3 gap-12">
+        <div class="grid grid-rows-3 gap-12 md:gap-4">
             <!--  FIRST ROW -->
-            <div class="bg-white grid grid-cols-2 p-8 shadow-md rounded-md h-40">
-                <div class="grid gap-2">
-                    <h1 class="text-3xl"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
-                    <p class="text-lg">
+            <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 p-8 shadow-md rounded-md lg:h-40">
+                <div class="grid lg:gap-2 md:gap-0">
+                    <h1 class="lg:text-3xl md:text-[1.5em]"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
+                    <p class="lg:text-lg md:text-[18px] md:mt-3">
                         @if(($companyName == 0))
                         Do well on your internship
                         @else
@@ -78,49 +76,49 @@
                         @endif
                     </p>
                 </div>
-                <div class="flex flex-col justify-end">
-                    <div class="grid justify-items-end">
-                        <a href="{{ route('student_profile') }}"><button class="bg-black text-white p-1 rounded-md text-sm w-40">Go to your
+                <div class="flex flex-col lg:justify-end lg:row-span-2 md:row-span-2 md:justify-end ">
+                    <div class=" grid justify-items-end md:top-0">
+                        <a href=" {{ route('student_profile') }}"><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem]">Go to your
                                 Profile</button></a>
                     </div>
                 </div>
             </div>
 
             <!--  SECOND ROW -->
-            <div class="row-span-1">
-                <div class="bg-white  p-8 shadow-md rounded-md h-40 flex flex-col justify-center items-center gap-6">
+            <div class="lg:row-span-1">
+                <div class="bg-white  p-8 shadow-md rounded-md lg:h-40 flex flex-col justify-center items-center gap-6">
                     <div>
-                        <h1 class="text-2xl font-semibold">View Partner Companies Here:</h1>
+                        <h1 class="lg:text-2xl font-semibold">View Partner Companies Here:</h1>
                     </div>
-                    <div><button class="bg-black text-white p-1 rounded-md text-sm w-36">
+                    <div><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36">
                             <a href="{{ route('student_company-list') }}">Company List</a></button></div>
                 </div>
             </div>
 
             <!--  THIRD ROW -->
-            <div class="row-span-3">
-                <div class=" grid grid-cols-2 gap-16 ">
-                    <div class="bg-white shadow-md rounded-md h-48 flex flex-col items-center justify-center gap-6">
+            <div class="lg:row-span-3">
+                <div class="grid grid-cols-2 gap-16 ">
+                    <div class="bg-white shadow-md rounded-md lg:h-48 flex flex-col items-center justify-center gap-6">
                         <div>
-                            <h1 class="font-semibold text-2xl">Journal Entry</h1>
+                            <h1 class="font-semibold lg:text-2xl">Journal Entry</h1>
                         </div>
                         <div>
                             <a href="{{ route('student_journal') }}"><button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4">Journal</button>
                         </div></a>
                         <div>
-                            <p class="text-sm">Please submit your Daily Journal entry here and input your working hours
+                            <p class="lg:text-sm">Please submit your Daily Journal entry here and input your working hours
                             </p>
                         </div>
                     </div>
-                    <div class="bg-white shadow-md rounded-md h-48 flex flex-col items-center justify-center gap-6">
+                    <div class="bg-white shadow-md rounded-md lg:h-48 flex flex-col items-center justify-center gap-6">
                         <div>
-                            <h1 class="font-semibold text-2xl">Company Matches</h1>
+                            <h1 class="font-semibold lg:text-2xl">Company Matches</h1>
                         </div>
                         <div>
-                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
+                            <button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36 mb-4"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
                         </div>
                         <div>
-                            <p class="text-sm">Contact your coordinator for more information about your company matches
+                            <p class="lg:text-sm">Contact your coordinator for more information about your company matches
                             </p>
                         </div>
                     </div>
