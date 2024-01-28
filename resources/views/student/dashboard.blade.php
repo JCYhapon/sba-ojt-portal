@@ -78,7 +78,7 @@
                 </div>
                 <div class="flex flex-col lg:justify-end lg:row-span-2 md:row-span-2 md:justify-end sm:justify-end ss:justify-end xs:items-center xs:justify-end">
                     <div class=" grid justify-items-end">
-                        <a href=" {{ route('student_profile') }}"><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem] ss:text-[13px] ss:w-[9rem]">Go to your
+                        <a href=" {{ route('student_profile') }}"><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem] ss:text-[13px] ss:w-[9rem] xs:text-[13px] xs:w-[9rem]">Go to your
                                 Profile</button></a>
                     </div>
                 </div>
