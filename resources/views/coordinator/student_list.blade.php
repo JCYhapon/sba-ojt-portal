@@ -142,7 +142,7 @@
                             $student = \App\Models\Student::where('studentID', $studentID)->first();
                             @endphp
                             @if ($student)
-                            <tr>
+                            <tr onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';">
                                 <td class="py-2 px-4 border-b">{{ $student->firstName }} {{ $student->lastName }}</td>
                                 <td class="py-2 px-4 border-b">{{ $student->email }}</td>
                                 <td class="py-2 px-4 border-b">{{ $student->section }}</td>
