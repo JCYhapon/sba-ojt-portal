@@ -14,7 +14,7 @@ export default {
                 "70vh": "70vh",
             },
             screens: {
-                xs: "390px",
+                xs: "480px",
                 ss: "620px",
                 sm: "768px",
                 md: "1060px",
