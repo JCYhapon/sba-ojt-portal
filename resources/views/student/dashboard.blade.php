@@ -63,7 +63,7 @@
 
     <div class="w-full lg:container mx-auto lg:max-w-screen-xl  mt-8 p-12 h-auto">
 
-        <div class="grid grid-rows-3 gap-12 md:gap-4">
+        <div class="grid grid-rows-3 lg:gap-12 md:gap-6">
             <!--  FIRST ROW -->
             <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 p-8 shadow-md rounded-md lg:h-40">
                 <div class="grid lg:gap-2 md:gap-0">
@@ -86,39 +86,39 @@
 
             <!--  SECOND ROW -->
             <div class="lg:row-span-1">
-                <div class="bg-white  p-8 shadow-md rounded-md lg:h-40 flex flex-col justify-center items-center gap-6">
+                <div class="bg-white  p-8 shadow-md rounded-md h-40 flex flex-col justify-center items-center gap-6">
                     <div>
-                        <h1 class="lg:text-2xl font-semibold">View Partner Companies Here:</h1>
+                        <h1 class="lg:text-2xl md:text-lg font-semibold">View Partner Companies Here:</h1>
                     </div>
-                    <div><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36">
+                    <div><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36 md:text-[14px] md:w-[9rem]">
                             <a href="{{ route('student_company-list') }}">Company List</a></button></div>
                 </div>
             </div>
 
             <!--  THIRD ROW -->
             <div class="lg:row-span-3">
-                <div class="grid grid-cols-2 gap-16 ">
-                    <div class="bg-white shadow-md rounded-md lg:h-48 flex flex-col items-center justify-center gap-6">
+                <div class="grid grid-cols-2 lg:gap-16 md:gap-10 ">
+                    <div class="bg-white shadow-md rounded-md h-auto flex flex-col items-center justify-center gap-6">
                         <div>
-                            <h1 class="font-semibold lg:text-2xl">Journal Entry</h1>
+                            <h1 class="font-semibold lg:text-2xl md:mt-5">Journal Entry</h1>
                         </div>
                         <div>
-                            <a href="{{ route('student_journal') }}"><button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4">Journal</button>
+                            <a href="{{ route('student_journal') }}"><button class="bg-black text-white p-1 rounded-md text-sm w-36 lg:mb-4 ">Journal</button>
                         </div></a>
                         <div>
-                            <p class="lg:text-sm">Please submit your Daily Journal entry here and input your working hours
+                            <p class="lg:text-sm md:text-[13px] md:mb-2">Please submit your Daily Journal entry here and input your working hours
                             </p>
                         </div>
                     </div>
                     <div class="bg-white shadow-md rounded-md lg:h-48 flex flex-col items-center justify-center gap-6">
                         <div>
-                            <h1 class="font-semibold lg:text-2xl">Company Matches</h1>
+                            <h1 class="font-semibold lg:text-2xl md:mt-5">Company Matches</h1>
                         </div>
                         <div>
-                            <button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36 mb-4"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
+                            <button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36 lg:mb-4 md:text-[14px] md:w-[9rem]"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
                         </div>
                         <div>
-                            <p class="lg:text-sm">Contact your coordinator for more information about your company matches
+                            <p class="lg:text-sm md:text-[13px] md:mb-2">Contact your coordinator for more information about your company matches
                             </p>
                         </div>
                     </div>
