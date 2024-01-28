@@ -100,7 +100,7 @@
                 <div class="grid grid-cols-2 lg:gap-16 md:gap-10 gap-6">
                     <div class="bg-white shadow-md rounded-md h-auto flex flex-col items-center justify-center gap-6">
                         <div>
-                            <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-2xl ss:text-2xl xs:text-2xl text-[13px] mt-5">Journal Entry</h1>
+                            <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-xl ss:text-2xl xs:text-xl text-[13px] mt-5">Journal Entry</h1>
                         </div>
                         <div>
                             <a href="{{ route('student_journal') }}"><button class="bg-black text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:mb-4 w-[6rem] ">Journal</button>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="bg-white shadow-md rounded-md lg:h-48 flex flex-col items-center justify-center gap-6">
                         <div>
-                            <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-2xl ss:text-2xl xs:text-2xl text-[13px] mt-5">Company Matches</h1>
+                            <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-2xl ss:text-2xl xs:text-xl text-[13px] mt-5">Company Matches</h1>
                         </div>
                         <div>
                             <button class="bg-black text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:w-36 lg:mb-4 md:w-[9rem]  sm:w-[9rem]  ss:w-[9rem] w-[6rem]"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
