@@ -7,8 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/loginpage.css') }}">
+
     @vite('resources/css/app.css')
     <title>SBA-OJT PORTAL</title>
+
 </head>
 
 <body>
@@ -16,7 +21,7 @@
         <div class="w-full py-6">
 
             <!-- Laravel login form -->
-            <div class="w-[40vh] mx-auto white p-[2rem] shadow-lg rounded-md">
+            <div class="w-[40vh] mx-auto bg-white p-[2rem] shadow-lg rounded-md">
                 <h1 class="text-center mb-5">
                     <span class="font-bold text-3xl text-black ">Welcome Back!</span>
                 </h1>
