@@ -63,11 +63,11 @@
 
     <div class="w-full lg:container mx-auto lg:max-w-screen-xl  mt-8 p-12 h-auto">
 
-        <div class="grid grid-rows-3 lg:gap-12 md:gap-6">
+        <div class="grid grid-rows-3 lg:gap-12 md:gap-6 gap-4">
             <!--  FIRST ROW -->
-            <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 p-8 shadow-md rounded-md lg:h-40">
+            <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 p-8 shadow-md rounded-md lg:h-40">
                 <div class="grid lg:gap-2 md:gap-0">
-                    <h1 class="lg:text-3xl md:text-[1.5em]"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
+                    <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em]"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
                     <p class="lg:text-lg md:text-[18px] md:mt-3">
                         @if(($companyName == 0))
                         Do well on your internship
@@ -76,9 +76,9 @@
                         @endif
                     </p>
                 </div>
-                <div class="flex flex-col lg:justify-end lg:row-span-2 md:row-span-2 md:justify-end ">
-                    <div class=" grid justify-items-end md:top-0">
-                        <a href=" {{ route('student_profile') }}"><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem]">Go to your
+                <div class="flex flex-col lg:justify-end lg:row-span-2 md:row-span-2 md:justify-end sm:justify-end">
+                    <div class=" grid justify-items-end">
+                        <a href=" {{ route('student_profile') }}"><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem]">Go to your
                                 Profile</button></a>
                     </div>
                 </div>
