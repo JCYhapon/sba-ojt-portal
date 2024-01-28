@@ -90,7 +90,7 @@
                     <div>
                         <h1 class="lg:text-2xl md:text-lg sm:text-lg ss:text-lg font-semibold">View Partner Companies Here:</h1>
                     </div>
-                    <div><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36 md:text-[14px] md:w-[9rem] sm:text-[14px] sm:w-[9rem] ss:text-[14px] ss:w-[9rem]">
+                    <div><button class="bg-black text-white p-1 rounded-md lg:text-sm lg:w-36 md:text-[14px] md:w-[9rem] sm:text-[14px] sm:w-[9rem] ss:text-[14px] ss:w-[9rem] xs:text-[14px] xs:w-[9rem]">
                             <a href="{{ route('student_company-list') }}">Company List</a></button></div>
                 </div>
             </div>
