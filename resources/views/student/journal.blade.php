@@ -76,7 +76,7 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
         <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
-            <div class="flex align-middle justify-end">
+            <div class="flex align-middle justify-end mb-4">
                 <a href="{{ route('create_journal') }}" class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
                     <button type="button" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                         <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -87,40 +87,45 @@
                 </a>
             </div>
 
-            @foreach($journals as $journal)
-            <div class="card mb-3">
-                <div class="card-body row">
-                    <div class="col">
-                        <h2 class="card-title">Journal Number: {{ $journal->journalNumber }}</h2>
-                        <p class="card-text"><strong>Status:</strong>
-                            @if($journal->status == 1)
-                            Unread
-                            @elseif($journal->status == 2)
-                            Seen
-                            @elseif($journal->status == 3)
-                            Graded
-                            @endif
-                        </p>
-                        <p class="card-text"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
-                    </div>
-                    <div class="col-auto">
-                        {{-- <a href="{{ route('edit_journal',['journalID' => $journal->journalID]) }}"> --}}
-                        <a href="{{ route('edit_journal', ['journal' => $journal->journalID]) }}">
-                            <box-icon name='edit' color='#1f2937' style='font-size: 45px;'></box-icon>
-                        </a>
-                    </div>
-                </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-4">Journal Title</th>
+                            <th scope="col" class="px-4 py-4">Status</th>
+                            <th scope="col" class="px-4 py-4">Grade</th>
+                            <th scope="col" class="px-4 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($journals as $journal)
+                        <tr>
+                            <td class="py-2 px-4 border-b">Journal Number: {{ $journal->journalNumber }}</td>
+                            <td class="py-2 px-4 border-b">
+                                @if($journal->status == 1)
+                                Unread
+                                @elseif($journal->status == 2)
+                                Seen
+                                @elseif($journal->status == 3)
+                                Graded
+                                @endif
+                            </td>
+                            <td class="py-2 px-4 border-b"> {{ $journal->grade ?? 'Not graded yet' }}</td>
+                            <td class="py-2 px-4 border-b">
+                                {{-- <a href="{{ route('edit_journal',['journalID' => $journal->journalID]) }}"> --}}
+                                <a href="{{ route('edit_journal', ['journal' => $journal->journalID]) }}">
+                                    <box-icon name='edit' color='#1f2937' style='font-size: 45px;'></box-icon>
+                                </a>
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    {!! $journals->links() !!}
             </div>
-            @endforeach
-            {!! $journals->links() !!}
-
-
         </div>
-
-
-
     </div>
-
 </body>
 
 </html>
