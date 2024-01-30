@@ -83,10 +83,13 @@
             <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- Date --}}
-                <div class="flex flex-row justify-between">
-                    <div class="form-group">
-                        <input type="text" class="form-control rounded-md" name="journalNumber" required placeholder="Journal Title">
+                <div class="flex flex-row justify-between mb-[1.5rem]">
+                    <div class="flex items-end">
+                        <div class="form-group w-[5rem]">
+                            <input type="text" class="form-control rounded-md w-[30rem] border-neutral-400 bg-gray-50" name="journalNumber" required placeholder="Journal Title">
+                        </div>
                     </div>
+
                     <div class="flex flex-col">
                         <div class="">
                             <label for="coverage_start_date">Start Date</label>
@@ -97,35 +100,36 @@
                             <input type="date" name="coverage_end_date" id="coverage_end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
                     </div>
-
-
-                </div>
-
-
-
-                <div class="form-group">
-                    <label for="reflection">Reflection:</label>
-                    <textarea class="form-control" name="reflection" rows="4" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="hoursRendered">Hours Rendered:</label>
-                    <input type="number" class="form-control" name="hoursRendered" required>
+                    <textarea class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" placeholder="Write your thoughts here..." name="reflection" rows="10" required id="message"></textarea>
+                </div>
+
+                <div class="form-group mb-8">
+                    <input type="number" class="form-control rounded-md w-[30rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required>
+                </div>
+
+
+                <div class="form-group mb-4">
+                    <label for="studentSignature" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white" for="file_input">Student Signature</label>
+                    <input type="file" name="studentSignature" accept="image/*" class="form-control-file w-[30rem]  block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                 </div>
 
                 <div class="form-group">
-                    <label for="studentSignature">Student Signature:</label>
-                    <input type="file" class="form-control-file" name="studentSignature" accept="image/*">
+                    <label for="supervisorSignature" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Supervisor Signature</label>
+                    <input type="file" name="supervisorSignature" accept="image/*" class="form-control-file block w-[30rem] text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                 </div>
 
-                <div class="form-group">
-                    <label for="supervisorSignature">Supervisor Signature:</label>
-                    <input type="file" class="form-control-file" name="supervisorSignature" accept="image/*">
+                <div class="flex align-middle justify-end mt-8">
+                    <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+                        <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                            Create Journal
+                        </button>
+                    </a>
                 </div>
-                <button type="submit" class="btn btn-primary">Create Journal</button>
             </form>
         </div>
-
     </div>
 
 
