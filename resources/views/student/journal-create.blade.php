@@ -74,51 +74,58 @@
         </div>
     </div>
     <!-- END OF NAVBAR -->
-    <div class="container">
-        <h1 class="mt-5">Create Journal Entry</h1>
-        <br>
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
+        <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
+            @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
 
-        @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+            <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                {{-- Date --}}
+                <div class="flex flex-row justify-between">
+                    <div class="form-group">
+                        <input type="text" class="form-control rounded-md" name="journalNumber" required placeholder="Journal Title">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="">
+                            <label for="coverage_start_date">Start Date</label>
+                            <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="coverage_end_date">End Date</label>
+                            <input type="date" name="coverage_end_date" id="coverage_end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        </div>
+                    </div>
 
-        <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            {{-- Date --}}
-            <div class="col-span-2">
-                <label for="coverage_start_date">Coverage Start Date</label>
-                <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-            </div>
-            <div class="col-span-2">
-                <label for="coverage_end_date">Coverage End Date</label>
-                <input type="date" name="coverage_end_date" id="coverage_end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-            </div>
-            <div class="form-group">
-                <label for="journalNumber">Journal Number:</label>
-                <input type="text" class="form-control" name="journalNumber" required>
-            </div>
 
-            <div class="form-group">
-                <label for="reflection">Reflection:</label>
-                <textarea class="form-control" name="reflection" rows="4" required></textarea>
-            </div>
+                </div>
 
-            <div class="form-group">
-                <label for="hoursRendered">Hours Rendered:</label>
-                <input type="number" class="form-control" name="hoursRendered" required>
-            </div>
 
-            <div class="form-group">
-                <label for="studentSignature">Student Signature:</label>
-                <input type="file" class="form-control-file" name="studentSignature" accept="image/*">
-            </div>
 
-            <div class="form-group">
-                <label for="supervisorSignature">Supervisor Signature:</label>
-                <input type="file" class="form-control-file" name="supervisorSignature" accept="image/*">
-            </div>
-            <button type="submit" class="btn btn-primary">Create Journal</button>
-        </form>
+                <div class="form-group">
+                    <label for="reflection">Reflection:</label>
+                    <textarea class="form-control" name="reflection" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="hoursRendered">Hours Rendered:</label>
+                    <input type="number" class="form-control" name="hoursRendered" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentSignature">Student Signature:</label>
+                    <input type="file" class="form-control-file" name="studentSignature" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="supervisorSignature">Supervisor Signature:</label>
+                    <input type="file" class="form-control-file" name="supervisorSignature" accept="image/*">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Journal</button>
+            </form>
+        </div>
+
     </div>
 
 
