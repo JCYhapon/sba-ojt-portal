@@ -86,7 +86,7 @@
                 <div class="flex flex-row justify-between mb-[1.5rem]">
                     <div class="flex items-end">
                         <div class="form-group w-[5rem]">
-                            <input type="text" class="form-control rounded-md w-[30rem] border-neutral-400 bg-gray-50" name="journalNumber" required placeholder="Journal Title">
+                            <input type="text" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="journalNumber" required placeholder="Journal Number">
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@
                             <label for="coverage_start_date">Start Date</label>
                             <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3">
                         </div>
-                        <div class="col-span-2">
+                        <div class="">
                             <label for="coverage_end_date">End Date</label>
                             <input type="date" name="coverage_end_date" id="coverage_end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="form-group mb-8">
-                    <input type="number" class="form-control rounded-md w-[30rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required>
+                    <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required>
                 </div>
 
 

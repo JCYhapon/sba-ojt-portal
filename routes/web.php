@@ -64,7 +64,9 @@ Route::get('/journal', function () {
     return view('student.journal');
 })->name('student_journal'); // STUDENT JOURNAL PAGE
 
-Route::get('/student-profile', function () {return view('student.profile');})->name('student_profile'); // STUDENT PROFILE PAGE
+Route::get('/student-profile', function () {
+    return view('student.profile');
+})->name('student_profile'); // STUDENT PROFILE PAGE
 
 
 
@@ -207,4 +209,3 @@ Route::get('/coordinator/student-list', [StudentController::class, 'studentHired
 |----------------------------------------------------------------
 */
 Route::get('/match-students', [MatchingController::class, 'matchStudentsWithCompanies'])->name('match-students');
-
