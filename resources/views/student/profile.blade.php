@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @vite('resources/css/app.css')
     <title>Profile</title>
 </head>
@@ -66,104 +67,144 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto">
         @foreach (explode(',',Auth::user()->schoolID) as $studentID)
-            @php
-                $student = \App\Models\Student::where('studentID', $studentID)->first();
-            @endphp
-            @if (!empty(auth()->user()->profilePicture))
-                <img src="/{{ auth()->user()->profilePicture }}" width="100px">
-            @else
-                <img src="/profilePicture/defaultProfilePicture.jpg" width="100px">
-            @endif
-            <div class="grid grid-rows-3">
-                <!--  FIRST ROW -->
-                <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
-                    <div class="flex flex-col justify-between">
+        @php
+        $student = \App\Models\Student::where('studentID', $studentID)->first();
+        @endphp
+
+        <div class="grid grid-rows-3">
+            <!--  FIRST ROW -->
+            <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
+                <div class="flex flex-col justify-between">
+                    <div class="flex flex-row gap-10">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
+                        @if (!empty(auth()->user()->profilePicture))
+                        <img src="/{{ auth()->user()->profilePicture }}" width="100px">
+                        @else
+                        <img src="/profilePicture/defaultProfilePicture.jpg" width="80px" class="rounded-full">
+                        @endif
+                    </div>
+                    <div>
                         <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
                     </div>
-                    <div class="flex items-end">
-                        <div>
-                            <p class="text-lg"><span class="font-semibold">Email:</span> {{ $student->email }}</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-between">
-                        <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
-                        <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
+
+                </div>
+                <div class="flex items-end">
+                    <div>
+                        <p class="text-lg"><span class="font-semibold">Email:</span> {{ $student->email }}</p>
                     </div>
                 </div>
-
-                <!-- SECOND ROW -->
-                <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-56">
-                    <div class="flex flex-col justify-between gap-2">
-                        <div>
-                            @if(isset($companies->name) && !empty($companies->name))
-                                <p class="text-lg font-semibold">Company: {{ $companies->name }}</p>
-                            @else
-                                <p class="text-lg font-semibold">Company: Not Hired</p>
-                            @endif
-                        </div>
-
-                        <div>
-                            <p class="text-lg font-semibold">Position:</p>
-                            @foreach($student->position as $position)
-                            <ul>
-                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
-                            </ul>
-                            @endforeach
-                        </div>
-                        <div>
-                            <p class="text-lg font-semibold">Supervisor: {{ $student->supervisor }}</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <h1 class="text-lg font-bold">Total Hours Tracker</h1>
-                        </div>
-                        <div class="flex flex-col justify-end">
-                            <p class="text-sm font-semibold">Hours Rendered: {{ $totalRenderedHours }}</p>
-                            <p class="text-sm font-semibold">Hours Left: {{ $remainingHours }}</p>
-                            <p class="text-sm font-semibold text-cyan-500">Needed Hours: {{ $neededHours }}</p>
-                        </div>
-                    </div>
+                <div class="flex flex-col justify-between">
+                    <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
+                    <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
                 </div>
-
-                <!--  THIRD ROW -->
-                <div class="flex">
-                    <div class="row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
-                        <div class="flex flex-col gap-4">
-                            <div>
-                                <h1 class="text-lg font-semibold">Update Password</h1>
-                            </div>
-                            <div>
-                                <p>Ensure your account is using a long, random password to stay secure.</p>
-                            </div>
-                            <div>
-                                <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4">Update Password</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
-                        <div class="flex flex-col gap-4">
-                            <div>
-                                <h1 class="text-lg font-semibold">Update Profile</h1>
-                            </div>
-                            <div>
-                                <p>Edit Profile to match into a company</p>
-                            </div>
-                            <div>
-                                <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
-
-                                <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--  END OF THIRD ROW -->
-
             </div>
+
+            <!-- SECOND ROW -->
+            <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-56">
+                <div class="flex flex-col justify-between gap-2">
+                    <div>
+                        @if(isset($companies->name) && !empty($companies->name))
+                        <p class="text-lg font-semibold">Company: {{ $companies->name }}</p>
+                        @else
+                        <p class="text-lg font-semibold">Company: Not Hired</p>
+                        @endif
+                    </div>
+
+                    <div>
+                        <p class="text-lg font-semibold">Position:</p>
+                        @foreach($student->position as $position)
+                        <ul>
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
+                        </ul>
+                        @endforeach
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">Supervisor: {{ $student->supervisor }}</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-row gap-6">
+                    <div>
+                        <h1 class="text-lg font-bold">Total Hours Tracker</h1>
+                        <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
+                            <canvas data-te-chart="doughnut" data-te-dataset-data='[
+        {{ $totalRenderedHours }},
+        {{ $remainingHours }},
+        {{ $neededHours }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)", "rgba(255, 193, 7, 0.5)"]'>
+                            </canvas>
+                        </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                // Find the canvas element using its data attributes
+                                const canvas = document.querySelector('[data-te-chart="doughnut"]');
+
+                                // Extract necessary data from data attributes
+                                const data = JSON.parse(canvas.getAttribute('data-te-dataset-data'));
+                                const backgroundColor = JSON.parse(canvas.getAttribute('data-te-dataset-background-color'));
+
+                                // Create the doughnut chart with labels for Hired, Non-hired, and Needed Hours
+                                new Chart(canvas, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Rendered', 'Left', 'Needed'], // Updated labels
+                                        datasets: [{
+                                            data: data,
+                                            backgroundColor: backgroundColor
+                                        }]
+                                    },
+                                    options: {
+                                        // You can add options here if needed
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+
+                    <div class="flex flex-col justify-end">
+                        <p class="text-sm font-semibold">Hours Rendered: {{ $totalRenderedHours }}</p>
+                        <p class="text-sm font-semibold">Hours Left: {{ $remainingHours }}</p>
+                        <p class="text-sm font-semibold text-cyan-500">Needed Hours: {{ $neededHours }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--  THIRD ROW -->
+            <div class="flex">
+                <div class="row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <h1 class="text-lg font-semibold">Update Password</h1>
+                        </div>
+                        <div>
+                            <p>Ensure your account is using a long, random password to stay secure.</p>
+                        </div>
+                        <div>
+                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4">Update Password</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <h1 class="text-lg font-semibold">Update Profile</h1>
+                        </div>
+                        <div>
+                            <p>Edit Profile to match into a company</p>
+                        </div>
+                        <div>
+                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
+
+                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  END OF THIRD ROW -->
+
+        </div>
         @endforeach
     </div>
 
