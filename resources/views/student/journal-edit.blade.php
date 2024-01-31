@@ -75,53 +75,63 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="container mt-5">
-        <h1>Edit Journal</h1>
-        <form method="POST" action="{{ route('update_journal', ['journalID' => $journal->journalID]) }}">
-            @csrf
-            @method('PUT')
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
+        <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
+            <form method="POST" action="{{ route('update_journal', ['journalID' => $journal->journalID]) }}">
+                @csrf
+                @method('PUT')
+                <div class="flex flex-row justify-between mb-[1.5rem]">
+                    <div class="flex items-end">
+                        <div class="form-group w-[5rem]">
+                            <input type="text" name="journalNumber" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->journalNumber }}" required>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label for="journalNumber">Journal Number</label>
-                <input type="text" name="journalNumber" class="form-control" value="{{ $journal->journalNumber }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="coverage_start_date">Journal Week Coverage Start:</label>
-                <input type="date" name="coverage_start_date" class="form-control" value="{{ $journal->coverage_start_date }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="coverage_end_date">Journal Week Coverage End:</label>
-                <input type="date" name="coverage_end_date" class="form-control" value="{{ $journal->coverage_end_date }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="reflection">Reflection</label>
-                <textarea name="reflection" class="form-control" readonly>{{ $journal->reflection }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="hoursRendered">Hours Rendered</label>
-                <input type="text" name="hoursRendered" class="form-control" value="{{ $journal->hoursRendered }}" required>
-            </div>
+                    <div class="flex flex-col">
+                        <div class="form-group">
+                            <label for="coverage_start_date">Start Date</label>
+                            <input type="date" name="coverage_start_date" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3" value="{{ $journal->coverage_start_date }}" required>
+                        </div>
 
 
-            <img src="/{{ $journal->studentSignature }}" width="100px">
-            <img src="/{{ $journal->supervisorSignature }}" width="100px">
+                        <div class="form-group">
+                            <label for="coverage_end_date">End Date</label>
+                            <input type="date" name="coverage_end_date" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ $journal->coverage_end_date }}" required>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="grade">Grade</label>
-                <input type="text" name="grade" class="form-control" value="{{ $journal->grade ?: 'Not Graded Yet' }}" readonly>
-            </div>
+                <div class="form-group">
+                    <label for="reflection">Reflection</label>
+                    <textarea name="reflection" class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" rows="10" readonly>{{ $journal->reflection }}</textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="comments">Coordinators Comment</label>
-                <textarea name="comments" class="form-control" readonly>{{ $journal->comments }}</textarea>
-            </div>
+                <div class="flex flex-row justify-between">
+                    <div class="form-group">
+                        <label for="hoursRendered">Hours Rendered</label>
+                        <input type="text" name="hoursRendered" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->hoursRendered }}" required>
+                    </div>
 
-            <button type="submit" class="btn btn-primary">Update Journal</button>
-        </form>
+
+                    <img src="/{{ $journal->studentSignature }}" width="100px">
+                    <img src="/{{ $journal->supervisorSignature }}" width="100px">
+                </div>
+
+
+                <div class="form-group flex flex-col">
+                    <label for="grade">Grade</label>
+                    <input type="text" name="grade" class="form-control" value="{{ $journal->grade ?: 'Not Graded Yet' }}" readonly>
+                </div>
+
+                <div class="form-group flex flex-col">
+                    <label for="comments">Coordinators Comment</label>
+                    <textarea name="comments" class="form-control" readonly>{{ $journal->comments }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Journal</button>
+
+            </form>
+        </div>
     </div>
 
 </body>
