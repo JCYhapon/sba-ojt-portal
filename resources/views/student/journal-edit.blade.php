@@ -128,7 +128,7 @@
                     <textarea name="comments" class="form-control" readonly>{{ $journal->comments }}</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update Journal</button>
+                <button type="submit" class="btn btn-primary">Updates Journal</button>
 
             </form>
         </div>
