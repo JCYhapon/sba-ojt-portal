@@ -65,23 +65,18 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto overflow-x-auto ">
         @foreach (explode(',',Auth::user()->schoolID) as $studentID)
         @php
         $student = \App\Models\Student::where('studentID', $studentID)->first();
         @endphp
 
-        <div class="grid grid-rows-3">
+        <div class="grid grid-rows-3 lg:max-h-[70vh]  xs:max-h-screen xs:gap-8 gap-0 h-auto">
             <!--  FIRST ROW -->
-            <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
+            <div class="bg-white row-span-1 grid grid-cols-3 x p-8 shadow-md rounded-md h-48 py-12">
                 <div class="flex flex-col justify-between">
                     <div class="flex flex-row gap-10">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
-                        @if (!empty(auth()->user()->profilePicture))
-                        <img src="/{{ auth()->user()->profilePicture }}" width="100px">
-                        @else
-                        <img src="/profilePicture/defaultProfilePicture.jpg" width="80px" class="rounded-full">
-                        @endif
                     </div>
                     <div>
                         <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
@@ -128,9 +123,9 @@
                         <h1 class="text-lg font-bold">Total Hours Tracker</h1>
                         <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
                             <canvas data-te-chart="doughnut" data-te-dataset-data='[
-        {{ $totalRenderedHours }},
-        {{ $remainingHours }},
-        {{ $neededHours }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)", "rgba(255, 193, 7, 0.5)"]'>
+                    {{ $totalRenderedHours }},
+                     {{ $remainingHours }},
+                    {{ $neededHours }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)", "rgba(255, 193, 7, 0.5)"]'>
                             </canvas>
                         </div>
 
@@ -170,14 +165,14 @@
             </div>
 
             <!--  THIRD ROW -->
-            <div class="flex">
-                <div class="row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+            <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10">
+                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
                     <div class="flex flex-col gap-4">
                         <div>
                             <h1 class="text-lg font-semibold">Update Password</h1>
                         </div>
                         <div>
-                            <p>Ensure your account is using a long, random password to stay secure.</p>
+                            <p class="lg:text-lg text-sm xs:text-sm">Ensure your account is using a long, random password to stay secure.</p>
                         </div>
                         <div>
                             <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4">Update Password</button>
@@ -185,13 +180,13 @@
                     </div>
                 </div>
 
-                <div class="row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
                     <div class="flex flex-col gap-4">
                         <div>
                             <h1 class="text-lg font-semibold">Update Profile</h1>
                         </div>
                         <div>
-                            <p>Edit Profile to match into a company</p>
+                            <p class="lg:text-lg text-sm xs:text-sm">Edit Profile to match into a company</p>
                         </div>
                         <div>
                             <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
@@ -204,10 +199,10 @@
 
             <!--  END OF THIRD ROW -->
 
-        </div>
-        @endforeach
-    </div>
 
+            @endforeach
+        </div>
+    </div>
 </body>
 
 </html>
