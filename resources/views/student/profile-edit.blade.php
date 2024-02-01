@@ -8,6 +8,10 @@
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
     @vite('resources/css/app.css')
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
     <title>Profile</title>
 </head>
 
@@ -66,100 +70,100 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto">
         @foreach (explode(',',Auth::user()->schoolID) as $studentID)
-            @php
-                $student = \App\Models\Student::where('studentID', $studentID)->first();
-            @endphp
-            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="grid grid-rows-3">
-                    <!--  FIRST ROW -->
-                    <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
-                        <div class="flex flex-col justify-between">
-                            <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
-                            <div class="form-group">
-                                <label for="profilePicture">Profile Picture</label>
-                                <input type="file" name="profilePicture" accept="image/*">
-                            </div>
-                            <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
+        @php
+        $student = \App\Models\Student::where('studentID', $studentID)->first();
+        @endphp
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="grid grid-rows-3">
+                <!--  FIRST ROW -->
+                <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
+                    <div class="flex flex-col justify-between">
+                        <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
+                        <div class="form-group">
+                            <label for="profilePicture">Profile Picture</label>
+                            <input type="file" name="profilePicture" accept="image/*">
                         </div>
-                        <div class="flex items-end">
-                            <div>
-                                <p class="text-lg"><span class="font-semibold">Email:</span> {{ $student->email }}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-between">
-                            <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
-                            <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
+                        <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
+                    </div>
+                    <div class="flex items-end">
+                        <div>
+                            <p class="text-lg"><span class="font-semibold">Email:</span> {{ $student->email }}</p>
                         </div>
                     </div>
-
-                    <!-- SECOND ROW -->
-                    <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-56">
-                        <div class="flex flex-col justify-between gap-2">
-                            @php
-                                $company = \App\Models\Company::find($student->hiredCompany);
-                            @endphp
-                            <div>
-                                @if(isset($companies->name) && !empty($companies->name))
-                                    <p class="text-lg font-semibold">Company: {{ $companies->name }}</p>
-                                @else
-                                    <p class="text-lg font-semibold">Company: Not Hired</p>
-                                @endif
-                            </div>
-                            <!-- Add input fields for position and supervisor -->
-                            <div class="sm:col-span-2">
-                                <label for="position">Positions:</label>
-                                <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
-                                    @if (!empty($company->position) && is_array($company->position) && count($company->position) > 0)
-                                        @foreach($company->position as $position)
-                                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
-                                        @endforeach
-                                        <li>
-                                            <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
-                                                <option value="">Choose a position</option>
-                                                <option value="">Choose a position</option>
-                                                <option value="Administration">Administration </option>
-                                                <option value="Accountancy">Accountancy</option>
-                                                <option value="Internal Auditing">Internal Auditing</option>
-                                                <option value="Bookkeeping">Bookkeeping</option>
-                                                <option value="Management Accounting">Management Accounting</option>
-                                                <option value="Financial Management">Financial Management</option>
-                                                <option value="Human Resource Management">Human Resource Management</option>
-                                                <option value="Marketing Managements ">Marketing Managements</option>
-                                                <option value="Legal Managements">Legal  Managements</option>
-                                            </select>
-                                        </li>
-                                    @else
-                                        <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
-                                        <li>
-                                            <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
-                                                <option value="">Choose a position</option>
-                                                <option value="">Choose a position</option>
-                                                <option value="Administration">Administration </option>
-                                                <option value="Accountancy">Accountancy</option>
-                                                <option value="Internal Auditing">Internal Auditing</option>
-                                                <option value="Bookkeeping">Bookkeeping</option>
-                                                <option value="Management Accounting">Management Accounting</option>
-                                                <option value="Financial Management">Financial Management</option>
-                                                <option value="Human Resource Management">Human Resource Management</option>
-                                                <option value="Marketing Managements ">Marketing Managements</option>
-                                                <option value="Legal Managements">Legal  Managements</option>
-                                            </select>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
-
-                            <div>
-                                <label for="supervisor">Supervisor:</label>
-                                <input type="text" id="supervisor" name="supervisor" value="{{ old('supervisor') }}" placeholder="Enter new supervisor">
-                            </div>
-                            <button type="submit">Update Profile</button>
-                        </div>
+                    <div class="flex flex-col justify-between">
+                        <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
+                        <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
                     </div>
                 </div>
-            </form>
+
+                <!-- SECOND ROW -->
+                <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-56">
+                    <div class="flex flex-col justify-between gap-2">
+                        @php
+                        $company = \App\Models\Company::find($student->hiredCompany);
+                        @endphp
+                        <div>
+                            @if(isset($companies->name) && !empty($companies->name))
+                            <p class="text-lg font-semibold">Company: {{ $companies->name }}</p>
+                            @else
+                            <p class="text-lg font-semibold">Company: Not Hired</p>
+                            @endif
+                        </div>
+                        <!-- Add input fields for position and supervisor -->
+                        <div class="sm:col-span-2">
+                            <label for="position">Positions:</label>
+                            <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
+                                @if (!empty($company->position) && is_array($company->position) && count($company->position) > 0)
+                                @foreach($company->position as $position)
+                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
+                                @endforeach
+                                <li>
+                                    <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                        <option value="">Choose a position</option>
+                                        <option value="">Choose a position</option>
+                                        <option value="Administration">Administration </option>
+                                        <option value="Accountancy">Accountancy</option>
+                                        <option value="Internal Auditing">Internal Auditing</option>
+                                        <option value="Bookkeeping">Bookkeeping</option>
+                                        <option value="Management Accounting">Management Accounting</option>
+                                        <option value="Financial Management">Financial Management</option>
+                                        <option value="Human Resource Management">Human Resource Management</option>
+                                        <option value="Marketing Managements ">Marketing Managements</option>
+                                        <option value="Legal Managements">Legal Managements</option>
+                                    </select>
+                                </li>
+                                @else
+                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
+                                <li>
+                                    <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                        <option value="">Choose a position</option>
+                                        <option value="">Choose a position</option>
+                                        <option value="Administration">Administration </option>
+                                        <option value="Accountancy">Accountancy</option>
+                                        <option value="Internal Auditing">Internal Auditing</option>
+                                        <option value="Bookkeeping">Bookkeeping</option>
+                                        <option value="Management Accounting">Management Accounting</option>
+                                        <option value="Financial Management">Financial Management</option>
+                                        <option value="Human Resource Management">Human Resource Management</option>
+                                        <option value="Marketing Managements ">Marketing Managements</option>
+                                        <option value="Legal Managements">Legal Managements</option>
+                                    </select>
+                                </li>
+                                @endif
+                            </ul>
+                        </div>
+
+                        <div>
+                            <label for="supervisor">Supervisor:</label>
+                            <input type="text" id="supervisor" name="supervisor" value="{{ old('supervisor') }}" placeholder="Enter new supervisor">
+                        </div>
+                        <button type="submit">Update Profile</button>
+                    </div>
+                </div>
+            </div>
+        </form>
         @endforeach
     </div>
 
