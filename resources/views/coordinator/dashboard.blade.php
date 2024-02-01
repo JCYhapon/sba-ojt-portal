@@ -9,6 +9,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @vite('resources/css/app.css')
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
     <title>Dashboard</title>
 </head>
 
@@ -87,11 +91,9 @@
 
                             <p class="text-center font-bold">Student Status Tracker</p>
                             <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
-                                <canvas data-te-chart="doughnut"
-                                    data-te-dataset-data='[
+                                <canvas data-te-chart="doughnut" data-te-dataset-data='[
                                         {{ $totalHiredStudents }},
-                                        {{ $totalNonHiredStudents }}]'
-                                    data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)"]'>
+                                        {{ $totalNonHiredStudents }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)"]'>
                                 </canvas>
                             </div>
 
