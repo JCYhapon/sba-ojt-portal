@@ -8,6 +8,11 @@
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
     @vite('resources/css/app.css')
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
+
     <title>Company List</title>
 </head>
 
