@@ -83,7 +83,7 @@
             <!--  SECOND ROW -->
             <div class="row-span-3">
                 <div class="grid grid-cols-3 gap-12 h-auto">
-                    <div class="bg-white shadow-md rounded-md p-8 col-span-1 h-96 flex flex-col justify-between">
+                    <div class="bg-white shadow-md rounded-md p-8 col-span-1 h-[26rem] flex flex-col justify-between">
                         <div>
                             @php
                             $userMajor = auth()->user()->major;

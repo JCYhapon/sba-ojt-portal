@@ -122,7 +122,7 @@
                         </thead>
                         <tbody>
                             @foreach ($companies as $company)
-                            <tr onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}';">
+                            <tr onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'">
                                 <td class="py-2 px-4 border-b">{{ $company->name }}</td>
                                 <td class="py-2 px-4 border-b">{{ $company->email }}</td>
                                 <td class="py-2 px-4 border-b">{{ $company->address }}</td>
