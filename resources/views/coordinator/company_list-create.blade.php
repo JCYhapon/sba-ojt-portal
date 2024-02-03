@@ -67,8 +67,8 @@
   <section class="bg-#f9fafb dark:bg-gray-900">
     <div class="max-w-2xl rounded-md shadow-md container px-4 mt-12  mx-auto py-2 bg-white">
 
-      <button class="">
-        <a href="{{ url()->previous() }}">Back</a>
+      <button class="mb-8">
+        <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
       </button>
 
 
@@ -76,23 +76,29 @@
       <form method="post" action="{{ route('coordinator.company_store') }}">
         @csrf
         @method('post')
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col">
+            <label for="name" class="text-sm font-semibold">Name</label>
+            <input type="text" name="name" placeholder="Company's name" class="rounded-md" />
+          </div>
 
-        <div>
-          <label for="name">Name:</label>
-          <input type="text" name="name" placeholder="Name" />
+          <div class="flex flex-col">
+            <label for="email" class="text-sm font-semibold">Email</label>
+            <input type="email" name="email" placeholder="Company's email" class="rounded-md" />
+          </div>
+
+          <div class="flex flex-col">
+            <label for="address" class="text-sm font-semibold">Address</label>
+            <input type="text" name="address" placeholder="Company's address" class="rounded-md" />
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button type="submit" class="text-white bg-indigo-500  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              Save
+            </button>
+          </div>
         </div>
 
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" name="email" placeholder="Email" />
-        </div>
-
-        <div>
-          <label for="address">Address:</label>
-          <input type="text" name="address" placeholder="Address" />
-        </div>
-
-        <button type="submit">Save</button>
       </form>
   </section>
   </div>
