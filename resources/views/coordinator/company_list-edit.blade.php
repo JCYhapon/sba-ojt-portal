@@ -8,6 +8,10 @@
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
     @vite('resources/css/app.css')
     <title>Company List</title>
 </head>

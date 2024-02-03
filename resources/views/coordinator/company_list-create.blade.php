@@ -7,6 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {{----alphinejs----}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
   @vite('resources/css/app.css')
   <title>Company List</title>
 </head>
