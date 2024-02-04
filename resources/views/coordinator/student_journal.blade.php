@@ -9,6 +9,9 @@
   {{----alphinejs----}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
 
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
   @vite('resources/css/app.css')
   <title>Student Journals</title>
 </head>
@@ -73,6 +76,7 @@
               <th scope="col" class="px-4 py-4">Journal Number</th>
               <th scope="col" class="px-4 py-4">Name</th>
               <th scope="col" class="px-4 py-4">Section</th>
+              <th scope="col" class="px-4 py-4">Reflection</th>
               <th scope="col" class="px-4 py-4">Status</th>
               <th scope="col" class="px-4 py-4">Grade</th>
               <th scope="col" class="px-4 py-4">Action</th>
@@ -87,38 +91,48 @@
 
             @if($student)
             <div class="col-md-6 mb-3">
-              <div class="">
-
-
-
-                <h2 class="card-title">Journal Number: {{ $journal->journalNumber }}</h2>
-                <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="btn btn-primary">Mark as Unread</a>
-                <h1 class="card-title">Student Name: {{ $student->firstName }} {{ $student->lastName }}</h1>
-                <h1 class="card-title">Section: {{ $student->section }}</h1>
-
-                <p class="card-text"><strong>Status:</strong>
-                  @if($journal->status == 1)
-                  Unread
-                  @elseif($journal->status == 2)
-                  Seen
-                  @elseif($journal->status == 3)
-                  Graded
+              <tbody>
+                <td class="py-2 px-4 border-b">
+                  <h2 class="card-title">{{ $journal->journalNumber }}</h2>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <h1 class="card-title">{{ $student->firstName }} {{ $student->lastName }}</h1>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <h1 class="card-title">{{ $student->section }}</h1>
+                </td>
+                <td class="py-2 px-4 border-b overflow-x-auto">
+                  <p class="overflow-x-auto">{{ $journal->reflection }}</p>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <p class="card-text">
+                    @if($journal->status == 1)
+                    Unread
+                    @elseif($journal->status == 2)
+                    Seen
+                    @elseif($journal->status == 3)
+                    Graded
+                    @endif
+                  </p>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <p class="card-text"> {{ $journal->grade ?? 'Not graded yet' }}</p>
+                </td>
+                <td class="py-2 px-4 border-b">
+                  <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="btn btn-primary">Mark as Unread</a>
+                  <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="btn btn-primary">Grade</a>
+                  @if($journal->status != 1 && $journal->status != 3)
                   @endif
-                </p>
-                <p class="card-text"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
-                <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="btn btn-primary">Grade</a>
-                @if($journal->status != 1 && $journal->status != 3)
-                @endif
-                <input type="text" name="reflection" class="form-control" value="{{ $journal->reflection }}" readonly>
-
-              </div>
+                </td>
+              </tbody>
             </div>
-            @endif
-            @endforeach
           </div>
-        </table>
+          @endif
+          @endforeach
       </div>
+      </table>
     </div>
+  </div>
   </div>
 
 
