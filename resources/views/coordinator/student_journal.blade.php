@@ -66,12 +66,12 @@
   <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
     <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
 
-      <div class="container mt-5">
+      <div class="container overflow-x-auto">
         {{-- Left-aligned h1 --}}
 
         {{-- Loop through journals --}}
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
             <tr>
               <th scope="col" class="px-4 py-4">Journal Number</th>
               <th scope="col" class="px-4 py-4">Name</th>
@@ -101,8 +101,8 @@
                 <td class="py-2 px-4 border-b">
                   <h1 class="card-title">{{ $student->section }}</h1>
                 </td>
-                <td class="py-2 px-4 border-b overflow-x-auto">
-                  <p class="overflow-x-auto">{{ $journal->reflection }}</p>
+                <td class="py-2 px-4 border-b w-[40%]">
+                  <p class="overflow-x-auto ">{{ $journal->reflection }}</p>
                 </td>
                 <td class="py-2 px-4 border-b">
                   <p class="card-text">
@@ -119,10 +119,12 @@
                   <p class="card-text"> {{ $journal->grade ?? 'Not graded yet' }}</p>
                 </td>
                 <td class="py-2 px-4 border-b">
-                  <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="btn btn-primary">Mark as Unread</a>
-                  <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="btn btn-primary">Grade</a>
-                  @if($journal->status != 1 && $journal->status != 3)
-                  @endif
+                  <div class="flex gap-2">
+                    <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-gray-800 text-white w-[7rem] text-center p-[7px] rounded-full">Mark as Unread</a>
+                    <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="bg-gray-800 text-white w-[7rem] text-center p-[7px] rounded-full">Grade</a>
+                    @if($journal->status != 1 && $journal->status != 3)
+                    @endif
+                  </div>
                 </td>
               </tbody>
             </div>
