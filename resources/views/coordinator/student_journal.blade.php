@@ -62,20 +62,34 @@
 
   <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
     <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
+
       <div class="container mt-5">
         {{-- Left-aligned h1 --}}
 
         {{-- Loop through journals --}}
-        <div class="row">
-          @foreach($journals as $journal)
-          @php
-          $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
-          @endphp
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-4 py-4">Journal Number</th>
+              <th scope="col" class="px-4 py-4">Name</th>
+              <th scope="col" class="px-4 py-4">Section</th>
+              <th scope="col" class="px-4 py-4">Status</th>
+              <th scope="col" class="px-4 py-4">Grade</th>
+              <th scope="col" class="px-4 py-4">Action</th>
+            </tr>
+          </thead>
 
-          @if($student)
-          <div class="col-md-6 mb-3">
-            <div class="">
+          <div class="row">
+            @foreach($journals as $journal)
+            @php
+            $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
+            @endphp
+
+            @if($student)
+            <div class="col-md-6 mb-3">
               <div class="">
+
+
 
                 <h2 class="card-title">Journal Number: {{ $journal->journalNumber }}</h2>
                 <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="btn btn-primary">Mark as Unread</a>
@@ -96,12 +110,13 @@
                 @if($journal->status != 1 && $journal->status != 3)
                 @endif
                 <input type="text" name="reflection" class="form-control" value="{{ $journal->reflection }}" readonly>
+
               </div>
             </div>
+            @endif
+            @endforeach
           </div>
-          @endif
-          @endforeach
-        </div>
+        </table>
       </div>
     </div>
   </div>
