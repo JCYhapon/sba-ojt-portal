@@ -60,45 +60,53 @@
   </div>
   <!-- END OF NAVBAR -->
 
-  <div class="container mt-5">
-    {{-- Left-aligned h1 --}}
-    <h1 class="mt-5 mb-4">Student Journal Page</h1>
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
+      <div class="container mt-5">
+        {{-- Left-aligned h1 --}}
 
-    {{-- Loop through journals --}}
-    <div class="row">
-      @foreach($journals as $journal)
-      @php
-      $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
-      @endphp
+        {{-- Loop through journals --}}
+        <div class="row">
+          @foreach($journals as $journal)
+          @php
+          $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
+          @endphp
 
-      @if($student)
-      <div class="col-md-6 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title">Student Name: {{ $student->firstName }} {{ $student->lastName }}</h1>
-            <h1 class="card-title">Section: {{ $student->section }}</h1>
-            <h2 class="card-title">Journal Number: {{ $journal->journalNumber }}</h2>
-            <p class="card-text"><strong>Status:</strong>
-              @if($journal->status == 1)
-              Unread
-              @elseif($journal->status == 2)
-              Seen
-              @elseif($journal->status == 3)
-              Graded
-              @endif
-            </p>
-            <p class="card-text"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
-            <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="btn btn-primary">Grade</a>
-            @if($journal->status != 1 && $journal->status != 3)
-            <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="btn btn-primary">Mark as Unread</a>
-            @endif
+          @if($student)
+          <div class="col-md-6 mb-3">
+            <div class="">
+              <div class="">
+
+                <h2 class="card-title">Journal Number: {{ $journal->journalNumber }}</h2>
+                <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="btn btn-primary">Mark as Unread</a>
+                <h1 class="card-title">Student Name: {{ $student->firstName }} {{ $student->lastName }}</h1>
+                <h1 class="card-title">Section: {{ $student->section }}</h1>
+
+                <p class="card-text"><strong>Status:</strong>
+                  @if($journal->status == 1)
+                  Unread
+                  @elseif($journal->status == 2)
+                  Seen
+                  @elseif($journal->status == 3)
+                  Graded
+                  @endif
+                </p>
+                <p class="card-text"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
+                <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="btn btn-primary">Grade</a>
+                @if($journal->status != 1 && $journal->status != 3)
+                @endif
+                <input type="text" name="reflection" class="form-control" value="{{ $journal->reflection }}" readonly>
+              </div>
+            </div>
           </div>
+          @endif
+          @endforeach
         </div>
       </div>
-      @endif
-      @endforeach
     </div>
   </div>
+
+
 
 
 </body>
