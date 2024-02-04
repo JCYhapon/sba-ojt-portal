@@ -83,11 +83,20 @@
             </div>
             <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
           </div>
-          <label for="dropdown">Select an option:</label>
-          <select id="dropdown" name="dropdown">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+
+          <!-- FILTERING -->
+
+          <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-[10%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
+            <option value="option1">All Section</option>
+            <option value="option2">MT - 102</option>
+            <option value="option3">MT - 103</option>
+          </select>
+
+          <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-[10%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
+            <option value="option1">All</option>
+            <option value="option2">Unread</option>
+            <option value="option3">Seen</option>
+            <option value="option3">Graded</option>
           </select>
         </div>
 
