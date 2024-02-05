@@ -65,8 +65,7 @@
   <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
     <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
       <div class="container mt-5">
-        <h1>Grade Journal</h1>
-        <br>
+
         <div class="mb-4">
           <a href="{{ url()->previous() }}" class="text-2xl font-bold mb-4">Back</a>
         </div>
