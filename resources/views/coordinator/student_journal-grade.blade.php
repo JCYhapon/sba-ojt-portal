@@ -62,54 +62,59 @@
   </div>
   <!-- END OF NAVBAR -->
 
-  <div class="container mt-5">
-    <h1>Grade Journal</h1>
-    <br>
-    <div class="mb-4">
-      <a href="{{ url()->previous() }}" class="text-2xl font-bold mb-4">Back</a>
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
+      <div class="container mt-5">
+        <h1>Grade Journal</h1>
+        <br>
+        <div class="mb-4">
+          <a href="{{ url()->previous() }}" class="text-2xl font-bold mb-4">Back</a>
+        </div>
+        <br>
+
+
+        <form method="POST" action="{{ route('grade.journal', ['journalID' => $journal->journalID]) }}">
+          @csrf
+          @method('POST')
+
+          <div class="form-group">
+            <label for="created_at">Date Submitted</label>
+            <textarea name="created_at" class="form-control" readonly>{{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="studentID">Student Number</label>
+            <textarea name="studentID" class="form-control" readonly>{{ $journal->studentID }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="hoursRendered">Weekly Hours Rendered</label>
+            <textarea name="hoursRendered" class="form-control" readonly>{{ $journal->hoursRendered }}</textarea>
+          </div>
+
+          <img src="/{{ $journal->studentSignature }}" width="100px">
+          <img src="/{{ $journal->supervisorSignature }}" width="100px">
+
+          <div class="form-group">
+            <label for="reflection">Reflection</label>
+            <input type="text" name="reflection" class="form-control" value="{{ $journal->reflection }}" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="grade">Grade</label>
+            <input type="number" name="grade" class="form-control" value="{{ $journal->grade }}" min="0" max="30">
+          </div>
+
+          <div class="form-group">
+            <label for="comments">Coordinators Comment</label>
+            <textarea name="comments" class="form-control">{{ $journal->comments }}</textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Update Journal</button>
+        </form>
+      </div>
+
     </div>
-    <br>
-
-
-    <form method="POST" action="{{ route('grade.journal', ['journalID' => $journal->journalID]) }}">
-      @csrf
-      @method('POST')
-
-      <div class="form-group">
-        <label for="created_at">Date Submitted</label>
-        <textarea name="created_at" class="form-control" readonly>{{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="studentID">Student Number</label>
-        <textarea name="studentID" class="form-control" readonly>{{ $journal->studentID }}</textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="hoursRendered">Weekly Hours Rendered</label>
-        <textarea name="hoursRendered" class="form-control" readonly>{{ $journal->hoursRendered }}</textarea>
-      </div>
-
-      <img src="/{{ $journal->studentSignature }}" width="100px">
-      <img src="/{{ $journal->supervisorSignature }}" width="100px">
-
-      <div class="form-group">
-        <label for="reflection">Reflection</label>
-        <input type="text" name="reflection" class="form-control" value="{{ $journal->reflection }}" readonly>
-      </div>
-
-      <div class="form-group">
-        <label for="grade">Grade</label>
-        <input type="number" name="grade" class="form-control" value="{{ $journal->grade }}" min="0" max="30">
-      </div>
-
-      <div class="form-group">
-        <label for="comments">Coordinators Comment</label>
-        <textarea name="comments" class="form-control">{{ $journal->comments }}</textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Update Journal</button>
-    </form>
   </div>
 
 
