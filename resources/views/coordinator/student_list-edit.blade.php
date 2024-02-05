@@ -8,6 +8,10 @@
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
     @vite('resources/css/app.css')
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
     <title>Student List</title>
 </head>
 
@@ -111,21 +115,21 @@
                         <label for="matchedCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matched Company</label>
                         <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
                             @if(count($students->matchedCompany) > 0)
-                                @foreach($students->matchedCompany as $matchedCompany)
-                                    @php
-                                        $company = \App\Models\Company::where('id', $matchedCompany)->first();
-                                    @endphp
-                                    <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $company->name }}</li>
-                                @endforeach
+                            @foreach($students->matchedCompany as $matchedCompany)
+                            @php
+                            $company = \App\Models\Company::where('id', $matchedCompany)->first();
+                            @endphp
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $company->name }}</li>
+                            @endforeach
                             @else
-                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Matched Company</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Matched Company</li>
                             @endif
 
                             <li>
                                 <select name="matchedCompany" class="rounded-lg p-2.5 dark:placeholder-gray-400 w-full">
                                     <option value="">Choose a Matched Company</option>
                                     @foreach($companies as $company)
-                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -140,20 +144,20 @@
                         <label for="hiredCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hired Company</label>
                         <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
                             @php
-                                $company = \App\Models\Company::find($students->hiredCompany);
+                            $company = \App\Models\Company::find($students->hiredCompany);
                             @endphp
 
                             @if ($students->hiredCompany && $company)
-                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $company->name }}</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $company->name }}</li>
                             @else
-                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Not Yet Hired</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Not Yet Hired</li>
                             @endif
 
                             <li>
                                 <select name="hiredCompany" class="rounded-lg p-2.5 dark:placeholder-gray-400 w-full">
                                     <option value="">Choose a Hired Company</option>
                                     @foreach($companies as $company)
-                                        <option value="{{ $company->id }}" @if($students->hiredCompany == $company->id) selected @endif>{{ $company->name }}</option>
+                                    <option value="{{ $company->id }}" @if($students->hiredCompany == $company->id) selected @endif>{{ $company->name }}</option>
                                     @endforeach
                                 </select>
                             </li>
