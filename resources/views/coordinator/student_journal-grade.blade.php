@@ -76,46 +76,59 @@
           @csrf
           @method('POST')
 
-          <div class="form-group">
-            <label for="created_at">Date Submitted</label>
-            <textarea name="created_at" class="form-control" readonly>{{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</textarea>
-          </div>
+          <div class="flex flex-col">
+            <div class="form-group">
+              <label for="created_at" class="font-mono text-sm font-semibold">Date Submitted: </label>
+              {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</ </div>
 
-          <div class="form-group">
-            <label for="studentID">Student Number</label>
-            <textarea name="studentID" class="form-control" readonly>{{ $journal->studentID }}</textarea>
-          </div>
+              <div class="flex flex-row gap-[5em]">
+                <div class="form-group">
+                  <label for="studentID" class="font-mono text-sm font-semibold">Student Number: </label>
+                  {{ $journal->studentID }}
+                </div>
 
-          <div class="form-group">
-            <label for="hoursRendered">Weekly Hours Rendered</label>
-            <textarea name="hoursRendered" class="form-control" readonly>{{ $journal->hoursRendered }}</textarea>
-          </div>
+                <div class="form-group">
+                  <label for="hoursRendered" class="font-mono text-sm font-semibold">Weekly Hours Rendered: </label>
+                  {{ $journal->hoursRendered }}
+                </div>
 
-          <img src="/{{ $journal->studentSignature }}" width="100px">
-          <img src="/{{ $journal->supervisorSignature }}" width="100px">
+                <div class="flex gap-8">
+                  <div class="flex gap-4">
+                    <label for="" class="font-mono text-sm font-semibold">Student Signature:</label>
+                    <img src="/{{ $journal->studentSignature }}" width="100px">
+                  </div>
 
-          <div class="form-group">
-            <label for="reflection">Reflection</label>
-            <input type="text" name="reflection" class="form-control" value="{{ $journal->reflection }}" readonly>
-          </div>
+                  <div class="flex gap-4">
+                    <label for="" class="font-mono text-sm font-semibold">Supervisor Signature:</label>
+                    <img src="/{{ $journal->supervisorSignature }}" width="100px">
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label for="grade">Grade</label>
-            <input type="number" name="grade" class="form-control" value="{{ $journal->grade }}" min="0" max="30">
-          </div>
 
-          <div class="form-group">
-            <label for="comments">Coordinators Comment</label>
-            <textarea name="comments" class="form-control">{{ $journal->comments }}</textarea>
-          </div>
+            <div class="form-group flex flex-col">
+              <label for="reflection" class="font-mono text-sm font-semibold">Reflection</label>
+              <textarea name="" id="" cols="30" rows="10" value="" readonly> {{ $journal->reflection }}</textarea>
+            </div>
 
-          <div class="flex align-middle justify-center">
-            <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
-              <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                Update
-              </button>
-            </a>
-          </div>
+            <div class="form-group">
+              <label for="grade">Grade</label>
+              <input type="number" name="grade" class="form-control" value="{{ $journal->grade }}" min="0" max="30">
+            </div>
+
+            <div class="form-group">
+              <label for="comments">Coordinators Comment</label>
+              <textarea name="comments" class="form-control">{{ $journal->comments }}</textarea>
+            </div>
+
+            <div class="flex align-middle justify-center">
+              <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+                <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                  Update
+                </button>
+              </a>
+            </div>
         </form>
       </div>
 
