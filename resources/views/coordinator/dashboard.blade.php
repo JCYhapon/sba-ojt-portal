@@ -66,7 +66,7 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto">
 
-        <div class="grid grid-rows-3 gap-12">
+        <div class="lg:grid lg:grid-rows-3 gap-12 flex flex-col">
             <!--  FIRST ROW -->
             <div class="bg-white flex flex-col gap-4 p-8 shadow-md rounded-md h-auto">
                 <div class="flex flex-col gap-4">
@@ -82,8 +82,8 @@
 
             <!--  SECOND ROW -->
             <div class="row-span-3">
-                <div class="grid grid-cols-3 gap-12 h-auto">
-                    <div class="bg-white shadow-md rounded-md p-8 col-span-1 h-[26rem] flex flex-col justify-between">
+                <div class="lg:grid lg:grid-cols-3 gap-12 h-auto flex flex-col">
+                    <div class="bg-white shadow-md rounded-md p-8 col-span-1 lg:h-[26rem] h-auto flex flex-col justify-between">
                         <div>
                             @php
                             $userMajor = auth()->user()->major;
