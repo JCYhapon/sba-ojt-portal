@@ -76,7 +76,7 @@
           @csrf
           @method('POST')
 
-          <div class="flex flex-col">
+          <div class="flex flex-col gap-4">
             <div class="form-group">
               <label for="created_at" class="font-mono text-sm font-semibold">Date Submitted: </label>
               {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</ </div>
@@ -109,17 +109,16 @@
 
             <div class="form-group flex flex-col">
               <label for="reflection" class="font-mono text-sm font-semibold">Reflection</label>
-              <textarea name="" id="" cols="30" rows="10" value="" readonly> {{ $journal->reflection }}</textarea>
+              <textarea name="" id="" cols="30" rows="10" class="rounded border-gray-300 text-gray-600" readonly> {{ $journal->reflection }}</textarea>
             </div>
 
             <div class="form-group">
-              <label for="grade">Grade</label>
-              <input type="number" name="grade" class="form-control" value="{{ $journal->grade }}" min="0" max="30">
+              <textarea name="comments" class="form-control w-full rounded border-gray-300" placeholder="Coordinators comment....">{{ $journal->comments }}</textarea>
             </div>
 
-            <div class="form-group">
-              <label for="comments">Coordinators Comment</label>
-              <textarea name="comments" class="form-control">{{ $journal->comments }}</textarea>
+            <div class="form-group flex items-center gap-4">
+              <label for="grade" class="font-mono text-sm font-semibold">Grade:</label>
+              <input type="number" name="grade" class="form-control rounded border-gray-300" value="{{ $journal->grade }}" min="0" max="30">
             </div>
 
             <div class="flex align-middle justify-center">
