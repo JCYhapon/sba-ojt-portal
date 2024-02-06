@@ -76,8 +76,8 @@
           @csrf
           @method('POST')
 
-          <div class="flex flex-col gap-4">
-            <div class="form-group">
+          <div class="flex flex-col gap-4 ">
+            <div class="form-group overflow-x-auto">
               <label for="created_at" class="font-mono text-sm font-semibold">Date Submitted: </label>
               {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</ </div>
 
@@ -118,7 +118,7 @@
 
             <div class="form-group flex items-center gap-4">
               <label for="grade" class="font-mono text-sm font-semibold">Grade:</label>
-              <input type="number" name="grade" class="form-control rounded border-gray-300" value="{{ $journal->grade }}" min="0" max="30">
+              <input type="number" name="grade" class="form-control rounded border-gray-300 w-[7%]" value="{{ $journal->grade }}" min="0" max="30">
             </div>
 
             <div class="flex align-middle justify-center">

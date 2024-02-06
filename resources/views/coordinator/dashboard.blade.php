@@ -68,13 +68,13 @@
 
         <div class="grid grid-rows-3 gap-12">
             <!--  FIRST ROW -->
-            <div class="bg-white grid grid-cols-2 p-8 shadow-md rounded-md h-40">
-                <div class="grid gap-2">
-                    <h1 class="text-3xl"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
-                    <p class="text-lg">You are using <span class="capitalize">{{ Auth::user()->major }}</span> Coordinator Account</p>
+            <div class="bg-white flex flex-col gap-4 p-8 shadow-md rounded-md h-auto">
+                <div class="flex flex-col gap-4">
+                    <h1 class="lg:text-3xl text-md"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
+                    <p class="lg:text-lg text-sm">You are using <span class="capitalize">{{ Auth::user()->major }}</span> Coordinator Account</p>
                 </div>
                 <div class="flex flex-col justify-end">
-                    <div class="grid justify-items-end">
+                    <div class="lg:grid lg:justify-items-end  ">
                         <a href="{{ route('coordinator_student-list') }}"><button class="bg-black text-white p-1 rounded-md text-sm w-40">Manage Student</button></a>
                     </div>
                 </div>
