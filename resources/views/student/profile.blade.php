@@ -80,7 +80,7 @@
 
         <div class="grid grid-rows-3 lg:max-h-[70vh]  xs:max-h-screen xs:gap-8 gap-0 h-auto">
             <!--  FIRST ROW -->
-            <div class="bg-white row-span-1 flex lg:flex-row md:flex-row lg:justify-between xs:flex-col  p-8 shadow-md rounded-md lg:h-48 h-auto py-12">
+            <div class="bg-white row-span-1 flex lg:flex-row md:flex-row sm:flex-row lg:justify-between md:justify-between sm:justify-between  xs:flex-col  p-8 shadow-md rounded-md lg:h-48 h-auto py-12">
                 <div class="flex flex-col gap-2">
                     <div class="flex flex-row gap-2">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
@@ -96,7 +96,7 @@
                 <div class="flex items-center">
 
                 </div>
-                <div class="flex flex-col justify-between">
+                <div class="flex flex-col gap-2">
                     <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
                     <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
                 </div>
