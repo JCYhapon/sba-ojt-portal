@@ -173,7 +173,7 @@
             </div>
 
             <!--  THIRD ROW -->
-            <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10">
+            <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-[10rem] lg:gap-[3rem]  ">
                 <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
                     <div class="flex flex-col gap-4">
                         <div>
