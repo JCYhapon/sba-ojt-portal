@@ -102,7 +102,7 @@
             </div>
 
             <!-- SECOND ROW -->
-            <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-56">
+            <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-auto">
                 <div class="flex flex-col justify-between gap-2">
                     <div>
                         @if(isset($companies->name) && !empty($companies->name))
