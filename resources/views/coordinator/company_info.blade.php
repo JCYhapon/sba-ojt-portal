@@ -87,16 +87,16 @@
 
             <!-- coordinator_company_info.blade.php -->
 
-            <table class=" w-full ">
-                <tr>
+            <table class=" ">
+                <tr class="flex gap-8">
                     <td>Email:</td>
                     <td>{{ $companies->email }}</td>
                 </tr>
-                <tr>
+                <tr class="flex gap-3">
                     <td>Address:</td>
                     <td>{{ $companies->address }}</td>
                 </tr>
-                <tr>
+                <tr class="flex gap-6">
                     <td>Status:</td>
                     <td>
                         @if($companies->status == 1)
@@ -106,7 +106,7 @@
                         @endif
                     </td>
                 </tr>
-                <tr>
+                <tr class="flex gap-2">
                     <td>Position:</td>
                     <td>
                         @if ($companies->position)
