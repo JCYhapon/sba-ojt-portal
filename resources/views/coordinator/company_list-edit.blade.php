@@ -180,7 +180,9 @@
                                     @php
                                     $student = \App\Models\Student::where('studentID', $studentID)->first();
                                     @endphp
+                                    @if ($student)
                                     <option value="{{ $student->studentID }}">{{ $student->firstName }} {{ $student->lastName }}</option>
+                                    @endif
                                     @endforeach
                                     @endforeach
                                 </select>

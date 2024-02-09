@@ -90,7 +90,7 @@
             <table class=" ">
                 <tr class="flex gap-8">
                     <td>Email:</td>
-                    <td>{{ $companies->email }}</td>
+                    <td class="">{{ $companies->email }}</td>
                 </tr>
                 <tr class="flex gap-3">
                     <td>Address:</td>
