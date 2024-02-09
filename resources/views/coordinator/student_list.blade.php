@@ -146,7 +146,7 @@
                             @endphp
                             @if ($student)
                             <tr onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';">
-                                <td class="py-2 px-4 border-b">{{ $student->firstName }} {{ $student->lastName }}</td>
+                                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $student->firstName }} {{ $student->lastName }}</td>
                                 <td class="py-2 px-4 border-b">{{ $student->email }}</td>
                                 <td class="py-2 px-4 border-b">{{ $student->section }}</td>
                                 <td class="py-2 px-4 border-b">{{ $student->major }}</td>
