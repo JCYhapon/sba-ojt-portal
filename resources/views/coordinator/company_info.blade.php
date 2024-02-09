@@ -59,10 +59,10 @@
 
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
         <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
 
-            <div class="max-w-screen-xl container mx-auto">
+            <div class="">
 
                 <!-- Back Button -->
                 <div class="mb-4">
@@ -119,11 +119,11 @@
                 {{-- <tr>
             <td>Matched Students:</td>
             
-                <table>
+                <table class="w-full">
                     <tr>
-                        <th>Hired Students</th>
-                        <th>Section & Major</th>
-                        <th>Email</th>
+                        <th class="px-4 py-4">Hired Students</th>
+                        <th class="px-4 py-4">Section & Major</th>
+                        <th class="px-4 py-4">Email</th>
                     </tr>
                     @if (!empty($companies->hiredStudents) && is_array($companies->hiredStudents) && count($companies->hiredStudents) > 0)
                         @foreach ($companies->hiredStudents as $studentID)
@@ -161,51 +161,53 @@
             </tr> --}}
             <tr>
 
-                <td>
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th>Hired Students</th>
-                                <th>Section & Major</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-
-                        @if (!empty($companies->hiredStudents) && is_array($companies->hiredStudents) && count($companies->hiredStudents) > 0)
-                        @foreach ($companies->hiredStudents as $studentID)
-                        @php
-                        $student = \App\Models\Student::where('studentID', $studentID)->first();
-                        @endphp
-                        <tr>
-                            <td>
-                                @if ($student)
-                                {{ $student->firstName }} {{ $student->lastName }}
-                                @endif
-                            </td>
-
-                            <td>
-                                @if ($student)
-                                {{ $student->section }} {{ $student->major }}
-                                @endif
-                            </td>
-
-                            <td>
-                                @if ($student)
-                                {{ $student->email }}
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                        @else
-                        <tr>
-                            <td colspan="3">No hired students</td>
-                        </tr>
-                        @endif
-                    </table>
 
                 </td>
             </tr>
             </table>
+
+            <!-- HIRED STUDENTS -->
+            <td>
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-4 py-4">Hired Students</th>
+                            <th class="px-4 py-4">Section & Major</th>
+                            <th class="px-4 py-4">Email</th>
+                        </tr>
+                    </thead>
+
+                    @if (!empty($companies->hiredStudents) && is_array($companies->hiredStudents) && count($companies->hiredStudents) > 0)
+                    @foreach ($companies->hiredStudents as $studentID)
+                    @php
+                    $student = \App\Models\Student::where('studentID', $studentID)->first();
+                    @endphp
+                    <tr>
+                        <td class="py-2 px-4 border-b">
+                            @if ($student)
+                            {{ $student->firstName }} {{ $student->lastName }}
+                            @endif
+                        </td>
+
+                        <td class="py-2 px-4 border-b">
+                            @if ($student)
+                            {{ $student->section }} {{ $student->major }}
+                            @endif
+                        </td>
+
+                        <td class="py-2 px-4 border-b">
+                            @if ($student)
+                            {{ $student->email }}
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td colspan="3">No hired students</td>
+                    </tr>
+                    @endif
+                </table>
 
         </div>
     </div>
