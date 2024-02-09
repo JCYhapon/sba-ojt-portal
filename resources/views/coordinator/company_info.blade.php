@@ -8,6 +8,10 @@
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
     @vite('resources/css/app.css')
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
     <title>Company List</title>
 </head>
 
@@ -65,11 +69,11 @@
             <div class="">
 
                 <!-- Back Button -->
-                <div class="mb-4">
+                <div class="mb-8">
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
                 </div>
 
-                <h1 class="text-3xl font-bold mb-4">{{ $companies->name }} Information</h1>
+                <h1 class="lg:text-2xl text-xl font-bold mb-4">{{ $companies->name }} Information</h1>
 
                 <!-- Display Success Message -->
                 @if(session()->has('success'))
@@ -167,8 +171,9 @@
             </table>
 
             <!-- HIRED STUDENTS -->
-            <td>
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-6 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th class="px-4 py-4">Hired Students</th>
@@ -208,7 +213,7 @@
                     </tr>
                     @endif
                 </table>
-
+            </div>
         </div>
     </div>
 
