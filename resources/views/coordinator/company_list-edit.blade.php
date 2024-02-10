@@ -12,7 +12,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/background.css') }}">
 
-    @vite('resources/css/app.css')
+    <!-- Tailwindcss CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Company List</title>
 </head>
 
