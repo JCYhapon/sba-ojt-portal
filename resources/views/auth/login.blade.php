@@ -12,8 +12,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/loginpage.css') }}">
-    <!-- 
-    @vite('resources/css/app.css') -->
+
     <title>SBA-OJT PORTAL</title>
 
 </head>
