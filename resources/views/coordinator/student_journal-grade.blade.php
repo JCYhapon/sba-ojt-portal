@@ -67,9 +67,9 @@
     <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
       <div class="container mt-5">
 
-        <div class="mb-4">
-          <a href="{{ url()->previous() }}" class="text-2xl font-bold mb-4">Back</a>
-        </div>
+        <button class="mb-8">
+          <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+        </button>
         <br>
 
 
