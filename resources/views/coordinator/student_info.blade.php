@@ -11,6 +11,10 @@
 
     <!-- VITE -->
     @vite('resources/css/app.css')
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
     <!-- LIVEWIRE STYLES -->
     @livewireStyles
 
@@ -80,22 +84,22 @@
     <!-- END OF NAVBAR -->
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12">
-        <div class="mb-4">
-            <a href="{{ url()->previous() }}" class="text-2xl font-bold mb-4">Back</a>
-        </div>
+        <button class="mb-8">
+            <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+        </button>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- FIRST ROW -->
             <div class="bg-white col-span-3 p-8 shadow-md rounded-md">
                 <div class="flex flex-col md:flex-row justify-between">
                     @php
-                        $user = \App\Models\User::where('schoolID', $student->studentID)->first();
+                    $user = \App\Models\User::where('schoolID', $student->studentID)->first();
                     @endphp
 
                     @if (!empty($user->profilePicture))
-                        <img src="/{{ $user->profilePicture }}" width="100px">
+                    <img src="/{{ $user->profilePicture }}" width="100px">
                     @else
-                        <img src="/profilePicture/defaultProfilePicture.jpg" width="100px">
+                    <img src="/profilePicture/defaultProfilePicture.jpg" width="100px">
                     @endif
                     <div class="flex flex-col justify-between mb-4 md:mb-0">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
@@ -116,26 +120,26 @@
             <!-- SECOND ROW -->
             <div class="col-span-3 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                 @if($journals->count() > 0)
-                    @foreach($journals as $journal)
-                        <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="block hover:no-underline">
-                            <div class="bg-white p-8 shadow-md rounded-md mb-8">
-                                <h2 class="text-lg mb-4">Journal Number: {{ $journal->journalNumber }}</h2>
-                                <p class="text-lg mb-4"><strong>Date Submitted:</strong> {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</p>
-                                <p class="text-lg mb-4"><strong>Status:</strong>
-                                    @if($journal->status == 1)
-                                        Unread
-                                    @elseif($journal->status == 2)
-                                        Seen
-                                    @elseif($journal->status == 3)
-                                        Graded
-                                    @endif
-                                </p>
-                                <p class="text-lg mb-4"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
-                            </div>
-                        </a>
-                    @endforeach
+                @foreach($journals as $journal)
+                <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="block hover:no-underline">
+                    <div class="bg-white p-8 shadow-md rounded-md mb-8">
+                        <h2 class="text-lg mb-4">Journal Number: {{ $journal->journalNumber }}</h2>
+                        <p class="text-lg mb-4"><strong>Date Submitted:</strong> {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</p>
+                        <p class="text-lg mb-4"><strong>Status:</strong>
+                            @if($journal->status == 1)
+                            Unread
+                            @elseif($journal->status == 2)
+                            Seen
+                            @elseif($journal->status == 3)
+                            Graded
+                            @endif
+                        </p>
+                        <p class="text-lg mb-4"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
+                    </div>
+                </a>
+                @endforeach
                 @else
-                    <p class="text-lg mb-4">Student has no journals.</p>
+                <p class="text-lg mb-4">Student has no journals.</p>
                 @endif
             </div>
 

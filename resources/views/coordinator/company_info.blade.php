@@ -69,9 +69,9 @@
             <div class="">
 
                 <!-- Back Button -->
-                <div class="mb-8">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
-                </div>
+                <button class="mb-8">
+                    <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+                </button>
 
                 <h1 class="lg:text-2xl text-xl font-bold mb-4">{{ $companies->name }} Information</h1>
 

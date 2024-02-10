@@ -63,7 +63,10 @@
 
     <section class="bg-#f9fafb dark:bg-gray-900">
         <div class="max-w-2xl rounded-md shadow-md container px-4 mt-12 py-4 mx-auto lg:py-12 bg-white">
-            <h2 class="mb-10 text-xl font-bold text-gray-900 dark:text-white">Update student</h2>
+            <!-- Back Button -->
+            <button class="mb-8">
+                <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+            </button>
             <form method="post" action="{{ route('coordinator_student-list.update',['students' => $students]) }}">
                 @csrf
                 @method('put')
