@@ -82,7 +82,7 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
 
-        <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <!-- Display Success Message -->
             @if(session()->has('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4">
