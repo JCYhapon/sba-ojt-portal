@@ -65,7 +65,7 @@ class JournalController extends Controller
             $studentSignaturePath = 'studentSignature/';
             $studentSignatureImage = date('YmdHis') . "." . $studentSignature->getClientOriginalExtension();
             $studentSignature->move($studentSignaturePath, $studentSignatureImage);
-            $input['studentSignature'] = $studentSignaturePath.$studentSignatureImage; // Full path
+            $input['studentSignature'] = $studentSignaturePath . $studentSignatureImage; // Full path
         }
 
         // Get the supervisor signature file
@@ -73,7 +73,7 @@ class JournalController extends Controller
             $supervisorSignaturePath = 'supervisorSignature/';
             $supervisorSignatureImage = date('YmdHis') . "." . $supervisorSignature->getClientOriginalExtension();
             $supervisorSignature->move($supervisorSignaturePath, $supervisorSignatureImage);
-            $input['supervisorSignature'] = $supervisorSignaturePath.$supervisorSignatureImage; // Full path
+            $input['supervisorSignature'] = $supervisorSignaturePath . $supervisorSignatureImage; // Full path
         }
 
         // Create the Journal record using the $input array
@@ -97,7 +97,7 @@ class JournalController extends Controller
 
     public function editJournal(Journal $journal)
     {
-        return view('student.journal-edit',compact('journal'));
+        return view('student.journal-edit', compact('journal'));
     }
 
     public function updateJournal(Request $request, $journalID)
@@ -182,5 +182,4 @@ class JournalController extends Controller
 
         return redirect()->back()->with('success', 'Journal marked as unread successfully');
     }
-
 }

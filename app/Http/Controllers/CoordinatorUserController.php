@@ -16,7 +16,7 @@ class CoordinatorUserController extends Controller
     public function studentlist()
     {
         $userMajor = auth()->user()->major;
-        $users = User::where('major', $userMajor)->where('role', 3)->get();
+        $users = User::where('major', $userMajor)->where('role', 3)->paginate(12);
 
         return view('coordinator.student_list', ['users' => $users]);
     }
@@ -30,7 +30,8 @@ class CoordinatorUserController extends Controller
         return Student::whereIn('studentID', $studentIDs)->get();
     }
 
-    public function create (){
+    public function create()
+    {
         return view('coordinator.student_list-create');
     }
 
@@ -92,7 +93,7 @@ class CoordinatorUserController extends Controller
         return view('coordinator.student_list-edit', compact('students', 'companies'));
     }
 
-    public function update(Student $students,Company $company ,Request $request)
+    public function update(Student $students, Company $company, Request $request)
     {
         $students = Student::with(['user', 'hiredCompany'])->findOrFail($students->id);
 
@@ -150,7 +151,7 @@ class CoordinatorUserController extends Controller
 
         // Check if a matchedCompany is selected (not empty) before merging
         if ($request->filled('matchedCompany')) {
-           // Merge the new matchedCompany with the existing positions
+            // Merge the new matchedCompany with the existing positions
             $matchedCompany = array_merge($students->matchedCompany, $newMatchedCompany);
         } else {
             $matchedCompany = $students->matchedCompany;
@@ -158,7 +159,7 @@ class CoordinatorUserController extends Controller
 
         // Check if a hiredCompany is selected (not empty) before merging
         if ($request->filled('hiredCompany')) {
-            if($request->input('hiredCompany') == 0){
+            if ($request->input('hiredCompany') == 0) {
                 $hiredCompany =  null;
             }
         } else {
@@ -205,7 +206,8 @@ class CoordinatorUserController extends Controller
         return redirect(route('coordinator_student-list'))->with('success', $message);
     }
 
-    public function studentInfo($id) {
+    public function studentInfo($id)
+    {
         // Find a student with the given $id
         $student = Student::find($id);
 
