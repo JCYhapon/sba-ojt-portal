@@ -66,7 +66,7 @@
   <!-- END OF NAVBAR -->
 
   <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
-    <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
+    <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 overflow-auto">
 
       <div class="container overflow-x-auto">
         {{-- Left-aligned h1 --}}

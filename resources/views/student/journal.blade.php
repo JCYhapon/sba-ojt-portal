@@ -20,8 +20,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 
-
-    @vite('resources/css/app.css')
     <title>Journal</title>
 </head>
 
@@ -79,7 +77,7 @@
     <!-- END OF NAVBAR -->
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
-        <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <div class="flex align-middle justify-end mb-4">
                 <a href="{{ route('create_journal') }}" class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
                     <button type="button" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
