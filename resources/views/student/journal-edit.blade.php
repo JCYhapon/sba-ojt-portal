@@ -12,7 +12,6 @@
     <!-- Tailwindcss CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/background.css') }}">
 

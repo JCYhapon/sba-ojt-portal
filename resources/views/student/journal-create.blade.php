@@ -84,7 +84,12 @@
             <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- Date --}}
+                <!-- Back Button -->
+                <button class="mb-8">
+                    <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+                </button>
                 <div class="flex flex-row justify-between mb-[1.5rem]">
+
                     <div class="flex items-end">
                         <div class="form-group w-[5rem]">
                             <input type="text" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="journalNumber" required placeholder="Journal Number">
