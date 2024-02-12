@@ -87,11 +87,6 @@
             <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- Date --}}
-<<<<<<< HEAD
-
-=======
-
->>>>>>> b564f6e9861e90319acf17a2267f9788383b1763
                 <div class="flex flex-row justify-between mb-[1.5rem]">
 
                     <div class="flex items-end">

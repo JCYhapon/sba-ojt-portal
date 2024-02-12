@@ -14,7 +14,15 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/background.css') }}">
 
+    <style>
+        th.asc::after {
+            content: " ↑";
+        }
 
+        th.desc::after {
+            content: " ↓";
+        }
+    </style>
     <title>Company List</title>
 </head>
 
@@ -146,6 +154,9 @@
 
             </div>
         </div>
+
+        <script src="{{ asset('js/coordinator.js') }}">
+        </script>
 </body>
 
 </html>
