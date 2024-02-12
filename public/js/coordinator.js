@@ -53,4 +53,26 @@ document.addEventListener("DOMContentLoaded", function () {
             rows.forEach((row) => tbody.appendChild(row));
         });
     });
+
+    // Function to apply search filter
+    function applySearchFilter(searchTerm) {
+        rows.forEach((row) => {
+            const rowText = Array.from(row.children)
+                .map((td) => td.textContent.trim().toLowerCase())
+                .join(" ");
+
+            if (rowText.includes(searchTerm)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    // Initial search functionality
+    const searchInput = document.getElementById("simple-search");
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        applySearchFilter(searchTerm);
+    });
 });

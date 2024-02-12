@@ -87,7 +87,7 @@
             </div>
             @endif
 
-            <!-- Add New Student Button -->
+
             <div class="mb-4 w-full flex justify-between">
                 <div class="w-2/4">
                     <form class="flex items-center">
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-col justify-between min-h-70vh overflow-x-auto">
+            <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto">
                 <!-- Company Table -->
                 <div>
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -150,9 +150,8 @@
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
+
         </div>
 
         <script src="{{ asset('js/coordinator.js') }}">
