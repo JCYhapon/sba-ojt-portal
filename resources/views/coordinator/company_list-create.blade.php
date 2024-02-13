@@ -81,17 +81,17 @@
         <div class="flex flex-col gap-6">
           <div class="flex flex-col">
             <label for="name" class="text-sm font-semibold">Name</label>
-            <input type="text" name="name" placeholder="Company's name" class="rounded-md" />
+            <input type="text" name="name" placeholder="Company's name" class="p-1 rounded-sm border-black border-[2px]" />
           </div>
 
           <div class="flex flex-col">
             <label for="email" class="text-sm font-semibold">Email</label>
-            <input type="email" name="email" placeholder="Company's email" class="rounded-md" />
+            <input type="email" name="email" placeholder="Company's email" class="p-1 rounded-sm border-black border-[2px]" />
           </div>
 
           <div class="flex flex-col">
             <label for="address" class="text-sm font-semibold">Address</label>
-            <input type="text" name="address" placeholder="Company's address" class="rounded-md" />
+            <input type="text" name="address" placeholder="Company's address" class="p-1 rounded-sm border-black border-[2px]" />
           </div>
 
           <div class="flex items-center space-x-4">
