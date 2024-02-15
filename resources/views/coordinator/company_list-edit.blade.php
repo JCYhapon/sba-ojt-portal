@@ -107,7 +107,7 @@
                         <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
                             @if (!empty($company->position) && is_array($company->position) && count($company->position) > 0)
                             @foreach($company->position as $position)
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $position }}</li>
                             @endforeach
                             <li>
                                 <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
@@ -124,7 +124,7 @@
                                 </select>
                             </li>
                             @else
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">No Positions Available</li>
                             <li>
                                 <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
                                     <option value="">Choose a position</option>
@@ -152,7 +152,7 @@
                             @php
                             $student = \App\Models\Student::where('studentID', $studentID)->first();
                             @endphp
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">
                                 @if ($student)
                                 {{ $student->firstName }} {{ $student->lastName }}
                                 @endif
@@ -198,8 +198,8 @@
 
 
                     <div class="flex items-center space-x-4">
-                        <button type="submit" class="text-white bg-indigo-500  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                            Update company
+                        <button type="submit" class="text-white bg-gray-800 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Update Company
                         </button>
                     </div>
                 </div>
