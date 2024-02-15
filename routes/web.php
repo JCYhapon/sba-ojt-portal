@@ -142,6 +142,7 @@ Route::put('/coordinator_student-list/{students}/update', [CoordinatorUserContro
 
 Route::post('/coordinator_student-list/students/{id}/toggle-status', [CoordinatorUserController::class, 'toggleStatus'])->name('coordinator_student-list.toggleStatus');
 
+Route::post('/removeMatchedCompanies', [StudentController::class, 'removeMatchedCompanies'])->name('student.remove-matched-company');
 /*
 |----------------------------------------------------------------
 | Dashboard Controller                                          |
@@ -200,6 +201,10 @@ Route::put('/profile/update', [StudentController::class, 'updateProfile'])->name
 Route::get('/profile', [StudentController::class, 'journalRenderedHours'])->name('profile');
 
 Route::get('/coordinator/student-list', [StudentController::class, 'studentHiredCompany'])->name('coordinator.student-list');
+
+Route::post('/removeStudentPosition', [StudentController::class, 'removePositions'])->name('student.remove-positions');
+
+Route::post('/add-supervisor', [StudentController::class, 'addSupervisor'])->name('add.supervisor');
 
 /*
 |----------------------------------------------------------------
