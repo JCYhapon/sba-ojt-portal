@@ -150,6 +150,11 @@
                         </tbody>
                     </table>
                 </div>
+                <div>
+                    <div>
+                        {!! $companies->links() !!}
+                    </div>
+                </div>
             </div>
 
         </div>
