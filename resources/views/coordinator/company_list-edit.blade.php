@@ -65,8 +65,8 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <section class="bg-#f9fafb dark:bg-gray-900">
-        <div class="max-w-2xl rounded-md shadow-md container px-4 mt-12 py-4 mx-auto lg:py-12 bg-white">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
 
 
             <!-- Back Button -->
@@ -204,7 +204,8 @@
                     </div>
                 </div>
             </form>
-    </section>
+        </div>
+    </div>
 
 
 </body>
