@@ -83,10 +83,12 @@
                 <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
                     <div class="flex flex-col justify-between">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
+
                         <div class="form-group">
                             <label for="profilePicture">Profile Picture</label>
                             <input type="file" name="profilePicture" accept="image/*">
                         </div>
+
                         <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
                     </div>
                     <div class="flex items-end">
@@ -107,60 +109,181 @@
                         $company = \App\Models\Company::find($student->hiredCompany);
                         @endphp
                         <div>
-                            @if(isset($companies->name) && !empty($companies->name))
-                            <p class="text-lg font-semibold">Company: {{ $companies->name }}</p>
+                            @if($student->hiredCompany !== null)
+                            <p class="text-lg font-semibold">Company: {{ $company->name }}</p>
                             @else
-                            <p class="text-lg font-semibold">Company: Not Hired</p>
+                            <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
+                                @php
+                                $company = \App\Models\Company::find($student->hiredCompany);
+                                @endphp
+
+                                <li class="flex items-center"> <!-- Added flex and items-center -->
+                                    <p class="text-lg font-semibold">Company:</p>
+                                    <select name="hiredCompany" class="text-lg font-semibold ml-2"> <!-- Added ml-2 for margin -->
+                                        <option value="">Choose a Hired Company</option>
+                                        @php
+                                        $companies = \App\Models\Company::all();
+                                        @endphp
+                                        @foreach($companies as $company)
+                                        <option value="{{ $company->id }}" @if($student->hiredCompany == $company->id) selected @endif>{{ $company->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </li>
+                            </ul>
                             @endif
                         </div>
+
+                        {{-- Display only If hired --}}
+                        <div>
+                            @if($student->hiredCompany !== null)
+                            <label for="supervisor">Supervisor:</label>
+                            <input type="text" id="supervisor" name="supervisor" placeholder="{{$student->supervisor}}">
+                            @endif
+                        </div>
+
                         <!-- Add input fields for position and supervisor -->
                         <div class="sm:col-span-2">
                             <label for="position">Positions:</label>
-                            <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
-                                @if (!empty($company->position) && is_array($company->position) && count($company->position) > 0)
-                                @foreach($company->position as $position)
-                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
-                                @endforeach
-                                <li>
-                                    <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
-                                        <option value="">Choose a position</option>
-                                        <option value="">Choose a position</option>
-                                        <option value="Administration">Administration </option>
-                                        <option value="Accountancy">Accountancy</option>
-                                        <option value="Internal Auditing">Internal Auditing</option>
-                                        <option value="Bookkeeping">Bookkeeping</option>
-                                        <option value="Management Accounting">Management Accounting</option>
-                                        <option value="Financial Management">Financial Management</option>
-                                        <option value="Human Resource Management">Human Resource Management</option>
-                                        <option value="Marketing Managements ">Marketing Managements</option>
-                                        <option value="Legal Managements">Legal Managements</option>
-                                    </select>
-                                </li>
-                                @else
+
+                            <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container">
+                                @php
+                                $positions = $student->position;
+                                $availablePositions = [
+                                'Administration',
+                                'Accountancy',
+                                'Internal Auditing',
+                                'Bookkeeping',
+                                'Management Accounting',
+                                'Financial Management',
+                                'Human Resource Management',
+                                'Marketing Managements ',
+                                'Legal Managements'
+                                ];
+
+                                // Remove positions that are already selected
+                                if (is_array($positions)) {
+                                $availablePositions = array_diff($availablePositions, $positions);
+                                }
+                                @endphp
+
+                                @if(empty($positions))
                                 <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
+                                @endif
+
+                                @foreach($positions ?? [] as $position)
+                                <div class="position-item flex items-center mt-2 mr-2">
+                                    <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
+                                </div>
+                                <!-- Hidden input fields to store positions -->
+                                <input type="hidden" name="positions[]" value="{{ $position }}">
+                                @endforeach
+
+                                @if(empty($positions))
                                 <li>
-                                    <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                    @endif
+
+                                    <select name="position" id="addPosition" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
                                         <option value="">Choose a position</option>
-                                        <option value="">Choose a position</option>
-                                        <option value="Administration">Administration </option>
-                                        <option value="Accountancy">Accountancy</option>
-                                        <option value="Internal Auditing">Internal Auditing</option>
-                                        <option value="Bookkeeping">Bookkeeping</option>
-                                        <option value="Management Accounting">Management Accounting</option>
-                                        <option value="Financial Management">Financial Management</option>
-                                        <option value="Human Resource Management">Human Resource Management</option>
-                                        <option value="Marketing Managements ">Marketing Managements</option>
-                                        <option value="Legal Managements">Legal Managements</option>
+                                        @foreach($availablePositions as $availablePosition)
+                                        <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
+                                        @endforeach
                                     </select>
+
+                                    @if(empty($positions))
                                 </li>
                                 @endif
+
+                                <script>
+                                    document.getElementById('addPosition').addEventListener('change', function(event) {
+                                        const selectedPosition = event.target.value;
+
+                                        if (selectedPosition) {
+                                            // Create a new position item
+                                            const newPositionItem = document.createElement('div');
+                                            newPositionItem.classList.add('position-item', 'flex', 'items-center', 'mt-2', 'mr-2');
+
+                                            // Create span element for position text
+                                            const newPositionText = document.createElement('span');
+                                            newPositionText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-blue-500', 'text-white');
+                                            newPositionText.textContent = selectedPosition;
+
+                                            // Create remove button
+                                            const removeButton = document.createElement('input');
+                                            removeButton.type = 'button'; // Set type to button
+                                            removeButton.value = '×'; // Set the value (content) of the button
+                                            removeButton.classList.add('remove', 'pl-2', 'pr-1', 'cursor-pointer');
+                                            removeButton.dataset.position = selectedPosition;
+
+                                            // Append elements to position item
+                                            newPositionItem.appendChild(newPositionText);
+                                            newPositionText.appendChild(removeButton);
+
+                                            // Append position item to container
+                                            document.querySelector('.position-container').appendChild(newPositionItem);
+
+                                            // Create hidden input field to store position
+                                            const hiddenInput = document.createElement('input');
+                                            hiddenInput.type = 'hidden';
+                                            hiddenInput.name = 'positions[]';
+                                            hiddenInput.value = selectedPosition;
+                                            document.querySelector('.position-container').appendChild(hiddenInput);
+
+                                            // Clear selected option
+                                            event.target.value = '';
+                                        }
+                                    });
+
+                                    // Delegate the event handling to the document level for remove buttons
+                                    document.querySelector('.position-container').addEventListener('click', function(event) {
+                                        if (event.target.classList.contains('remove')) {
+                                            event.preventDefault();
+
+                                            const matchedCompanyToRemove = event.target.dataset.position;
+                                            const matchedCompanyContainer = event.target.closest('.position-container');
+
+                                            event.target.closest('.position-item').remove();
+
+                                            const hiddenInputsToRemove = matchedCompanyContainer.querySelectorAll('input[value="' + matchedCompanyToRemove + '"]');
+                                            hiddenInputsToRemove.forEach(input => {
+                                                input.remove();
+                                            });
+                                        }
+                                    });
+                                </script>
                             </ul>
                         </div>
 
+                        {{-- Preferred Work Type --}}
                         <div>
-                            <label for="supervisor">Supervisor:</label>
-                            <input type="text" id="supervisor" name="supervisor" value="{{ old('supervisor') }}" placeholder="Enter new supervisor">
+                            <label for="workType">Preferred Work Type: </label>
+                            <br>
+                            @if($student->workType !== null)
+                            <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2.5">
+                                @if ($student->workType === 1)
+                                On Site
+                                @elseif ($student->workType === 2)
+                                Work From home
+                                @else
+                                Any
+                                @endif
+                            </span>
+                            @endif
+                            <select name="workType" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2" required>
+                                @if($student->workType !== null)
+                                <option value="{{ $student->workType }}">Choose New Work Type</option>
+                                <option value="1">On Site</option>
+                                <option value="2">Work from Home</option>
+                                <option value="3">Any</option>
+                                @else
+                                <option value="">Choose Work Type</option>
+                                <option value="1">On Site</option>
+                                <option value="2">Work from Home</option>
+                                <option value="3">Any</option>
+                                @endif
+                            </select>
                         </div>
+
+                        {{-- Submit Form --}}
                         <div class="flex align-start justify-end mb-4">
                             <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
                                 <button type="submit" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -177,8 +300,6 @@
         </form>
         @endforeach
     </div>
-
-
 </body>
 
 </html>
