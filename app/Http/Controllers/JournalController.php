@@ -21,7 +21,7 @@ class JournalController extends Controller
 
         $journals = Journal::where('studentID', $user->schoolID)
             ->orderBy('journalNumber', 'asc')
-            ->paginate(5);
+            ->paginate(12);
 
         return view('student.journal', compact('journals'));
     }

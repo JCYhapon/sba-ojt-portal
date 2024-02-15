@@ -81,30 +81,30 @@
 
         <div class="grid grid-rows-3 lg:max-h-[70vh]  xs:max-h-screen xs:gap-8 gap-0 h-auto">
             <!--  FIRST ROW -->
-            <div class="bg-white row-span-1 flex lg:flex-row md:flex-row sm:flex-row lg:justify-between md:justify-between sm:justify-between  xs:flex-col  p-8 shadow-md rounded-md lg:h-48 h-auto py-12">
-                <div class="flex flex-col gap-2">
-                    <div class="flex flex-row gap-2">
+            <div class="bg-white row-span-1 grid grid-cols-3 x p-8 shadow-md rounded-md h-48 py-12">
+                <div class="flex flex-col justify-between">
+                    <div class="flex flex-row gap-10">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
                     </div>
                     <div>
                         <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
                     </div>
+
+                </div>
+                <div class="flex items-end">
                     <div>
                         <p class="text-lg"><span class="font-semibold">Email:</span> {{ $student->email }}</p>
                     </div>
                 </div>
-
-                <div class="flex items-center">
-
-                </div>
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col justify-between">
                     <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
                     <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
                 </div>
             </div>
 
             <!-- SECOND ROW -->
-            <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-auto">
+            <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2">
+
                 <div class="flex flex-col justify-between gap-2">
                     <div>
                         @if(isset($companies->name) && !empty($companies->name))
@@ -115,15 +115,111 @@
                     </div>
 
                     <div>
-                        <p class="text-lg font-semibold">Position:</p>
-                        @foreach($student->position as $position)
-                        <ul>
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
-                        </ul>
-                        @endforeach
+                        @if($student->hiredCompany !== null)
+                        @if($student->supervisor !== null)
+                        <label for="supervisor">Supervisor: {{$student->supervisor}}</label>
+
+                        @else
+                        <form method="post" action="{{ route('add.supervisor') }}" class="p-4 md:p-1">
+                            @csrf
+
+                            <label for="supervisor">Supervisor:</label>
+                            <input type="text" id="supervisor" name="supervisor" placeholder="{{$student->supervisor}}" oninput="toggleSaveChangesButton()">
+
+                            <!-- Save Changes button -->
+                            <button type="submit" id="saveChangesBtn" style="display: none; background-color: #202c34; color: white;" class="rounded-lg p-2.5 mt-1 dark:placeholder-gray-400">
+                                Save Changes
+                            </button>
+                        </form>
+
+                        <script>
+                            // Function to show/hide Save Changes button based on supervisor input
+                            function toggleSaveChangesButton() {
+                                const supervisorInput = document.getElementById('supervisor');
+                                const saveChangesBtn = document.getElementById('saveChangesBtn');
+
+                                // Check if supervisor input field has a value
+                                if (supervisorInput.value.trim() !== '') {
+                                    saveChangesBtn.style.display = 'block'; // Show the button
+                                } else {
+                                    saveChangesBtn.style.display = 'none'; // Hide the button
+                                }
+                            }
+
+                            // Initially hide the Save Changes button
+                            toggleSaveChangesButton();
+                        </script>
+                        @endif
+                        @endif
                     </div>
+
                     <div>
-                        <p class="text-lg font-semibold">Supervisor: {{ $student->supervisor }}</p>
+                        <p class="text-lg font-semibold">Position:</p>
+                        {{-- Collect the position in an array first --}}
+                        <form method="post" action="{{ route('student.remove-positions') }}" class="p-4 md:p-1">
+                            @csrf
+                            @method('post')
+
+                            <div class="position-container flex flex-wrap">
+                                @php
+                                $positions = $student->position ?? [];
+                                @endphp
+
+                                @forelse($positions as $position)
+                                <div class="position-item flex items-center mt-2 mr-2">
+                                    <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
+                                </div>
+                                <!-- Hidden input fields to store positions -->
+                                <input type="hidden" name="positions[]" value="{{ $position }}">
+                                @empty
+                                <button style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">
+                                    <a href="{{ route('profile.edit') }}"><b>+</b> Add Position</a>
+                                </button>
+                                @endforelse
+                            </div>
+
+                            <div class="flex mt-4 space-x-4">
+                                <!-- Save Changes button initially hidden -->
+                                <button type="submit" id="saveChangesBtn" style="display: none; background-color: #202c34; color: white;" class="rounded-lg p-2.5 mt-1 dark:placeholder-gray-400">
+                                    Save Changes
+                                </button>
+
+                                <!-- Cancel Changes button initially hidden -->
+                                <button type="button" id="cancelChangesBtn" style="display: none; background-color: #ff4d4d; color: white;" class="rounded-lg p-2.5 mt-1 dark:placeholder-gray-400">
+                                    Cancel Changes
+                                </button>
+                            </div>
+                        </form>
+
+                        <script>
+                            document.querySelectorAll('.remove').forEach(anchor => {
+                                anchor.addEventListener('click', function(event) {
+                                    event.preventDefault(); // Prevent the default behavior of anchor element (i.e., navigation)
+
+                                    const matchedCompanyToRemove = this.dataset.position;
+                                    const matchedCompanyContainer = this.closest('.position-container');
+
+                                    // Remove the position item from the view
+                                    this.closest('.position-item').remove();
+
+                                    // Remove the corresponding hidden input field
+                                    const hiddenInputsToRemove = matchedCompanyContainer.querySelectorAll('input[value="' + matchedCompanyToRemove + '"]');
+                                    hiddenInputsToRemove.forEach(input => {
+                                        input.remove();
+                                    });
+
+                                    // Show the "Save Changes" and "Cancel Changes" buttons
+                                    document.getElementById('saveChangesBtn').style.display = 'block';
+                                    document.getElementById('cancelChangesBtn').style.display = 'block';
+                                });
+                            });
+
+                            // Add event listener to "Cancel Changes" button
+                            document.getElementById('cancelChangesBtn').addEventListener('click', function() {
+                                // Reload the page to cancel changes and reset the form
+                                location.reload();
+                            });
+                        </script>
                     </div>
                 </div>
 
@@ -132,9 +228,9 @@
                         <h1 class="text-lg font-bold">Total Hours Tracker</h1>
                         <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
                             <canvas data-te-chart="doughnut" data-te-dataset-data='[
-                    {{ $totalRenderedHours }},
-                     {{ $remainingHours }},
-                    {{ $neededHours }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)", "rgba(255, 193, 7, 0.5)"]'>
+                                    {{ $totalRenderedHours }},
+                                    {{ $remainingHours }},
+                                    {{ $neededHours }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)", "rgba(255, 193, 7, 0.5)"]'>
                             </canvas>
                         </div>
 
@@ -174,7 +270,7 @@
             </div>
 
             <!--  THIRD ROW -->
-            <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-[10rem] lg:gap-[3rem]  ">
+            <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10">
                 <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
                     <div class="flex flex-col gap-4">
                         <div>
@@ -207,8 +303,6 @@
             </div>
 
             <!--  END OF THIRD ROW -->
-
-
             @endforeach
         </div>
     </div>

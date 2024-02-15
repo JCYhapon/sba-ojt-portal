@@ -206,7 +206,7 @@
                 <div class="">
                     {!! $users->links() !!}
                 </div>
-                <!-- //PAGINATION -->
+              
 
 
             </div>
