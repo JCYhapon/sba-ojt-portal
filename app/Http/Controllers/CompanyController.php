@@ -15,11 +15,12 @@ class CompanyController extends Controller
 {
     public function getCompany()
     {
-        $companies = Company::orderBy('id','asc')->paginate(10);
+        $companies = Company::orderBy('id', 'asc')->paginate(12);
         return view('coordinator.company_list', compact('companies'));
     }
 
-    public function companyInfo($id) {
+    public function companyInfo($id)
+    {
 
         $companies = Company::find($id);
 
@@ -68,7 +69,7 @@ class CompanyController extends Controller
 
         Company::create($data);
 
-        return redirect()->route('coordinator_company-list')->with('success','Company has been created successfully.');
+        return redirect()->route('coordinator_company-list')->with('success', 'Company has been created successfully.');
     }
 
     public function editCompany(Company $company)
@@ -89,6 +90,7 @@ class CompanyController extends Controller
             'status' => 'required',
             'position',
             'hiredStudents',
+            'workType',
         ]);
 
         // Convert the input positions and hiredStudents to an array
@@ -120,6 +122,7 @@ class CompanyController extends Controller
             'status' => $request->input('status'),
             'position' => $positions,
             'hiredStudents' => $hiredStudents,
+            'workType' => $request->input('workType'),
         ]);
 
         // Update the corresponding students

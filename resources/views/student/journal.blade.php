@@ -125,9 +125,15 @@
                         </tr>
                         @endforeach
                     </tbody>
-                    {!! $journals->links() !!}
+
             </div>
+
+            <div>
+                {!! $journals->links() !!}
+            </div>
+
         </div>
+
     </div>
 </body>
 

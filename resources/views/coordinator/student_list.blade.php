@@ -217,6 +217,7 @@
 
     @include('coordinator.student_list-create')
 
+    <!-- FOR FILTER -->
     <script src="{{ asset('js/coordinator.js') }}">
     </script>
 

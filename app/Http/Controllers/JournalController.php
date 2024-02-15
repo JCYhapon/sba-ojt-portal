@@ -43,13 +43,43 @@ class JournalController extends Controller
 
     public function createJournal()
     {
-        return view('student.journal-create');
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Retrieve the schoolID of the authenticated user
+        $studentID = $user->schoolID;
+
+        // Count the number of journal entries with the matching studentID
+        $journalCount = Journal::where('studentID', $studentID)->count();
+
+        if ($journalCount == 0) {
+            $journalCount = 1;
+        } else {
+            $journalCount = $journalCount + 1;
+        }
+        // Log the count
+        Log::info('Journal Count: ' . $journalCount);
+
+        // Return the data to the view
+        return view('student.journal-create', [
+            'journalCount' => $journalCount
+        ]);
     }
 
     public function storeJournal(Request $request)
     {
+        $user = Auth::user();
+        $studentID = $user->schoolID;
+        $journalCount = Journal::where('studentID', $studentID)->count();
+
+        if ($journalCount == 0) {
+            $journalCount = 1;
+        } else {
+            $journalCount = $journalCount + 1;
+        }
+
         $request->validate([
-            'journalNumber' => 'required',
+            'journalNumber',
             'reflection' => 'required',
             'hoursRendered' => 'required',
             'studentSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -79,7 +109,7 @@ class JournalController extends Controller
         // Create the Journal record using the $input array
         Journal::create([
             'studentID' => $user->schoolID,
-            'journalNumber' => $request->input('journalNumber'),
+            'journalNumber' => $journalCount,
             'reflection' => $request->input('reflection'),
             'hoursRendered' => $request->input('hoursRendered'),
             'studentSignature' => $input['studentSignature'],
@@ -106,28 +136,22 @@ class JournalController extends Controller
         $journal = Journal::findOrFail($journalID);
 
         $request->validate([
-            'journalNumber' => 'required',
             'hoursRendered' => 'required',
-            'studentSignature' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'supervisorSignature' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'coverage_start_date' => 'required',
             'coverage_end_date' => 'required',
+            'reflection' => 'required',
         ]);
-
-        // Store the uploaded signatures and get their file paths
-        $studentSignaturePath = $request->file('studentSignature')->store('public/signatures');
-        $supervisorSignaturePath = $request->file('supervisorSignature')->store('public/signatures');
 
         // Update the Journal entry
         $journal->update([
+            'reflection' => $request->input('reflection'),
             'coverage_start_date' => $request->input('coverage_start_date'),
             'coverage_end_date' => $request->input('coverage_end_date'),
-            'journalNumber' => $request->input('journalNumber'),
             'hoursRendered' => $request->input('hoursRendered'),
-            'studentSignature' => $studentSignaturePath,
-            'supervisorSignature' => $supervisorSignaturePath,
             'updated_at' => now(), // Update the 'updated_at' field
         ]);
+
+        return redirect()->route('student_journal')->with('success', 'Journal has been updated successfully');
     }
 
     public function studentJournalGrade(Journal $journal)
@@ -151,13 +175,12 @@ class JournalController extends Controller
         $request->validate([
             'grade',
             'comments',
-            'updated_at' => now(),
         ]);
 
         $journal->update([
             'grade' => $request->input('grade'),
             'comments' => $request->input('comments'),
-            'supervisorSignature' => $request->input('supervisorSignature'),
+            'updated_at' => now(),
         ]);
 
         // If grade is not null, set status to 3
