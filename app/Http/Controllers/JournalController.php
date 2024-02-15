@@ -32,7 +32,6 @@ class JournalController extends Controller
         $studentIDs = Student::where('major', $userMajor)->pluck('studentID');
 
         $journals = Journal::whereIn('studentID', $studentIDs)
-            ->orderBy('status', 'asc')
             ->orderBy('journalNumber', 'asc')
             ->get();
 
