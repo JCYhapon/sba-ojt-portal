@@ -77,7 +77,7 @@
     <!-- END OF NAVBAR -->
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
-        <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <div class="flex align-middle justify-end mb-4">
                 @php
                 $user = Auth::user();
@@ -103,41 +103,48 @@
 
 
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-4 py-4">Journal Title</th>
-                            <th scope="col" class="px-4 py-4">Status</th>
-                            <th scope="col" class="px-4 py-4">Grade</th>
-                            <th scope="col" class="px-4 py-4">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($journals as $journal)
-                        <tr>
-                            <td class="py-2 px-4 border-b">Journal Number: {{ $journal->journalNumber }}</td>
-                            <td class="py-2 px-4 border-b">
-                                @if($journal->status == 1)
-                                Unread
-                                @elseif($journal->status == 2)
-                                Seen
-                                @elseif($journal->status == 3)
-                                Graded
-                                @endif
-                            </td>
-                            <td class="py-2 px-4 border-b"> {{ $journal->grade ?? 'Not graded yet' }}</td>
-                            <td class="py-2 px-4 border-b">
-                                {{-- <a href="{{ route('edit_journal',['journalID' => $journal->journalID]) }}"> --}}
-                                <a href="{{ route('edit_journal', ['journal' => $journal->journalID]) }}">
-                                    <box-icon name='edit' color='#1f2937' style='font-size: 45px;'></box-icon>
-                                </a>
+            <div class="overflow-x-auto min-h-[70vh] flex flex-col justify-between">
+                <div>
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-4 py-4">Journal Title</th>
+                                <th scope="col" class="px-4 py-4">Status</th>
+                                <th scope="col" class="px-4 py-4">Grade</th>
+                                <th scope="col" class="px-4 py-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($journals as $journal)
+                            <tr>
+                                <td class="py-2 px-4 border-b">Journal Number: {{ $journal->journalNumber }}</td>
+                                <td class="py-2 px-4 border-b">
+                                    @if($journal->status == 1)
+                                    Unread
+                                    @elseif($journal->status == 2)
+                                    Seen
+                                    @elseif($journal->status == 3)
+                                    Graded
+                                    @endif
+                                </td>
+                                <td class="py-2 px-4 border-b"> {{ $journal->grade ?? 'Not graded yet' }}</td>
+                                <td class="py-2 px-4 border-b">
+                                    {{-- <a href="{{ route('edit_journal',['journalID' => $journal->journalID]) }}"> --}}
+                                    <a href="{{ route('edit_journal', ['journal' => $journal->journalID]) }}">
+                                        <box-icon name='edit' color='#1f2937' style='font-size: 45px;'></box-icon>
+                                    </a>
 
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div>
                     {!! $journals->links() !!}
+                </div>
+
+
             </div>
         </div>
     </div>
