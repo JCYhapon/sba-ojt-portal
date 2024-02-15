@@ -63,8 +63,8 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <section class="bg-#f9fafb dark:bg-gray-900">
-        <div class="max-w-2xl rounded-md shadow-md container px-4 mt-12 py-4 mx-auto lg:py-12 bg-white">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
             <!-- Back Button -->
             <button class="mb-8">
                 <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
@@ -124,7 +124,7 @@
                             @php
                             $company = \App\Models\Company::where('id', $matchedCompany)->first();
                             @endphp
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $company->name }}</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $company->name }}</li>
                             @endforeach
                             @else
                             <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Matched Company</li>
@@ -153,7 +153,7 @@
                             @endphp
 
                             @if ($students->hiredCompany && $company)
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $company->name }}</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $company->name }}</li>
                             @else
                             <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Not Yet Hired</li>
                             @endif
@@ -182,14 +182,15 @@
                     </div>
 
                     <div class="flex items-center space-x-4">
-                        <button type="submit" class="text-white bg-indigo-500  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                            Update student
+                        <button type="submit" class="text-white bg-gray-800 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Update Student
                         </button>
                     </div>
                 </div>
             </form>
         </div>
-    </section>
+    </div>
+
 
 </body>
 
