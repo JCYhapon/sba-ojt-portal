@@ -78,9 +78,9 @@
         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="grid grid-rows-3">
+            <div class="flex flex-col gap-4 h-auto">
                 <!--  FIRST ROW -->
-                <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-48 py-12">
+                <div class="bg-white row-span-1 grid grid-cols-3 p-8 shadow-md rounded-md h-[15rem] py-12">
                     <div class="flex flex-col justify-between">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
 
@@ -103,7 +103,7 @@
                 </div>
 
                 <!-- SECOND ROW -->
-                <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-[20rem]">
+                <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-auto">
                     <div class="flex flex-col justify-between gap-2">
                         @php
                         $company = \App\Models\Company::find($student->hiredCompany);
