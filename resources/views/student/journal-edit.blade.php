@@ -83,7 +83,7 @@
                 <div class="flex lg:flex-row justify-between mb-[1.5rem] xs:flex-col">
                     <div class="flex items-end">
                         <div class="form-group w-[5rem]">
-                            <input type="text" name="journalNumber" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->journalNumber }}" required>
+                            <input type="text" name="journalNumber" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->journalNumber }}" readonly>
                         </div>
                     </div>
 
@@ -103,7 +103,7 @@
 
                 <div class="form-group">
                     <label for="reflection">Reflection</label>
-                    <textarea name="reflection" class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" rows="10" readonly>{{ $journal->reflection }}</textarea>
+                    <textarea name="reflection" class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" rows="10">{{ $journal->reflection }}</textarea>
                 </div>
 
                 <div class="flex lg:flex-row justify-between xs:flex-col xs:mb-6">
@@ -127,7 +127,7 @@
 
                 <div class="form-group flex flex-row items-center gap-4 mb-4">
                     <label for="grade">Grade</label>
-                    <input type="text" name="grade" class="form-control rounded-md bg-gray-50 text-gray-400 overflow-x-auto" value="{{ $journal->grade ?: 'Not Graded Yet' }}" readonly>
+                    <input type="text" name="grade" class="form-control rounded-md bg-gray-50 text-gray-400 overflow-x-auto" value="{{ $journal->grade ?: 'Not Graded Yet' }}/30" readonly>
                 </div>
 
                 <div class="form-group flex flex-col">
@@ -138,10 +138,24 @@
                 <div class="flex align-middle justify-end mt-8">
                     <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
                         <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                            @if($journal->grade !== null)
+                            Back
+                            @else
                             Update Journal
+                            @endif
                         </button>
                     </a>
 
+                    @if($journal->grade !== null)
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var formElements = document.querySelectorAll('form input, form textarea');
+                            formElements.forEach(function(element) {
+                                element.setAttribute('readonly', true);
+                            });
+                        });
+                    </script>
+                    @endif
             </form>
         </div>
     </div>
