@@ -66,8 +66,6 @@
                                 </form>
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
@@ -80,18 +78,14 @@
             @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <!-- Back Button -->
-            <button class="mb-8">
-                <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
-            </button>
+
             <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- Date --}}
                 <div class="flex flex-row justify-between mb-[1.5rem]">
-
                     <div class="flex items-end">
                         <div class="form-group w-[5rem]">
-                            <input type="text" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="journalNumber" required placeholder="Journal Number">
+                            <input type="text" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="journalNumber" placeholder="{{ $journalCount }}" value="{{ $journalCount }}" disabled>
                         </div>
                     </div>
 
@@ -128,7 +122,7 @@
 
                 <div class="flex align-middle justify-end mt-8">
                     <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
-                        <button type="submit" id="create-journal-btn" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Create Journal
                         </button>
                     </a>
@@ -138,9 +132,8 @@
     </div>
 
     <!-- FOR BUTTON SUCCESS MESSAGE -->
-    <script src="{{ asset('js/button.js') }}">
-    </script>
-
+    <script src="{{ asset('js/button.js') }}"></script>
 </body>
+
 
 </html>
