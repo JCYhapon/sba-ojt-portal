@@ -79,7 +79,7 @@
         $student = \App\Models\Student::where('studentID', $studentID)->first();
         @endphp
 
-        <div class="grid grid-rows-3 lg:max-h-[70vh]  xs:max-h-screen xs:gap-8 gap-0 h-auto">
+        <div class="grid grid-rows-3 lg:max-h-auto  xs:max-h-screen xs:gap-8 gap-0 h-auto">
             <!--  FIRST ROW -->
             <div class="bg-white row-span-1 grid grid-cols-3 x p-8 shadow-md rounded-md h-48 py-12">
                 <div class="flex flex-col justify-between">
