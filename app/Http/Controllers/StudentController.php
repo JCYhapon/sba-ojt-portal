@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Journal;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
@@ -53,7 +54,7 @@ class StudentController extends Controller
 
     public function displayCompany()
     {
-        $companies = Company::orderBy('id','asc')->paginate(10);
+        $companies = Company::orderBy('id', 'asc')->paginate(10);
         return view('student.company_list', compact('companies'));
     }
 
@@ -81,43 +82,109 @@ class StudentController extends Controller
         // Search for the Student with the specified schoolID
         $student = Student::where('studentID', $userSchoolID)->first();
 
-
         $request->validate([
-            'profilePicture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'position',
+            'profilePicture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'positions' => 'array', // Ensure positions is provided and is an array
+            'positions.*' => 'string',
             'supervisor',
+            'hiredCompany',
+            'workType',
         ]);
 
-        // Get the student signature file
-        if ($profilePicture = $request->file('profilePicture')) {
+        // Initialize input variable
+        $input = [];
+
+        // Get the student signature file if it exists
+        if ($request->hasFile('profilePicture')) {
+            $profilePicture = $request->file('profilePicture');
             $profilePicturePath = 'profilePicture/';
             $profilePictureImage = date('YmdHis') . "." . $profilePicture->getClientOriginalExtension();
             $profilePicture->move($profilePicturePath, $profilePictureImage);
-            $input['profilePicture'] = $profilePicturePath.$profilePictureImage; // Full path
+            $input['profilePicture'] = $profilePicturePath . $profilePictureImage; // Full path
         }
 
-        $newPositions = explode(',', $request->input('position'));
+        // Check if a profile picture was uploaded before proceeding with related steps
+        if (!empty($input['profilePicture'])) {
+            // Updating User table profilePicture
+            $user->update([
+                'profilePicture' => $input['profilePicture'],
+            ]);
+        }
 
-        // Check if a position is selected (not empty) before merging
-        if ($request->filled('position')) {
-            // Merge the new positions with the existing positions
-            $positions = array_merge($student->position, $newPositions);
+        $updatedPositions = $request->input('positions') ?? [];
+
+        // Check if a hiredCompany is (not empty)
+        if ($request->filled('hiredCompany')) {
+            $hiredCompany =  $request->input('hiredCompany');
         } else {
-            $positions = $student->position;
+            $hiredCompany = $student->hiredCompany;
         }
 
-        //Create an update for User table profilePicture
-        $user->update([
-            'profilePicture'=>  $input['profilePicture'],
-        ]);
+        // Check if a supervisor is (not empty)
+        if ($request->filled('supervisor')) {
+            $supervisor =  $request->input('supervisor');
+        } else {
+            $supervisor = $student->supervisor;
+        }
+
 
         // Updating Company
         $student->update([
-            'position' => $positions,
+            'position' => $updatedPositions,
+            'supervisor' => $supervisor,
+            'workType' => $request->input('workType'),
+            'hiredCompany' => $hiredCompany,
+        ]);
+
+
+        return redirect()->route('student_profile')->with('success', 'Student has been updated successfully.');
+    }
+
+    public function removePositions(Request $request)
+    {
+        // Get the schoolID of the authenticated user
+        $userSchoolID = auth()->user()->schoolID;
+
+        // Search for the Student with the specified schoolID
+        $student = Student::where('studentID', $userSchoolID)->first();
+
+        // Validate the request
+        $request->validate([
+            'positions' => 'array', // Ensure positions is provided and is an array
+            'positions.*' => 'string', // Ensure each position is a string
+        ]);
+
+        // Get the updated positions from the request, using an empty array as fallback if position is null
+        $updatedPositions = $request->input('positions') ?? [];
+
+        // Update the student's positions
+        $updateStudent = $student->update([
+            'position' => $updatedPositions,
+        ]);
+
+        // Optionally, you can return a response to indicate success or failure
+        return back()->with('success', 'Positions updated successfully');
+    }
+
+    public function addSupervisor(Request $request)
+    {
+        // Get the schoolID of the authenticated user
+        $userSchoolID = auth()->user()->schoolID;
+
+        // Search for the Student with the specified schoolID
+        $student = Student::where('studentID', $userSchoolID)->first();
+
+        // Validate the request
+        $request->validate([
+            'supervisor' => 'required',
+        ]);
+
+        // Update the student's positions
+        $updateStudent = $student->update([
             'supervisor' => $request->input('supervisor'),
         ]);
 
-        return redirect()->route('student_profile')->with('success', 'Company has been updated successfully.');
+        // Optionally, you can return a response to indicate success or failure
+        return back()->with('success', 'Supervisor updated successfully');
     }
-
 }

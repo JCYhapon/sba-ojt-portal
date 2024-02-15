@@ -108,6 +108,7 @@ class CoordinatorUserController extends Controller
             'section' => 'required',
             'major' => 'required',
             'matchedCompany',
+            'matchedCompanies.*' => 'exists:companies,id',
             'hiredCompany',
             'status' => 'required',
         ]);
@@ -176,7 +177,7 @@ class CoordinatorUserController extends Controller
             'email' => $request->input('email'),
             'section' => $request->input('section'),
             'major' => $request->input('major'),
-            'matchedCompany' => array_map('intval', $matchedCompany),
+            'matchedCompany' => array_map('intval', $matchedCompany) ?? [],
             'hiredCompany' => $request->input('hiredCompany'),
             'status' => $request->input('status'),
             'updated_at' => now(),
@@ -185,6 +186,7 @@ class CoordinatorUserController extends Controller
 
         return redirect(route('coordinator_student-list'))->with('success', 'Student updated successfully.');
     }
+
 
 
     public function toggleStatus($id)
