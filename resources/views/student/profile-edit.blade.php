@@ -103,7 +103,7 @@
                 </div>
 
                 <!-- SECOND ROW -->
-                <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2 h-auto">
+                <div class="row-span-1 bg-white p-8 shadow-md rounded-md  h-auto">
                     <div class="flex flex-col justify-between gap-2">
                         @php
                         $company = \App\Models\Company::find($student->hiredCompany);
@@ -134,10 +134,10 @@
                         </div>
 
                         {{-- Display only If hired --}}
-                        <div>
+                        <div class="flex items-center gap-4">
                             @if($student->hiredCompany !== null)
-                            <label for="supervisor">Supervisor:</label>
-                            <input type="text" id="supervisor" name="supervisor" placeholder="{{$student->supervisor}}">
+                            <label for="supervisor text-center">Supervisor:</label>
+                            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[40%] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="text" id="supervisor" name="supervisor" placeholder="{{$student->supervisor}}">
                             @endif
                         </div>
 
@@ -145,7 +145,7 @@
                         <div class="sm:col-span-2">
                             <label for="position">Positions:</label>
 
-                            <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container">
+                            <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container items-center">
                                 @php
                                 $positions = $student->position;
                                 $availablePositions = [
@@ -182,7 +182,7 @@
                                 <li>
                                     @endif
 
-                                    <select name="position" id="addPosition" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                    <select name="position" id="addPosition" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="">Choose a position</option>
                                         @foreach($availablePositions as $availablePosition)
                                         <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
@@ -254,33 +254,36 @@
                         </div>
 
                         {{-- Preferred Work Type --}}
-                        <div>
+                        <div class="flex flex-col gap-2">
                             <label for="workType">Preferred Work Type: </label>
-                            <br>
-                            @if($student->workType !== null)
-                            <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2.5">
-                                @if ($student->workType === 1)
-                                On Site
-                                @elseif ($student->workType === 2)
-                                Work From home
-                                @else
-                                Any
-                                @endif
-                            </span>
-                            @endif
-                            <select name="workType" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2" required>
+                            <div class="flex items-center">
                                 @if($student->workType !== null)
-                                <option value="{{ $student->workType }}">Choose New Work Type</option>
-                                <option value="1">On Site</option>
-                                <option value="2">Work from Home</option>
-                                <option value="3">Any</option>
-                                @else
-                                <option value="">Choose Work Type</option>
-                                <option value="1">On Site</option>
-                                <option value="2">Work from Home</option>
-                                <option value="3">Any</option>
+                                <span style="background-color: #202c34; color: white;" class="rounded-md p-2.5 dark:placeholder-gray-400 m-2.5">
+                                    @if ($student->workType === 1)
+                                    On Site
+                                    @elseif ($student->workType === 2)
+                                    Work From home
+                                    @else
+                                    Any
+                                    @endif
+                                </span>
                                 @endif
-                            </select>
+
+                                <select name="workType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                                    @if($student->workType !== null)
+                                    <option value="{{ $student->workType }}">Choose New Work Type</option>
+                                    <option value="1">On Site</option>
+                                    <option value="2">Work from Home</option>
+                                    <option value="3">Any</option>
+                                    @else
+                                    <option value="">Choose Work Type</option>
+                                    <option value="1">On Site</option>
+                                    <option value="2">Work from Home</option>
+                                    <option value="3">Any</option>
+                                    @endif
+                                </select>
+                            </div>
+
                         </div>
 
                         {{-- Submit Form --}}
