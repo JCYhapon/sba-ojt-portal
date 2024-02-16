@@ -110,7 +110,7 @@
                             <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $position }}</li>
                             @endforeach
                             <li>
-                                <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                <select name="position" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="">Choose a position</option>
                                     <option value="Administration">Administration </option>
                                     <option value="Accountancy">Accountancy</option>
@@ -126,7 +126,7 @@
                             @else
                             <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">No Positions Available</li>
                             <li>
-                                <select name="position" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                <select name="position" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="">Choose a position</option>
                                     <option value="Administration">Administration </option>
                                     <option value="Accountancy">Accountancy</option>
@@ -160,7 +160,7 @@
                             @endforeach
 
                             <li>
-                                <select name="hiredStudents" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                <select name="hiredStudents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="">Choose a Hired Students</option>
                                     @foreach($users as $user)
                                     @foreach (explode(',', $user->schoolID) as $studentID)
@@ -178,7 +178,7 @@
                             @else
                             <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Hired Students</li>
                             <li>
-                                <select name="hiredStudents" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">
+                                <select name="hiredStudents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="">Choose a Hired Students</option>
                                     @foreach($users as $user)
                                     @foreach (explode(',', $user->schoolID) as $studentID)
