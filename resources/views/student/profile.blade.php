@@ -280,7 +280,7 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Ensure your account is using a long, random password to stay secure.</p>
                         </div>
                         <div>
-                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4">Update Password</button>
+                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
                         </div>
                     </div>
                 </div>
