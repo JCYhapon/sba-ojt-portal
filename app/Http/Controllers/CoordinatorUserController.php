@@ -111,7 +111,14 @@ class CoordinatorUserController extends Controller
             'matchedCompanies.*' => 'exists:companies,id',
             'hiredCompany',
             'status' => 'required',
+            'password',
         ]);
+
+        if ($request->has('password') && $request->input('password') !== null) {
+            $password = Hash::make($request->input('password'));
+        } else {
+            $password = $user->password;
+        }
 
         // Update user details
         $user = $students->user;
@@ -119,7 +126,7 @@ class CoordinatorUserController extends Controller
             'name' => $request->input('firstName') . ' ' . $request->input('lastName'),
             'email' => $request->input('email'),
             'major' => $request->input('major'),
-            'password' => Hash::make($request->input('password')),
+            'password' => $password,
             'updated_at' => now(),
         ]);
 
@@ -186,7 +193,6 @@ class CoordinatorUserController extends Controller
 
         return redirect(route('coordinator_student-list'))->with('success', 'Student updated successfully.');
     }
-
 
 
     public function toggleStatus($id)
