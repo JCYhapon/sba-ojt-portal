@@ -118,8 +118,6 @@ Route::put('/coordinator_company-update/{company}', [CompanyController::class, '
 Route::get('coordinator_company-list', [CompanyController::class, 'getCompany'])->name('coordinator_company-list');
 Route::get('coordinator_company-page', [CompanyController::class, 'getCompany'])->name('coordinator_company-page');
 
-Route::get('/coordinator/company/{id}', [CompanyController::class, 'companyInfo'])->name('coordinator_company_info');
-
 Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class, 'toggleStatus'])->name('coordinator.company_toggle_status');
 
 /*
@@ -198,6 +196,10 @@ Route::get('/profile/edit/', [StudentController::class, 'editProfile'])->name('p
 
 Route::put('/profile/update', [StudentController::class, 'updateProfile'])->name('profile.update');
 
+Route::get('/password/edit/', [StudentController::class, 'editPassword'])->name('password.edit');
+
+Route::put('/password/update', [StudentController::class, 'updatePassword'])->name('password.update');
+
 Route::get('/profile', [StudentController::class, 'journalRenderedHours'])->name('profile');
 
 Route::get('/coordinator/student-list', [StudentController::class, 'studentHiredCompany'])->name('coordinator.student-list');
@@ -205,6 +207,8 @@ Route::get('/coordinator/student-list', [StudentController::class, 'studentHired
 Route::post('/removeStudentPosition', [StudentController::class, 'removePositions'])->name('student.remove-positions');
 
 Route::post('/add-supervisor', [StudentController::class, 'addSupervisor'])->name('add.supervisor');
+
+Route::get('/student/company/{id}', [StudentController::class, 'companyInformation'])->name('student_company_information');
 
 /*
 |----------------------------------------------------------------
