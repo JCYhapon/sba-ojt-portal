@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\Journal;
 use Illuminate\Support\Facades\Hash;
@@ -54,7 +55,7 @@ class StudentController extends Controller
 
     public function displayCompany()
     {
-        $companies = Company::orderBy('id', 'asc')->paginate(12);
+        $companies = Company::orderBy('id', 'asc')->paginate(10);
         return view('student.company_list', compact('companies'));
     }
 
@@ -186,5 +187,52 @@ class StudentController extends Controller
 
         // Optionally, you can return a response to indicate success or failure
         return back()->with('success', 'Supervisor updated successfully');
+    }
+
+    public function companyInformation($id)
+    {
+
+        $companies = Company::find($id);
+
+        if (!$companies) {
+            return redirect()->back()->with('error', 'Company not found.');
+        }
+
+
+        return view('student.company_info', ['companies' => $companies]);
+    }
+
+    public function editPassword(Student $student)
+    {
+        return view('student.update-password', compact('student'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        // Log that the updatePassword function is being used
+        Log::info('updatePassword function is being used.');
+        // Validate the incoming request data
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8',
+        ]);
+
+        // Log that the updatePassword function is being used
+        Log::info('Validation Done');
+        // Get the current user
+        $user = Auth::user();
+
+        // Check if the old password matches the user's current password
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->with('error', 'The old password is incorrect.');
+        }
+        Log::info('2nd Validation Done');
+        // Update the student's positions
+        $updateStudent = $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+        Log::info('Password Save Done');
+        // Redirect back with success message
+        return redirect()->route('student_profile')->with('success', 'Student password updated successfully.');
     }
 }
