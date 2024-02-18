@@ -112,43 +112,22 @@
           </select>
         </div>
 
+        <div class="flex flex-col flex-wrap gap-2 mt-4">
 
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
-            <tr>
-              <th scope="col" class="px-4 py-4">Journal Number</th>
-              <th scope="col" class="px-4 py-4">Name</th>
-              <th scope="col" class="px-4 py-4">Section</th>
-              <th scope="col" class="px-4 py-4">Reflection</th>
-              <th scope="col" class="px-4 py-4">Status</th>
-              <th scope="col" class="px-4 py-4">Grade</th>
-              <th scope="col" class="px-4 py-4">Action</th>
-            </tr>
-          </thead>
-
-          <div class="row">
-            @foreach($journals as $journal)
+          @foreach($journals as $journal)
+          <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}">
             @php
             $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
             @endphp
 
             @if($student)
-            <div class="col-md-6 mb-3">
-              <tbody>
-                <td class="py-2 px-4 border-b">
-                  <h2 class="card-title">{{ $journal->journalNumber }}</h2>
-                </td>
-                <td class="py-2 px-4 border-b">
-                  <h1 class="card-title">{{ $student->firstName }} {{ $student->lastName }}</h1>
-                </td>
-                <td class="py-2 px-4 border-b">
-                  <h1 class="card-title">{{ $student->section }}</h1>
-                </td>
-                <td class="py-2 px-4 border-b w-[40%]">
-                  <p class="overflow-x-auto ">{{ $journal->reflection }}</p>
-                </td>
-                <td class="py-2 px-4 border-b">
-                  <p class="card-text">
+
+            <div class="border rounded-md p-[20px]">
+              <div class="flex items-center justify-between">
+                <h2 class="card-title text-lg font-bold hover:underline">Journal {{ $journal->journalNumber }}</h2>
+                <div class="flex gap-4 items-center justify-evenly">
+                  <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-gray-800 text-white  text-center p-[5px] rounded-md text-[13px]">Mark as Unread</a>
+                  <p class="bg-gray-800 text-white  text-center p-[5px] rounded-md text-[13px]">
                     @if($journal->status == 1)
                     Unread
                     @elseif($journal->status == 2)
@@ -157,27 +136,29 @@
                     Graded
                     @endif
                   </p>
-                </td>
-                <td class="py-2 px-4 border-b">
-                  <p class="card-text"> {{ $journal->grade ?? 'Not graded yet' }}</p>
-                </td>
-                <td class="py-2 px-4 border-b">
-                  <div class="flex gap-2">
-                    <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-gray-800 text-white w-[7rem] text-center p-[7px] rounded-full">Mark as Unread</a>
-                    <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="bg-gray-800 text-white w-[7rem] text-center p-[7px] rounded-full">Grade</a>
-                    @if($journal->status != 1 && $journal->status != 3)
-                    @endif
-                  </div>
-                </td>
-              </tbody>
+                  @if($journal->status != 1 && $journal->status != 3)
+                  @endif
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div class="flex flex-row gap-4">
+                  <h1 class="card-title"><span class="font-semibold">Name: </span>{{ $student->firstName }} {{ $student->lastName }}</h1>
+                  <h1 class="card-title"><span class="font-semibold">Section: </span>{{ $student->section }}</h1>
+                  <p class="card-text"><span class="font-semibold">Score: </span>{{ $journal->grade ?? 'Not graded yet' }}</p>
+                </div>
+                <div>
+                  <p class="overflow-x-auto ">{{ $journal->reflection }}</p>
+                </div>
+              </div>
+              @endif
             </div>
-          </div>
-          @endif
+          </a>
           @endforeach
+        </div>
       </div>
-      </table>
     </div>
   </div>
+
 
 
   <!-- FOR FILTER -->
