@@ -112,16 +112,16 @@
 
             <div class="form-group flex flex-col">
               <label for="reflection" class="font-mono text-sm font-semibold">Reflection</label>
-              <textarea name="" id="" cols="30" rows="10" class="rounded border-gray-300 text-gray-600" readonly> {{ $journal->reflection }}</textarea>
+              <textarea name="" id="" cols="30" rows="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" readonly> {{ $journal->reflection }}</textarea>
             </div>
 
             <div class="form-group">
-              <textarea name="comments" class="form-control w-full rounded border-gray-300" placeholder="Coordinators comment....">{{ $journal->comments }}</textarea>
+              <textarea name="comments" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Coordinators comment....">{{ $journal->comments }}</textarea>
             </div>
 
             <div class="form-group flex items-center gap-4">
               <label for="grade" class="font-mono text-sm font-semibold">Grade:</label>
-              <input type="number" name="grade" class="form-control rounded border-gray-300 w-[7%]" value="{{ $journal->grade }}" min="0" max="30">
+              <input type="number" name="grade" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[8%] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ $journal->grade }}" min="0" max="30">
             </div>
 
             <div class="flex align-middle justify-center">
