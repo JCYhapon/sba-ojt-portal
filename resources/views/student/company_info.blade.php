@@ -67,61 +67,63 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="max-w-screen-xl container mx-auto p-12">
-        <h1 class="text-3xl font-bold mb-4">{{ $companies->name }} Information</h1>
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
+            <div class="">
+                <h1 class="text-3xl font-bold mb-4">{{ $companies->name }} Information</h1>
 
-        <!-- Display Success Message -->
-        @if(session()->has('success'))
-        <div class="bg-green-200 text-green-800 p-4 mb-4">
-            {{ session('success') }}
-        </div>
-        @endif
+                <!-- Display Success Message -->
+                @if(session()->has('success'))
+                <div class="bg-green-200 text-green-800 p-4 mb-4">
+                    {{ session('success') }}
+                </div>
+                @endif
 
 
-        <!-- Add New Student Button -->
-        <div class="mb-4">
-            <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+                <!-- Add New Student Button -->
+                <div class="mb-4">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+                </div>
+            </div>
+
+            <!-- coordinator_company_info.blade.php -->
+
+            <table class="w-full border border-gray-300">
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ $companies->email }}</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>{{ $companies->address }}</td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td>
+                        @if($companies->status == 1)
+                        Active
+                        @elseif($companies->status == 2)
+                        For Renewal
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <td>Position:</td>
+                    <td>
+                        @if ($companies->position)
+                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
+                            @foreach($companies->position as $position)
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
+                            @endforeach
+                        </ul>
+                        @else
+                        No Available Position
+                        @endif
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
-
-    <!-- coordinator_company_info.blade.php -->
-
-    <table class="w-full border border-gray-300">
-        <tr>
-            <td>Email:</td>
-            <td>{{ $companies->email }}</td>
-        </tr>
-        <tr>
-            <td>Address:</td>
-            <td>{{ $companies->address }}</td>
-        </tr>
-        <tr>
-            <td>Status:</td>
-            <td>
-                @if($companies->status == 1)
-                Active
-                @elseif($companies->status == 2)
-                For Renewal
-                @endif
-            </td>
-        </tr>
-        <tr>
-            <td>Position:</td>
-            <td>
-                @if ($companies->position)
-                <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
-                    @foreach($companies->position as $position)
-                    <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
-                    @endforeach
-                </ul>
-                @else
-                No Available Position
-                @endif
-            </td>
-        </tr>
-
-
-    </table>
 
 </body>
 
