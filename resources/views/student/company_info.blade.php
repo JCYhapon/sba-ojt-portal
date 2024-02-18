@@ -73,6 +73,12 @@
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <div class="">
+
+                <!-- BACK BUTTON -->
+                <button class="mb-8">
+                    <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+                </button>
+
                 <h1 class="text-3xl font-bold mb-4">{{ $companies->name }} Information</h1>
 
                 <!-- Display Success Message -->
@@ -81,17 +87,11 @@
                     {{ session('success') }}
                 </div>
                 @endif
-
-
-                <!-- Add New Student Button -->
-                <div class="mb-4">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
-                </div>
             </div>
 
             <!-- coordinator_company_info.blade.php -->
 
-            <table class="w-full border border-gray-300">
+            <table class="w-full border-grey-500 border-b-[1px] ">
                 <tr>
                     <td>Email:</td>
                     <td>{{ $companies->email }}</td>
@@ -114,9 +114,9 @@
                     <td>Position:</td>
                     <td>
                         @if ($companies->position)
-                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
+                        <ul class="flex flex-wrap dark:border-gray-600">
                             @foreach($companies->position as $position)
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">{{ $position }}</li>
+                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $position }}</li>
                             @endforeach
                         </ul>
                         @else
