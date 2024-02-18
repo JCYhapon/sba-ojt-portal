@@ -108,16 +108,16 @@
                 <div class="flex flex-col justify-between gap-2">
                     <div>
                         @if(isset($companies->name) && !empty($companies->name))
-                        <p class="text-lg font-semibold">Company: {{ $companies->name }}</p>
+                        <p class="text-lg "><span class="font-semibold">Company:</span> {{ $companies->name }}</p>
                         @else
-                        <p class="text-lg font-semibold">Company: Not Hired</p>
+                        <p class="text-lg font-semibold"><span class="font-semibold">Company:</span> Not Hired</p>
                         @endif
                     </div>
 
                     <div>
                         @if($student->hiredCompany !== null)
                         @if($student->supervisor !== null)
-                        <label for="supervisor">Supervisor: {{$student->supervisor}}</label>
+                        <label for="supervisor"><span class="font-semibold text-lg">Supervisor:</span> {{$student->supervisor}}</label>
 
                         @else
                         <form method="post" action="{{ route('add.supervisor') }}" class="p-4 md:p-1">
@@ -172,7 +172,7 @@
                                 <!-- Hidden input fields to store positions -->
                                 <input type="hidden" name="positions[]" value="{{ $position }}">
                                 @empty
-                                <button style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">
+                                <button style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">
                                     <a href="{{ route('profile.edit') }}"><b>+</b> Add Position</a>
                                 </button>
                                 @endforelse
@@ -229,8 +229,7 @@
                         <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
                             <canvas data-te-chart="doughnut" data-te-dataset-data='[
                                     {{ $totalRenderedHours }},
-                                    {{ $remainingHours }},
-                                    {{ $neededHours }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)", "rgba(255, 193, 7, 0.5)"]'>
+                                    {{ $remainingHours }}]' data-te-dataset-background-color='["#00AB98", "#ED0081"]'>
                             </canvas>
                         </div>
 
@@ -247,7 +246,7 @@
                                 new Chart(canvas, {
                                     type: 'doughnut',
                                     data: {
-                                        labels: ['Rendered', 'Left', 'Needed'], // Updated labels
+                                        labels: ['Rendered', 'Left'], // Updated labels
                                         datasets: [{
                                             data: data,
                                             backgroundColor: backgroundColor
@@ -280,7 +279,7 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Ensure your account is using a long, random password to stay secure.</p>
                         </div>
                         <div>
-                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
+                            <button class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
                         </div>
                     </div>
                 </div>
@@ -294,9 +293,9 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Edit Profile to match into a company</p>
                         </div>
                         <div>
-                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
+                            <button class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
 
-                            <button class="bg-black text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
+                            <button class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
                         </div>
                     </div>
                 </div>

@@ -95,7 +95,7 @@
                             <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
                                 <canvas data-te-chart="doughnut" data-te-dataset-data='[
                                         {{ $totalHiredStudents }},
-                                        {{ $totalNonHiredStudents }}]' data-te-dataset-background-color='["rgba(77, 182, 172, 0.5)", "rgba(156, 39, 176, 0.5)"]'>
+                                        {{ $totalNonHiredStudents }}]' data-te-dataset-background-color='["#00AB98", "#ED0081"]'>
                                 </canvas>
                             </div>
 
