@@ -25,7 +25,7 @@
             <!-- Laravel login form -->
             <div class="w-[40vh] mx-auto bg-white p-[2rem] shadow-lg rounded-md">
                 <h1 class="text-center mb-5">
-                    <span class="font-bold text-3xl text-black ">Login</span>
+                    <span class="font-bold text-3xl text-black ">SBA OJT Portal</span>
                 </h1>
                 <form method="POST" action="{{ route('login') }}" class="mb-4">
                     @csrf
