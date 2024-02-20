@@ -19,11 +19,17 @@
 </head>
 
 <body>
-    <section class="min-h-screen flex justify-center items-center mx-auto  text-white ">
-        <div class="w-full py-6">
+    <section class="min-h-screen flex justify-center items-center   text-white ">
+        <div class="w-full flex">
+
+            <div class="w-[100%]  p-4">
+                <div id="background" class="w-[100%] h-full rounded-[3vh]">
+                    <h1>hahahahaha</h1>
+                </div>
+            </div>
 
             <!-- Laravel login form -->
-            <div class="w-[40vh] mx-auto bg-white p-[2rem] shadow-lg rounded-md">
+            <div class="w-[80%] h-[100vh] mx-auto bg-white p-[2rem]">
                 <h1 class="text-center mb-5">
                     <span class="font-bold text-3xl text-black ">SBA OJT Portal</span>
                 </h1>
