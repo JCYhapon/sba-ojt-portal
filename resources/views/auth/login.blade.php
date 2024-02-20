@@ -33,39 +33,43 @@
 
             <!-- Laravel login form -->
 
-            <div class="w-[80%] h-[100vh] mx-auto bg-white p-[10rem]">
-                <div class="w-full">
-                    <img src="{{ asset('logo.png') }}" alt="" class="w-full">
+            <div id="form" class="w-[80%] h-[100vh] mx-auto  p-[10rem] flex flex-col  gap-[5rem]">
+                <div class="flex flex-row justify-center">
+                    <img src="{{ asset('assets/logo.png') }}" alt="" class="">
                 </div>
-                <h1 class="text-center mb-5">
-                    <span class="font-bold text-3xl text-black ">SBA OJT Portal</span>
-                </h1>
-                <form method="POST" action="{{ route('login') }}" class="mb-4">
-                    @csrf
-                    <div class="mb-4">
-                        <label for="email" class="text-sm font-medium text-black">Email Address</label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required autofocus class="w-full px-4 py-2 border rounded-md text-black bg-gray-100 focus:border-black focus:outline-none focus:shadow-outline-blue @error('email') border-red-500 @enderror">
-                        @error('email')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="mb-4">
-                        <label for="password" class="text-sm font-medium text-black">Password</label>
-                        <input id="password" type="password" placeholder="Entern your password" name="password" required class="w-full px-4 py-2 border rounded-md text-black bg-gray-100 focus:border-black focus:outline-none focus:shadow-outline-blue @error('password') border-red-500 @enderror">
-                        @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="mb-4">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="text-black focus:black border-gray-700 rounded">
-                            <span class="ml-2 text-sm text-gray-500">Remember me</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="w-full bg-gray-800 text-gray-200 p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:shadow-outline-blue">
-                        Log in
-                    </button>
-                </form>
+
+                <div class="bg-white p-6">
+                    <h1 class="text-center mb-5">
+                        <span class="font-bold text-3xl text-black ">SBA OJT Portal</span>
+                    </h1>
+                    <form method="POST" action="{{ route('login') }}" class="mb-4">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="email" class="text-sm font-medium text-black">Email Address</label>
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required autofocus class="w-full px-4 py-2 border rounded-md text-black bg-gray-100 focus:border-black focus:outline-none focus:shadow-outline-blue @error('email') border-red-500 @enderror">
+                            @error('email')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="text-sm font-medium text-black">Password</label>
+                            <input id="password" type="password" placeholder="Entern your password" name="password" required class="w-full px-4 py-2 border rounded-md text-black bg-gray-100 focus:border-black focus:outline-none focus:shadow-outline-blue @error('password') border-red-500 @enderror">
+                            @error('password')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="text-black focus:black border-gray-700 rounded">
+                                <span class="ml-2 text-sm text-gray-500">Remember me</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="w-full bg-gray-800 text-gray-200 p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:shadow-outline-blue">
+                            Log in
+                        </button>
+                    </form>
+                </div>
+
             </div>
             <!-- End of Laravel login form -->
         </div>
