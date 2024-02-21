@@ -107,10 +107,12 @@
                     </div>
                 </div>
 
+                <!-- ADD LABEL -->
                 <div class="form-group">
                     <textarea class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" placeholder="Write your thoughts here..." name="reflection" rows="10" required id="message"></textarea>
                 </div>
 
+                <!-- ADD LABEL -->
                 <div class="form-group mb-8">
                     <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required>
                 </div>
