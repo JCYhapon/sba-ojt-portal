@@ -6,6 +6,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\MatchingController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ExportReportController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -37,19 +39,9 @@ Route::get('/admin', function () {
     return view('admin.dashboard');
 })->name('admin')->middleware('admin'); // THIS IS ALSO FOR DASHBOARD PAGE
 
-Route::get('/admin_company-list', function () {
-    return view('admin.company');
-})->name('admin_company-page'); // ADMIN COMPANY PAGE
-
-Route::get('/admin_coordinator-list', function () {
-    return view('admin.coordinator');
-})->name('admin_coordinator-page'); // COORDINATOR COMPANY PAGE
-
-Route::get('/admin_student-list', function () {
-    return view('admin.student');
-})->name('admin_student-page'); // STUDENT COMPANY PAGE
-
-
+Route::get('/coordinator-profile', function () {
+    return view('coordinator.profile');
+})->name('coordinator_profile');
 
 //FOR STUDENT
 Route::get('/student', function () {
@@ -114,9 +106,6 @@ Route::post('/coordinator_company-store', [CompanyController::class, 'storeCompa
 
 Route::get('/coordinator_company-edit/{company}', [CompanyController::class, 'editCompany'])->name('coordinator.company_edit');
 Route::put('/coordinator_company-update/{company}', [CompanyController::class, 'updateCompany'])->name('coordinator.company_update');
-
-Route::get('coordinator_company-list', [CompanyController::class, 'getCompany'])->name('coordinator_company-list');
-Route::get('coordinator_company-page', [CompanyController::class, 'getCompany'])->name('coordinator_company-page');
 
 Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class, 'toggleStatus'])->name('coordinator.company_toggle_status');
 
@@ -212,9 +201,34 @@ Route::get('/student/company/{id}', [StudentController::class, 'companyInformati
 
 /*
 |----------------------------------------------------------------
+| Company Controller                                            |
+|---------------------------------------------------------------|
+| All Functions in Company Controller                           |
+|----------------------------------------------------------------
+*/
+Route::get('/admin_company-list', [AdminController::class, 'companyAdmin'])->name('admin_company-page');
+
+Route::get('/admin_coordinator-list', [AdminController::class, 'coordinatorList'])->name('admin_coordinator-page');
+
+Route::get('/admin_student-list', [AdminController::class, 'studentList'])->name('admin_student-page');
+
+/*
+|----------------------------------------------------------------
 |   Matching Controller                                         |
 |---------------------------------------------------------------|
 | All Routes for MatchingController                             |
 |----------------------------------------------------------------
 */
 Route::get('/match-students', [MatchingController::class, 'matchStudentsWithCompanies'])->name('match-students');
+
+/*
+|----------------------------------------------------------------
+|   Export Report Controller                                    |
+|---------------------------------------------------------------|
+| All Routes for ExportReportController                         |
+|----------------------------------------------------------------
+*/
+
+Route::get('/coordinator-profile', [ExportReportController::class, 'journalGrade'])->name('coordinator_profile');
+
+Route::get('/export-journal-grades', [ExportReportController::class, 'exportJournalGrades'])->name('export.journal.grades');
