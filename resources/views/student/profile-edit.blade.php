@@ -172,7 +172,7 @@
 
                                 @foreach($positions ?? [] as $position)
                                 <div class="position-item flex items-center mt-2 mr-2">
-                                    <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
+                                    <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <input type="button" class="remove pl-2 pr-1" data-position="{{ $position }}" value="×"></input> </span>
                                 </div>
                                 <!-- Hidden input fields to store positions -->
                                 <input type="hidden" name="positions[]" value="{{ $position }}">
