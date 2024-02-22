@@ -88,23 +88,16 @@ class CompanyController extends Controller
             'email' => 'required',
             'address' => 'required',
             'status' => 'required',
-            'position',
+            'positions' => 'array', // Ensure positions is provided and is an array
+            'positions.*' => 'string',
             'hiredStudents',
             'workType',
         ]);
 
         // Convert the input positions and hiredStudents to an array
-        $newPositions = explode(',', $request->input('position'));
         $hiredStudents = $request->input('hiredStudents');
         $newHiredStudents = array_map('intval', explode(',', $hiredStudents));
-
-        // Check if a position is selected (not empty) before merging
-        if ($request->filled('position')) {
-            // Merge the new positions with the existing positions
-            $positions = array_merge($company->position, $newPositions);
-        } else {
-            $positions = $company->position;
-        }
+        $updatedPositions = $request->input('positions') ?? [];
 
         // Check if a hired Position is selected (not empty) before merging
         if ($request->filled('hiredStudents')) {
@@ -120,7 +113,7 @@ class CompanyController extends Controller
             'email' => $request->input('email'),
             'address' => $request->input('address'),
             'status' => $request->input('status'),
-            'position' => $positions,
+            'position' => $updatedPositions,
             'hiredStudents' => $hiredStudents,
             'workType' => $request->input('workType'),
         ]);
@@ -133,13 +126,6 @@ class CompanyController extends Controller
         foreach ($students as $student) {
             $student->update(['hiredCompany' => $company->id]);
         }
-
-        //-----------------------------------------------------------
-        // Create logic for
-        // removing company ID from the hiredCompany students table
-        // removing student ID from the hiredStudent companies table
-        //                  - OBRA NANG KIKS
-        //-----------------------------------------------------------
 
         return redirect()->route('coordinator_company-list')->with('success', 'Company has been updated successfully.');
     }
