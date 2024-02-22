@@ -104,9 +104,6 @@ Route::get('/coordinator/company/{id}', [CompanyController::class, 'companyInfo'
 Route::get('/coordinator_company-create', [CompanyController::class, 'createCompany'])->name('coordinator.company_create');
 Route::post('/coordinator_company-store', [CompanyController::class, 'storeCompany'])->name('coordinator.company_store');
 
-Route::get('/coordinator_company-edit/{company}', [CompanyController::class, 'editCompany'])->name('coordinator.company_edit');
-Route::put('/coordinator_company-update/{company}', [CompanyController::class, 'updateCompany'])->name('coordinator.company_update');
-
 Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class, 'toggleStatus'])->name('coordinator.company_toggle_status');
 
 /*
