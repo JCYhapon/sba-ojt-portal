@@ -44,17 +44,20 @@
                         </svg>
                     </button>
                     <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 mt-2 w-full origin-top-right rounded-md shadow-lg md:w-48">
+
                         <div class="rounded-md bg-gray-800 px-2 py-2 shadow">
-
-                            <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-
-                            </a>
+                            <div>
+                                <a href="{{ route('coordinator_profile') }}">Profile</a>
+                            </div>
+                            <div>
+                                <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,29 +118,56 @@
                         </select>
                     </div>
 
-                    {{-- Student Table Matched Company --}}
                     <div class="w-full">
-                        <label for="matchedCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matched Company</label>
-                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
-                            @if(count($students->matchedCompany) > 0)
-                            @foreach($students->matchedCompany as $matchedCompany)
+                        <label for="position">Positions:</label>
+
+                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container items-center">
                             @php
-                            $company = \App\Models\Company::where('id', $matchedCompany)->first();
+                            $positions = $students->position;
+                            $availablePositions = [
+                            'Administration',
+                            'Accountancy',
+                            'Internal Auditing',
+                            'Bookkeeping',
+                            'Management Accounting',
+                            'Financial Management',
+                            'Human Resource Management',
+                            'Marketing Managements ',
+                            'Legal Managements'
+                            ];
+
+                            // Remove positions that are already selected
+                            if (is_array($positions)) {
+                            $availablePositions = array_diff($availablePositions, $positions);
+                            }
                             @endphp
-                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $company->name }}</li>
-                            @endforeach
-                            @else
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Matched Company</li>
+
+                            @if(empty($positions))
+                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
                             @endif
 
+                            @foreach($positions ?? [] as $position)
+                            <div class="position-item flex items-center mt-2 mr-2">
+                                <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }}<input type="button" class="remove pl-2 pr-1 cursor-pointer" data-position="{{ $position }}" value="×"></input></span>
+                            </div>
+                            <!-- Hidden input fields to store positions -->
+                            <input type="hidden" name="positions[]" value="{{ $position }}">
+                            @endforeach
+
+                            @if(empty($positions))
                             <li>
-                                <select name="matchedCompany" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option value="">Choose a Matched Company</option>
-                                    @foreach($companies as $company)
-                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                @endif
+
+                                <select name="position" id="addPosition" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="">Choose a position</option>
+                                    @foreach($availablePositions as $availablePosition)
+                                    <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
                                     @endforeach
                                 </select>
+
+                                @if(empty($positions))
                             </li>
+                            @endif
                         </ul>
                     </div>
 
@@ -193,5 +223,62 @@
 
 
 </body>
+<script>
+    document.getElementById('addPosition').addEventListener('change', function(event) {
+        const selectedPosition = event.target.value;
+
+        if (selectedPosition) {
+            // Create a new position item
+            const newPositionItem = document.createElement('div');
+            newPositionItem.classList.add('position-item', 'flex', 'items-center', 'mt-2', 'mr-2');
+
+            // Create span element for position text
+            const newPositionText = document.createElement('span');
+            newPositionText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-blue-500', 'text-white');
+            newPositionText.textContent = selectedPosition;
+
+            // Create remove button
+            const removeButton = document.createElement('input');
+            removeButton.type = 'button'; // Set type to button
+            removeButton.value = '×'; // Set the value (content) of the button
+            removeButton.classList.add('remove', 'pl-2', 'pr-1', 'cursor-pointer');
+            removeButton.dataset.position = selectedPosition;
+
+            // Append elements to position item
+            newPositionItem.appendChild(newPositionText);
+            newPositionText.appendChild(removeButton);
+
+            // Append position item to container
+            document.querySelector('.position-container').appendChild(newPositionItem);
+
+            // Create hidden input field to store position
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'positions[]';
+            hiddenInput.value = selectedPosition;
+            document.querySelector('.position-container').appendChild(hiddenInput);
+
+            // Clear selected option
+            event.target.value = '';
+        }
+    });
+
+    // Delegate the event handling to the document level for remove buttons
+    document.querySelector('.position-container').addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove')) {
+            event.preventDefault();
+
+            const matchedCompanyToRemove = event.target.dataset.position;
+            const matchedCompanyContainer = event.target.closest('.position-container');
+
+            event.target.closest('.position-item').remove();
+
+            const hiddenInputsToRemove = matchedCompanyContainer.querySelectorAll('input[value="' + matchedCompanyToRemove + '"]');
+            hiddenInputsToRemove.forEach(input => {
+                input.remove();
+            });
+        }
+    });
+</script>
 
 </html>

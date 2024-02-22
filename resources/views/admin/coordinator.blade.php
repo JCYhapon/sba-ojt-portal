@@ -7,8 +7,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {{----alphinejs----}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
   <!-- Tailwindcss CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
 
   <title>Coordinator</title>
 </head>
@@ -53,6 +59,93 @@
           </div>
         </div>
       </nav>
+    </div>
+  </div>
+  {{-- End of NavBar --}}
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="min-h-[70vh] bg-white rounded-md border-0 shadow-md p-5">
+      <!-- Display Success Message -->
+      @if(session()->has('success'))
+      <div class="bg-green-200 text-green-800 p-4 mb-4">
+        {{ session('success') }}
+      </div>
+      @endif
+
+
+      <!-- Add New Student Button -->
+      <div class="mb-4 w-full flex justify-between">
+        <div class="w-2/4">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+            </div>
+          </form>
+        </div>
+
+        <div class="flex align-middle justify-center">
+          <a href="#" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+            <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+              <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+              </svg>
+              New Coordinator
+            </button>
+          </a>
+        </div>
+      </div>
+
+
+      <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto">
+
+        <!-- Students Table -->
+        <div class="">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-auto">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-4 py-3">School ID</th>
+                <th scope="col" class="px-4 py-4">Coordinator name</th>
+                <th scope="col" class="px-4 py-3">Email</th>
+                <th scope="col" class="px-4 py-3">Major</th>
+                <th scope="col" class="px-4 py-3">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($users as $user)
+              <tr>
+                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $user->schoolID }}</td>
+                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $user->name }}</td>
+                <td class="py-2 px-4 border-b">{{ $user->email }}</td>
+                <td class="py-2 px-4 border-b">{{ $user->major }}</td>
+
+
+                <td class="py-2 px-4 border-b">
+                  <div class="flex gap-3">
+                    <a href="{{ route('coordinator_student-list.edit',['students' => $user]) }}">
+                      <button data-modal-target="default-modal" data-modal-toggle="default-modal" type="button">
+                        <box-icon name='edit' color='#1f2937'></box-icon>
+                      </button>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+
+        <div class="">
+          {!! $users->links() !!}
+        </div>
+
+
+
+      </div>
     </div>
   </div>
 

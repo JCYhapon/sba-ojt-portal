@@ -109,6 +109,8 @@ class CoordinatorUserController extends Controller
             'major' => 'required',
             'matchedCompany',
             'matchedCompanies.*' => 'exists:companies,id',
+            'positions' => 'array', // Ensure positions is provided and is an array
+            'positions.*' => 'string',
             'hiredCompany',
             'status' => 'required',
             'password',
@@ -144,6 +146,7 @@ class CoordinatorUserController extends Controller
 
         // Find the new company
         $newCompany = Company::find($request->input('hiredCompany'));
+        $updatedPositions = $request->input('positions') ?? [];
 
         if ($newCompany) {
             // Add student to the new company's hiredStudents
@@ -184,6 +187,7 @@ class CoordinatorUserController extends Controller
             'email' => $request->input('email'),
             'section' => $request->input('section'),
             'major' => $request->input('major'),
+            'position' => $updatedPositions,
             'matchedCompany' => array_map('intval', $matchedCompany) ?? [],
             'hiredCompany' => $request->input('hiredCompany'),
             'status' => $request->input('status'),
