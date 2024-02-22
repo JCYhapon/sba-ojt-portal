@@ -45,17 +45,20 @@
                         </svg>
                     </button>
                     <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 mt-2 w-full origin-top-right rounded-md shadow-lg md:w-48">
+
                         <div class="rounded-md bg-gray-800 px-2 py-2 shadow">
-
-                            <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-
-                            </a>
+                            <div>
+                                <a href="{{ route('coordinator_profile') }}">Profile</a>
+                            </div>
+                            <div>
+                                <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,68 +111,30 @@
                         @endif
                     </td>
                 </tr>
+                @php
+                $positions = $companies->position ?? [];
+                @endphp
+                @if(empty($positions))
+                {{-- No display if company has no position --}}
+                @else
                 <tr class="flex gap-2">
-                    <td>Position:</td>
+                    <td>We are looking for:</td>
                     <td>
-                        @if ($companies->position)
-                        <ul class="flex flex-wrap  dark:border-gray-600">
-                            @foreach($companies->position as $position)
-                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[2px] dark:placeholder-gray-400 m-2">{{ $position }}</li>
-                            @endforeach
-                        </ul>
-                        @else
-                        No Available Position
-                        @endif
+                        @foreach($positions as $position)
+                        <p>{{ $position }}</p>
+                        @endforeach
                     </td>
                 </tr>
-                {{-- <tr>
-            <td>Matched Students:</td>
-            
-                <table class="w-full">
-                    <tr>
-                        <th class="px-4 py-4">Hired Students</th>
-                        <th class="px-4 py-4">Section & Major</th>
-                        <th class="px-4 py-4">Email</th>
-                    </tr>
-                    @if (!empty($companies->hiredStudents) && is_array($companies->hiredStudents) && count($companies->hiredStudents) > 0)
-                        @foreach ($companies->hiredStudents as $studentID)
-                            @php
-                                $student = \App\Models\Students::where('studentID', $studentID)->first();
-                            @endphp
-                            <tr>
-                                <td>
-                                    @if ($student)
-                                        {{ $student->firstName }} {{ $student->lastName }}
                 @endif
-                </td>
 
-                <td>
-                    @if ($student)
-                    {{ $student->section }} {{ $student->major }}
-                    @endif
-                </td>
-
-                <td>
-                    @if ($student)
-                    {{ $student->email }}
-                    @endif
-                </td>
-                </tr>
-                @endforeach
-                @else
-                <tr>
-                    <td colspan="3">No hired students</td>
+                @if($companies->description !== null)
+                <tr class="flex gap-6">
+                    <td>Description:</td>
+                    <td>
+                        {{ $companies->description }}
+                    </td>
                 </tr>
                 @endif
-            </table>
-
-
-            </tr> --}}
-            <tr>
-
-
-                </td>
-            </tr>
             </table>
 
             <!-- HIRED STUDENTS -->
