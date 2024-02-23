@@ -82,43 +82,44 @@
                 @method('PUT')
                 <div class="flex lg:flex-row justify-between mb-[1.5rem] xs:flex-col">
                     <div class="flex items-end">
-                        <div class="form-group w-[5rem]">
+                        <div class="form-group w-[10rem]">
+                            <label for="" class="text-md font-medium">Journal Number</label>
                             <input type="text" name="journalNumber" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->journalNumber }}" readonly>
                         </div>
                     </div>
 
                     <div class="flex flex-col">
                         <div class="form-group">
-                            <label for="coverage_start_date">Start Date</label>
+                            <label for="coverage_start_date" class="text-md font-medium">Start Date</label>
                             <input type="date" name="coverage_start_date" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3" value="{{ $journal->coverage_start_date }}" required>
                         </div>
 
 
                         <div class="form-group">
-                            <label for="coverage_end_date">End Date</label>
+                            <label for="coverage_end_date" class="text-md font-medium">End Date</label>
                             <input type="date" name="coverage_end_date" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ $journal->coverage_end_date }}" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="reflection">Reflection</label>
+                    <label for="reflection" class="text-md font-medium">Reflection</label>
                     <textarea name="reflection" class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" rows="10">{{ $journal->reflection }}</textarea>
                 </div>
 
                 <div class="flex lg:flex-row justify-between xs:flex-col xs:mb-6">
                     <div class="form-group">
-                        <label for="hoursRendered">Hours Rendered</label>
+                        <label for="hoursRendered" class="text-md font-medium">Hours Rendered</label>
                         <input type="text" name="hoursRendered" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->hoursRendered }}" required>
                     </div>
 
                     <div>
-                        <label for="">Student Signature</label>
+                        <label for="" class="text-md font-medium">Student Signature</label>
                         <img src="/{{ $journal->studentSignature }}" width="100px">
                     </div>
 
                     <div>
-                        <label for="">Supervisor Signature</label>
+                        <label for="" class="text-md font-medium">Documentation</label>
                         <img src="/{{ $journal->supervisorSignature }}" width="100px">
                     </div>
 
@@ -126,12 +127,12 @@
 
 
                 <div class="form-group flex flex-row items-center gap-4 mb-4">
-                    <label for="grade">Grade</label>
+                    <label for="grade" class="text-md font-medium">Grade</label>
                     <input type="text" name="grade" class="form-control rounded-md bg-gray-50 text-gray-400 overflow-x-auto" value="{{ $journal->grade ?: 'Not Graded Yet' }}/30" readonly>
                 </div>
 
                 <div class="form-group flex flex-col">
-                    <label for="comments">Coordinators Comment</label>
+                    <label for="comments" class="text-md font-medium">Coordinators Comment</label>
                     <textarea name="comments" class="form-control rounded-md bg-gray-50 text-gray-400" readonly>{{ $journal->comments }}</textarea>
                 </div>
 

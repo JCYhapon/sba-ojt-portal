@@ -136,14 +136,14 @@
                         {{-- Display only If hired --}}
                         <div class="flex items-center gap-4">
                             @if($student->hiredCompany !== null)
-                            <label for="supervisor text-center">Supervisor:</label>
+                            <label for="supervisor text-center " class="text-lg font-semibold">Supervisor:</label>
                             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[40%] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="text" id="supervisor" name="supervisor" placeholder="{{$student->supervisor}}">
                             @endif
                         </div>
 
                         <!-- Add input fields for position and supervisor -->
                         <div class="sm:col-span-2">
-                            <label for="position">Positions:</label>
+                            <label for="position" class="text-lg font-semibold">Positions:</label>
 
                             <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container items-center">
                                 @php
@@ -268,7 +268,7 @@
                                     @elseif ($student->workType === 2)
                                     Work From home
                                     @else
-                                    Any
+                                    Hybrid
                                     @endif
                                 </span>
                                 @endif
@@ -278,12 +278,12 @@
                                     <option value="{{ $student->workType }}">Choose New Work Type</option>
                                     <option value="1">On Site</option>
                                     <option value="2">Work from Home</option>
-                                    <option value="3">Any</option>
+                                    <option value="3">Hybrid</option>
                                     @else
                                     <option value="">Choose Work Type</option>
                                     <option value="1">On Site</option>
                                     <option value="2">Work from Home</option>
-                                    <option value="3">Any</option>
+                                    <option value="3">Hybrid</option>
                                     @endif
                                 </select>
                             </div>
