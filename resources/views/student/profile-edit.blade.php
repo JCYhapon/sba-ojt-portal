@@ -167,30 +167,34 @@
                                 @endphp
 
                                 @if(empty($positions))
-                                <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
-                                @endif
+                                <div>
 
-                                @foreach($positions ?? [] as $position)
-                                <div class="position-item flex items-center mt-2 mr-2">
-                                    <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <input type="button" class="remove pl-2 pr-1" data-position="{{ $position }}" value="×"></input> </span>
-                                </div>
-                                <!-- Hidden input fields to store positions -->
-                                <input type="hidden" name="positions[]" value="{{ $position }}">
-                                @endforeach
 
-                                @if(empty($positions))
-                                <li>
+                                    <li style="background-color: #202c34; color: white;" class="bg-[#202c34] text-white p-1 rounded-md text-sm w-38 mb-4 text-center">No Positions Available</li>
                                     @endif
 
-                                    <select name="position" id="addPosition" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option value="">Choose a position</option>
-                                        @foreach($availablePositions as $availablePosition)
-                                        <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
-                                        @endforeach
-                                    </select>
+                                    @foreach($positions ?? [] as $position)
+                                    <div class="position-item flex items-center mt-2 mr-2">
+                                        <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <input type="button" class="remove pl-2 pr-1" data-position="{{ $position }}" value="×"></input> </span>
+                                    </div>
+                                    <!-- Hidden input fields to store positions -->
+                                    <input type="hidden" name="positions[]" value="{{ $position }}">
+                                    @endforeach
 
                                     @if(empty($positions))
-                                </li>
+                                    <li>
+                                        @endif
+
+                                        <select name="position" id="addPosition" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mr-2">
+                                            <option value="">Choose a position</option>
+                                            @foreach($availablePositions as $availablePosition)
+                                            <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @if(empty($positions))
+                                    </li>
+                                </div>
                                 @endif
 
                                 <script>
@@ -204,7 +208,7 @@
 
                                             // Create span element for position text
                                             const newPositionText = document.createElement('span');
-                                            newPositionText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-blue-500', 'text-white');
+                                            newPositionText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-gray-800', 'text-white');
                                             newPositionText.textContent = selectedPosition;
 
                                             // Create remove button
