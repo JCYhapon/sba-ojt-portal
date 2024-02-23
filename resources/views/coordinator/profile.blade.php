@@ -15,6 +15,9 @@
     <!-- Tailwindcss CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Boxicons -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
     <title>Profile</title>
 
 
@@ -70,73 +73,83 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto overflow-x-auto ">
-        <!--  FIRST ROW -->
-        <div class="bg-white row-span-1 grid grid-cols-3 x p-8 shadow-md rounded-md h-48 py-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 flex flex-col gap-2">
+            <button class="mb-8">
+                <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+            </button>
+
             @php
             $user = Auth::user();
             @endphp
-            <div class="flex flex-col justify-between">
+            <div class="flex flex-col gap-4 h-auto">
                 <div class="flex flex-row gap-10">
                     <h1 class="text-3xl">{{ $user->name }}</h1>
                 </div>
-                <div>
-                    <p class="text-lg capitalize"><span class="font-semibold">School ID:</span> {{ $user->schoolID }}</p>
+                <div class="lg:flex flex-row gap-5 ">
+                    <div>
+                        <p class="text-lg capitalize"><span class="font-semibold">School ID:</span> {{ $user->schoolID }}</p>
+                    </div>
+                    <div>
+                        <p class="text-lg capitalize"><span class="font-semibold">Handled Students:</span> {{ $user->major }}</p>
+                    </div>
+                    <div>
+                        <p class="text-lg"><span class="font-semibold">Email:</span> {{ $user->email }}</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-lg capitalize"><span class="font-semibold">Handled Students:</span> {{ $user->major }}</p>
+            </div>
+
+            {{-- 2nd Row --}}
+            <div class="flex flex-col gap-4">
+
+                <div class="flex flex-row justify-between items-center">
+                    <h1 class="text-lg font-medium">Student Grades</h1>
+                    <button class="bg-gray-800 text-white flex p-1 rounded-md gap-2">
+                        <a href="{{ route('export.journal.grades') }}" class="btn btn-primary">Download Grades </a> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOhJREFUSEvtlb0NwjAQhe8nrECJREVFn4oV2AJmYARGIIMwQKrUsAC0WYHcHTKCKESx4iRKgYI7y/b37t2dbYSRB47Mh4kJiIi5lDJzsPPgjQ78F2jt2ImnyGdfRE4AsPPkL2HmfXWtzinb1CdgZjMRSRExroLMLGPmDSI+Bgm4w2Y2V9UrAMzfsJyI1oiY1511dvABmFmsqqmbE5GLPGtKW28BByuK4lWLKIoSX08PEmi9KA3PSWuRQ6ChRb4DwKIr0LP/xsxLt1Y6MLOtqh4BYDVQ5EJEB0Q8fwkMhHqPd/oP+gTx+wJPnBaIGYHM7lgAAAAASUVORK5CYII=" />
+                    </button>
                 </div>
 
-            </div>
-            <div class="flex items-end">
-                <div>
-                    <p class="text-lg"><span class="font-semibold">Email:</span> {{ $user->email }}</p>
-                </div>
-            </div>
-        </div>
-
-        {{-- 2nd Row --}}
-        <div class="bg-white p-4 shadow-md rounded-md">
-            <h1>Student Grades</h1>
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse table-auto">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2 border">Student Name</th>
-                            @for ($i = 1; $i <= 15; $i++) <th class="px-4 py-2 border">{{ $i }}</th>
-                                @endfor
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        // Fetch all students corresponding to the schoolIDs of users, sorted by last name
-                        $studentIDs = $users->pluck('schoolID')->flatten()->toArray();
-                        $sortedStudents = \App\Models\Student::whereIn('studentID', $studentIDs)
-                        ->orderBy('lastName', 'asc')
-                        ->get();
-                        @endphp
-                        @foreach($sortedStudents as $student)
-                        <tr>
-                            <td class="px-4 py-2 border">{{ $student->lastName }} {{ $student->firstName }}</td>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse table-auto">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 border text-start">Student Name</th>
+                                @for ($i = 1; $i <= 15; $i++) <th class="px-4 py-2 border">{{ $i }}</th>
+                                    @endfor
+                            </tr>
+                        </thead>
+                        <tbody>
                             @php
-                            // Search the journal table using the schoolID
-                            $journals = \App\Models\Journal::where('studentId', $student->studentID)->get();
+                            // Fetch all students corresponding to the schoolIDs of users, sorted by last name
+                            $studentIDs = $users->pluck('schoolID')->flatten()->toArray();
+                            $sortedStudents = \App\Models\Student::whereIn('studentID', $studentIDs)
+                            ->orderBy('lastName', 'asc')
+                            ->get();
                             @endphp
-                            @for ($i = 1; $i <= 15; $i++) <td class="px-4 py-2 border">
-                                @foreach($journals as $journal)
-                                @if ($journal->journalNumber == $i)
-                                {{ $journal->grade }}
-                                @endif
-                                @endforeach
-                                </td>
-                                @endfor
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                            @foreach($sortedStudents as $student)
+                            <tr>
+                                <td class="px-4 py-2 border">{{ $student->lastName }} {{ $student->firstName }}</td>
+                                @php
+                                // Search the journal table using the schoolID
+                                $journals = \App\Models\Journal::where('studentId', $student->studentID)->get();
+                                @endphp
+                                @for ($i = 1; $i <= 15; $i++) <td class="px-4 py-2 border text-center">
+                                    @foreach($journals as $journal)
+                                    @if ($journal->journalNumber == $i)
+                                    {{ $journal->grade }}
+                                    @endif
+                                    @endforeach
+                                    </td>
+                                    @endfor
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-            <a href="{{ route('export.journal.grades') }}" class="btn btn-primary">Download Journal Grades</a>
+
+
+            </div>
         </div>
     </div>
 </body>

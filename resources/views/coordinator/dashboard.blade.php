@@ -115,7 +115,7 @@
                                     new Chart(canvas, {
                                         type: 'doughnut',
                                         data: {
-                                            labels: ['Hired', 'Non-hired'], // Updated labels
+                                            labels: ['Deployed', 'Undeployed'], // Updated labels
                                             datasets: [{
                                                 data: data,
                                                 backgroundColor: backgroundColor
@@ -134,8 +134,8 @@
 
                         {{-- Display for Student Tracker --}}
                         <div>
-                            <p class="font-semibold">Hired: {{ $totalHiredStudents }} Counts</p>
-                            <p class="font-semibold">Non-hired: {{ $totalNonHiredStudents }} Counts</p>
+                            <p class="font-semibold">Deployed: {{ $totalHiredStudents }} Counts</p>
+                            <p class="font-semibold">Undeployed: {{ $totalNonHiredStudents }} Counts</p>
                             <p class="text-cyan-600 font-semibold">Total Enrolled Students: {{ $totalEnrolledStudents }} Students</p>
                         </div>
                     </div>
