@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
+// FOR FILTERING COORDINATOR - STUDENT JOURNAL 
+Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
+
 //LANDING PAGE
 Route::get('/', function () {
     return view('auth.login');
