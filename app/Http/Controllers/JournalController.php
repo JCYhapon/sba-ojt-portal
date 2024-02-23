@@ -26,14 +26,24 @@ class JournalController extends Controller
         return view('student.journal', compact('journals'));
     }
 
-    public function journalCoordinator()
+    public function journalCoordinator(Request $request)
     {
         $userMajor = auth()->user()->major;
         $studentIDs = Student::where('major', $userMajor)->pluck('studentID');
 
-        $journals = Journal::whereIn('studentID', $studentIDs)
-            ->orderBy('journalNumber', 'asc')
-            ->get();
+        $query = Journal::whereIn('studentID', $studentIDs)->orderBy('journalNumber', 'asc');
+
+        // Filtering based on the selected status
+        if ($request->has('status')) {
+            $status = $request->input('status');
+            if ($status == 'unread') {
+                $query->whereNotIn('status', [2, 3]); // Unread status
+            } elseif ($status == 'graded') {
+                $query->where('status', 3); // Graded status
+            }
+        }
+
+        $journals = $query->get();
 
         return view('coordinator.student_journal', compact('journals'));
     }
