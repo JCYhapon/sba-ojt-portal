@@ -118,11 +118,9 @@
                         @if($student->hiredCompany !== null)
                         @if($student->supervisor !== null)
                         <label for="supervisor"><span class="font-semibold text-lg">Supervisor:</span> {{$student->supervisor}}</label>
-
                         @else
                         <form method="post" action="{{ route('add.supervisor') }}" class="p-4 md:p-1">
                             @csrf
-
                             <label for="supervisor" class="text-lg font-semibold">Supervisor:</label>
 
                         </form>
@@ -162,7 +160,7 @@
 
                                 @forelse($positions as $position)
                                 <div class="position-item flex items-center mt-2 mr-2">
-                                    <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
+                                    <span style="background-color: #202c34; color: white;" class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4 text-center">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
                                 </div>
                                 <!-- Hidden input fields to store positions -->
                                 <input type="hidden" name="positions[]" value="{{ $position }}">
@@ -175,12 +173,12 @@
 
                             <div class="flex mt-4 space-x-4">
                                 <!-- Save Changes button initially hidden -->
-                                <button type="submit" id="saveChangesBtn" style="display: none; background-color: #202c34; color: white;" class="rounded-lg p-2.5 mt-1 dark:placeholder-gray-400">
+                                <button type="submit" id="saveChangesBtn" style="display: none; background-color: #202c34; color: white;" class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4">
                                     Save Changes
                                 </button>
 
                                 <!-- Cancel Changes button initially hidden -->
-                                <button type="button" id="cancelChangesBtn" style="display: none; background-color: #ff4d4d; color: white;" class="rounded-lg p-2.5 mt-1 dark:placeholder-gray-400">
+                                <button type="button" id="cancelChangesBtn" style="display: none; background-color: #ff4d4d; color: white;" class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4">
                                     Cancel Changes
                                 </button>
                             </div>
