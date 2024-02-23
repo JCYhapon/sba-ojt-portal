@@ -87,7 +87,7 @@
         {{-- Loop through journals --}}
 
         <!-- SEARCH AND FILTER -->
-        <div class="flex gap-6">
+        <div class="flex gap-6 w-full">
           <!-- SEARCH -->
           <label for="simple-search" class="sr-only">Search</label>
           <div class="relative w-[40%]">
@@ -101,18 +101,33 @@
 
           <!-- FILTERING -->
 
-          <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-[10%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
-            <option value="option1">All Section</option>
-            <option value="option2">MT - 102</option>
-            <option value="option3">MT - 103</option>
-          </select>
+          <div class="flex flex-row gap-4">
+            <div>
+              <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
+                <option value="option1">All Section</option>
+                <option value="option2">MT - 102</option>
+                <option value="option3">MT - 103</option>
+              </select>
+            </div>
 
-          <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-[10%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
-            <option value="option1">All</option>
-            <option value="option2">Unread</option>
-            <option value="option3">Seen</option>
-            <option value="option3">Graded</option>
-          </select>
+            <div>
+              <form method="GET" action="{{ route('journals.index') }}" class="flex gap-4">
+
+                <select id="dropdown-status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                  <option value="">All</option>
+                  <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>Unread</option>
+                  <option value="graded" {{ request('status') == 'graded' ? 'selected' : '' }}>Graded</option>
+                </select>
+                <div>
+                  <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Filter</button>
+                </div>
+
+              </form>
+            </div>
+
+
+
+          </div>
         </div>
 
         <div class="flex flex-col flex-wrap gap-2 mt-4">
