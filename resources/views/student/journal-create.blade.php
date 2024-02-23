@@ -90,18 +90,19 @@
                 {{-- Date --}}
                 <div class="flex flex-row justify-between mb-[1.5rem]">
                     <div class="flex items-end">
-                        <div class="form-group w-[5rem]">
+                        <div class="form-group w-[10rem]">
+                            <label for="" class="text-md font-medium">Journal Number</label>
                             <input type="text" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="journalNumber" placeholder="{{ $journalCount }}" value="{{ $journalCount }}" disabled>
                         </div>
                     </div>
 
                     <div class="flex flex-col">
                         <div class="">
-                            <label for="coverage_start_date">Start Date</label>
+                            <label for="coverage_start_date" class="text-md font-medium">Start Date</label>
                             <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3">
                         </div>
                         <div class="">
-                            <label for="coverage_end_date">End Date</label>
+                            <label for="coverage_end_date" class="text-md font-medium">End Date</label>
                             <input type="date" name="coverage_end_date" id="coverage_end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
                     </div>
@@ -109,11 +110,13 @@
 
                 <!-- ADD LABEL -->
                 <div class="form-group">
-                    <textarea class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" placeholder="Write your thoughts here..." name="reflection" rows="10" required id="message"></textarea>
+                    <label for="" class="text-md font-medium">Reflection</label>
+                    <textarea class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white   mb-6" placeholder="Write your thoughts here..." name="reflection" rows="10" required id="message"></textarea>
                 </div>
 
                 <!-- ADD LABEL -->
                 <div class="form-group mb-8">
+                    <label for="" class="text-md font-medium">Hours Rendered</label>
                     <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required>
                 </div>
 
