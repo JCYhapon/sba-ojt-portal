@@ -75,95 +75,100 @@
     <!-- END OF NAVBAR -->
 
 
-    <div>
-        <!--  FIRST ROW -->
-        <form action="{{ route('password.update') }}" method="POST" enctype="multipart/form-data" class="col-span-1 grid grid-rows-4 x p-8 shadow-md rounded-md h-auto place-items-center">
-            @csrf
-            @method('PUT')
-            <!-- Label and Input for Old Password -->
-            <div>
-                <label for="old_password" class="mb-2">Old Password:</label>
-                <input type="password" id="old_password" name="old_password" placeholder="Old Password" class="border rounded-md px-3 py-2">
-            </div>
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
+            <button class="mb-8">
+                <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+            </button>
+            <br>
 
-            <!-- Label and Input for New Password -->
-            <div>
-                <label for="new_password" class="mb-2">New Password:</label>
-                <input type="password" id="new_password" name="new_password" placeholder="New Password" class="border rounded-md px-3 py-2">
-            </div>
-
-            <!-- Label and Input for Re-enter New Password -->
-            <div>
-                <label for="confirm_password" class="mb-2">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter New Password" class="border rounded-md px-3 py-2">
-            </div>
-
-            <div id="passwordRequirements" class="flex-col">
-                <div class="flex items-center">
-                    <input type="checkbox" id="checkbox1" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
-                    <label for="checkbox1" class="ml-2">8 - 12 characters</label>
+            <!--  FIRST ROW -->
+            <form action="{{ route('password.update') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
+                @csrf
+                @method('PUT')
+                <!-- Label and Input for Old Password -->
+                <div class="flex flex-col">
+                    <label for="old_password" class="mb-2 font-semibold">Old Password:</label>
+                    <input type="password" id="old_password" name="old_password" placeholder="Enter your old password" class="border rounded-md px-3 py-2">
                 </div>
-                <div class="flex items-center">
-                    <input type="checkbox" id="checkbox2" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
-                    <label for="checkbox2" class="ml-2">Capital Letter</label>
+
+                <!-- Label and Input for New Password -->
+                <div class="flex flex-col">
+                    <label for="new_password" class="mb-2 font-semibold">New Password:</label>
+                    <input type="password" id="new_password" name="new_password" placeholder="Enter your new password" class="border rounded-md px-3 py-2">
                 </div>
-                <div class="flex items-center">
-                    <input type="checkbox" id="checkbox3" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
-                    <label for="checkbox3" class="ml-2">Numerical</label>
+
+                <!-- Label and Input for Re-enter New Password -->
+                <div class="flex flex-col">
+                    <label for="confirm_password" class="mb-2 font-semibold">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Enter your confirm password" class="border rounded-md px-3 py-2">
                 </div>
-                <div class="flex items-center">
-                    <input type="checkbox" id="checkbox4" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
-                    <label for="checkbox4" class="ml-2">With Special character</label>
+
+                <div id="passwordRequirements" class="flex-col">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="checkbox1" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <label for="checkbox1" class="ml-2">8 - 12 characters</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="checkbox2" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <label for="checkbox2" class="ml-2">Capital Letter</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="checkbox3" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <label for="checkbox3" class="ml-2">Numerical</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="checkbox4" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" class="bg-gray-800">
+                        <label for="checkbox4" class="ml-2">With Special character</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="checkbox5" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <label for="checkbox5" class="ml-2">Confirm Password</label>
+                    </div>
                 </div>
-                <div class="flex items-center">
-                    <input type="checkbox" id="checkbox5" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
-                    <label for="checkbox5" class="ml-2">Confirm Password</label>
+
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <button id="submitButton" type="submit" class="w-[30%] bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Update Password</button>
                 </div>
-            </div>
+            </form>
 
-            <!-- Submit Button -->
-            <button id="submitButton" type="submit" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Submit</button>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const passwordInput = document.getElementById('new_password');
+                    const confirmInput = document.getElementById('confirm_password');
+                    const checkboxes = document.querySelectorAll('#passwordRequirements input[type="checkbox"]');
+                    const submitButton = document.getElementById('submitButton');
 
+                    function validatePassword() {
+                        const password = passwordInput.value;
+                        const confirm = confirmInput.value;
 
+                        const isLengthValid = password.length >= 8 && password.length <= 12;
+                        const hasUpperCase = /[A-Z]/.test(password);
+                        const hasNumber = /\d/.test(password);
+                        const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+                        const isConfirmed = password === confirm;
 
-        </form>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const passwordInput = document.getElementById('new_password');
-                const confirmInput = document.getElementById('confirm_password');
-                const checkboxes = document.querySelectorAll('#passwordRequirements input[type="checkbox"]');
-                const submitButton = document.getElementById('submitButton');
+                        checkboxes[0].checked = isLengthValid;
+                        checkboxes[1].checked = hasUpperCase;
+                        checkboxes[2].checked = hasNumber;
+                        checkboxes[3].checked = hasSpecialChar;
+                        checkboxes[4].checked = isConfirmed;
 
-                function validatePassword() {
-                    const password = passwordInput.value;
-                    const confirm = confirmInput.value;
+                        // Enable/disable submit button based on password requirements
+                        submitButton.disabled = !(isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed);
 
-                    const isLengthValid = password.length >= 8 && password.length <= 12;
-                    const hasUpperCase = /[A-Z]/.test(password);
-                    const hasNumber = /\d/.test(password);
-                    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-                    const isConfirmed = password === confirm;
+                        // Change button color based on password requirements
+                        submitButton.classList.toggle('bg-gray-800', isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed);
+                        submitButton.classList.toggle('bg-gray-800', !(isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed));
+                    }
 
-                    checkboxes[0].checked = isLengthValid;
-                    checkboxes[1].checked = hasUpperCase;
-                    checkboxes[2].checked = hasNumber;
-                    checkboxes[3].checked = hasSpecialChar;
-                    checkboxes[4].checked = isConfirmed;
-
-                    // Enable/disable submit button based on password requirements
-                    submitButton.disabled = !(isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed);
-
-                    // Change button color based on password requirements
-                    submitButton.classList.toggle('bg-blue-500', isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed);
-                    submitButton.classList.toggle('bg-gray-500', !(isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed));
-                }
-
-                passwordInput.addEventListener('input', validatePassword);
-                confirmInput.addEventListener('input', validatePassword);
-            });
-        </script>
-
-
+                    passwordInput.addEventListener('input', validatePassword);
+                    confirmInput.addEventListener('input', validatePassword);
+                });
+            </script>
+        </div>
     </div>
 
 
