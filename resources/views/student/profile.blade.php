@@ -123,13 +123,8 @@
                         <form method="post" action="{{ route('add.supervisor') }}" class="p-4 md:p-1">
                             @csrf
 
-                            <label for="supervisor">Supervisor:</label>
-                            <input type="text" id="supervisor" name="supervisor" placeholder="{{$student->supervisor}}" oninput="toggleSaveChangesButton()">
+                            <label for="supervisor" class="text-lg font-semibold">Supervisor:</label>
 
-                            <!-- Save Changes button -->
-                            <button type="submit" id="saveChangesBtn" style="display: none; background-color: #202c34; color: white;" class="rounded-lg p-2.5 mt-1 dark:placeholder-gray-400">
-                                Save Changes
-                            </button>
                         </form>
 
                         <script>
