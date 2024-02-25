@@ -24,9 +24,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-// FOR FILTERING COORDINATOR - STUDENT JOURNAL 
-Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
-
 //LANDING PAGE
 Route::get('/', function () {
     return view('auth.login');
@@ -84,6 +81,9 @@ Route::get('/coordinator_student-journal', function () {
     return view('coordinator.student_journal');
 })->name('coordinator_student-journal'); // COORDINATOR COMPANY-LIST PAGE
 
+// FOR FILTERING COORDINATOR - STUDENT JOURNAL 
+Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
+
 /*
 |----------------------------------------------------------------
 | Company Controller                                            |
@@ -103,9 +103,6 @@ Route::get('coordinator_company-list', [CompanyController::class, 'getCompany'])
 Route::get('coordinator_company-page', [CompanyController::class, 'getCompany'])->name('coordinator_company-page');
 
 Route::get('/coordinator/company/{id}', [CompanyController::class, 'companyInfo'])->name('coordinator_company_info');
-
-Route::get('/coordinator_company-create', [CompanyController::class, 'createCompany'])->name('coordinator.company_create');
-Route::post('/coordinator_company-store', [CompanyController::class, 'storeCompany'])->name('coordinator.company_store');
 
 Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class, 'toggleStatus'])->name('coordinator.company_toggle_status');
 
@@ -201,9 +198,9 @@ Route::get('/student/company/{id}', [StudentController::class, 'companyInformati
 
 /*
 |----------------------------------------------------------------
-| Company Controller                                            |
+| Admin Controller                                              |
 |---------------------------------------------------------------|
-| All Functions in Company Controller                           |
+| All Functions in Admin Controller                             |
 |----------------------------------------------------------------
 */
 Route::get('/admin_company-list', [AdminController::class, 'companyAdmin'])->name('admin_company-page');
@@ -211,6 +208,15 @@ Route::get('/admin_company-list', [AdminController::class, 'companyAdmin'])->nam
 Route::get('/admin_coordinator-list', [AdminController::class, 'coordinatorList'])->name('admin_coordinator-page');
 
 Route::get('/admin_student-list', [AdminController::class, 'studentList'])->name('admin_student-page');
+
+Route::get('/admin_create', [AdminController::class, 'createCoordinator'])->name('admin-coordinator_create');
+
+Route::post('/admin_store', [AdminController::class, 'storeCoordinator'])->name('admin-coordinator_store');
+
+Route::get('/admin_coordinator/{user}/edit', [AdminController::class, 'editCoordinator'])->name('admin-coordinator_edit');
+
+Route::put('/admin/coordinator/{user}/update',  [AdminController::class, 'updateCoordinator'])->name('admin-coordinator_update');
+
 
 /*
 |----------------------------------------------------------------
