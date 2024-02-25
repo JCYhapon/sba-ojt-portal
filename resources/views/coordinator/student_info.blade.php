@@ -144,7 +144,7 @@
                             <p class="text-lg"><span class="font-semibold">Email:</span> {{ $student->email }}</p>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-between hidden md:block">
+                    <div class="flex flex-col justify-between md:block">
                         <p class="text-lg"><span class="font-semibold">Status:</span> {{ $student->status == 1 ? 'Active' : ($student->status == 2 ? 'Drop' : 'Unknown') }}</p>
                         <p class="text-lg capitalize"><span class="font-semibold">Course:</span> {{ $student->major }}</p>
                     </div>
