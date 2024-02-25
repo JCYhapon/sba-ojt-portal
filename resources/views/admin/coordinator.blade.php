@@ -121,8 +121,8 @@
             <tbody>
               @foreach($users as $user)
               <tr>
-                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $user->schoolID }}</td>
-                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $user->name }}</td>
+                <td class="py-2 px-4 border-b">{{ $user->schoolID }}</td>
+                <td class="py-2 px-4 border-b">{{ $user->name }}</td>
                 <td class="py-2 px-4 border-b">{{ $user->email }}</td>
                 <td class="py-2 px-4 border-b">{{ $user->major }}</td>
 

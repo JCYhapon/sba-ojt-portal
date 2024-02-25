@@ -98,7 +98,7 @@
                 <th scope="col" class="px-4 py-4">Address</th>
                 <th scope="col" class="px-4 py-4">Status</th>
                 <th scope="col" class="px-4 py-4">Position</th>
-                <th scope="col" class="px-4 py-4">Action</th>
+
               </tr>
             </thead>
             <tbody>
@@ -119,16 +119,7 @@
                   @endif
                 </td>
 
-                <td class="py-2 px-4 border-b">
-                  <a class="btn btn-primary" href="{{ route('coordinator.company_edit', $company->id) }}"><box-icon name='edit' color='#1f2937'></box-icon></a>
-                  {{-- Toggle Status Button --}}
 
-                  <form action="{{ route('coordinator.company_toggle_status', $company->id) }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('POST') {{-- Add this line to specify the POST method --}}
-                    <button type="submit" class="btn btn-warning"><box-icon name='message-alt-x' color='#1f2937'></box-icon></button>
-                  </form>
-                </td>
               </tr>
               @endforeach
             </tbody>

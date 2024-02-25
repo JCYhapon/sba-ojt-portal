@@ -92,6 +92,7 @@ class CompanyController extends Controller
             'positions.*' => 'string',
             'hiredStudents',
             'workType',
+            'description',
         ]);
 
         // Convert the input positions and hiredStudents to an array
@@ -116,6 +117,7 @@ class CompanyController extends Controller
             'position' => $updatedPositions,
             'hiredStudents' => $hiredStudents,
             'workType' => $request->input('workType'),
+            'description' => $request->input('description'),
         ]);
 
         // Update the corresponding students
