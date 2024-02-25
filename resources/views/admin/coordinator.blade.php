@@ -130,7 +130,7 @@
                 <td class="py-2 px-4 border-b">
                   <div class="flex gap-3">
                     <a href="{{ route('admin-coordinator_edit', $user->id) }}">
-                      <button data-modal-target="default-modal" data-modal-toggle="default-modal" type="button">
+                      <button type="button">
                         <box-icon name='edit' color='#1f2937'></box-icon>
                       </button>
                     </a>
