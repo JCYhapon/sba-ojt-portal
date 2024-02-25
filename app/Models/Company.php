@@ -18,6 +18,7 @@ class Company extends Model
         'workType',
         'position',
         'hiredStudents',
+        'description',
     ];
 
     protected $casts = [
