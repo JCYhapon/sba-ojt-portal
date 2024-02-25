@@ -31,4 +31,72 @@ class AdminController extends Controller
 
         return view('admin.student', ['users' => $users]);
     }
+
+    public function createCoordinator()
+    {
+        return view('admin.coordinator_create');
+    }
+
+    public function storeCoordinator(Request $request)
+    {
+        Log::info('Store Function Called');
+        $request->validate([
+            'studentID' => 'required|min:8|max:8',
+            'lastName' => 'required|string',
+            'firstName' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'major' => 'required',
+        ]);
+        Log::info('Store Function validate');
+        // Create user details first
+        $user = User::create([
+            'id' => $request->input('studentID'),
+            'schoolID' => $request->input('studentID'),
+            'name' => $request->input('firstName') . ' ' . $request->input('lastName'),
+            'email' => $request->input('email'),
+            'role' => 2,
+            'major' => $request->input('major'),
+            'password' => Hash::make($request->input('password')),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        Log::info('Store Function Create');
+
+        return redirect(route('admin_coordinator-page'))->with('success', 'Coordinator created successfully.');
+    }
+
+    public function editCoordinator(User $user)
+    {
+        return view('admin.coordinator_edit', compact('user'));
+    }
+
+    public function updateCoordinator(Request $request, User $user)
+    {
+        Log::info('update Function Called');
+        $request->validate([
+            'name' => 'string',
+            'email' => 'email',
+            'password',
+            'major',
+        ]);
+        Log::info('update Function validate');
+        if ($request->has('password') && $request->input('password') !== null) {
+            $password = Hash::make($request->input('password'));
+        } else {
+            $password = $user->password;
+        }
+        Log::info('update Function password');
+        $updateUser = $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'major' => $request->input('major'),
+            'password' => $password,
+            'updated_at' => now(),
+        ]);
+        Log::info('update Function save');
+        return redirect(route('admin_coordinator-page'))->with('success', 'Coordinator updated successfully.');
+    }
 }
