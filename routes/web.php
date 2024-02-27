@@ -138,6 +138,8 @@ Route::get('/coordinator', [DashboardController::class, 'getCoordinatorDashboard
 
 Route::get('/student', [DashboardController::class, 'getStudentDashboardData'])->name('student');
 
+Route::get('/admin', [DashboardController::class, 'getAdminDashboardData'])->name('admin');
+
 /*
 |----------------------------------------------------------------
 | Journal Controller                                            |

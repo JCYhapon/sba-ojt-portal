@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Journal;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 
 class DashboardController extends Controller
 {
@@ -66,6 +68,57 @@ class DashboardController extends Controller
 
         return view('student.dashboard', [
             'companyName' => $companyName,
+        ]);
+    }
+
+    public function getAdminDashboardData()
+    {
+        // Get Students Count
+        $accountingTotalStudents = Student::where('major', 'Accounting')->count();
+        $managementTotalStudents = Student::where('major', 'Management')->count();
+
+        // Coordinators Name
+        $accountingCoordinator = User::where('major', 'Accounting')->first();
+        $managementCoordinator = User::where('major', 'Management')->first();
+
+        $accountingCoordinatorName = $accountingCoordinator->name;
+        $managementCoordinatorName = $managementCoordinator->name;
+
+        // Get Sections Count
+        $accountingTotalSections = Student::where('major', 'Accounting')
+            ->distinct('section')
+            ->count('section');
+
+        $managementTotalSections = Student::where('major', 'Management')
+            ->distinct('section')
+            ->count('section');
+
+        // Count Student per Section
+        $accountingStudentSection = Student::select('section', DB::raw('COUNT(*) as student_count'))
+            ->where('major', 'Accounting')
+            ->groupBy('section')
+            ->get();
+
+        $managementStudentSection = Student::select('section', DB::raw('COUNT(*) as student_count'))
+            ->where('major', 'Management')
+            ->groupBy('section')
+            ->get();
+
+
+        // Get Company Count
+        $totalCompanies = Company::count();
+        $totalCompaniesWithStatus1 = Company::where('status', 1)->count();
+        $totalCompaniesWithStatus2 = Company::where('status', 2)->count();
+
+        return view('admin.dashboard', [
+            'accountingTotalStudents' => $accountingTotalStudents,
+            'managementTotalStudents' => $managementTotalStudents,
+            'accountingCoordinatorName' => $accountingCoordinatorName,
+            'managementCoordinatorName' => $managementCoordinatorName,
+            'accountingTotalSections' => $accountingTotalSections,
+            'managementTotalSections' => $managementTotalSections,
+            'accountingStudentSection' => $accountingStudentSection,
+            'managementStudentSection' => $managementStudentSection,
         ]);
     }
 }

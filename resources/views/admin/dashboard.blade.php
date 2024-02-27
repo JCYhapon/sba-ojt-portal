@@ -41,7 +41,7 @@
             <div class="rounded-md bg-gray-800 px-2 py-2 shadow">
 
               <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
               </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -55,8 +55,80 @@
       </nav>
     </div>
   </div>
-
-  <!-- FOR DASHBOARD - LAYOUT -->
+  {{-- End of Nav Bar --}}
+  <div>
+    <div>
+      <span>Dashboard</span>
+    </div>
+    <br>
+    <div>
+      <span>All Courses and Section</span>
+    </div>
+    <br>
+    <div>
+      <span>Accountancy</span>
+      <div>
+        <label>Students</label>
+        <span>{{ $accountingTotalStudents }}</span>
+      </div>
+      <div>
+        <label>Sections</label>
+        <span>{{ $accountingTotalSections }}</span>
+      </div>
+      <div>
+        <label>Coordinators</label>
+        <span>{{ $accountingCoordinatorName }}</span>
+      </div>
+    </div>
+    <br>
+    <div>
+      <table>
+        <tr>
+          <th>Section</th>
+          <th>Students</th>
+        </tr>
+        <tr>
+          @foreach ($accountingStudentSection as $section)
+        <tr>
+          <td>{{ $section->section }}</td>
+          <td>{{ $section->student_count }}</td>
+        </tr>
+        @endforeach
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div>
+      <span>Business Management</span>
+      <div>
+        <label>Students</label>
+        <span>{{ $managementTotalStudents }}</span>
+      </div>
+      <div>
+        <label>Sections</label>
+        <span>{{ $managementTotalSections }}</span>
+      </div>
+      <div>
+        <label>Coordinators</label>
+        <span>{{ $managementCoordinatorName }}</span>
+      </div>
+    </div>
+    <br>
+    <div>
+      <table>
+        <tr>
+          <th>Section</th>
+          <th>Students</th>
+        </tr>
+        @foreach ($managementStudentSection as $section)
+        <tr>
+          <td>{{ $section->section }}</td>
+          <td>{{ $section->student_count }}</td>
+        </tr>
+        @endforeach
+      </table>
+    </div>
+  </div>
 
 </body>
 
