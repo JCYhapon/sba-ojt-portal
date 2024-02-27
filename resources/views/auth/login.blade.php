@@ -39,6 +39,11 @@
                     <h1 class="text-center mb-[30px]">
                         <span class="font-bold text-2xl text-black ">SBA OJT Portal</span>
                     </h1>
+                    @if(session()->has('error'))
+                    <div class="bg-red-500 text-green-red p-4 mb-4">
+                        {{ session('error') }}
+                    </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}" class="mb-4">
                         @csrf
                         <div class="mb-4">
