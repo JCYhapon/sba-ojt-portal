@@ -40,8 +40,11 @@ class JournalController extends Controller
                 $query->whereNotIn('status', [2, 3]); // Unread status
             } elseif ($status == 'graded') {
                 $query->where('status', 3); // Graded status
+            } elseif ($status == 'seen') {
+                $query->whereIn('status', [2]); // Seen status
             }
         }
+
 
         $journals = $query->get();
 
