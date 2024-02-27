@@ -8,6 +8,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\MatchingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ExportReportController;
+use App\Http\Controllers\ImportController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -242,3 +243,14 @@ Route::get('/match-students', [MatchingController::class, 'matchStudentsWithComp
 Route::get('/coordinator-profile', [ExportReportController::class, 'journalGrade'])->name('coordinator_profile');
 
 Route::get('/export-journal-grades', [ExportReportController::class, 'exportJournalGrades'])->name('export.journal.grades');
+
+/*
+|----------------------------------------------------------------
+|   Import Report Controller                                    |
+|---------------------------------------------------------------|
+| All Routes for ExportReportController                         |
+|----------------------------------------------------------------
+*/
+Route::get('/student-list-bulk', [ImportController::class, 'redirectToStudentBulkList'])->name('student_bulk_list');
+
+Route::post('/import', [ImportController::class, 'import'])->name('import');

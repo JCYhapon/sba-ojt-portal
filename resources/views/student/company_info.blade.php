@@ -124,6 +124,14 @@
                         @endif
                     </td>
                 </tr>
+                @if($companies->description !== null)
+                <tr class="flex gap-6">
+                    <td>Description:</td>
+                    <td>
+                        {{ $companies->description }}
+                    </td>
+                </tr>
+                @endif
             </table>
         </div>
     </div>

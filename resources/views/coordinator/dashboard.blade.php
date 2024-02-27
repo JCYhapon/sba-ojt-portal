@@ -79,7 +79,7 @@
                 </div>
                 <div class="flex flex-col justify-end">
                     <div class="lg:grid lg:justify-items-end  ">
-                        <a href="{{ route('coordinator_student-list') }}"><button class="bg-black text-white p-1 rounded-md text-sm w-40">Manage Student</button></a>
+                        <a href="{{ route('coordinator_student-list') }}"><button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-40">Manage Student</button></a>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                         <div>
                             <p class="font-semibold">Deployed: {{ $totalHiredStudents }} Counts</p>
                             <p class="font-semibold">Undeployed: {{ $totalNonHiredStudents }} Counts</p>
-                            <p class="text-cyan-600 font-semibold">Total Enrolled Students: {{ $totalEnrolledStudents }} Students</p>
+                            <p class="text-[#AD974F] font-semibold">Total Enrolled Students: {{ $totalEnrolledStudents }} Students</p>
                         </div>
                     </div>
                     <div class="grid grid-rows-2 gap-8 col-span-2">
@@ -147,7 +147,7 @@
                                         <p>Partner Companies</p>
                                     </div>
                                     <div>
-                                        <a href="{{ route('coordinator_company-list') }}"> <button class="bg-black text-white p-1 rounded-md text-sm w-36">Manage
+                                        <a href="{{ route('coordinator_company-list') }}"> <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36">Manage
                                                 Company</button></a>
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@
                                         <p>Journal Entries</p>
                                     </div>
                                     <div>
-                                        <a href="{{ route('coordinator_student-journal') }}"> <button class=" bg-black text-white p-1 rounded-md text-sm w-36">
+                                        <a href="{{ route('coordinator_student-journal') }}"> <button class=" bg-[#AD974F] text-white p-1 rounded-md text-sm w-36">
                                                 Journal</button></a>
                                     </div>
                                 </div>
