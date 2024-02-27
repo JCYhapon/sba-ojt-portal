@@ -130,8 +130,6 @@
 
                         </div>
 
-
-
                         {{-- Display for Student Tracker --}}
                         <div>
                             <p class="font-semibold">Deployed: {{ $totalHiredStudents }} Counts</p>

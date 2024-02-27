@@ -98,8 +98,8 @@
 
             @foreach ($accountingStudentSection as $section)
             <tr>
-              <td class="px-4 py-2">{{ $section->section }}</td>
-              <td class="px-4 py-2">{{ $section->student_count }}</td>
+              <td>{{ $section->section }}</td>
+              <td>{{ $section->student_count }}</td>
             </tr>
             @endforeach
           </table>

@@ -115,11 +115,12 @@
 
                 <select id="dropdown-status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
                   <option value="">All</option>
-                  <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>Unread</option>
                   <option value="graded" {{ request('status') == 'graded' ? 'selected' : '' }}>Graded</option>
+                  <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>Unread</option>
+                  <option value="seen" {{ request('status') == 'seen' ? 'selected' : '' }}>Seen</option>
                 </select>
                 <div>
-                  <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Filter</button>
+                  <button type="submit" class="bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Filter</button>
                 </div>
 
               </form>
@@ -145,9 +146,9 @@
                 <h2 class="card-title text-lg font-bold hover:underline">Journal {{ $journal->journalNumber }}</h2>
                 <div class="flex gap-4 items-center justify-evenly">
                   @if($journal->status != 1 && $journal->status != 3)
-                  <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-gray-800 text-white  text-center p-[5px] rounded-md text-[13px]">Mark as Unread</a>
+                  <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-[#AD974F] text-white  text-center p-[5px] rounded-md text-[13px]">Mark as Unread</a>
                   @endif
-                  <p class="bg-gray-800 text-white  text-center p-[5px] rounded-md text-[13px]">
+                  <p class="bg-[#AD974F] text-white  text-center p-[5px] rounded-md text-[13px]">
                     @if($journal->status == 1)
                     Unread
                     @elseif($journal->status == 2)
