@@ -41,34 +41,36 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function login(Request $request){
-        
-        $credentials=$request->validate([
-            'email'=>'required|email',
-            'password'=>'required',
+    protected function login(Request $request)
+    {
+
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if(Auth::attempt($credentials)){
-            $user_role=Auth::user()->role;
+        // Check if the credentials exist in the database
+        if (Auth::attempt($credentials)) {
+            $user_role = Auth::user()->role;
 
-            switch($user_role){
-                case 1;
+            switch ($user_role) {
+                case 1:
                     return redirect('/admin');
                     break;
-                case 2;
+                case 2:
                     return redirect('/coordinator');
                     break;
-                case 3;
+                case 3:
                     return redirect('/student');
                     break;
                 default:
                     Auth::logout();
-                    return redirect('/login')->with('error','oooops something went wrong!');
-                    
+                    return redirect('/login')->with('error', 'Oops, something went wrong!');
+                    break;
             }
-
-        }else{
-            return redirect('/login');
+        } else {
+            // If the credentials do not exist in the database, display an error
+            return redirect('/login')->with('error', 'Email or password is incorrect!');
         }
     }
 }
