@@ -1,9 +1,8 @@
 html {
-    background-size: 100px 100px;
-    background-image: linear-gradient(
-            to right,
-            rgb(233, 223, 223) 1px,
-            transparent 0.5px
-        ),
-        linear-gradient(to bottom, rgb(247, 237, 237) 1px, transparent 0.5px);
+    background-color: #efefef;
+    background-image: url("/assets/sba-bg.png");
+    background-repeat: no-repeat; /* Do not repeat the background */
+    background-position: bottom right; /* Position the background image at the bottom right corner */
+    position: relative;
+    height: 100vh; /* Set the height of the HTML element to cover the entire viewport height */
 }
