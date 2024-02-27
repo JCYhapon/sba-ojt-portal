@@ -10,10 +10,15 @@
   <!-- Tailwindcss CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+
   <title>Dashboard</title>
 </head>
 
 <body>
+
+  <!-- CODE FOR NAVBAR -->
   <div class="w-full bg-gray-800 text-gray-200">
     <div x-data="{ open: false }" class="mx-auto flex max-w-screen-xl flex-col px-4 md:flex-row md:items-center md:justify-between md:px-6 lg:px-8">
       <div class="flex flex-row items-center justify-between p-4">
@@ -26,7 +31,7 @@
         </button>
       </div>
       <nav :class="{'flex': open, 'hidden': !open}" class="hidden flex-grow flex-col pb-4 md:flex md:flex-row md:justify-end md:pb-0">
-        <a class="focus:shadow-outline mt-2 rounded-lg bg-gray-700 px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0" href="{{ route ('admin') }}">Dashboard</a>
+        <a class="focus:shadow-outline mt-2 text-[#AD974F] rounded-lg bg-gray-700 px-4 py-2 text-sm font-bold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0" href="{{ route ('admin') }}">Dashboard</a>
         <a class="focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4" href="{{ route('admin_company-page') }}">Company</a>
         <a class="focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4" href="{{ route('admin_coordinator-page') }}">Coordinator</a>
         <a class="focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold text-gray-200 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4" href="{{ route('admin_student-page') }}">Student</a>
@@ -55,79 +60,92 @@
       </nav>
     </div>
   </div>
-  {{-- End of Nav Bar --}}
-  <div>
-    <div>
-      <span>Dashboard</span>
-    </div>
-    <br>
-    <div>
-      <span>All Courses and Section</span>
-    </div>
-    <br>
-    <div>
-      <span>Accountancy</span>
-      <div>
-        <label>Students</label>
-        <span>{{ $accountingTotalStudents }}</span>
+  <!-- {{-- End of Nav Bar --}} -->
+
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="min-h-[80vh] border-0 flex flex-col gap-6">
+      <div class="bg-white text-center text-3xl p-8 rounded-md font-medium border-gray-800">
+        <span>All Courses and Section</span>
       </div>
-      <div>
-        <label>Sections</label>
-        <span>{{ $accountingTotalSections }}</span>
+
+      <div class="flex flex-row justify-between gap-8">
+        <div class="grid grid-cols-2 w-[70%]  bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center">
+          <div class="w-[100%]">
+            <span class="text-xl font-semibold text-center">Accountancy</span>
+          </div>
+          <div class="flex flex-row gap-[50px]">
+            <div class="flex flex-col items-center gap-4">
+              <label>Students</label>
+              <span>{{ $accountingTotalStudents }}</span>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <label>Sections</label>
+              <span>{{ $accountingTotalSections }}</span>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <label>Coordinators</label>
+              <span>{{ $accountingCoordinatorName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[30%] bg-white p-4 rounded-md font-medium border border-gray-100 text-center ">
+          <table>
+            <tr>
+              <th class="px-14 py-2">Section</th>
+              <th class=" " style=" text-align: center;">Students</th>
+            </tr>
+
+            @foreach ($accountingStudentSection as $section)
+            <tr>
+              <td class="px-4 py-2">{{ $section->section }}</td>
+              <td class="px-4 py-2">{{ $section->student_count }}</td>
+            </tr>
+            @endforeach
+          </table>
+        </div>
       </div>
-      <div>
-        <label>Coordinators</label>
-        <span>{{ $accountingCoordinatorName }}</span>
+
+      <div class="flex flex-row justify-between gap-8">
+        <div class="grid grid-cols-2 w-[70%] bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center">
+          <div class="w-[100%]">
+            <span class="text-xl font-semibold text-center">Business Management</span>
+          </div>
+          <div class="flex flex-row gap-[50px]">
+            <div class="flex flex-col items-center gap-4">
+              <label>Students</label>
+              <span>{{ $managementTotalStudents }}</span>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <label>Sections</label>
+              <span>{{ $managementTotalSections }}</span>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <label>Coordinators</label>
+              <span>{{ $managementCoordinatorName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[30%] bg-white p-4 rounded-md font-medium border border-gray-100 text-center ">
+          <table>
+            <tr>
+              <th class="px-14 py-2">Section</th>
+              <th>Students</th>
+            </tr>
+            @foreach ($managementStudentSection as $section)
+            <tr>
+              <td>{{ $section->section }}</td>
+              <td>{{ $section->student_count }}</td>
+            </tr>
+            @endforeach
+          </table>
+        </div>
       </div>
+
+      <!-- 2ND BOX -->
     </div>
-    <br>
-    <div>
-      <table>
-        <tr>
-          <th>Section</th>
-          <th>Students</th>
-        </tr>
-        <tr>
-          @foreach ($accountingStudentSection as $section)
-        <tr>
-          <td>{{ $section->section }}</td>
-          <td>{{ $section->student_count }}</td>
-        </tr>
-        @endforeach
-        </tr>
-      </table>
-    </div>
-    <br>
-    <div>
-      <span>Business Management</span>
-      <div>
-        <label>Students</label>
-        <span>{{ $managementTotalStudents }}</span>
-      </div>
-      <div>
-        <label>Sections</label>
-        <span>{{ $managementTotalSections }}</span>
-      </div>
-      <div>
-        <label>Coordinators</label>
-        <span>{{ $managementCoordinatorName }}</span>
-      </div>
-    </div>
-    <br>
-    <div>
-      <table>
-        <tr>
-          <th>Section</th>
-          <th>Students</th>
-        </tr>
-        @foreach ($managementStudentSection as $section)
-        <tr>
-          <td>{{ $section->section }}</td>
-          <td>{{ $section->student_count }}</td>
-        </tr>
-        @endforeach
-      </table>
-    </div>
+    <!-- 1ST BOX -->
   </div>
 
 </body>
