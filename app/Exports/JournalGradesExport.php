@@ -13,8 +13,9 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFormatting
+class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize
 {
     public function collection()
     {
@@ -22,31 +23,35 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
         $userMajor = Auth::user()->major;
 
         // Retrieve all Students with the same major, sorted by last name in ascending order
-        $studentIds = Student::where('major', $userMajor)
+        $students = Student::where('major', $userMajor)
             ->orderBy('lastName', 'asc')
-            ->pluck('students.studentID');
+            ->get();
 
         // Initialize an empty collection to hold the data
         $data = collect();
 
         // Retrieve the grades for the students
-        foreach ($studentIds as $studentId) {
-            $studentGrades = Journal::where('journals.studentID', $studentId)
-                ->join('students', 'journals.studentID', '=', 'students.studentID')
-                ->select('students.lastName', 'students.firstName', 'journals.grade')
-                ->get();
+        foreach ($students as $student) {
+            // Retrieve the grades for the current student
+            $studentGrades = Journal::where('studentID', $student->studentID)->pluck('grade');
 
             // Push the student's name into the data collection
             $row = [
-                'Student Name' => $studentGrades->first()->lastName . ', ' . $studentGrades->first()->firstName,
+                'Student Name' => $student->lastName . ', ' . $student->firstName,
             ];
 
-            // Initialize an index for the grade
-            $gradeIndex = 1;
+            // If the student has grades, include them in the row; otherwise, mark as "N/A"
+            if ($studentGrades->isNotEmpty()) {
+                // Initialize an index for the grade
+                $gradeIndex = 1;
 
-            // Push each grade into the data collection as a separate column
-            foreach ($studentGrades as $grade) {
-                $row['Grade ' . $gradeIndex++] = $grade->grade;
+                // Push each grade into the data collection as a separate column
+                foreach ($studentGrades as $grade) {
+                    $row['Grade ' . $gradeIndex++] = $grade;
+                }
+            } else {
+                // Mark as "N/A" if the student has no grades
+                $row['Grade'] = '';
             }
 
             $data->push($row);
@@ -80,7 +85,7 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
     public function columnFormats(): array
     {
         return [
-            'A' => '20', // Set width of column A (Student Name) to 20
+            'A' => '200',
         ];
     }
 }
