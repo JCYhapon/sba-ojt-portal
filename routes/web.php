@@ -34,6 +34,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// FOR FILTERING COORDINATOR - STUDENT JOURNAL 
+Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
+
 
 //FOR ADMIN
 Route::get('/admin', function () {
@@ -81,9 +84,6 @@ Route::post('/coordinator_student-list', [CoordinatorUserController::class, 'sto
 Route::get('/coordinator_student-journal', function () {
     return view('coordinator.student_journal');
 })->name('coordinator_student-journal'); // COORDINATOR COMPANY-LIST PAGE
-
-// FOR FILTERING COORDINATOR - STUDENT JOURNAL 
-Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
 
 /*
 |----------------------------------------------------------------
@@ -253,4 +253,8 @@ Route::get('/export-journal-grades', [ExportReportController::class, 'exportJour
 */
 Route::get('/student-list-bulk', [ImportController::class, 'redirectToStudentBulkList'])->name('student_bulk_list');
 
+Route::get('/company-list-bulk', [ImportController::class, 'redirectToCompanyBulkList'])->name('company_bulk_list');
+
 Route::post('/import', [ImportController::class, 'import'])->name('import');
+
+Route::post('/importCompany', [ImportController::class, 'importCompany'])->name('import_company');
