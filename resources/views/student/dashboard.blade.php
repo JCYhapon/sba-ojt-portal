@@ -73,7 +73,7 @@
             <!--  FIRST ROW -->
             <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 ss:grid-cols-2 xs:grid-cols-1 p-8 shadow-md rounded-md lg:h-40">
                 <div class="grid lg:gap-2 md:gap-0 ss:gap-0">
-                    <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em] ss:text-[18px] xs:text-[18px]"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
+                    <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em] ss:text-[18px] xs:text-[18px]"><span class="font-bold text-[#AD974F]">Welcome,</span> {{ Auth::user()->name }}</h1>
                     <p class="lg:text-lg md:text-[18px] md:mt-3 ss:text-[15px] xs:text-[15px] ss:mt-0">
                         @if(($companyName == 0))
                         Do well on your internship
@@ -84,7 +84,7 @@
                 </div>
                 <div class="flex flex-col lg:justify-end lg:row-span-2 md:row-span-2  md:justify-end sm:justify-end ss:justify-end lg:items-end md:items-end sm:items-end ss:items-end items-end xs:items-center xs:justify-end">
                     <div class=" grid justify-items-end">
-                        <a href=" {{ route('student_profile') }}"><button class="bg-gray-800 text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem] ss:text-[13px] ss:w-[9rem] xs:text-[13px] xs:w-[9rem]">Go to your
+                        <a href=" {{ route('student_profile') }}"><button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem] ss:text-[13px] ss:w-[9rem] xs:text-[13px] xs:w-[9rem]">Go to your
                                 Profile</button></a>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     <div>
                         <h1 class="lg:text-2xl md:text-lg sm:text-lg ss:text-lg font-semibold">View Partner Companies Here:</h1>
                     </div>
-                    <div><button class="bg-gray-800 text-white p-1 rounded-md lg:text-sm lg:w-36 md:text-[14px] md:w-[9rem] sm:text-[14px] sm:w-[9rem] ss:text-[14px] ss:w-[9rem] xs:text-[14px] xs:w-[9rem]">
+                    <div><button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm lg:w-36 md:text-[14px] md:w-[9rem] sm:text-[14px] sm:w-[9rem] ss:text-[14px] ss:w-[9rem] xs:text-[14px] xs:w-[9rem]">
                             <a href="{{ route('student_company-list') }}">Company List</a></button></div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                             <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-xl ss:text-2xl xs:text-xl text-[13px] mt-5">Journal Entry</h1>
                         </div>
                         <div>
-                            <a href="{{ route('student_journal') }}"><button class="bg-gray-800 text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:mb-4 w-[6rem] ">Journal</button>
+                            <a href="{{ route('student_journal') }}"><button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:mb-4 w-[6rem] ">Journal</button>
                         </div></a>
                         <div>
                             <p class="lg:text-sm md:text-[13px] sm:text-[12px] mb-2 text-center ss:text-[12px] xs:text-[10px] text-[10px]">Please submit your Daily Journal entry here and input your working hours
@@ -121,7 +121,7 @@
                             <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-2xl ss:text-2xl xs:text-xl text-[13px] mt-5">Company Matches</h1>
                         </div>
                         <div>
-                            <button class="bg-gray-800 text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:w-36 lg:mb-4 md:w-[9rem]  sm:w-[9rem]  ss:w-[9rem] w-[6rem]"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
+                            <button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:w-36 lg:mb-4 md:w-[9rem]  sm:w-[9rem]  ss:w-[9rem] w-[6rem]"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
                         </div>
                         <div>
                             <p class="lg:text-sm md:text-[13px] sm:text-[12px] ss:text-[12px] xs:text-[10px] text-[10px] mb-2 text-center">Contact your coordinator for more information about your company matches
