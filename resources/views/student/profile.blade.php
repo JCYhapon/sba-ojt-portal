@@ -222,7 +222,7 @@
                         <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
                             <canvas data-te-chart="doughnut" data-te-dataset-data='[
                                     {{ $totalRenderedHours }},
-                                    {{ $remainingHours }}]' data-te-dataset-background-color='["#00AB98", "#ED0081"]'>
+                                    {{ $remainingHours }}]' data-te-dataset-background-color='["#AD974F", "#1F2937"]'>
                             </canvas>
                         </div>
 
