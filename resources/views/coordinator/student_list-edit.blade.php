@@ -143,12 +143,12 @@
                             @endphp
 
                             @if(empty($positions))
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
+                            <li style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Positions Available</li>
                             @endif
 
                             @foreach($positions ?? [] as $position)
                             <div class="position-item flex items-center mt-2 mr-2">
-                                <span style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }}<input type="button" class="remove pl-2 pr-1 cursor-pointer" data-position="{{ $position }}" value="×"></input></span>
+                                <span style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $position }}<input type="button" class="remove pl-2 pr-1 cursor-pointer" data-position="{{ $position }}" value="×"></input></span>
                             </div>
                             <!-- Hidden input fields to store positions -->
                             <input type="hidden" name="positions[]" value="{{ $position }}">
@@ -183,9 +183,9 @@
                             @endphp
 
                             @if ($students->hiredCompany && $company)
-                            <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $company->name }}</li>
+                            <li style="background-color: #AD974F; color: white;" class="rounded-lg text-sm p-2.5  dark:placeholder-gray-400 m-2 my-auto">{{ $company->name }}</li>
                             @else
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Not Yet Hired</li>
+                            <li style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Not Yet Hired</li>
                             @endif
 
                             <li>
@@ -212,7 +212,7 @@
                     </div>
 
                     <div class="flex items-center space-x-4">
-                        <button type="submit" class="text-white bg-gray-800 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <button type="submit" class="text-white bg-[#AD974F] hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             Update Student
                         </button>
                     </div>
