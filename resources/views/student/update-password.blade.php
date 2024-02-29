@@ -129,7 +129,7 @@
 
                 <!-- Submit Button -->
                 <div class="flex justify-center">
-                    <button id="submitButton" type="submit" class="w-[30%] bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Update Password</button>
+                    <button id="submitButton" type="submit" class="w-[30%] bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Update Password</button>
                 </div>
             </form>
 

@@ -160,12 +160,12 @@
 
                                 @forelse($positions as $position)
                                 <div class="position-item flex items-center mt-2 mr-2">
-                                    <span style="background-color: #202c34; color: white;" class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4 text-center">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
+                                    <span style="background-color: #AD974F; color: white;" class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4 text-center">{{ $position }} <button class="remove pl-2 pr-1" data-position="{{ $position }}"><b>×</b></button> </span>
                                 </div>
                                 <!-- Hidden input fields to store positions -->
                                 <input type="hidden" name="positions[]" value="{{ $position }}">
                                 @empty
-                                <button style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">
+                                <button style="background-color:#AD974F; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">
                                     <a href="{{ route('profile.edit') }}"><b>+</b> Add Position</a>
                                 </button>
                                 @endforelse
@@ -256,7 +256,7 @@
                     <div class="flex flex-col justify-end">
                         <p class="text-sm font-semibold">Hours Rendered: {{ $totalRenderedHours }}</p>
                         <p class="text-sm font-semibold">Hours Left: {{ $remainingHours }}</p>
-                        <p class="text-sm font-semibold text-cyan-500">Needed Hours: {{ $neededHours }}</p>
+                        <p class="text-sm font-semibold text-[#AD974F]">Needed Hours: {{ $neededHours }}</p>
                     </div>
                 </div>
             </div>
@@ -272,7 +272,7 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Ensure your account is using a long, random password to stay secure.</p>
                         </div>
                         <div>
-                            <button class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
+                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
                         </div>
                     </div>
                 </div>
@@ -286,9 +286,9 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Edit Profile to match into a company</p>
                         </div>
                         <div>
-                            <button class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
+                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
 
-                            <button class="bg-[#202c34] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
+                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
                         </div>
                     </div>
                 </div>
