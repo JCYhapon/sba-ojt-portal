@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="flex align-middle justify-end mt-8">
-                    <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+                    <a class="bg-[#AD974F] text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
                         <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Create Journal
                         </button>
