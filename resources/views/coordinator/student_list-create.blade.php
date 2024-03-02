@@ -71,19 +71,38 @@
                             <label for="major" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Major</label>
                             <select id="major" name="major" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" selected disabled>Major</option>
-                                <option selected="management">Management</option>
-                                <option selected="accounting">Accounting</option>
+                                @if(Auth::user()->role == 2)
+                                @if(Auth::user()->major == 'management')
+                                <option value="management" selected>Management</option>
+                                @elseif(Auth::user()->major == 'accounting')
+                                <option value="accounting" selected>Accounting</option>
+                                @endif
+                                @endif
                             </select>
                         </div>
+
                         {{-- Section --}}
                         <div class="col-span-2 sm:col-span-1">
                             <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section</label>
                             <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" selected disabled>Section</option>
-                                <option selected="management">MT-101</option>
-                                <option selected="accounting">AT-101</option>
+                                @if(Auth::user()->role == 2 && Auth::user()->major == 'management')
+                                <option value="MT-331">MT-331</option>
+                                <option value="MT-332">MT-332</option>
+                                <option value="MT-333">MT-333</option>
+                                <option value="MT-334">MT-334</option>
+                                <option value="MT-335">MT-335</option>
+                                <option value="MT-336">MT-336</option>
+                                @elseif(Auth::user()->role == 2 && Auth::user()->major == 'accounting')
+                                <option value="AT-331">AT-331</option>
+                                <option value="AT-332">AT-332</option>
+                                <option value="AT-333">AT-333</option>
+                                <option value="AT-334">AT-334</option>
+                                <option value="AT-335">AT-335</option>
+                                @endif
                             </select>
                         </div>
+
                     </div>
                     <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
