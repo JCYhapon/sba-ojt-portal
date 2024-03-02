@@ -36,7 +36,6 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
@@ -52,17 +51,12 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
-            // 'client' => [
-            //     'timeout' => 5,
-            // ],
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
         ],
 
         'postmark' => [
             'transport' => 'postmark',
-            // 'message_stream_id' => null,
-            // 'client' => [
-            //     'timeout' => 5,
-            // ],
         ],
 
         'sendmail' => [
@@ -85,6 +79,18 @@ return [
                 'smtp',
                 'log',
             ],
+        ],
+
+        // Password Reset Mailer Configuration
+        'password_reset' => [
+            'transport' => 'smtp',
+            'host' => env('FORGOT_PASSWORD_MAIL_HOST', 'smtp.example.com'),
+            'port' => env('FORGOT_PASSWORD_MAIL_PORT', 587),
+            'encryption' => env('FORGOT_PASSWORD_MAIL_ENCRYPTION', 'tls'),
+            'username' => env('FORGOT_PASSWORD_MAIL_USERNAME'),
+            'password' => env('FORGOT_PASSWORD_MAIL_PASSWORD'),
+            'timeout' => null,
+            'local_domain' => env('FORGOT_PASSWORD_MAIL_EHLO_DOMAIN'),
         ],
     ],
 
