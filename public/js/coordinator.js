@@ -61,10 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 .map((td) => td.textContent.trim().toLowerCase())
                 .join(" ");
 
+            // Check if the row text includes the search term
             if (rowText.includes(searchTerm)) {
-                row.style.display = "";
+                row.style.display = ""; // Show the row if it matches the search term
             } else {
-                row.style.display = "none";
+                row.style.display = "none"; // Hide the row if it doesn't match the search term
             }
         });
     }

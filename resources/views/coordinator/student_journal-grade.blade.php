@@ -106,7 +106,7 @@
                   </div>
 
                   <div class="flex gap-4">
-                    <label for="" class="font-mono text-sm font-semibold">Supervisor Signature:</label>
+                    <label for="" class="font-mono text-sm font-semibold">Documentation:</label>
                     <img src="/{{ $journal->supervisorSignature }}" width="100px">
                   </div>
                 </div>

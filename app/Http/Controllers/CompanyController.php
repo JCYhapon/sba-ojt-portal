@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
-    public function getCompany()
+    public function getCompany(Request $request)
     {
-        $companies = Company::orderBy('id', 'asc')->paginate(7);
+        $searchQuery = $request->query('search');
+
+        $companies = Company::query();
+
+        if ($searchQuery) {
+            $companies->where('name', 'like', '%' . $searchQuery . '%');
+        }
+
+        $companies = $companies->orderBy('id', 'asc')->paginate(7);
+
         return view('coordinator.company_list', compact('companies'));
     }
 
