@@ -88,96 +88,110 @@
 
         <!-- SEARCH AND FILTER -->
         <div class="flex gap-6 w-full">
-          <!-- SEARCH -->
-          <label for="simple-search" class="sr-only">Search</label>
-          <div class="relative w-[40%]">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-              </svg>
-            </div>
-            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
-          </div>
+
+
 
           <!-- FILTERING -->
+          @php
+          $uniqueJournalNumbers = [];
+          @endphp
 
-          <div class="flex flex-row gap-4">
-            <div>
-              <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
-                <option value="option1">All Section</option>
-                <option value="option2">MT - 102</option>
-                <option value="option3">MT - 103</option>
+          <div>
+            <form method="GET" action="{{ route('journals.index') }}" class="flex gap-4" id="filterForm">
+
+              <select id="sectionDropdown" name="sectionDropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
+                <option value="">All Sections</option>
+                @php
+                $uniqueSections = [];
+                @endphp
+                @foreach($students as $student)
+                @if(!in_array($student->section, $uniqueSections))
+                <option value="{{ $student->section }}" {{ request('sectionDropdown') == $student->section ? 'selected' : '' }}>{{ $student->section }}</option>
+                @php
+                $uniqueSections[] = $student->section;
+                @endphp
+                @endif
+                @endforeach
               </select>
-            </div>
 
-            <div>
-              <form method="GET" action="{{ route('journals.index') }}" class="flex gap-4">
-
-                <select id="dropdown-status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                  <option value="">All</option>
-                  <option value="graded" {{ request('status') == 'graded' ? 'selected' : '' }}>Graded</option>
-                  <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>Unread</option>
-                  <option value="seen" {{ request('status') == 'seen' ? 'selected' : '' }}>Seen</option>
-                </select>
-                <div>
-                  <button type="submit" class="bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Filter</button>
-                </div>
-
-              </form>
-            </div>
+              <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
+                <option value="">All Journal</option>
+                @php
+                $uniqueJournalNumbers = [];
+                @endphp
+                @foreach($journals as $journal)
+                @if(!in_array($journal->journalNumber, $uniqueJournalNumbers))
+                <option value="{{ $journal->journalNumber }}" {{ request('dropdown') == $journal->journalNumber ? 'selected' : '' }}>Journal {{ $journal->journalNumber }}</option>
+                @php
+                $uniqueJournalNumbers[] = $journal->journalNumber;
+                @endphp
+                @endif
+                @endforeach
+              </select>
 
 
+              <select id="dropdown-status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
+                <option value="">All Status</option>
+                <option value="graded" {{ request('status') == 'graded' ? 'selected' : '' }}>Graded</option>
+                <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>Unread</option>
+                <option value="seen" {{ request('status') == 'seen' ? 'selected' : '' }}>Seen</option>
+              </select>
 
+              <button type="submit" name="reset" value="reset" class="bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Reset</button>
+            </form>
           </div>
-        </div>
 
-        <div class="flex flex-col flex-wrap gap-2 mt-4">
 
-          @foreach($journals as $journal)
-          <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}">
-            @php
-            $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
-            @endphp
-
-            @if($student)
-
-            <div class="border rounded-md p-[20px]">
-              <div class="flex items-center justify-between">
-                <h2 class="card-title text-lg font-bold hover:underline">Journal {{ $journal->journalNumber }}</h2>
-                <div class="flex gap-4 items-center justify-evenly">
-                  @if($journal->status != 1 && $journal->status != 3)
-                  <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-[#AD974F] text-white  text-center p-[5px] rounded-md text-[13px]">Mark as Unread</a>
-                  @endif
-                  <p class="bg-[#AD974F] text-white  text-center p-[5px] rounded-md text-[13px]">
-                    @if($journal->status == 1)
-                    Unread
-                    @elseif($journal->status == 2)
-                    Seen
-                    @elseif($journal->status == 3)
-                    Graded
-                    @endif
-                  </p>
-                  @if($journal->status != 1 && $journal->status != 3)
-                  @endif
-                </div>
-              </div>
-              <div class="flex flex-col gap-4">
-                <div class="flex flex-row gap-4">
-                  <h1 class="card-title"><span class="font-semibold">Name: </span>{{ $student->firstName }} {{ $student->lastName }}</h1>
-                  <h1 class="card-title"><span class="font-semibold">Section: </span>{{ $student->section }}</h1>
-                  <p class="card-text"><span class="font-semibold">Score: </span>{{ $journal->grade ?? 'Not graded yet' }}</p>
-                </div>
-                <div>
-                  <p class="overflow-x-auto ">{{ $journal->reflection }}</p>
-                </div>
-              </div>
-              @endif
-            </div>
-          </a>
-          @endforeach
         </div>
       </div>
+
+      <div class="flex flex-col flex-wrap gap-2 mt-4">
+
+        @foreach($journals as $journal)
+        <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}">
+          @php
+          $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
+          @endphp
+
+          @if($student)
+
+          <div class="border rounded-md p-[20px]">
+            <div class="flex items-center justify-between">
+              <h2 class="card-title text-lg font-bold hover:underline">Journal {{ $journal->journalNumber }}</h2>
+              <div class="flex gap-4 items-center justify-evenly">
+                @if($journal->status != 1 && $journal->status != 3)
+                <a href="{{ route('mark.unread', ['journalID' => $journal->journalID]) }}" class="bg-[#AD974F] text-white  text-center p-[5px] rounded-md text-[13px]">Mark as Unread</a>
+                @endif
+                <p class="bg-[#AD974F] text-white  text-center p-[5px] rounded-md text-[13px]">
+                  @if($journal->status == 1)
+                  Unread
+                  @elseif($journal->status == 2)
+                  Seen
+                  @elseif($journal->status == 3)
+                  Graded
+                  @endif
+                </p>
+                @if($journal->status != 1 && $journal->status != 3)
+                @endif
+              </div>
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-row gap-4">
+                <h1 class="card-title"><span class="font-semibold">Name: </span>{{ $student->firstName }} {{ $student->lastName }}</h1>
+                <h1 class="card-title"><span class="font-semibold">Section: </span>{{ $student->section }}</h1>
+                <p class="card-text"><span class="font-semibold">Score: </span>{{ $journal->grade ?? 'Not graded yet' }}</p>
+              </div>
+              <div>
+                <p class="overflow-x-auto ">{{ $journal->reflection }}</p>
+              </div>
+            </div>
+            @endif
+          </div>
+        </a>
+        @endforeach
+      </div>
     </div>
+  </div>
   </div>
 
 
