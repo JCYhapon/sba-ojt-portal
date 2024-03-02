@@ -128,7 +128,7 @@
 
             </div>
 
-            <div class="flex flex-col justify-between min-h-70vh ">
+            <div class="flex flex-col justify-between min-h-[70vh] ">
 
                 <!-- Students Table -->
                 <div class="overflow-x-auto">

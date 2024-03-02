@@ -15,7 +15,7 @@ class CompanyController extends Controller
 {
     public function getCompany()
     {
-        $companies = Company::orderBy('id', 'asc')->paginate(12);
+        $companies = Company::orderBy('id', 'asc')->paginate(7);
         return view('coordinator.company_list', compact('companies'));
     }
 
