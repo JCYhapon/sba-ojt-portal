@@ -33,6 +33,12 @@ class JournalController extends Controller
 
         $query = Journal::whereIn('studentID', $studentIDs)->orderBy('journalNumber', 'asc');
 
+        // Resetting the filtering
+        if ($request->has('reset')) {
+            // Clear any filtering parameters
+            return redirect()->route('journals.index');
+        }
+
         // Filtering based on the selected status
         if ($request->has('status')) {
             $status = $request->input('status');
@@ -45,11 +51,36 @@ class JournalController extends Controller
             }
         }
 
+        // Filtering based on the selected journal number
+        if ($request->has('dropdown')) {
+            $journalNumber = $request->input('dropdown');
+            if (!empty($journalNumber)) {
+                // Clear the journal number filtering, as it will be handled in the table
+                $query->where('journalNumber', $journalNumber);
+            }
+        }
+
+        // Filtering based on the selected section
+        if ($request->has('sectionDropdown')) {
+            $section = $request->input('sectionDropdown');
+            if (!empty($section)) {
+                $studentIDs = Student::where('major', $userMajor)->where('section', $section)->pluck('studentID');
+                $query->whereIn('studentID', $studentIDs);
+            }
+        }
 
         $journals = $query->get();
 
-        return view('coordinator.student_journal', compact('journals'));
+        // Retrieve the list of students for the section dropdown
+        $students = Student::where('major', $userMajor)->get();
+
+        return view('coordinator.student_journal', compact('journals', 'students'));
     }
+
+
+
+
+
 
 
 
