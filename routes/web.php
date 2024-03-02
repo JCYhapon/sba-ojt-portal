@@ -37,6 +37,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // FOR FILTERING COORDINATOR - STUDENT JOURNAL 
 Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
 
+//FORGOT PASSWORD
+Route::get('/forgot-password', function () {
+    return view('auth.forgotpassword');
+})->name('forgot-password');
 
 //FOR ADMIN
 Route::get('/admin', function () {
