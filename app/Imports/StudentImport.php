@@ -17,29 +17,32 @@ class StudentImport implements ToCollection
     public function collection(Collection $rows)
     {
         foreach ($rows->slice(1) as $row) {
-            Log::info('File Being Transferred');
+            if (empty($row[0]) || empty($row[1]) || empty($row[2]) || empty($row[3]) || empty($row[4])) {
+                continue;
+            }
+
             User::create([
-                'id' => $row[0], // Assuming 'Student ID' is the first column
-                'schoolID' => $row[0], // Assuming 'Student ID' is the first column
-                'name' => $row[1] . ' ' . $row[2], // Assuming 'Last Name' is the second column and 'First Name' is the third column
-                'email' => $row[3], // Assuming 'Email' is the fourth column
+                'id' => $row[0],
+                'schoolID' => $row[0],
+                'name' => $row[1] . ' ' . $row[2],
+                'email' => $row[3],
                 'role' => 3,
-                'major' => $row[4], // Assuming 'Major' is the fifth column
+                'major' => $row[4],
                 'password' => Hash::make('password'),
-                'remember_token' => Str::random(10),
+                'remember_token' => null,
                 'email_verified_at' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
             Student::create([
-                'id' => $row[0], // Assuming 'Student ID' is the first column
-                'studentID' => $row[0], // Assuming 'Student ID' is the first column
-                'firstName' => $row[2], // Assuming 'First Name' is the third column
-                'lastName' => $row[1], // Assuming 'Last Name' is the second column
-                'email' => $row[3], // Assuming 'Email' is the fourth column
-                'major' => $row[4], // Assuming 'Major' is the fifth column
-                'section' => $row[5], // Assuming 'Section' is the sixth column
+                'id' => $row[0],
+                'studentID' => $row[0],
+                'firstName' => $row[2],
+                'lastName' => $row[1],
+                'email' => $row[3],
+                'major' => $row[4],
+                'section' => $row[5],
                 'workType' => null,
                 'jobTitle' => null,
                 'suggestedCompany' => [],

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('address');
+            $table->string('description')->nullable();
             $table->integer('status'); //active -1, forRenewal-2, expired-3
             $table->integer('workType')->nullable(); //On Site -1, Work from Home-2, Hybrid-3
             $table->json('position')->nullable();

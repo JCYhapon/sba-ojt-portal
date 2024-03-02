@@ -176,6 +176,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="">
+                    {!! $companies->links() !!}
+                </div>
 
                 <!-- FOR FILTER -->
                 <script src="{{ asset('js/coordinator.js') }}">

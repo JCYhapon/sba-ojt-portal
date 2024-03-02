@@ -79,6 +79,11 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
+            @if(session()->has('success'))
+            <div class="bg-green-200 text-green-800 p-4 mb-4">
+                <span>Company Uploaded Successfully</span>
+            </div>
+            @endif
             <h1>Coordinator Bulk Upload Format</h1>
             <div class="overflow-x-auto">
                 <table class="w-full border-collapse table-auto">

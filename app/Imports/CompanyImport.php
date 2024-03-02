@@ -17,10 +17,14 @@ class CompanyImport implements ToCollection
     public function collection(Collection $rows)
     {
         foreach ($rows->slice(1) as $row) {
+            if (empty($row[0]) || empty($row[1]) || empty($row[2])) {
+                continue;
+            }
+
             Company::create([
                 'name' => $row[0],
                 'email' => $row[1],
-                'address' => $row[3],
+                'address' => $row[2],
                 'description' => null,
                 'status' => 1,
                 'workType' => null,
