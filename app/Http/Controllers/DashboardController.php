@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-
 class DashboardController extends Controller
 {
     public function getCoordinatorDashboardData()
@@ -78,11 +77,15 @@ class DashboardController extends Controller
         $managementTotalStudents = Student::where('major', 'Management')->count();
 
         // Coordinators Name
-        $accountingCoordinator = User::where('major', 'Accounting')->first();
-        $managementCoordinator = User::where('major', 'Management')->first();
+        $accountingCoordinator = User::where('major', 'Accounting')
+            ->where('role', 2)
+            ->first();
+        $managementCoordinator = User::where('major', 'Management')
+            ->where('role', 2)
+            ->first();
 
-        $accountingCoordinatorName = $accountingCoordinator->name;
-        $managementCoordinatorName = $managementCoordinator->name;
+        $accountingCoordinatorName = $accountingCoordinator ? $accountingCoordinator->name : '';
+        $managementCoordinatorName = $managementCoordinator ? $managementCoordinator->name : '';
 
         // Get Sections Count
         $accountingTotalSections = Student::where('major', 'Accounting')
