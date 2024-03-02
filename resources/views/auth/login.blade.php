@@ -30,7 +30,7 @@
 
             <!-- Laravel login form -->
 
-            <div id="form" class="w-[80%] md:[100%] lg:w-[70%] h-[100vh] mx-auto  lg:p-[10rem] flex flex-col  gap-[3rem] items-center">
+            <div id="form" class="w-[80%] md:[100%] lg:w-[70%] h-[100vh] mx-auto  lg:p-[10rem] flex flex-col justify-center gap-[3rem] items-center">
                 <div class="flex flex-row justify-center ">
                     <img src="{{ asset('assets/sba-logo.png') }}" alt="sba-logo" class="">
                 </div>
@@ -64,9 +64,12 @@
                                 <span class="ml-2 text-sm text-gray-500">Remember me</span>
                             </label>
                         </div>
-                        <button type="submit" class="w-full font-semibold bg-[#AD974F] text-white p-2 rounded-md hover:bg-[#736023] focus:outline-none focus:shadow-outline-blue">
+                        <button type="submit" class="w-full mb-8 font-semibold bg-[#AD974F] text-white p-2 rounded-md hover:bg-[#736023] focus:outline-none focus:shadow-outline-blue">
                             Login
                         </button>
+                        <div class="text-center">
+                            <a href="" class="text-gray-500 cursor-pointer underline pt-6">Forgot Password?</a>
+                        </div>
                     </form>
                 </div>
 
