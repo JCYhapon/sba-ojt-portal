@@ -68,7 +68,7 @@
                             Login
                         </button>
                         <div class="text-center">
-                            <a href="" class="text-gray-500 cursor-pointer underline pt-6">Forgot Password?</a>
+                            <a href="{{ route ('forgot-password') }}" class="text-gray-500 cursor-pointer underline pt-6">Forgot Password?</a>
                         </div>
                     </form>
                 </div>
