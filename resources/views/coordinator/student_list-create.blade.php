@@ -87,18 +87,18 @@
                             <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" selected disabled>Section</option>
                                 @if(Auth::user()->role == 2 && Auth::user()->major == 'management')
-                                <option value="MT-331">MT-331</option>
-                                <option value="MT-332">MT-332</option>
-                                <option value="MT-333">MT-333</option>
-                                <option value="MT-334">MT-334</option>
-                                <option value="MT-335">MT-335</option>
-                                <option value="MT-336">MT-336</option>
+                                <option value="MT-331">BM-331</option>
+                                <option value="MT-332">BM-332</option>
+                                <option value="MT-333">BM-333</option>
+                                <option value="MT-334">BM-334</option>
+                                <option value="MT-335">BM-335</option>
+                                <option value="MT-336">BM-336</option>
                                 @elseif(Auth::user()->role == 2 && Auth::user()->major == 'accounting')
-                                <option value="AT-331">AT-331</option>
-                                <option value="AT-332">AT-332</option>
-                                <option value="AT-333">AT-333</option>
-                                <option value="AT-334">AT-334</option>
-                                <option value="AT-335">AT-335</option>
+                                <option value="AT-331">A-331</option>
+                                <option value="AT-332">A-332</option>
+                                <option value="AT-333">A-333</option>
+                                <option value="AT-334">A-334</option>
+                                <option value="AT-335">A-335</option>
                                 @endif
                             </select>
                         </div>
