@@ -35,33 +35,31 @@
                     <img src="{{ asset('assets/sba-logo.png') }}" alt="sba-logo" class="">
                 </div>
 
-                @if(session()->has('error'))
-                <div class="bg-red-500 text-green-red p-4 mb-4 rounded-full">
-                    {{ session('error') }}
-                </div>
-                @endif
 
-                @if(session()->has('email'))
-                <div class="bg-green-500 text-white p-4 mb-4 rounded-full">
-                    {{ session('email') }}
-                </div>
-                @endif
-
-                @if(session()->has('status'))
-                <div class="bg-green-500 text-white p-4 mb-4 rounded-full">
-                    {{ session('status') }}
-                </div>
-                @endif
 
                 <div class="bg-white h-auto p-[3rem] w-[100%] llg:w-[70%] lg:w-[100%] mmd:w-[100%] md:w-[100%]  rounded-[6%]">
                     <h1 class="text-center mb-[30px]">
                         <span class="font-bold text-2xl text-black ">SBA OJT Portal</span>
                     </h1>
+
                     @if(session()->has('error'))
-                    <div class="bg-red-500 text-green-red p-4 mb-4">
+                    <div class="bg-red-500 text-green-red p-4 mb-2 rounded-sm w-full text-center">
                         {{ session('error') }}
                     </div>
                     @endif
+
+                    @if(session()->has('email'))
+                    <div class="bg-green-500 text-white p-4 mb-2 rounded-sm w-full text-center">
+                        {{ session('email') }}
+                    </div>
+                    @endif
+
+                    @if(session()->has('status'))
+                    <div class="bg-green-500 text-white p-4 mb-2 rounded-sm w-full text-center">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}" class="mb-4">
                         @csrf
                         <div class="mb-4">
