@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -268,3 +270,18 @@ Route::get('/company-list-bulk', [ImportController::class, 'redirectToCompanyBul
 Route::post('/import', [ImportController::class, 'import'])->name('import');
 
 Route::post('/importCompany', [ImportController::class, 'importCompany'])->name('import_company');
+
+/*
+|----------------------------------------------------------------
+|   Forget Password Controller                                  |
+|---------------------------------------------------------------|
+| All Routes for ExportReportController                         |
+|----------------------------------------------------------------
+*/
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('forget.password');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'forgetPasswordPost'])->name('forget.password.post');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
+
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');

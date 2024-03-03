@@ -35,6 +35,24 @@
                     <img src="{{ asset('assets/sba-logo.png') }}" alt="sba-logo" class="">
                 </div>
 
+                @if(session()->has('error'))
+                <div class="bg-red-500 text-green-red p-4 mb-4 rounded-full">
+                    {{ session('error') }}
+                </div>
+                @endif
+
+                @if(session()->has('email'))
+                <div class="bg-green-500 text-white p-4 mb-4 rounded-full">
+                    {{ session('email') }}
+                </div>
+                @endif
+
+                @if(session()->has('status'))
+                <div class="bg-green-500 text-white p-4 mb-4 rounded-full">
+                    {{ session('status') }}
+                </div>
+                @endif
+
                 <div class="bg-white h-auto p-[3rem] w-[100%] llg:w-[70%] lg:w-[100%] mmd:w-[100%] md:w-[100%]  rounded-[6%]">
                     <h1 class="text-center mb-[30px]">
                         <span class="font-bold text-2xl text-black ">SBA OJT Portal</span>
@@ -68,8 +86,11 @@
                             Login
                         </button>
                         <div class="text-center">
-                            <a href="{{ route('forgot-password') }}" class="text-gray-500 cursor-pointer underline pt-6">Forgot Password?</a>
+                            <a href="{{ route('forget.password') }}" class="text-gray-500 cursor-pointer underline pt-6">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
                         </div>
+
                     </form>
                 </div>
 
