@@ -106,30 +106,30 @@
 
                 <div id="passwordRequirements" class="flex-col">
                     <div class="flex items-center">
-                        <input type="checkbox" id="checkbox1" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <input type="checkbox" id="checkbox1" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
                         <label for="checkbox1" class="ml-2">8 - 12 characters</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="checkbox2" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <input type="checkbox" id="checkbox2" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
                         <label for="checkbox2" class="ml-2">Capital Letter</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="checkbox3" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <input type="checkbox" id="checkbox3" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
                         <label for="checkbox3" class="ml-2">Numerical</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="checkbox4" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" class="bg-gray-800">
+                        <input type="checkbox" id="checkbox4" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" class="bg-gray-800" disabled>
                         <label for="checkbox4" class="ml-2">With Special character</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="checkbox5" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;">
+                        <input type="checkbox" id="checkbox5" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
                         <label for="checkbox5" class="ml-2">Confirm Password</label>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="flex justify-center">
-                    <button id="submitButton" type="submit" class="w-[30%] bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Update Password</button>
+                    <button id="submitButton" type="submit" class="w-[30%] bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" disabled>Update Password</button>
                 </div>
             </form>
 
@@ -159,13 +159,18 @@
                         // Enable/disable submit button based on password requirements
                         submitButton.disabled = !(isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed);
 
-                        // Change button color based on password requirements
-                        submitButton.classList.toggle('bg-gray-800', isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed);
-                        submitButton.classList.toggle('bg-gray-800', !(isLengthValid && hasUpperCase && hasNumber && hasSpecialChar && isConfirmed));
+                        // Change button color based on password requirements and confirmation
+                        if (isConfirmed) {
+                            submitButton.classList.remove('bg-gray-800'); // Remove gray background
+                            submitButton.classList.add('bg-[#AD974F]'); // Add custom background color
+                        } else {
+                            submitButton.classList.remove('bg-[#AD974F]'); // Remove custom background color
+                            submitButton.classList.add('bg-gray-800'); // Add gray background
+                        }
                     }
 
                     passwordInput.addEventListener('input', validatePassword);
-                    confirmInput.addEventListener('input', validatePassword);
+                    confirmInput.addEventListener('input', validatePassword); // Update confirmation status when confirm input changes
                 });
             </script>
         </div>

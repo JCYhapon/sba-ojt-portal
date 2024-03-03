@@ -53,7 +53,7 @@ class AdminController extends Controller
         $user = User::create([
             'id' => $request->input('studentID'),
             'schoolID' => $request->input('studentID'),
-            'name' => $request->input('firstName') . ' ' . $request->input('lastName'),
+            'name' => $request->input('firstName') . ', ' . $request->input('lastName'),
             'email' => $request->input('email'),
             'role' => 2,
             'major' => $request->input('major'),

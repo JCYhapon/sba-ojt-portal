@@ -51,7 +51,7 @@ class CoordinatorUserController extends Controller
         $user = User::create([
             'id' => $request->input('studentID'),
             'schoolID' => $request->input('studentID'),
-            'name' => $request->input('firstName') . ' ' . $request->input('lastName'),
+            'name' => $request->input('lastName') . ', ' . $request->input('firstName'),
             'email' => $request->input('email'),
             'role' => 3,
             'major' => $request->input('major'),
@@ -125,7 +125,7 @@ class CoordinatorUserController extends Controller
         // Update user details
         $user = $students->user;
         $updateUser = $user->update([
-            'name' => $request->input('firstName') . ' ' . $request->input('lastName'),
+            'name' => $request->input('lastName') . ', ' . $request->input('firstName'),
             'email' => $request->input('email'),
             'major' => $request->input('major'),
             'password' => $password,

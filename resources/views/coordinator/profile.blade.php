@@ -116,6 +116,7 @@
                                 <th class="px-4 py-2 border text-start">Student Name</th>
                                 @for ($i = 1; $i <= 15; $i++) <th class="px-4 py-2 border">{{ $i }}</th>
                                     @endfor
+                                    <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,15 +133,23 @@
                                 @php
                                 // Search the journal table using the schoolID
                                 $journals = \App\Models\Journal::where('studentId', $student->studentID)->get();
+                                $totalGrade = 0; // Initialize total grade for this student
                                 @endphp
                                 @for ($i = 1; $i <= 15; $i++) <td class="px-4 py-2 border text-center">
-                                    @foreach($journals as $journal)
-                                    @if ($journal->journalNumber == $i)
-                                    {{ $journal->grade }}
-                                    @endif
-                                    @endforeach
+                                    @php
+                                    $gradeFound = false;
+                                    foreach($journals as $journal) {
+                                    if ($journal->journalNumber == $i) {
+                                    echo $journal->grade;
+                                    $totalGrade += $journal->grade; // Add grade to total
+                                    $gradeFound = true;
+                                    break;
+                                    }
+                                    }
+                                    @endphp
                                     </td>
                                     @endfor
+                                    <td>{{ $totalGrade }}</td> <!-- Display total grade here -->
                             </tr>
                             @endforeach
                         </tbody>

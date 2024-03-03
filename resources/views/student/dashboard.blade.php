@@ -121,7 +121,7 @@
                             <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-2xl ss:text-2xl xs:text-xl text-[13px] mt-5">Company Matches</h1>
                         </div>
                         <div>
-                            <button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:w-36 lg:mb-4 md:w-[9rem]  sm:w-[9rem]  ss:w-[9rem] w-[6rem]"><a href="{{ route('matched.company.list') }}">Matched Companies</a></button>
+                            <button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm md:text-sm ss:text-sm sm:text-sm xs:text-sm text-[12px] lg:w-36 lg:mb-4 md:w-[9rem]  sm:w-[9rem]  ss:w-[9rem] w-[6rem]"><a href="{{ route('match-students') }}">Matched Companies</a></button>
                         </div>
                         <div>
                             <p class="lg:text-sm md:text-[13px] sm:text-[12px] ss:text-[12px] xs:text-[10px] text-[10px] mb-2 text-center">Contact your coordinator for more information about your company matches

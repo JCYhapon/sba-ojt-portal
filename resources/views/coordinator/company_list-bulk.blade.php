@@ -79,10 +79,6 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
-            <!-- BACK BUTTON -->
-            <button class="mb-8">
-                <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
-            </button>
             @if(session()->has('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4">
                 <span>Company Uploaded Successfully</span>
@@ -96,6 +92,7 @@
                             <th class="px-4 py-2 border">Company Name</th>
                             <th class="px-4 py-2 border">Company Email</th>
                             <th class="px-4 py-2 border">Company Address</th>
+                            <th class="px-4 py-2 border">Company Description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,6 +100,7 @@
                             <td class="py-2 px-4 border-b">XYZ Company</td>
                             <td class="py-2 px-4 border-b">xyz@email.com</td>
                             <td class="py-2 px-4 border-b">123 Main Street, Anytown, USA 12345</td>
+                            <td class="py-2 px-4 border-b">XYZ Company Description</td>
                         </tr>
                     </tbody>
                 </table>

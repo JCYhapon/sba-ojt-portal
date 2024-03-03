@@ -17,7 +17,7 @@ class CompanyImport implements ToCollection
     public function collection(Collection $rows)
     {
         foreach ($rows->slice(1) as $row) {
-            if (empty($row[0]) || empty($row[1]) || empty($row[2])) {
+            if (empty($row[0]) || empty($row[1]) || empty($row[2]) || empty($row[3])) {
                 continue;
             }
 
@@ -25,7 +25,7 @@ class CompanyImport implements ToCollection
                 'name' => $row[0],
                 'email' => $row[1],
                 'address' => $row[2],
-                'description' => null,
+                'description' => $row[3],
                 'status' => 1,
                 'workType' => null,
                 'position' => [],

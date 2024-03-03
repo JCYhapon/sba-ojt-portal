@@ -71,12 +71,26 @@
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
-            <!-- Display Success Message -->
-            @if(session()->has('success'))
-            <div class="bg-green-200 text-green-800 p-4 mb-4">
-                {{ session('success') }}
+            @if(!$student || !$student->workType)
+            @if (empty($student->position))
+            <div class="bg-red-200 text-red-800 p-4 mb-4">
+                No Company Matched
+                <button class="bg-red p-1 rounded-md text-sm">
+                    <a href="{{ route('profile.edit') }}" class="text-red-1000 font-bold">Click Here</a>
+                </button>
+                to Set preferred Position and Work Type
+            </div>
+            @elseif (empty($student->workType))
+            <div class="bg-red-200 text-red-800 p-4 mb-4">
+                No Company Matched
+                <button class="bg-red p-1 rounded-md text-sm">
+                    <a href="{{ route('profile.edit') }}" class="text-red-1000 font-bold">Click Here</a>
+                </button>
+                to Set preferred Work Type
             </div>
             @endif
+            @endif
+
 
             <div class="flex flex-col justify-between min-h-70vh overflow-x-auto">
                 <!-- Company Table -->
@@ -94,7 +108,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($students->suggestedCompany as $companyId)
+                                @foreach ($student->suggestedCompany as $companyId)
                                 @php
                                 $company = \App\Models\Company::find($companyId);
                                 @endphp
@@ -118,7 +132,6 @@
                             </tbody>
                         </table>
                     </div>
-
                     <div style="flex: 1;">
                         <h1><b>Matched Company</b></h1>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -132,7 +145,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($students->matchedCompany as $companyId)
+                                @foreach ($student->matchedCompany as $companyId)
                                 @php
                                 $company = \App\Models\Company::find($companyId);
                                 @endphp
@@ -157,9 +170,6 @@
                         </table>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 </body>

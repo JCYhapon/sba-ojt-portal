@@ -17,16 +17,24 @@ class MatchingController extends Controller
     {
         $userId = auth()->user()->schoolID;
         $student = Student::where('studentID', $userId)->first();
-        $studentWorkType = $student->workType;
 
-        if (!$studentWorkType) {
-            return;
+        if (!$student || !$student->workType) {
+            if (empty($student->position)) {
+                return view('student.matched_company-list', compact('student'));
+            }
+            return view('student.matched_company-list', compact('student'));
         }
 
+
+        $studentWorkType = $student->workType;
+        $studentSuggestedCompanies = collect($student->suggestedCompany);
+        $studentSuggestedCompanyIds = $studentSuggestedCompanies->pluck('id')->toArray();
+
         $companies = Company::where('status', 1)
-            ->whereJsonDoesntContain('position', [])
             ->where('workType', $studentWorkType)
+            ->whereNotIn('id', $studentSuggestedCompanyIds)
             ->get();
+
         $matchingResults = [];
 
         foreach ($companies as $company) {
@@ -53,6 +61,8 @@ class MatchingController extends Controller
                 }
             }
         }
+
+        return view('student.matched_company-list', compact('student'));
     }
 
     private function checkPositionMatch($studentPositions, $companyPositions)
