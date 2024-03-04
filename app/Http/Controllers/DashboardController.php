@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+
 class DashboardController extends Controller
 {
     public function getCoordinatorDashboardData()
@@ -79,13 +80,16 @@ class DashboardController extends Controller
         // Coordinators Name
         $accountingCoordinator = User::where('major', 'Accounting')
             ->where('role', 2)
-            ->first();
-        $managementCoordinator = User::where('major', 'Management')
-            ->where('role', 2)
+            ->where('status', 1)
             ->first();
 
-        $accountingCoordinatorName = $accountingCoordinator ? $accountingCoordinator->name : '';
-        $managementCoordinatorName = $managementCoordinator ? $managementCoordinator->name : '';
+        $managementCoordinator = User::where('major', 'Management')
+            ->where('role', 2)
+            ->where('status', 1)
+            ->first();
+
+        $accountingCoordinatorName = $accountingCoordinator ? $accountingCoordinator->name : "No Accounting Coordinator found";
+        $managementCoordinatorName = $managementCoordinator ? $managementCoordinator->name : "No Management Coordinator found";
 
         // Get Sections Count
         $accountingTotalSections = Student::where('major', 'Accounting')

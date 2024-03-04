@@ -35,11 +35,12 @@
 
         function validatePassword() {
             var password = document.getElementById("password").value;
-            var alphanumericRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+            var uppercaseRegex = /[A-Z]/;
+            var lowercaseRegex = /[a-z]/;
             var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
-            if (!alphanumericRegex.test(password)) {
-                alert("Password must contain at least one alphanumeric character.");
+            if (!uppercaseRegex.test(password) || !lowercaseRegex.test(password)) {
+                alert("Password must contain both uppercase and lowercase letters.");
                 return false;
             }
 

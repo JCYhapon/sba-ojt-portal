@@ -72,9 +72,9 @@
                             <select id="major" name="major" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" selected disabled>Major</option>
                                 @if(Auth::user()->role == 2)
-                                @if(Auth::user()->major == 'management')
+                                @if(Auth::user()->major == 'Management')
                                 <option value="management" selected>Management</option>
-                                @elseif(Auth::user()->major == 'accounting')
+                                @elseif(Auth::user()->major == 'Accounting')
                                 <option value="accounting" selected>Accounting</option>
                                 @endif
                                 @endif
@@ -86,14 +86,14 @@
                             <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section</label>
                             <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" selected disabled>Section</option>
-                                @if(Auth::user()->role == 2 && Auth::user()->major == 'management')
+                                @if(Auth::user()->role == 2 && Auth::user()->major == 'Management')
                                 <option value="MT-331">BM-331</option>
                                 <option value="MT-332">BM-332</option>
                                 <option value="MT-333">BM-333</option>
                                 <option value="MT-334">BM-334</option>
                                 <option value="MT-335">BM-335</option>
                                 <option value="MT-336">BM-336</option>
-                                @elseif(Auth::user()->role == 2 && Auth::user()->major == 'accounting')
+                                @elseif(Auth::user()->role == 2 && Auth::user()->major == 'Accounting')
                                 <option value="AT-331">A-331</option>
                                 <option value="AT-332">A-332</option>
                                 <option value="AT-333">A-333</option>

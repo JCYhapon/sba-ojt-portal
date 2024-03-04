@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\Company;
+use App\Models\PasswordReset;
 
 class Kernel extends ConsoleKernel
 {
@@ -12,7 +14,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('renew:companies')->dailyAt('03:00');
+        $schedule->call(function () {
+            $companies = Company::all();
+
+            foreach ($companies as $company) {
+                $createdAt = $company->created_at;
+                $diffInYears = $createdAt->diffInYears(now());
+
+                if ($diffInYears >= 2) {
+                    $company->status = 2;
+                    $company->save();
+                }
+            }
+        })->dailyAt('03:00');
+        $schedule->call(function () {
+            PasswordReset::truncate();
+        })->everyFifteenMinutes();
     }
 
     /**

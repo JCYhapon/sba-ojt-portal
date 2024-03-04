@@ -104,9 +104,26 @@
 
                 <div class="flex flex-row justify-between items-center">
                     <h1 class="text-lg font-medium">Student Grades</h1>
-                    <button class="bg-gray-800 text-white flex p-1 rounded-md gap-2">
-                        <a href="{{ route('export.journal.grades') }}" class="btn btn-primary">Download Grades </a> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOhJREFUSEvtlb0NwjAQhe8nrECJREVFn4oV2AJmYARGIIMwQKrUsAC0WYHcHTKCKESx4iRKgYI7y/b37t2dbYSRB47Mh4kJiIi5lDJzsPPgjQ78F2jt2ImnyGdfRE4AsPPkL2HmfXWtzinb1CdgZjMRSRExroLMLGPmDSI+Bgm4w2Y2V9UrAMzfsJyI1oiY1511dvABmFmsqqmbE5GLPGtKW28BByuK4lWLKIoSX08PEmi9KA3PSWuRQ6ChRb4DwKIr0LP/xsxLt1Y6MLOtqh4BYDVQ5EJEB0Q8fwkMhHqPd/oP+gTx+wJPnBaIGYHM7lgAAAAASUVORK5CYII=" />
-                    </button>
+                    <form action="{{ route('export.journal.grades') }}" method="GET">
+                        @csrf
+                        <label for="section">Select Section:</label>
+                        <select name="section" id="section">
+                            <option value="all">All Sections</option>
+                            @if(strtolower(Auth::user()->major) === 'accounting')
+                            @foreach($accountingSections as $section)
+                            <option value="{{ $section }}">Accounting - {{ $section }}</option>
+                            @endforeach
+                            @elseif(strtolower(Auth::user()->major) === 'management')
+                            @foreach($managementSections as $section)
+                            <option value="{{ $section }}">Management - {{ $section }}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                        <button type="submit" class="bg-gray-800 text-white flex p-1 rounded-md gap-2">
+                            Download Grades
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOhJREFUSEvtlb0NwjAQhe8nrECJREVFn4oV2AJmYARGIIMwQKrUsAC0WYHcHTKCKESx4iRKgYI7y/b37t2dbYSRB47Mh4kJiIi5lDJzsPPgjQ78F2jt2ImnyGdfRE4AsPPkL2HmfXWtzinb1CdgZjMRSRExroLMLGPmDSI+Bgm4w2Y2V9UrAMzfsJyI1oiY1511dvABmFmsqqmbE5GLPGtKW28BByuK4lWLKIoSX08PEmi9KA3PSWuRQ6ChRb4DwKIr0LP/xsxLt1Y6MLOtqh4BYDVQ5EJEB0Q8fwkMhHqPd/oP+gTx+wJPnBaIGYHM7lgAAAAASUVORK5CYII=" />
+                        </button>
+                    </form>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -158,6 +175,23 @@
 
 
 
+            </div>
+
+            <!--  THIRD ROW -->
+            <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10 gap-10">
+                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <h1 class="text-lg font-semibold">Update Password</h1>
+                        </div>
+                        <div>
+                            <p class="lg:text-lg text-sm xs:text-sm">Ensure your account is using a long, random password to stay secure.</p>
+                        </div>
+                        <div>
+                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

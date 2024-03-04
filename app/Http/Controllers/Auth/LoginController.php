@@ -43,7 +43,6 @@ class LoginController extends Controller
 
     protected function login(Request $request)
     {
-
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -51,9 +50,17 @@ class LoginController extends Controller
 
         // Check if the credentials exist in the database
         if (Auth::attempt($credentials)) {
-            $user_role = Auth::user()->role;
+            // Get the authenticated user
+            $user = Auth::user();
 
-            switch ($user_role) {
+            // Check if the user's status is 2 or 3
+            if ($user->status == 2 || $user->status == 3) {
+                Auth::logout();
+                return redirect('/login')->with('error', 'Your access has been denied');
+            }
+
+            // Redirect based on user role
+            switch ($user->role) {
                 case 1:
                     return redirect('/admin');
                     break;

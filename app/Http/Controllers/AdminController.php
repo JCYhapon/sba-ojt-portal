@@ -39,7 +39,6 @@ class AdminController extends Controller
 
     public function storeCoordinator(Request $request)
     {
-        Log::info('Store Function Called');
         $request->validate([
             'studentID' => 'required|min:8|max:8',
             'lastName' => 'required|string',
@@ -48,15 +47,26 @@ class AdminController extends Controller
             'password' => 'required|min:6',
             'major' => 'required',
         ]);
-        Log::info('Store Function validate');
+
+        // Search for a user with role 2 and the same major, if found, update their status to 2
+        $existingCoordinator = User::where('role', 2)
+            ->where('major', $request->input('major'))
+            ->first();
+
+        if ($existingCoordinator) {
+            $existingCoordinator->status = 2;
+            $existingCoordinator->save();
+        }
+
         // Create user details first
         $user = User::create([
             'id' => $request->input('studentID'),
             'schoolID' => $request->input('studentID'),
-            'name' => $request->input('firstName') . ', ' . $request->input('lastName'),
+            'name' => $request->input('lastName') . ', ' . $request->input('firstName'),
             'email' => $request->input('email'),
             'role' => 2,
             'major' => $request->input('major'),
+            'status' => 1,
             'password' => Hash::make($request->input('password')),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -80,19 +90,32 @@ class AdminController extends Controller
             'name' => 'string',
             'email' => 'email',
             'password',
-            'major',
+            'major' => 'required',
+            'status',
         ]);
-        Log::info('update Function validate');
+
+        $currentCoordinator = User::where('role', 2)
+            ->where('major', $request->input('major'))
+            ->where('status', 1)
+            ->first();
+
+        if ($currentCoordinator) {
+            $currentCoordinator->status = 2;
+            $currentCoordinator->save();
+        }
+
+
         if ($request->has('password') && $request->input('password') !== null) {
             $password = Hash::make($request->input('password'));
         } else {
             $password = $user->password;
         }
-        Log::info('update Function password');
+
         $updateUser = $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'major' => $request->input('major'),
+            'status' => $request->input('status'),
             'password' => $password,
             'updated_at' => now(),
         ]);

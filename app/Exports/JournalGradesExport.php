@@ -2,14 +2,10 @@
 
 namespace App\Exports;
 
-use App\Models\Company;
-use App\Models\User;
 use App\Models\Student;
 use App\Models\Journal;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
-
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -17,10 +13,22 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize
 {
+    protected $section;
+
+    public function __construct($section)
+    {
+        $this->section = $section;
+    }
+
     public function collection()
     {
-        $userMajor = Auth::user()->major;
-        $students = Student::where('major', $userMajor)->orderBy('lastName', 'asc')->get();
+        // Filter students based on the selected section
+        $students = Student::where('major', Auth::user()->major)
+            ->when($this->section !== 'all', function ($query) {
+                return $query->where('section', $this->section);
+            })
+            ->orderBy('lastName', 'asc')
+            ->get();
 
         $data = collect();
 
@@ -57,7 +65,6 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
 
         return $data;
     }
-
 
     public function headings(): array
     {
