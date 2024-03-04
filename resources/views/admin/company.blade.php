@@ -15,6 +15,16 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('css/background.css') }}">
 
+  <style>
+    th.asc::after {
+      content: " ↑";
+    }
+
+    th.desc::after {
+      content: " ↓";
+    }
+  </style>
+
   <title>Company</title>
 </head>
 
@@ -84,7 +94,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col justify-between min-h-70vh ">
+      <div class="flex flex-col justify-between min-h-[70vh] ">
 
         <!-- Students Table -->
         <div class="overflow-x-auto">
@@ -123,6 +133,10 @@
             </tbody>
           </table>
         </div>
+        <div class="">
+          {!! $companies->links() !!}
+        </div>
+
 
         <!-- FOR FILTER -->
         <script src="{{ asset('js/coordinator.js') }}">

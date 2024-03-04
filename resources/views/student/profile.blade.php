@@ -288,7 +288,7 @@
                         <div>
                             <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
 
-                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('match-students') }}">Match Student</a></button>
+
                         </div>
                     </div>
                 </div>

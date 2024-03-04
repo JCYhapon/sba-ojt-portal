@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function companyAdmin()
     {
-        $companies = Company::orderBy('id', 'asc')->paginate(12);
+        $companies = Company::orderBy('id', 'asc')->paginate(9);
         return view('admin.company', compact('companies'));
     }
 

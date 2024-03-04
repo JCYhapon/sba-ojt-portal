@@ -90,7 +90,7 @@
             </button>
             @if(session()->has('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4">
-                <span>Company Uploaded Successfully</span>
+                <span>Student Uploaded Successfully</span>
             </div>
             @endif
             <h1>Student Bulk Upload Format</h1>

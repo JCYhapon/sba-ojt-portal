@@ -15,6 +15,16 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('css/background.css') }}">
 
+  <style>
+    th.asc::after {
+      content: " ↑";
+    }
+
+    th.desc::after {
+      content: " ↓";
+    }
+  </style>
+
   <!-- FLOWBITE CDN -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
@@ -149,7 +159,9 @@
     </div>
   </div>
 
-
+  <!-- FOR FILTER -->
+  <script src="{{ asset('js/coordinator.js') }}">
+  </script>
 </body>
 
 </html>

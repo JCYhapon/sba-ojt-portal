@@ -120,7 +120,7 @@
                         <tbody>
                             @foreach ($companies as $company)
                             <tr class="cursor-pointer" onclick="window.location='{{ route('student_company_information', ['id' => $company->id]) }}'">
-                                <td class="py-2 px-4 border-b">{{ $company->name }}</td>
+                                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
                                 <td class="py-2 px-4 border-b">{{ $company->email }}</td>
                                 <td class="py-2 px-4 border-b">{{ $company->address }}</td>
                                 <td class="py-2 px-4 border-b">
