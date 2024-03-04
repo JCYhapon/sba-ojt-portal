@@ -16,37 +16,80 @@
 
     <title>SBA-OJT PORTAL</title>
 
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField1 = document.getElementById("password");
+            var passwordField2 = document.getElementById("password_confirmation");
+            var toggleButton = document.getElementById("toggleButton");
+
+            if (passwordField1.type === "password") {
+                passwordField1.type = "text";
+                passwordField2.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordField1.type = "password";
+                passwordField2.type = "password";
+                toggleButton.textContent = "Show";
+            }
+        }
+
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var alphanumericRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+            var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+            if (!alphanumericRegex.test(password)) {
+                alert("Password must contain at least one alphanumeric character.");
+                return false;
+            }
+
+            if (!symbolRegex.test(password)) {
+                alert("Password must contain at least one symbol.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 
-<body class="bg-gray-800">
+<body class="">
     <section class="min-h-screen flex justify-center items-center mx-auto text-white">
         <div class="w-full py-6">
-            <div class="w-80 mx-auto bg-white p-8 shadow-lg rounded-md">
+            <div class="lg:w-[25%] w-full mx-auto bg-white p-6 shadow-lg rounded-lg">
                 <h1 class="text-center mb-5">
-                    <span class="font-bold text-3xl text-black">SBA OJT Portal</span>
+                    <span class="font-bold text-3xl text-black">Set your new password</span>
                 </h1>
-                <form method="POST" action="{{ route('reset.password.post') }}">
+                <form method="POST" action="{{ route('reset.password.post') }}" onsubmit="return validatePassword()">
                     @csrf
                     <input type="text" hidden name="token" value="{{ $token }}">
-                    <span class="block text-center text-gray-600 mt-4 pb-5">Create new password</span>
-                    <div class="mb-4">
+                    <span class="block text-center text-gray-600 mt-4 pb-5">Your new password should be different from passwords previously used.</span>
+                    <div class="my-4">
                         <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                        <input id="email" type="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" name="email" required>
+                        <input id="email" type="email" class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md text-gray-700" name="email" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="password" class="block text-sm font-medium text-gray-700">Enter New Password</label>
-                        <input id="password" type="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" name="password" required autofocus>
+                        <div class="relative">
+                            <input id="password" type="password" class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md text-gray-700" name="password" required autofocus>
+                        </div>
                     </div>
 
                     <div class="mb-4">
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
-                        <input id="password_confirmation" type="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" name="password_confirmation" required autofocus>
+                        <div class="relative">
+                            <input id="password_confirmation" type="password" class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md text-gray-700" name="password_confirmation" required autofocus>
+                        </div>
                     </div>
 
                     <div class="mb-4">
-                        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Submit
+                        <button type="button" onclick="togglePasswordVisibility()" id="toggleButton" class="w-[20%] flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800">Show</button>
+                    </div>
+
+                    <div class="mt-8">
+                        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#AD974F]  focus:outline-none focus:ring-2 focus:ring-offset-2 ">
+                            Confirm
                         </button>
                     </div>
                 </form>
@@ -54,6 +97,5 @@
         </div>
     </section>
 </body>
-
 
 </html>
