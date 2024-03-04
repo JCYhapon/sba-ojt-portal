@@ -11,7 +11,6 @@ class Journal extends Model
 
     protected $fillable = [
         'coverage_start_date',
-        'coverage_end_date',
         'studentID',
         'journalNumber',
         'reflection',

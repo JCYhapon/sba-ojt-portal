@@ -118,6 +118,7 @@
                         </select>
                     </div>
 
+                    {{-- Student Table Position --}}
                     <div class="w-full">
                         <label for="position">Positions:</label>
 
@@ -171,8 +172,60 @@
                         </ul>
                     </div>
 
+                    {{-- Student Table Matched Company --}}
+                    <div class="w-full">
+                        <label for="matchedCompany">Matched Company:</label>
+
+                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600 matchedCompany-container items-center">
+                            @php
+                            $matchedCompanies = $students->matchedCompany;
+                            $availableCompanies = \App\Models\Company::where('status', 1)->pluck('id')->toArray();
+
+                            if (is_array($matchedCompanies)) {
+                            $availableCompanies = array_diff($availableCompanies, $matchedCompanies);
+                            }
+                            @endphp
 
 
+                            @if(empty($matchedCompanies))
+                            <li style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Companies Available</li>
+                            @endif
+
+                            @foreach($matchedCompanies ?? [] as $matchedCompany)
+                            @php
+                            $company = \App\Models\Company::find($matchedCompany); // Assuming your Company model is in the App\Models namespace
+                            @endphp
+                            @if($company)
+                            <div class="matchedCompany-item flex items-center mt-2 mr-2">
+                                <span style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400">{{ $company->name }}<input type="button" class="remove pl-2 pr-1 cursor-pointer" data-company="{{ $company->id }}" value="×"></span>
+                            </div>
+                            <!-- Hidden input fields to store matched companies -->
+                            <input type="hidden" name="matchedCompanies[]" value="{{ $matchedCompany }}">
+                            @endif
+                            @endforeach
+
+                            @if(empty($matchedCompanies))
+                            <li>
+                                @endif
+
+                                <select name="matchedCompany" id="addMatchedCompany" class="m-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="">Choose Company</option>
+                                    @foreach($availableCompanies as $companyId)
+                                    @php
+                                    $company = \App\Models\Company::find($companyId); // Assuming your Company model is in the App\Models namespace
+                                    @endphp
+                                    @if($company)
+                                    <option value="{{ $companyId }}">{{ $company->name }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+
+
+                                @if(empty($matchedCompanies))
+                            </li>
+                            @endif
+                        </ul>
+                    </div>
 
                     {{-- Student Table Hired Company --}}
                     <div class="w-full">
@@ -223,6 +276,7 @@
 
 
 </body>
+{{-- Script for Position --}}
 <script>
     document.getElementById('addPosition').addEventListener('change', function(event) {
         const selectedPosition = event.target.value;
@@ -272,6 +326,70 @@
             const matchedCompanyContainer = event.target.closest('.position-container');
 
             event.target.closest('.position-item').remove();
+
+            const hiddenInputsToRemove = matchedCompanyContainer.querySelectorAll('input[value="' + matchedCompanyToRemove + '"]');
+            hiddenInputsToRemove.forEach(input => {
+                input.remove();
+            });
+        }
+    });
+</script>
+
+{{-- Script for matchedCompany --}}
+<script>
+    document.getElementById('addMatchedCompany').addEventListener('change', function(event) {
+        const selectedCompanyId = event.target.value;
+
+        if (selectedCompanyId) {
+            // Retrieve the company name based on the selected ID
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            const selectedCompanyName = selectedOption.textContent;
+
+            // Create a new matched company item
+            const newMatchedCompanyItem = document.createElement('div');
+            newMatchedCompanyItem.classList.add('matchedCompany-item', 'flex', 'items-center', 'mt-2', 'mr-2');
+
+            // Create span element for matched company text
+            const newMatchedCompanyText = document.createElement('span');
+            newMatchedCompanyText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-gray-800', 'text-white');
+            newMatchedCompanyText.textContent = selectedCompanyName; // Use the fetched company name
+
+            // Create remove button
+            const removeButton = document.createElement('input');
+            removeButton.type = 'button'; // Set type to button
+            removeButton.value = '×'; // Set the value (content) of the button
+            removeButton.classList.add('remove', 'pl-2', 'pr-1', 'cursor-pointer');
+            removeButton.dataset.company = selectedCompanyId;
+
+            // Append elements to matched company item
+            newMatchedCompanyItem.appendChild(newMatchedCompanyText);
+            newMatchedCompanyText.appendChild(removeButton);
+
+            // Append matched company item to container
+            document.querySelector('.matchedCompany-container').appendChild(newMatchedCompanyItem);
+
+            // Create hidden input field to store matched company
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'matchedCompanies[]';
+            hiddenInput.value = selectedCompanyId;
+            document.querySelector('.matchedCompany-container').appendChild(hiddenInput);
+
+            // Clear selected option
+            event.target.value = '';
+        }
+    });
+
+
+    // Delegate the event handling to the document level for remove buttons
+    document.querySelector('.matchedCompany-container').addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove')) {
+            event.preventDefault();
+
+            const matchedCompanyToRemove = event.target.dataset.company;
+            const matchedCompanyContainer = event.target.closest('.matchedCompany-container');
+
+            event.target.closest('.matchedCompany-item').remove();
 
             const hiddenInputsToRemove = matchedCompanyContainer.querySelectorAll('input[value="' + matchedCompanyToRemove + '"]');
             hiddenInputsToRemove.forEach(input => {

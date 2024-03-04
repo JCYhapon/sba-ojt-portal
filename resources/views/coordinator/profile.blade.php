@@ -101,58 +101,42 @@
 
             {{-- 2nd Row --}}
             <div class="flex flex-col gap-4">
-
                 <div class="flex flex-row justify-between items-center">
                     <h1 class="text-lg font-medium">Student Grades</h1>
                     <form action="{{ route('export.journal.grades') }}" method="GET">
                         @csrf
                         <label for="section">Select Section:</label>
                         <select name="section" id="section">
-                            <option value="all">All Sections</option>
-                            @if(strtolower(Auth::user()->major) === 'accounting')
-                            @foreach($accountingSections as $section)
-                            <option value="{{ $section }}">Accounting - {{ $section }}</option>
+                            <option value="all">Choose Section</option>
+                            @foreach($coordinatorSections as $section)
+                            <option value="{{ $section }}">{{ $section }}</option>
                             @endforeach
-                            @elseif(strtolower(Auth::user()->major) === 'management')
-                            @foreach($managementSections as $section)
-                            <option value="{{ $section }}">Management - {{ $section }}</option>
-                            @endforeach
-                            @endif
                         </select>
                         <button type="submit" class="bg-gray-800 text-white flex p-1 rounded-md gap-2">
                             Download Grades
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOhJREFUSEvtlb0NwjAQhe8nrECJREVFn4oV2AJmYARGIIMwQKrUsAC0WYHcHTKCKESx4iRKgYI7y/b37t2dbYSRB47Mh4kJiIi5lDJzsPPgjQ78F2jt2ImnyGdfRE4AsPPkL2HmfXWtzinb1CdgZjMRSRExroLMLGPmDSI+Bgm4w2Y2V9UrAMzfsJyI1oiY1511dvABmFmsqqmbE5GLPGtKW28BByuK4lWLKIoSX08PEmi9KA3PSWuRQ6ChRb4DwKIr0LP/xsxLt1Y6MLOtqh4BYDVQ5EJEB0Q8fwkMhHqPd/oP+gTx+wJPnBaIGYHM7lgAAAAASUVORK5CYII=" />
                         </button>
-                    </form>
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full border-collapse table-auto">
+                    <table id="studentTable" class="w-full border-collapse table-auto">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2 border text-start">Student Name</th>
-                                @for ($i = 1; $i <= 15; $i++) <th class="px-4 py-2 border">{{ $i }}</th>
+                                @for ($i = 1; $i <= $highestJournalNumber; $i++) <th class="px-4 py-2 border">{{ $i }}</th>
                                     @endfor
                                     <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                            // Fetch all students corresponding to the schoolIDs of users, sorted by last name
-                            $studentIDs = $users->pluck('schoolID')->flatten()->toArray();
-                            $sortedStudents = \App\Models\Student::whereIn('studentID', $studentIDs)
-                            ->orderBy('lastName', 'asc')
-                            ->get();
-                            @endphp
                             @foreach($sortedStudents as $student)
-                            <tr>
+                            <tr data-section="{{ $student->section }}">
                                 <td class="px-4 py-2 border">{{ $student->lastName }} {{ $student->firstName }}</td>
                                 @php
-                                // Search the journal table using the schoolID
                                 $journals = \App\Models\Journal::where('studentId', $student->studentID)->get();
-                                $totalGrade = 0; // Initialize total grade for this student
+                                $totalGrade = 0;
                                 @endphp
-                                @for ($i = 1; $i <= 15; $i++) <td class="px-4 py-2 border text-center">
+                                @for ($i = 1; $i <= $highestJournalNumber; $i++) <td class="px-4 py-2 border text-center">
                                     @php
                                     $gradeFound = false;
                                     foreach($journals as $journal) {
@@ -166,16 +150,37 @@
                                     @endphp
                                     </td>
                                     @endfor
-                                    <td>{{ $totalGrade }}</td> <!-- Display total grade here -->
+                                    <td class="px-4 py-2 border text-center total-grade">{{ $totalGrade }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-
-
-
+                </form>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Add change event listener to the select element
+                    document.getElementById('section').addEventListener('change', function() {
+                        // Get the selected section value
+                        var section = this.value;
+
+                        // Hide all table rows
+                        var rows = document.querySelectorAll('#studentTable tbody tr');
+                        rows.forEach(row => {
+                            row.style.display = 'none';
+                        });
+
+                        // Show table rows matching the selected section
+                        var matchingRows = document.querySelectorAll('#studentTable tbody tr[data-section="' + section + '"]');
+                        matchingRows.forEach(row => {
+                            row.style.display = '';
+                        });
+                    });
+                });
+            </script>
+
 
             <!--  THIRD ROW -->
             <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10 gap-10">

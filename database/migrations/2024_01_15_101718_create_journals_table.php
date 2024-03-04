@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->id('journalID');
-            $table->date('coverage_start_date'); // Start of the week reflection coverage
-            $table->date('coverage_end_date'); // End of the week reflection
+            $table->date('coverage_start_date');
             $table->foreignId('studentID')->constrained('students');
             $table->integer('journalNumber');
             $table->text('reflection');
@@ -24,7 +23,6 @@ return new class extends Migration
             $table->string('supervisorSignature')->nullable();
             $table->integer('grade')->nullable();
             $table->text('comments')->nullable();
-            $table->timestamps();
         });
     }
 

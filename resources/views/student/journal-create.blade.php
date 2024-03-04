@@ -101,10 +101,6 @@
                             <label for="coverage_start_date" class="text-md font-medium">Start Date</label>
                             <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3">
                         </div>
-                        <div class="">
-                            <label for="coverage_end_date" class="text-md font-medium">End Date</label>
-                            <input type="date" name="coverage_end_date" id="coverage_end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        </div>
                     </div>
                 </div>
 
@@ -117,7 +113,7 @@
                 <!-- ADD LABEL -->
                 <div class="form-group mb-8">
                     <label for="" class="text-md font-medium">Hours Rendered</label>
-                    <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required>
+                    <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required max="10">
                 </div>
 
 
@@ -132,7 +128,7 @@
                 </div>
 
                 <div class="flex align-middle justify-end mt-8">
-                    <a class="bg-[#AD974F] text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+                    <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
                         <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Create Journal
                         </button>

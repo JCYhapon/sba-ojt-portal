@@ -118,7 +118,13 @@
                                     <td class="py-2 px-4 border-b">{{ $company->name }}</td>
                                     <td class="py-2 px-4 border-b">{{ $company->email }}</td>
                                     <td class="py-2 px-4 border-b">{{ $company->address }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $company->status }}</td>
+                                    <td class="py-2 px-4 border-b">
+                                        @if($company->status == 1)
+                                        Active
+                                        @elseif($company->status == 2)
+                                        Renewal
+                                        @endif
+                                    </td>
                                     <td class="py-2 px-4 border-b">
                                         @if ($company->position)
                                         {{ implode(', ', $company->position) }}
@@ -155,7 +161,13 @@
                                     <td class="py-2 px-4 border-b">{{ $company->name }}</td>
                                     <td class="py-2 px-4 border-b">{{ $company->email }}</td>
                                     <td class="py-2 px-4 border-b">{{ $company->address }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $company->status }}</td>
+                                    <td class="py-2 px-4 border-b">
+                                        @if($company->status == 1)
+                                        Active
+                                        @elseif($company->status == 2)
+                                        Renewal
+                                        @endif
+                                    </td>
                                     <td class="py-2 px-4 border-b">
                                         @if ($company->position)
                                         {{ implode(', ', $company->position) }}

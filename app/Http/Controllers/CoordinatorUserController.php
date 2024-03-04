@@ -107,9 +107,9 @@ class CoordinatorUserController extends Controller
             'email' => 'required|email',
             'section' => 'required',
             'major' => 'required',
-            'matchedCompany',
+            'matchedCompanies' => 'array',
             'matchedCompanies.*' => 'exists:companies,id',
-            'positions' => 'array', // Ensure positions is provided and is an array
+            'positions' => 'array',
             'positions.*' => 'string',
             'hiredCompany',
             'status' => 'required',
@@ -146,6 +146,7 @@ class CoordinatorUserController extends Controller
 
         // Find the new company
         $newCompany = Company::find($request->input('hiredCompany'));
+        $updatedMatchedCompany = $request->input('matchedCompanies') ?? [];
         $updatedPositions = $request->input('positions') ?? [];
 
         if ($newCompany) {
@@ -153,19 +154,6 @@ class CoordinatorUserController extends Controller
             $newCompany->update([
                 'hiredStudents' => array_unique(array_merge($newCompany->hiredStudents, [$students->studentID])),
             ]);
-        }
-
-
-        //Convert String to Int Array
-        $matchedCompany = $request->input('matchedCompany');
-        $newMatchedCompany = array_map('intval', explode(',', $matchedCompany));
-
-        // Check if a matchedCompany is selected (not empty) before merging
-        if ($request->filled('matchedCompany')) {
-            // Merge the new matchedCompany with the existing positions
-            $matchedCompany = array_merge($students->matchedCompany, $newMatchedCompany);
-        } else {
-            $matchedCompany = $students->matchedCompany;
         }
 
         // Check if a hiredCompany is selected (not empty) before merging
@@ -188,7 +176,7 @@ class CoordinatorUserController extends Controller
             'section' => $request->input('section'),
             'major' => $request->input('major'),
             'position' => $updatedPositions,
-            'matchedCompany' => array_map('intval', $matchedCompany) ?? [],
+            'matchedCompany' => $updatedMatchedCompany,
             'hiredCompany' => $request->input('hiredCompany'),
             'status' => $request->input('status'),
             'updated_at' => now(),

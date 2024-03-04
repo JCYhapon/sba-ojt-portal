@@ -93,12 +93,6 @@
                             <label for="coverage_start_date" class="text-md font-medium">Start Date</label>
                             <input type="date" name="coverage_start_date" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3" value="{{ $journal->coverage_start_date }}" required>
                         </div>
-
-
-                        <div class="form-group">
-                            <label for="coverage_end_date" class="text-md font-medium">End Date</label>
-                            <input type="date" name="coverage_end_date" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[15rem] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ $journal->coverage_end_date }}" required>
-                        </div>
                     </div>
                 </div>
 
@@ -115,13 +109,56 @@
 
                     <div>
                         <label for="" class="text-md font-medium">Student Signature</label>
-                        <img src="/{{ $journal->studentSignature }}" width="100px">
+                        <img src="/{{ $journal->studentSignature }}" class="clickable-image rounded cursor-pointer transition duration-300 hover:opacity-70" style="max-width:100px;" data-toggle="modal" data-target="#imageModal">
                     </div>
 
                     <div>
                         <label for="" class="text-md font-medium">Documentation</label>
-                        <img src="/{{ $journal->supervisorSignature }}" width="100px">
+                        <img src="/{{ $journal->supervisorSignature }}" class="clickable-image rounded cursor-pointer transition duration-300 hover:opacity-70" style="max-width:100px;" data-toggle="modal" data-target="#imageModal">
                     </div>
+
+                    <!-- Image Modal -->
+                    <div class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
+                        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+                        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+                            <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+                                <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                    <path d="M18 1.5L16.5 0 9 7.5 1.5 0 0 1.5 7.5 9 0 16.5 1.5 18 9 10.5 16.5 18 18 16.5 10.5 9z" />
+                                </svg>
+                            </div>
+
+                            <!-- Modal content -->
+                            <img src="" class="modal-content p-4" id="modalImage">
+                        </div>
+                    </div>
+
+                    <!-- Your JavaScript code -->
+                    <script>
+                        // JavaScript to handle the click event
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var clickableImages = document.querySelectorAll('.clickable-image');
+
+                            clickableImages.forEach(function(image) {
+                                image.addEventListener('click', function() {
+                                    var imageUrl = this.getAttribute('src');
+                                    document.getElementById('modalImage').setAttribute('src', imageUrl);
+                                    document.querySelector('.modal').classList.remove('hidden');
+                                });
+                            });
+
+                            document.querySelector('.modal-close').addEventListener('click', function() {
+                                document.querySelector('.modal').classList.add('hidden');
+                            });
+
+                            document.querySelector('.modal-overlay').addEventListener('click', function() {
+                                document.querySelector('.modal').classList.add('hidden');
+                            });
+                        });
+                    </script>
+
+
 
                 </div>
 

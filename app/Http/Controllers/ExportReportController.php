@@ -18,35 +18,33 @@ class ExportReportController extends Controller
     {
         $userMajor = auth()->user()->major;
         $users = User::where('major', $userMajor)->where('role', 3)->get();
+        $studentIDs = $users->pluck('schoolID')->flatten()->toArray();
 
-        $accountingSections = Student::where('major', 'Accounting')
+        $coordinatorSections = Student::where('major', $userMajor)
             ->distinct('section')
             ->pluck('section');
 
-        $managementSections = Student::where('major', 'Management')
-            ->distinct('section')
-            ->pluck('section');
+        $sortedStudents = Student::whereIn('studentID', $studentIDs)
+            ->orderBy('lastName', 'asc')
+            ->get();
 
-        return view('coordinator.profile', compact('users', 'accountingSections', 'managementSections'));
+        $highestJournalNumber = Journal::max('journalNumber');
+
+        $highestJournalNumber = $highestJournalNumber ?? 0;
+
+        return view('coordinator.profile', compact('users', 'coordinatorSections', 'sortedStudents', 'highestJournalNumber'));
     }
 
     public function exportJournalGrades(Request $request)
     {
-        // Validate the section if provided
+
         $request->validate([
             'section' => 'nullable|string',
         ]);
-
-        // You can access the selected section using $request->section
-        // Pass this section to your export if needed
-
-        // If no specific section is selected, export all grades
         if ($request->section === 'all' || !$request->section) {
             return Excel::download(new JournalGradesExport, 'journal_grades.xlsx');
         }
 
-        // Otherwise, handle exporting for the selected section
-        // You may need to adjust this part based on your export logic
         return Excel::download(new JournalGradesExport($request->section), 'journal_grades_' . $request->section . '.xlsx');
     }
 }

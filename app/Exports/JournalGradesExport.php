@@ -15,7 +15,7 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
 {
     protected $section;
 
-    public function __construct($section)
+    public function __construct($section = null)
     {
         $this->section = $section;
     }
@@ -46,7 +46,7 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
                     $includedGrades[] = $grade;
                 }
 
-                while (count($includedGrades) < 15) {
+                while (count($includedGrades) < 10) {
                     $includedGrades[] = '';
                 }
 
@@ -54,7 +54,7 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
                     $row[] = $grade;
                 }
             } else {
-                for ($i = 0; $i < 15; $i++) {
+                for ($i = 0; $i < 10; $i++) {
                     $row[] = '';
                 }
             }
@@ -69,8 +69,8 @@ class JournalGradesExport implements FromCollection, WithHeadings, WithColumnFor
     public function headings(): array
     {
         $headings = ['Student Name'];
-        for ($i = 1; $i <= 15; $i++) {
-            $headings[] = (string)$i; // Add numbers 1 to 15 as headings
+        for ($i = 1; $i <= 10; $i++) {
+            $headings[] = (string)$i;
         }
         $headings[] = 'Total';
         return $headings;

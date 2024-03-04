@@ -128,7 +128,6 @@ class JournalController extends Controller
             'studentSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'supervisorSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'coverage_start_date' => 'required',
-            'coverage_end_date' => 'required',
         ]);
 
         $user = Auth::user();
@@ -158,7 +157,6 @@ class JournalController extends Controller
             'studentSignature' => $input['studentSignature'],
             'supervisorSignature' => $input['supervisorSignature'],
             'coverage_start_date' => $request->input('coverage_start_date'),
-            'coverage_end_date' => $request->input('coverage_end_date'),
             'grade' => null,
             'comments' => null,
             'created_at' => now(),
@@ -181,7 +179,6 @@ class JournalController extends Controller
         $request->validate([
             'hoursRendered' => 'required',
             'coverage_start_date' => 'required',
-            'coverage_end_date' => 'required',
             'reflection' => 'required',
         ]);
 
@@ -189,7 +186,6 @@ class JournalController extends Controller
         $journal->update([
             'reflection' => $request->input('reflection'),
             'coverage_start_date' => $request->input('coverage_start_date'),
-            'coverage_end_date' => $request->input('coverage_end_date'),
             'hoursRendered' => $request->input('hoursRendered'),
             'updated_at' => now(), // Update the 'updated_at' field
         ]);
