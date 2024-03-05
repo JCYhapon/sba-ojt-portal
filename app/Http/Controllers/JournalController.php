@@ -77,13 +77,6 @@ class JournalController extends Controller
         return view('coordinator.student_journal', compact('journals', 'students'));
     }
 
-
-
-
-
-
-
-
     public function createJournal()
     {
         // Get the authenticated user
@@ -159,8 +152,6 @@ class JournalController extends Controller
             'coverage_start_date' => $request->input('coverage_start_date'),
             'grade' => null,
             'comments' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         return redirect()->route('student_journal')->with('success', 'Journal has been updated successfully');
@@ -187,7 +178,7 @@ class JournalController extends Controller
             'reflection' => $request->input('reflection'),
             'coverage_start_date' => $request->input('coverage_start_date'),
             'hoursRendered' => $request->input('hoursRendered'),
-            'updated_at' => now(), // Update the 'updated_at' field
+
         ]);
 
         return redirect()->route('student_journal')->with('success', 'Journal has been updated successfully');
@@ -219,7 +210,7 @@ class JournalController extends Controller
         $journal->update([
             'grade' => $request->input('grade'),
             'comments' => $request->input('comments'),
-            'updated_at' => now(),
+
         ]);
 
         // If grade is not null, set status to 3
