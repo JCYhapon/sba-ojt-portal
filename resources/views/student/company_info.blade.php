@@ -93,15 +93,15 @@
 
             <table class="w-full border-grey-500 border-b-[1px] ">
                 <tr>
-                    <td>Email:</td>
+                    <td class="font-semibold">Email:</td>
                     <td>{{ $companies->email }}</td>
                 </tr>
                 <tr>
-                    <td>Address:</td>
+                    <td class="font-semibold">Address:</td>
                     <td>{{ $companies->address }}</td>
                 </tr>
                 <tr>
-                    <td>Status:</td>
+                    <td class="font-semibold">Status:</td>
                     <td>
                         @if($companies->status == 1)
                         Active
@@ -111,7 +111,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Position:</td>
+                    <td class="font-semibold">Position:</td>
                     <td>
                         @if ($companies->position)
                         <ul class="flex flex-wrap dark:border-gray-600">
@@ -125,14 +125,17 @@
                     </td>
                 </tr>
                 @if($companies->description !== null)
-                <tr class="flex gap-6">
-                    <td>Description:</td>
-                    <td>
-                        {{ $companies->description }}
-                    </td>
-                </tr>
+
                 @endif
             </table>
+            <div class="mt-6 flex flex-col">
+                <span class="font-semibold text-lg mb-4">Company Details</span>
+                <p>
+                    {{ $companies->description }}
+                </p>
+            </div>
+
+            </tr>
         </div>
     </div>
 
