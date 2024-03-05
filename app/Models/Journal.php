@@ -9,6 +9,8 @@ class Journal extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'coverage_start_date',
         'studentID',
