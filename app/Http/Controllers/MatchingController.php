@@ -15,16 +15,21 @@ class MatchingController extends Controller
 {
     public function matchStudentsWithCompanies()
     {
+        Log::info('Matching is called');
         $userId = auth()->user()->schoolID;
         $student = Student::where('studentID', $userId)->first();
 
-        if (!$student || !$student->workType) {
+        Log::info($student->workType);
+
+        if ($student->workType === null) {
+            Log::info('Goes Outside');
             if (empty($student->position)) {
+                Log::info('Goes Inside');
                 return view('student.matched_company-list', compact('student'));
             }
             return view('student.matched_company-list', compact('student'));
         }
-
+        Log::info('Proceeded');
 
         $studentWorkType = $student->workType;
         $studentSuggestedCompanies = collect($student->suggestedCompany);
@@ -32,32 +37,28 @@ class MatchingController extends Controller
 
         $companies = Company::where('status', 1)
             ->where('workType', $studentWorkType)
-            ->whereNotIn('id', $studentSuggestedCompanyIds)
+            // ->whereNotIn('id', $studentSuggestedCompanyIds)
             ->get();
 
         $matchingResults = [];
 
+        Log::info('Past Validation');
+
         foreach ($companies as $company) {
             $studentPosition = $student->position;
             $companyPosition = $company->position;
-            $studentSkills = $student->skills;
-            $companySkills = $company->skills;
-            $studentWorkType = $student->workType;
-            $companyWorkType = $company->workType;
 
             // Check if the work types match
-            if ($companyWorkType == $studentWorkType) {
-                // Check if positions match
+            if ($company->workType == $studentWorkType) {
+                Log::info('WorkType Matching');
                 if ($this->checkPositionMatch($studentPosition, $companyPosition)) {
-                    // Check if skills match
-                    if ($this->checkSkillsMatch($studentSkills, $companySkills)) {
-                        $matchingResults[] = [
-                            'student' => $student,
-                            'company' => $company,
-                        ];
-                        $student->suggestedCompany = array_merge($student->suggestedCompany, [$company->id]);
-                        $student->save();
-                    }
+                    Log::info('Position Matching');
+                    $matchingResults[] = [
+                        'student' => $student,
+                        'company' => $company,
+                    ];
+                    $student->suggestedCompany = array_merge($student->suggestedCompany, [$company->id]);
+                    $student->save();
                 }
             }
         }
@@ -73,18 +74,18 @@ class MatchingController extends Controller
         return $matchingCount > 0;
     }
 
-    private function checkSkillsMatch($studentSkills, $companySkills)
-    {
-        // Convert comma-separated skills into arrays
-        $studentSkillsArray = explode(',', $studentSkills);
-        $companySkillsArray = explode(',', $companySkills);
+    // private function checkSkillsMatch($studentSkills, $companySkills)
+    // {
+    //     // Convert comma-separated skills into arrays
+    //     $studentSkillsArray = explode(',', $studentSkills);
+    //     $companySkillsArray = explode(',', $companySkills);
 
-        // Check if there is any skill common between student and company
-        foreach ($studentSkillsArray as $studentSkill) {
-            if (in_array($studentSkill, $companySkillsArray)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //     // Check if there is any skill common between student and company
+    //     foreach ($studentSkillsArray as $studentSkill) {
+    //         if (in_array($studentSkill, $companySkillsArray)) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 }

@@ -68,6 +68,7 @@ class DashboardController extends Controller
 
         return view('student.dashboard', [
             'companyName' => $companyName,
+            'student' => $student,
         ]);
     }
 

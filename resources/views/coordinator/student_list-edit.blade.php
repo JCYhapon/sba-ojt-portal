@@ -120,8 +120,7 @@
 
                     {{-- Student Table Position --}}
                     <div class="w-full">
-                        <label for="position">Positions:</label>
-
+                        <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Positions:</label>
                         <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container items-center">
                             @php
                             $positions = $students->position;
@@ -159,7 +158,7 @@
                             <li>
                                 @endif
 
-                                <select name="position" id="addPosition" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <select name="position" id="addPosition" class="m-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="">Choose a position</option>
                                     @foreach($availablePositions as $availablePosition)
                                     <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
@@ -172,7 +171,8 @@
                         </ul>
                     </div>
 
-                    {{-- Student Table Matched Company --}}
+                    {{-- Hired Company --}}
+                    @if($students->hiredCompany === null)
                     <div class="w-full">
                         <label for="matchedCompany">Matched Company:</label>
 
@@ -226,6 +226,7 @@
                             @endif
                         </ul>
                     </div>
+                    @endif
 
                     {{-- Student Table Hired Company --}}
                     <div class="w-full">
@@ -282,6 +283,9 @@
         const selectedPosition = event.target.value;
 
         if (selectedPosition) {
+            // Remove the selected option from the dropdown list
+            event.target.querySelector(`option[value="${selectedPosition}"]`).remove();
+
             // Create a new position item
             const newPositionItem = document.createElement('div');
             newPositionItem.classList.add('position-item', 'flex', 'items-center', 'mt-2', 'mr-2');

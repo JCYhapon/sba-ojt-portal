@@ -145,15 +145,15 @@
                         </thead>
                         <tbody>
                             @foreach ($companies as $company)
-                            <tr onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'">
-                                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
-                                <td class="py-2 px-4 border-b">{{ $company->email }}</td>
-                                <td class="py-2 px-4 border-b">{{ $company->address }}</td>
-                                <td class="py-2 px-4 border-b">
+                            <tr>
+                                <td onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'" class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
+                                <td onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'" class="py-2 px-4 border-b">{{ $company->email }}</td>
+                                <td onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'" class="py-2 px-4 border-b">{{ $company->address }}</td>
+                                <td onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'" class="py-2 px-4 border-b">
                                     {{ $company->status === 1 ? 'Active' : 'For Renewal' }}
                                 </td>
 
-                                <td class="py-2 px-4 border-b">
+                                <td onclick="window.location='{{ route('coordinator_company_info', ['id' => $company->id]) }}'" class="py-2 px-4 border-b">
                                     @if ($company->position)
                                     {{ implode(', ', $company->position) }}
                                     @else
@@ -161,15 +161,40 @@
                                     @endif
                                 </td>
 
-                                <td class="py-2 px-4 border-b">
-                                    <a class="btn btn-primary" href="{{ route('coordinator.company_edit', $company->id) }}"><box-icon name='edit' color='#AD974F'></box-icon></a>
-                                    {{-- Toggle Status Button --}}
+                                <td class="py-2 px-4 border-b flex flex-col lg:flex-row items-center">
+                                    <!-- Edit Button -->
+                                    <a class="btn btn-primary mb-2 lg:mb-0 lg:mr-2" href="{{ route('coordinator.company_edit', $company->id) }}">
+                                        <box-icon name='edit' color='#AD974F'></box-icon>
+                                    </a>
 
-                                    <form action="{{ route('coordinator.company_toggle_status', $company->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST') {{-- Add this line to specify the POST method --}}
-                                        <button type="submit" class="btn btn-warning"><box-icon name='message-alt-x' color='#AD974F'></box-icon></button>
-                                    </form>
+                                    <!-- Toggle Status Button -->
+                                    <div x-data="{ isOpen: false }">
+                                        <!-- Button trigger modal -->
+                                        <button @click="isOpen = true" type="button" class="btn btn-warning">
+                                            <box-icon name='message-alt-x' color='#AD974F'></box-icon>
+                                        </button>
+
+                                        <div x-show="isOpen" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+                                            <div class="bg-white p-8 rounded shadow-md">
+                                                <h3 class="text-lg font-semibold mb-4">Confirmation</h3>
+                                                @if($company->status === 1)
+                                                <p>Are you sure you want to set the status to For Renewal?</p>
+                                                @elseif($company->status === 2)
+                                                <p>Are you sure you want to set the status to Active?</p>
+                                                @endif
+                                                <div class="mt-4 flex justify-center space-x-4">
+                                                    <button @click="isOpen = false" class="btn btn-secondary text-lg px-3 py-1.5">Cancel</button>
+                                                    <form id="confirmationForm" action="{{ route('coordinator.company_toggle_status', $company->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" class="flex items-center justify-center text-white font-medium rounded-lg text-lg px-3 py-1.5 bg-[#AD974F] hover:bg-gray-800 dark:bg-primary-600 dark:hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-opacity-50">
+                                                            Proceed
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

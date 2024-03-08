@@ -73,9 +73,9 @@
                                 <option value="" selected disabled>Major</option>
                                 @if(Auth::user()->role == 2)
                                 @if(Auth::user()->major == 'Management')
-                                <option value="management" selected>Management</option>
+                                <option value="Management" selected>Management</option>
                                 @elseif(Auth::user()->major == 'Accounting')
-                                <option value="accounting" selected>Accounting</option>
+                                <option value="Accounting" selected>Accounting</option>
                                 @endif
                                 @endif
                             </select>

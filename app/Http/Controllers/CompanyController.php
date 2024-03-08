@@ -63,6 +63,7 @@ class CompanyController extends Controller
             'name' => 'required',
             'email' => 'required',
             'address' => 'required',
+            'description',
         ]);
 
         $data = $request->only([
@@ -70,6 +71,7 @@ class CompanyController extends Controller
             'name',
             'email',
             'address',
+            'description'
         ]) + [
             'status' => 1,
             'position' => [],

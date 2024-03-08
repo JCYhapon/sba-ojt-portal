@@ -118,8 +118,8 @@ class JournalController extends Controller
             'journalNumber',
             'reflection' => 'required',
             'hoursRendered' => 'required',
-            'studentSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'supervisorSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'studentSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'supervisorSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg ',
             'coverage_start_date' => 'required',
         ]);
 

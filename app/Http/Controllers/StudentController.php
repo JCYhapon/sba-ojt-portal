@@ -33,6 +33,10 @@ class StudentController extends Controller
             $totalRenderedHours = Journal::where('studentID', $student->id)->sum('hoursRendered');
             $neededHours = $student->neededHours;
             $remainingHours = $student->neededHours - $totalRenderedHours;
+            if ($remainingHours === 0) {
+                $student->status = 3;
+                $student->save();
+            }
         } else {
             $totalRenderedHours = 0;
             $remainingHours = 0;

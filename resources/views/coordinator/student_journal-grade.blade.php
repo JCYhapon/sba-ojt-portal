@@ -102,46 +102,82 @@
                 <div class="flex gap-8">
                   <div class="flex gap-4">
                     <label for="" class="font-mono text-sm font-semibold">Student Signature:</label>
-                    <img src="/{{ $journal->studentSignature }}" width="100px">
+                    <img src="/{{ $journal->studentSignature }}" class="clickable-image rounded cursor-pointer transition duration-300 hover:opacity-70" style="max-width:100px;" data-toggle="modal" data-target="#imageModal">
+
+                    <div class="flex gap-4">
+                      <label for="" class="font-mono text-sm font-semibold">Documentation:</label>
+                      <img src="/{{ $journal->supervisorSignature }}" class="clickable-image rounded cursor-pointer transition duration-300 hover:opacity-70" style="max-width:100px;" data-toggle="modal" data-target="#imageModal">
+                    </div>
                   </div>
 
-                  <div class="flex gap-4">
-                    <label for="" class="font-mono text-sm font-semibold">Documentation:</label>
-                    <img src="/{{ $journal->supervisorSignature }}" width="100px">
+                  <!-- Image Modal -->
+                  <div class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
+                    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+                    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+                      <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+                        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                          <path d="M18 1.5L16.5 0 9 7.5 1.5 0 0 1.5 7.5 9 0 16.5 1.5 18 9 10.5 16.5 18 18 16.5 10.5 9z" />
+                        </svg>
+                      </div>
+
+                      <!-- Modal content -->
+                      <img src="" class="modal-content p-4" id="modalImage">
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
 
-            <div class="form-group flex flex-col">
-              <label for="reflection" class="font-mono text-sm font-semibold">Reflection</label>
-              <textarea name="" id="" cols="30" rows="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" readonly> {{ $journal->reflection }}</textarea>
-            </div>
+              <div class="form-group flex flex-col">
+                <label for="reflection" class="font-mono text-sm font-semibold">Reflection</label>
+                <textarea name="" id="" cols="30" rows="10" class="mt-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" readonly> {{ $journal->reflection }}</textarea>
+              </div>
 
-            <div class="form-group">
-              <textarea name="comments" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Coordinators comment....">{{ $journal->comments }}</textarea>
-            </div>
+              <div class="form-group">
+                <textarea name="comments" class="mt-5 form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Coordinators comment....">{{ $journal->comments }}</textarea>
+              </div>
 
-            <div class="form-group flex items-center gap-4">
-              <label for="grade" class="font-mono text-sm font-semibold">Grade:</label>
-              <input type="number" name="grade" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[8%] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ $journal->grade }}" min="0" max="30">
-            </div>
+              <div class="form-group flex items-center gap-4 mt-2">
+                <label for="grade" class="font-mono text-sm font-semibold">Grade:</label>
+                <input type="number" name="grade" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[8%] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ $journal->grade }}" min="0" max="30">
+              </div>
 
-            <div class="flex align-middle justify-center">
-              <a class="bg-[#AD974F] text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
-                <button type="submit" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                  Update
-                </button>
-              </a>
-            </div>
+              <div class="flex align-middle justify-center">
+                <a class="bg-[#AD974F] text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+                  <button type="submit" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    Update
+                  </button>
+                </a>
+              </div>
         </form>
       </div>
 
     </div>
   </div>
-
-
 </body>
 
 </html>
+<script>
+  // JavaScript to handle the click event
+  document.addEventListener("DOMContentLoaded", function() {
+    var clickableImages = document.querySelectorAll('.clickable-image');
+
+    clickableImages.forEach(function(image) {
+      image.addEventListener('click', function() {
+        var imageUrl = this.getAttribute('src');
+        document.getElementById('modalImage').setAttribute('src', imageUrl);
+        document.querySelector('.modal').classList.remove('hidden');
+      });
+    });
+
+    document.querySelector('.modal-close').addEventListener('click', function() {
+      document.querySelector('.modal').classList.add('hidden');
+    });
+
+    document.querySelector('.modal-overlay').addEventListener('click', function() {
+      document.querySelector('.modal').classList.add('hidden');
+    });
+  });
+</script>

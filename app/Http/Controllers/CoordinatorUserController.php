@@ -199,8 +199,7 @@ class CoordinatorUserController extends Controller
         // Save the changes
         $students->save();
 
-        // Define the message for redirection
-        $message = ($newStatus == 2) ? 'Student updated status to Drop.' : 'Student updated status to Active.';
+        $message = ($newStatus == 2) ? 'Student updated status to Inactive.' : 'Student updated status to Active.';
 
         // Redirect back or wherever you need
         return redirect(route('coordinator_student-list'))->with('success', $message);

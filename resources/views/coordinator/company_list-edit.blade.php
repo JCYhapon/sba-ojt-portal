@@ -70,7 +70,6 @@
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
 
-
             <!-- Back Button -->
             <button class="mb-8">
                 <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
@@ -119,11 +118,18 @@
                         </select>
                     </div>
 
-
-
                     <div class="sm:col-span-2">
-                        <label for="position">Positions:</label>
+                        <!-- Hidden Modal for Custom Position -->
+                        <div id="customPositionModal" class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                            <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+                                <span class="close-modal absolute top-4 right-4 cursor-pointer">&times;</span>
+                                <h2 class="text-lg font-semibold mb-4">Enter Custom Position</h2>
+                                <input type="text" id="customPositionInput" class="border border-gray-300 rounded-md p-2 w-full mb-4" placeholder="Enter custom position...">
+                                <input type="button" id="addCustomPositionBtn" class="flex items-center justify-center text-white font-medium rounded-lg text-lg px-3 py-1.5 bg-[#AD974F] hover:bg-gray-800 dark:bg-primary-600 dark:hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-opacity-50" value="Add Position">
+                            </div>
+                        </div>
 
+                        <label for="position">Positions:</label>
                         <ul class="flex flex-wrap p-2.5 dark:border-gray-600 position-container items-center">
                             @php
                             $positions = $company->position;
@@ -166,6 +172,7 @@
                                     @foreach($availablePositions as $availablePosition)
                                     <option value="{{ $availablePosition }}">{{ $availablePosition }}</option>
                                     @endforeach
+                                    <option value="custom">Other (Please specify)</option>
                                 </select>
 
                                 @if(empty($positions))
@@ -173,59 +180,124 @@
                             @endif
                         </ul>
                     </div>
+                    <script>
+                        // Function to show the modal
+                        function showModal() {
+                            document.getElementById('customPositionModal').classList.remove('hidden');
+                        }
 
-                    <div class="sm:col-span-2">
-                        <label for="hiredStudents" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Hired Students:</label>
-                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
-                            @if (!empty($company->hiredStudents) && is_array($company->hiredStudents) && count($company->hiredStudents) > 0)
-                            @foreach ($company->hiredStudents as $studentID)
-                            @php
-                            $student = \App\Models\Student::where('studentID', $studentID)->first();
-                            @endphp
-                            <li style="background-color: #AD974F; color: white;" class="rounded-lg text-sm p-2.5 dark:placeholder-gray-400 m-2 my-auto">
-                                @if ($student)
-                                {{ $student->firstName }} {{ $student->lastName }}
-                                @endif
-                            </li>
-                            @endforeach
+                        // Function to hide the modal
+                        function hideModal() {
+                            document.getElementById('customPositionModal').classList.add('hidden');
+                        }
 
-                            <li>
-                                <select name="hiredStudents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option value="">Choose a Hired Students</option>
-                                    @foreach($users as $user)
-                                    @foreach (explode(',', $user->schoolID) as $studentID)
-                                    @php
-                                    $student = \App\Models\Student::where('studentID', $studentID)->first();
-                                    @endphp
-                                    @if ($student)
-                                    <option value="{{ $student->studentID }}">{{ $student->firstName }} {{ $student->lastName }}</option>
-                                    @endif
-                                    @endforeach
-                                    @endforeach
+                        // Event listener for closing the modal
+                        document.querySelector('.close-modal').addEventListener('click', hideModal);
 
-                                </select>
-                            </li>
-                            @else
-                            <li style="background-color: #202c34; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">No Hired Students</li>
-                            <li>
-                                <select name="hiredStudents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[30vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option value="">Choose a Hired Students</option>
-                                    @foreach($users as $user)
-                                    @foreach (explode(',', $user->schoolID) as $studentID)
-                                    @php
-                                    $student = \App\Models\Student::where('studentID', $studentID)->first();
-                                    @endphp
-                                    @if ($student)
-                                    <option value="{{ $student->studentID }}">{{ $student->firstName }} {{ $student->lastName }}</option>
-                                    @endif
-                                    @endforeach
-                                    @endforeach
-                                </select>
-                            </li>
-                            @endif
-                        </ul>
-                    </div>
+                        // Event listener for adding custom position
+                        document.getElementById('addCustomPositionBtn').addEventListener('click', function() {
+                            const customPosition = document.getElementById('customPositionInput').value.trim();
+                            if (customPosition) {
+                                // Create a new position item for the custom position
+                                const newPositionItem = document.createElement('div');
+                                newPositionItem.classList.add('position-item', 'flex', 'items-center', 'mt-2', 'mr-2');
 
+                                // Create span element for position text
+                                const newPositionText = document.createElement('span');
+                                newPositionText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-gray-800', 'text-white');
+                                newPositionText.textContent = customPosition;
+
+                                // Create remove button
+                                const removeButton = document.createElement('input');
+                                removeButton.type = 'button'; // Set type to button
+                                removeButton.value = '×'; // Set the value (content) of the button
+                                removeButton.classList.add('remove', 'pl-2', 'pr-1', 'cursor-pointer');
+                                removeButton.dataset.position = customPosition;
+
+                                // Append elements to position item
+                                newPositionItem.appendChild(newPositionText);
+                                newPositionText.appendChild(removeButton);
+
+                                // Append position item to container
+                                document.querySelector('.position-container').appendChild(newPositionItem);
+
+                                // Create hidden input field to store position
+                                const hiddenInput = document.createElement('input');
+                                hiddenInput.type = 'hidden';
+                                hiddenInput.name = 'positions[]';
+                                hiddenInput.value = customPosition;
+                                document.querySelector('.position-container').appendChild(hiddenInput);
+
+                                // Clear input field
+                                document.getElementById('customPositionInput').value = '';
+
+                                // Hide the modal
+                                hideModal();
+                            }
+                        });
+
+                        document.getElementById('addPosition').addEventListener('change', function(event) {
+                            const selectedPosition = event.target.value;
+
+                            if (selectedPosition === 'custom') {
+                                // Show the modal for entering custom position
+                                showModal();
+                            } else if (selectedPosition) {
+                                // Remove the selected option from the dropdown
+                                event.target.remove(event.target.selectedIndex);
+
+                                // Create a new position item
+                                const newPositionItem = document.createElement('div');
+                                newPositionItem.classList.add('position-item', 'flex', 'items-center', 'mt-2', 'mr-2');
+
+                                // Create span element for position text
+                                const newPositionText = document.createElement('span');
+                                newPositionText.classList.add('rounded-lg', 'p-2.5', 'dark:placeholder-gray-400', 'bg-gray-800', 'text-white');
+                                newPositionText.textContent = selectedPosition;
+
+                                // Create remove button
+                                const removeButton = document.createElement('input');
+                                removeButton.type = 'button'; // Set type to button
+                                removeButton.value = '×'; // Set the value (content) of the button
+                                removeButton.classList.add('remove', 'pl-2', 'pr-1', 'cursor-pointer');
+                                removeButton.dataset.position = selectedPosition;
+
+                                // Append elements to position item
+                                newPositionItem.appendChild(newPositionText);
+                                newPositionText.appendChild(removeButton);
+
+                                // Append position item to container
+                                document.querySelector('.position-container').appendChild(newPositionItem);
+
+                                // Create hidden input field to store position
+                                const hiddenInput = document.createElement('input');
+                                hiddenInput.type = 'hidden';
+                                hiddenInput.name = 'positions[]';
+                                hiddenInput.value = selectedPosition;
+                                document.querySelector('.position-container').appendChild(hiddenInput);
+
+                                // Clear selected option
+                                event.target.value = '';
+                            }
+                        });
+
+                        // Delegate the event handling to the document level for remove buttons
+                        document.querySelector('.position-container').addEventListener('click', function(event) {
+                            if (event.target.classList.contains('remove')) {
+                                event.preventDefault();
+
+                                const matchedCompanyToRemove = event.target.dataset.position;
+                                const matchedCompanyContainer = event.target.closest('.position-container');
+
+                                event.target.closest('.position-item').remove();
+
+                                const hiddenInputsToRemove = matchedCompanyContainer.querySelectorAll('input[value="' + matchedCompanyToRemove + '"]');
+                                hiddenInputsToRemove.forEach(input => {
+                                    input.remove();
+                                });
+                            }
+                        });
+                    </script>
 
                     <div class="flex items-center space-x-4">
                         <button type="submit" class="text-white bg-[#AD974F] hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
@@ -237,11 +309,15 @@
         </div>
     </div>
 </body>
-<script>
+
+{{-- <script>
     document.getElementById('addPosition').addEventListener('change', function(event) {
         const selectedPosition = event.target.value;
 
         if (selectedPosition) {
+            // Remove the selected option from the dropdown list
+            event.target.querySelector(`option[value="${selectedPosition}"]`).remove();
+
             // Create a new position item
             const newPositionItem = document.createElement('div');
             newPositionItem.classList.add('position-item', 'flex', 'items-center', 'mt-2', 'mr-2');
@@ -293,6 +369,6 @@
             });
         }
     });
-</script>
+</script> --}}
 
 </html>

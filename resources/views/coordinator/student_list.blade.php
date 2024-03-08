@@ -82,7 +82,6 @@
     </div>
     <!-- END OF NAVBAR -->
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
-
         <div class="min-h-[70vh] bg-white rounded-md border-0 shadow-md p-5">
             <!-- Display Success Message -->
             @if(session()->has('success'))
@@ -158,11 +157,11 @@
                             $student = \App\Models\Student::where('studentID', $studentID)->first();
                             @endphp
                             @if ($student)
-                            <tr onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';">
-                                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $student->firstName }} {{ $student->lastName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $student->email }}</td>
-                                <td class="py-2 px-4 border-b">{{ $student->section }}</td>
-                                <td class="py-2 px-4 border-b">{{ $student->major }}</td>
+                            <tr>
+                                <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $student->firstName }} {{ $student->lastName }}</td>
+                                <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b">{{ $student->email }}</td>
+                                <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b">{{ $student->section }}</td>
+                                <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b">{{ $student->major }}</td>
 
                                 {{-- This is The Getting Of Company --}}
                                 @foreach (explode(',', $student->hiredCompany) as $id)
@@ -170,7 +169,7 @@
                                 $company = \App\Models\Company::where('id', $id)->first();
                                 @endphp
 
-                                <td class="py-2 px-4 border-b">
+                                <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b">
                                     @if ($company)
                                     {{ $company->name }}
                                     @else
@@ -180,7 +179,7 @@
                                 @endforeach
 
                                 {{-- This is the Status --}}
-                                <td class="py-2 px-4 border-b">
+                                <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b">
                                     @if (in_array($student->status, [1, 2]))
                                     {{ $student->status === 1 ? 'Active' : 'Inactive' }}
                                     @endif
@@ -193,21 +192,37 @@
                                                 <box-icon name='edit' color='#AD974F'></box-icon>
                                             </button>
                                         </a>
-                                        @if ($student->status === 1)
-                                        <form action="{{ route('coordinator_student-list.toggleStatus', $student->id) }}" method="POST">
-                                            @csrf
-                                            @method('POST')
-                                            <button type="submit" class="btn btn-warning">
+                                        <div x-data="{ isOpen: false }">
+                                            @if ($student->status === 1)
+                                            <button @click="isOpen = true" type="button" class="btn btn-warning">
                                                 <box-icon name='message-alt-x' color='#AD974F'></box-icon>
                                             </button>
-                                        </form>
-                                        @elseif ($student->status === 2)
-                                        <form action="{{ route('coordinator_student-list.toggleStatus', $student->id) }}" method="POST">
-                                            @csrf
-                                            @method('POST')
-                                            <button type="submit" class="btn btn-warning"><box-icon name='message-check' color='#1f2937'></box-icon></button>
-                                        </form>
-                                        @endif
+                                            @elseif ($student->status === 2)
+                                            <button @click="isOpen = true" type="button" class="btn btn-warning">
+                                                <box-icon name='message-alt-check' color='#AD974F'></box-icon>
+                                            </button>
+                                            @endif
+                                            <div x-show="isOpen" style="background-color: rgba(128, 128, 128, 0.75);;" class="fixed inset-0 flex items-center justify-center">
+                                                <div class="bg-white p-8 rounded shadow-lg">
+                                                    <h3 class="text-lg font-semibold mb-4">Confirmation</h3>
+                                                    @if($student->status === 1)
+                                                    <p>Are you sure you want to set the status to Inactive?</p>
+                                                    @elseif($student->status === 2)
+                                                    <p>Are you sure you want to set the status to Active?</p>
+                                                    @endif
+                                                    <div class="mt-4 flex justify-center space-x-4">
+                                                        <button @click="isOpen = false" class="btn btn-secondary text-lg px-3 py-1.5">Cancel</button>
+                                                        <form id="confirmationForm" action="{{ route('coordinator_student-list.toggleStatus', $student->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            @method('POST')
+                                                            <button type="submit" style="background-color: #AD974F; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='rgba(34, 41, 46, 1)'" onmouseout="this.style.backgroundColor='#AD974F'" class="flex items-center justify-center text-white font-medium rounded-lg text-lg px-3 py-1.5 dark:bg-primary-600 dark:hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-opacity-50">
+                                                                Proceed
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

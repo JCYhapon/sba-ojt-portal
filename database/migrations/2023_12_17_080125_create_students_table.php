@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('supervisor')->nullable();
             $table->integer('status'); //active -1, drop-2, complete-3
             $table->integer('neededHours')->default(600);
-            $table->timestamps();
             $table->foreign('hiredCompany')->references('id')->on('companies')->onDelete('set null')->nullable();
+            $table->timestamps();
         });
     }
 
