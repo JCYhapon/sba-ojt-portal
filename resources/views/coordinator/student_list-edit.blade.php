@@ -103,10 +103,24 @@
                     <div class="w-full">
                         <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section</label>
                         <select name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                            <option value="AT-101" {{ $students->section === 'AT-101' ? 'selected' : '' }}>AT-101</option>
-                            <option value="MT-101" {{ $students->section === 'MT-101' ? 'selected' : '' }}>MT-101</option>
+                            @if($students->major === 'Accounting')
+                            <option value="A-331" {{ $students->section === 'A-331' ? 'selected' : '' }}>A-331</option>
+                            <option value="A-332" {{ $students->section === 'A-332' ? 'selected' : '' }}>A-332</option>
+                            <option value="A-333" {{ $students->section === 'A-333' ? 'selected' : '' }}>A-333</option>
+                            <option value="A-334" {{ $students->section === 'A-334' ? 'selected' : '' }}>A-334</option>
+                            <option value="A-335" {{ $students->section === 'A-335' ? 'selected' : '' }}>A-335</option>
+                            <option value="A-336" {{ $students->section === 'A-336' ? 'selected' : '' }}>A-336</option>
+                            @elseif($students->major === 'Management')
+                            <option value="BM-331" {{ $students->section === 'BM-331' ? 'selected' : '' }}>BM-331</option>
+                            <option value="BM-332" {{ $students->section === 'BM-332' ? 'selected' : '' }}>BM-332</option>
+                            <option value="BM-333" {{ $students->section === 'BM-333' ? 'selected' : '' }}>BM-333</option>
+                            <option value="BM-334" {{ $students->section === 'BM-334' ? 'selected' : '' }}>BM-334</option>
+                            <option value="BM-335" {{ $students->section === 'BM-335' ? 'selected' : '' }}>BM-335</option>
+                            <option value="BM-336" {{ $students->section === 'BM-336' ? 'selected' : '' }}>BM-336</option>
+                            @endif
                         </select>
                     </div>
+
 
                     {{-- Student Table Stats --}}
                     <div class="w-full">
