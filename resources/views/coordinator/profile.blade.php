@@ -159,29 +159,6 @@
                 </form>
             </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Add change event listener to the select element
-                    document.getElementById('section').addEventListener('change', function() {
-                        // Get the selected section value
-                        var section = this.value;
-
-                        // Hide all table rows
-                        var rows = document.querySelectorAll('#studentTable tbody tr');
-                        rows.forEach(row => {
-                            row.style.display = 'none';
-                        });
-
-                        // Show table rows matching the selected section
-                        var matchingRows = document.querySelectorAll('#studentTable tbody tr[data-section="' + section + '"]');
-                        matchingRows.forEach(row => {
-                            row.style.display = '';
-                        });
-                    });
-                });
-            </script>
-
-
             <!--  THIRD ROW -->
             <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10 gap-10">
                 <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
@@ -200,6 +177,9 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/coordinator/profile.js') }}">
+    </script>
 </body>
 
 </html>
