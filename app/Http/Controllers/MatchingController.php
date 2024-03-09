@@ -15,11 +15,8 @@ class MatchingController extends Controller
 {
     public function matchStudentsWithCompanies()
     {
-        Log::info('Matching is called');
         $userId = auth()->user()->schoolID;
         $student = Student::where('studentID', $userId)->first();
-
-        Log::info($student->workType);
 
         if ($student->workType === null) {
             Log::info('Goes Outside');
@@ -29,7 +26,6 @@ class MatchingController extends Controller
             }
             return view('student.matched_company-list', compact('student'));
         }
-        Log::info('Proceeded');
 
         $studentWorkType = $student->workType;
         $studentSuggestedCompanies = collect($student->suggestedCompany);
@@ -37,18 +33,15 @@ class MatchingController extends Controller
 
         $companies = Company::where('status', 1)
             ->where('workType', $studentWorkType)
-            // ->whereNotIn('id', $studentSuggestedCompanyIds)
+            ->whereNotIn('id', $studentSuggestedCompanyIds)
             ->get();
 
         $matchingResults = [];
-
-        Log::info('Past Validation');
 
         foreach ($companies as $company) {
             $studentPosition = $student->position;
             $companyPosition = $company->position;
 
-            // Check if the work types match
             if ($company->workType == $studentWorkType) {
                 Log::info('WorkType Matching');
                 if ($this->checkPositionMatch($studentPosition, $companyPosition)) {
