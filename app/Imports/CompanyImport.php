@@ -17,28 +17,26 @@ class CompanyImport implements ToCollection
     public function collection(Collection $rows)
     {
         foreach ($rows->slice(1) as $row) {
-            $description = null;
-            if (empty($row[0]) || empty($row[1]) || empty($row[2])) {
-                if (empty($row[3])) {
-                    $description = null;
-                } else {
-                    $description = $row[3];
+            if (!empty($row[0]) && !empty($row[1]) && !empty($row[2])) {
+                if (!empty($row[3])) {
+                    $description = $row[3]; // Update description if it's not empty
                 }
-                continue;
+                Company::create([
+                    'name' => $row[0],
+                    'email' => $row[1],
+                    'address' => $row[2],
+                    'description' => $description,
+                    'status' => 1,
+                    'workType' => null,
+                    'position' => [],
+                    'skills' => [],
+                    'hiredStudents' => [],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            } else {
+                Log::info('Empty row');
             }
-            Company::create([
-                'name' => $row[0],
-                'email' => $row[1],
-                'address' => $row[2],
-                'description' => $description,
-                'status' => 1,
-                'workType' => null,
-                'position' => [],
-                'skills' => [],
-                'hiredStudents' => [],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
         }
     }
 }

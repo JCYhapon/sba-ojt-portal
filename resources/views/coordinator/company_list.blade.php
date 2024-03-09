@@ -161,7 +161,7 @@
                                     @endif
                                 </td>
 
-                                <td class="py-2 px-4 border-b flex flex-col lg:flex-row items-center">
+                                <td class="py-2 px-4 border-b ">
                                     <!-- Edit Button -->
                                     <a class="btn btn-primary mb-2 lg:mb-0 lg:mr-2" href="{{ route('coordinator.company_edit', $company->id) }}">
                                         <box-icon name='edit' color='#AD974F'></box-icon>

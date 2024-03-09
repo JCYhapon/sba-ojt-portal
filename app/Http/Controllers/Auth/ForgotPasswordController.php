@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\PasswordReset;
 
 use App\Mail\Email;
 
@@ -49,8 +50,20 @@ class ForgotPasswordController extends Controller
         return redirect()->to(route("login"))->with('status', 'We have emailed your password reset link!');
     }
 
-    function resetPassword($token)
+    public function resetPassword($token)
     {
+        $passwordReset = PasswordReset::where('token', $token)->first();
+
+        if (!$passwordReset) {
+            return redirect()->route('login')->with('error', 'Invalid Reset link!');
+        }
+
+        $createdAt = Carbon::parse($passwordReset->created_at);
+
+        if ($createdAt->addMinutes(30)->isPast()) {
+            return redirect()->route('login')->with('error', 'Your Reset link has expired!');
+        }
+
         return view('auth.passwords.confirm', compact('token'));
     }
 
