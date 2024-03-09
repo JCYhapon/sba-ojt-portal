@@ -26,9 +26,10 @@ class StudentController extends Controller
     {
         $userSchoolID = auth()->user()->schoolID;
         $student = Student::where('studentID', $userSchoolID)->first();
-
-        $companies = Company::where('id', $student->hiredCompany)->first();
-
+        $user = Auth::user();
+        if ($user->role !== 1) {
+            $companies = Company::where('id', $student->hiredCompany)->first();
+        }
         if ($student) {
             $totalRenderedHours = Journal::where('studentID', $student->id)->sum('hoursRendered');
             $neededHours = $student->neededHours;
@@ -40,6 +41,9 @@ class StudentController extends Controller
         } else {
             $totalRenderedHours = 0;
             $remainingHours = 0;
+        }
+        if ($user->role === 2) {
+            return view('coordinator.profile');
         }
 
         return view('student.profile', compact(
@@ -63,6 +67,7 @@ class StudentController extends Controller
 
     public function updateProfile(Request $request)
     {
+        Log::info('Update Profile Student');
         $userSchoolID = auth()->user()->schoolID;
         $user = User::findOrFail($userSchoolID);
 
@@ -114,8 +119,7 @@ class StudentController extends Controller
             'hiredCompany' => $hiredCompany,
         ]);
 
-
-        return redirect()->route('student_profile')->with('success', 'Student has been updated successfully.');
+        return redirect()->back()->with('success', 'Student has been updated successfully.');
     }
 
     public function removePositions(Request $request)
@@ -173,11 +177,13 @@ class StudentController extends Controller
 
     public function updatePassword(Request $request)
     {
+        Log::info('Update Password');
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required|min:8',
+            'new_password' => 'required',
         ]);
 
+        Log::info('====================');
         $user = Auth::user();
 
         if (!Hash::check($request->old_password, $user->password)) {
@@ -186,7 +192,14 @@ class StudentController extends Controller
         $updateStudent = $user->update([
             'password' => Hash::make($request->new_password),
         ]);
-
-        return redirect()->route('student_profile')->with('success', 'Student password updated successfully.');
+        Log::info($user->role);
+        if ($user->role === 3) {
+            Log::info('It goes here');
+            return redirect()->route('student_profile')->with('success', 'Password updated successfully.');
+        } else if ($user->role === 2) {
+            return redirect()->route('coordinator_profile')->with('success', 'Student password updated successfully.');
+        } else if ($user->role === 1) {
+            return redirect()->route('admin')->with('success', 'Student password updated successfully.');
+        }
     }
 }
