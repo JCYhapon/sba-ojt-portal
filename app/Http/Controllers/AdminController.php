@@ -58,11 +58,14 @@ class AdminController extends Controller
             $existingCoordinator->save();
         }
 
+        $lastName = ucfirst(strtolower($request->input('lastName')));
+        $firstName = ucfirst(strtolower($request->input('firstName')));
+
         // Create user details first
         $user = User::create([
             'id' => $request->input('studentID'),
             'schoolID' => $request->input('studentID'),
-            'name' => $request->input('lastName') . ', ' . $request->input('firstName'),
+            'name' => $lastName . ', ' . $firstName,
             'email' => $request->input('email'),
             'role' => 2,
             'major' => $request->input('major'),
