@@ -47,11 +47,14 @@ class CoordinatorUserController extends Controller
             'section' => 'required',
         ]);
 
+        $lastName = ucfirst(strtolower($request->input('lastName')));
+        $firstName = ucfirst(strtolower($request->input('firstName')));
+
         // Create user details first
         $user = User::create([
             'id' => $request->input('studentID'),
             'schoolID' => $request->input('studentID'),
-            'name' => $request->input('lastName') . ', ' . $request->input('firstName'),
+            'name' => $lastName . ', ' . $firstName,
             'email' => $request->input('email'),
             'role' => 3,
             'major' => $request->input('major'),
@@ -66,8 +69,8 @@ class CoordinatorUserController extends Controller
         $student = Student::create([
             'id' => $request->input('studentID'),
             'studentID' => $request->input('studentID'),
-            'firstName' => $request->input('firstName'),
-            'lastName' => $request->input('lastName'),
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'email' => $request->input('email'),
             'major' => $request->input('major'),
             'section' => $request->input('section'),
@@ -122,10 +125,13 @@ class CoordinatorUserController extends Controller
             $password = $user->password;
         }
 
+        $lastName = ucfirst(strtolower($request->input('lastName')));
+        $firstName = ucfirst(strtolower($request->input('firstName')));
+
         // Update user details
         $user = $students->user;
         $updateUser = $user->update([
-            'name' => $request->input('lastName') . ', ' . $request->input('firstName'),
+            'name' => $lastName . ', ' . $firstName,
             'email' => $request->input('email'),
             'major' => $request->input('major'),
             'password' => $password,
@@ -170,8 +176,8 @@ class CoordinatorUserController extends Controller
 
         // Update student details
         $updateStudent = $students->update([
-            'firstName' => $request->input('firstName'),
-            'lastName' => $request->input('lastName'),
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'email' => $request->input('email'),
             'section' => $request->input('section'),
             'major' => $request->input('major'),
