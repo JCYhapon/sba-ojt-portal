@@ -43,22 +43,22 @@
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         {{-- Student ID / id --}}
                         <div class="col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student ID</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student ID <span class="text-red-600">*</span></label>
                             <input type="text" name="studentID" id="studentID" maxlength="8" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="Student ID">
                         </div>
                         {{-- First Name --}}
                         <div class="col-span-2 sm:col-span-1">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name <span class="text-red-600">*</span></label>
                             <input type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="Last Name">
                         </div>
                         {{-- Last Name --}}
                         <div class="col-span-2 sm:col-span-1">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name <span class="text-red-600">*</span></label>
                             <input type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="First Name">
                         </div>
                         {{-- Email --}}
                         <div class="col-span-2">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email <span class="text-red-600">*</span></label>
                             <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="Email">
                         </div>
                         {{-- Password --}}
@@ -83,7 +83,7 @@
 
                         {{-- Section --}}
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section</label>
+                            <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section <span class="text-red-600">*</span></label>
                             <select id="section" name="section" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" selected disabled>Section</option>
                                 @if(Auth::user()->role == 2 && Auth::user()->major == 'Management')

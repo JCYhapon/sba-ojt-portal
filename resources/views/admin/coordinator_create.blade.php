@@ -76,22 +76,22 @@
                     <div class="flex flex-col gap-6">
                         {{-- Coordinator / id --}}
                         <div class="col-span-2">
-                            <label for="studentID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Coordinator ID</label>
+                            <label for="studentID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Coordinator ID <span class="text-red-600">*</span></label>
                             <input type="text" name="studentID" id="studentID" maxlength="8" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="Student ID">
                         </div>
                         {{-- First Name --}}
                         <div class="col-span-2 sm:col-span-1">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Last Name</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Last Name <span class="text-red-600">*</span></label>
                             <input type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="Last Name">
                         </div>
                         {{-- Last Name --}}
                         <div class="col-span-2 sm:col-span-1">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">First Name</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">First Name <span class="text-red-600">*</span></label>
                             <input type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="First Name">
                         </div>
                         {{-- Email --}}
                         <div class="col-span-2">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Email</label>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Email <span class="text-red-600">*</span></label>
                             <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="" placeholder="Email">
                         </div>
                         {{-- Password --}}
@@ -101,11 +101,11 @@
                         </div>
                         {{-- Major --}}
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="major" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Major</label>
+                            <label for="major" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Major <span class="text-red-600">*</span></label>
                             <select id="major" name="major" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                                 <option value="">Choose Major Handled</option>
-                                <option value="management">Management</option>
-                                <option value="accounting">Accounting</option>
+                                <option value="Management">Management</option>
+                                <option value="Accounting">Accounting</option>
                             </select>
                         </div>
                     </div>

@@ -98,7 +98,7 @@
 
                     <div class="flex flex-col">
                         <div class="">
-                            <label for="coverage_start_date" class="text-md font-medium">Start Date</label>
+                            <label for="coverage_start_date" class="text-md font-medium">Start Date <span class="text-red-600">*</span></label>
                             <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3" required>
                         </div>
                     </div>
@@ -106,24 +106,24 @@
 
                 <!-- ADD LABEL -->
                 <div class="form-group">
-                    <label for="" class="text-md font-medium">Reflection</label>
+                    <label for="" class="text-md font-medium">Reflection <span class="text-red-600">*</span></label>
                     <textarea class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white   mb-6" placeholder="Write your thoughts here..." name="reflection" rows="10" required id="message"></textarea>
                 </div>
 
                 <!-- ADD LABEL -->
                 <div class="form-group mb-8">
-                    <label for="" class="text-md font-medium">Hours Rendered</label>
+                    <label for="" class="text-md font-medium">Hours Rendered <span class="text-red-600">*</span></label>
                     <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required max="10">
                 </div>
 
 
                 <div class="form-group mb-4">
-                    <label for="studentSignature" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white" for="file_input">Student Signature</label>
+                    <label for="studentSignature" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white" for="file_input">Student Signature <span class="text-red-600">*</span></label>
                     <input type="file" name="studentSignature" accept="image/*" class="form-control-file w-[30rem]  block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="supervisorSignature" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Documentation</label>
+                    <label for="supervisorSignature" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Documentation <span class="text-red-600">*</span></label>
                     <input type="file" name="supervisorSignature" accept="image/*" class="form-control-file block w-[30rem] text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
                 </div>
 
