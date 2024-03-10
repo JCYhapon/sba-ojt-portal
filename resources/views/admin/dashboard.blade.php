@@ -65,8 +65,8 @@
         <span>All Courses and Section</span>
       </div>
 
-      <div class="flex flex-row justify-between gap-8">
-        <div class="grid grid-cols-2 w-[70%]  bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center">
+      <div class="flex flex-col lg:flex-row llg:flex-row justify-between gap-8 sm:flex-col ss:flex-col xs:flex-col">
+        <div class="grid grid-cols-2 lg:w-[70%]  bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center overflow-auto">
           <div class="w-[100%]">
             <span class="text-xl font-semibold text-center">Accountancy</span>
           </div>
@@ -86,7 +86,7 @@
           </div>
         </div>
 
-        <div class="w-[30%] bg-white p-4 rounded-md font-medium border border-gray-100 text-center ">
+        <div class="lg:w-[30%] bg-white p-4 rounded-md font-medium border border-gray-100 text-center ">
           <table>
             <tr>
               <th class="px-14 py-2">Section</th>
@@ -103,8 +103,8 @@
         </div>
       </div>
 
-      <div class="flex flex-row justify-between gap-8">
-        <div class="grid grid-cols-2 w-[70%] bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center">
+      <div class="flex flex-col lg:flex-row justify-between gap-8 sm:flex-col ss:flex-col xs:flex-col">
+        <div class="grid grid-cols-2 lg:w-[70%] bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center overflow-auto">
           <div class="w-[100%]">
             <span class="text-xl font-semibold text-center">Business Management</span>
           </div>
@@ -124,7 +124,7 @@
           </div>
         </div>
 
-        <div class="w-[30%] bg-white p-4 rounded-md font-medium border border-gray-100 text-center ">
+        <div class="lg:w-[30%] bg-white p-4 rounded-md font-medium border border-gray-100 text-center ">
           <table>
             <tr>
               <th class="px-14 py-2">Section</th>
