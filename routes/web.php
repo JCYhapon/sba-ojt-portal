@@ -39,7 +39,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // FOR FILTERING COORDINATOR - STUDENT JOURNAL 
-Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
+Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index')->middleware('coordinator');
 
 //Company Filtering
 Route::get('/company', [CompanyController::class, 'getCompany'])->name('company.search');
@@ -57,7 +57,7 @@ Route::get('/admin', function () {
 
 Route::get('/coordinator-profile', function () {
     return view('coordinator.profile');
-})->name('coordinator_profile');
+})->name('coordinator_profile')->middleware('coordinator');
 
 //FOR STUDENT
 Route::get('/student', function () {
@@ -66,7 +66,7 @@ Route::get('/student', function () {
 
 Route::get('/company-list', function () {
     return view('student.company_list');
-})->name('student_company-list'); // STUDENT COMPANY-LIST PAGE
+})->name('student_company-list')->middleware('coordinator'); // STUDENT COMPANY-LIST PAGE
 
 Route::get('/journal', function () {
     return view('student.journal');
@@ -87,15 +87,15 @@ Route::get('/coordinator_company-list', function () {
     return view('coordinator.company_list');
 })->name('coordinator_company-list'); // COORDINATOR COMPANY-LIST PAGE
 
-Route::get('/coordinator_student-list', [CoordinatorUserController::class, 'studentlist'])->name('coordinator_student-list'); // COORDINATOR STUDENT-LIST
+Route::get('/coordinator_student-list', [CoordinatorUserController::class, 'studentlist'])->name('coordinator_student-list')->middleware('coordinator'); // COORDINATOR STUDENT-LIST
 
-Route::get('/coordinator_student-list.create', [CoordinatorUserController::class, 'create'])->name('coordinator_student-list.create'); // COORDINATOR CREATE STUDENT-LIST
+Route::get('/coordinator_student-list.create', [CoordinatorUserController::class, 'create'])->name('coordinator_student-list.create')->middleware('coordinator'); // COORDINATOR CREATE STUDENT-LIST
 
-Route::post('/coordinator_student-list', [CoordinatorUserController::class, 'store'])->name('coordinator_student-list.store'); // COORDINATOR STORE STUDENT
+Route::post('/coordinator_student-list', [CoordinatorUserController::class, 'store'])->name('coordinator_student-list.store')->middleware('coordinator'); // COORDINATOR STORE STUDENT
 
 Route::get('/coordinator_student-journal', function () {
     return view('coordinator.student_journal');
-})->name('coordinator_student-journal'); // COORDINATOR COMPANY-LIST PAGE
+})->name('coordinator_student-journal')->middleware('coordinator'); // COORDINATOR COMPANY-LIST PAGE
 
 /*
 |----------------------------------------------------------------
@@ -106,18 +106,18 @@ Route::get('/coordinator_student-journal', function () {
 */
 Route::resource('companies', CompanyController::class);
 // ----Action Edit
-Route::get('/coordinator_company-create', [CompanyController::class, 'createCompany'])->name('coordinator.company_create');
-Route::post('/coordinator_company-store', [CompanyController::class, 'storeCompany'])->name('coordinator.company_store');
+Route::get('/coordinator_company-create', [CompanyController::class, 'createCompany'])->name('coordinator.company_create')->middleware('coordinator');
+Route::post('/coordinator_company-store', [CompanyController::class, 'storeCompany'])->name('coordinator.company_store')->middleware('coordinator');
 
-Route::get('/coordinator_company-edit/{company}', [CompanyController::class, 'editCompany'])->name('coordinator.company_edit');
-Route::put('/coordinator_company-update/{company}', [CompanyController::class, 'updateCompany'])->name('coordinator.company_update');
+Route::get('/coordinator_company-edit/{company}', [CompanyController::class, 'editCompany'])->name('coordinator.company_edit')->middleware('coordinator');
+Route::put('/coordinator_company-update/{company}', [CompanyController::class, 'updateCompany'])->name('coordinator.company_update')->middleware('coordinator');
 
-Route::get('coordinator_company-list', [CompanyController::class, 'getCompany'])->name('coordinator_company-list');
-Route::get('coordinator_company-page', [CompanyController::class, 'getCompany'])->name('coordinator_company-page');
+Route::get('coordinator_company-list', [CompanyController::class, 'getCompany'])->name('coordinator_company-list')->middleware('coordinator');
+Route::get('coordinator_company-page', [CompanyController::class, 'getCompany'])->name('coordinator_company-page')->middleware('coordinator');
 
-Route::get('/coordinator/company/{id}', [CompanyController::class, 'companyInfo'])->name('coordinator_company_info');
+Route::get('/coordinator/company/{id}', [CompanyController::class, 'companyInfo'])->name('coordinator_company_info')->middleware('coordinator');
 
-Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class, 'toggleStatus'])->name('coordinator.company_toggle_status');
+Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class, 'toggleStatus'])->name('coordinator.company_toggle_status')->middleware('coordinator');
 
 /*
 |----------------------------------------------------------------
@@ -127,19 +127,19 @@ Route::post('/coordinator/company/{id}/toggle-status', [CompanyController::class
 |----------------------------------------------------------------
 */
 
-Route::get('/coordinator/student-list', [CoordinatorUserController::class, 'userStudentsInfo'])->name('coordinator.student-list');
+Route::get('/coordinator/student-list', [CoordinatorUserController::class, 'userStudentsInfo'])->name('coordinator.student-list')->middleware('coordinator');
 
-Route::get('/coordinator/student/{id}', [CoordinatorUserController::class, 'studentInfo'])->name('coordinator_student_info');
+Route::get('/coordinator/student/{id}', [CoordinatorUserController::class, 'studentInfo'])->name('coordinator_student_info')->middleware('coordinator');
 
-Route::get('/coordinator/student-list', [CoordinatorUserController::class, 'userStudentsInfo'])->name('coordinator.student-list');
+Route::get('/coordinator/student-list', [CoordinatorUserController::class, 'userStudentsInfo'])->name('coordinator.student-list')->middleware('coordinator');
 
-Route::get('/coordinator_student-list/{students}/edit', [CoordinatorUserController::class, 'edit'])->name('coordinator_student-list.edit'); // COORDINATOR EDIT STUDENT
+Route::get('/coordinator_student-list/{students}/edit', [CoordinatorUserController::class, 'edit'])->name('coordinator_student-list.edit')->middleware('coordinator'); // COORDINATOR EDIT STUDENT
 
-Route::put('/coordinator_student-list/{students}/update', [CoordinatorUserController::class, 'update'])->name('coordinator_student-list.update'); // COORDINATOR UPDATE STUDENT
+Route::put('/coordinator_student-list/{students}/update', [CoordinatorUserController::class, 'update'])->name('coordinator_student-list.update')->middleware('coordinator'); // COORDINATOR UPDATE STUDENT
 
-Route::post('/coordinator_student-list/students/{id}/toggle-status', [CoordinatorUserController::class, 'toggleStatus'])->name('coordinator_student-list.toggleStatus');
+Route::post('/coordinator_student-list/students/{id}/toggle-status', [CoordinatorUserController::class, 'toggleStatus'])->name('coordinator_student-list.toggleStatus')->middleware('coordinator');
 
-Route::post('/removeMatchedCompanies', [StudentController::class, 'removeMatchedCompanies'])->name('student.remove-matched-company');
+Route::post('/removeMatchedCompanies', [StudentController::class, 'removeMatchedCompanies'])->name('student.remove-matched-company')->middleware('coordinator');
 /*
 |----------------------------------------------------------------
 | Dashboard Controller                                          |
@@ -147,11 +147,11 @@ Route::post('/removeMatchedCompanies', [StudentController::class, 'removeMatched
 | All Functions in Dashboard Controller                         |
 |----------------------------------------------------------------
 */
-Route::get('/coordinator', [DashboardController::class, 'getCoordinatorDashboardData'])->name('coordinator');
+Route::get('/coordinator', [DashboardController::class, 'getCoordinatorDashboardData'])->name('coordinator')->middleware('coordinator');
 
-Route::get('/student', [DashboardController::class, 'getStudentDashboardData'])->name('student');
+Route::get('/student', [DashboardController::class, 'getStudentDashboardData'])->name('student')->middleware('student');
 
-Route::get('/admin', [DashboardController::class, 'getAdminDashboardData'])->name('admin');
+Route::get('/admin', [DashboardController::class, 'getAdminDashboardData'])->name('admin')->middleware('admin');
 
 /*
 |----------------------------------------------------------------

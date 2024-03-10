@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response; // Import the Response class
 use Illuminate\Support\Facades\Auth;
 
 class Admin
@@ -12,26 +12,30 @@ class Admin
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return \Illuminate\Http\Response
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next): Response // Correct the return type
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/login');
         }
 
-        $user=Auth::user();
-        if($user->role==1){
+        $user = Auth::user();
+        if ($user->role == 1) {
             return $next($request);
         }
 
-        if($user->role==2){
+        if ($user->role == 2) {
             return redirect('/coordinator');
         }
 
-        if($user->role==3){
+        if ($user->role == 3) {
             return redirect('/student');
         }
-        
+
+        // Add a default redirect in case no conditions are met
+        return redirect('/'); // You may want to customize this according to your application's logic
     }
 }
