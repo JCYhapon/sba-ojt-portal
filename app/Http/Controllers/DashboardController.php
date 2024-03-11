@@ -10,6 +10,7 @@ use App\Models\Journal;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
@@ -47,30 +48,52 @@ class DashboardController extends Controller
 
     public function getStudentDashboardData()
     {
-        $userID = auth()->user()->schoolID;
-
-        // Search students table for a match in userID
+        $user = Auth::user();
+        $userID = $user->schoolID;
         $student = Student::where('studentID', $userID)->first();
 
-        // Get the hiredCompany of the student found
         $hiredCompany = $student->hiredCompany;
 
-        // If no hiredCompany, set $companyName to 0
         if (!$hiredCompany) {
             $companyName = 0;
         } else {
-            // Search company table id column for a match with hiredCompany
             $company = Company::find($hiredCompany);
-
-            // Get the name of the company with the match id
             $companyName = $company->name;
+        }
+
+        $totalRenderedHours = 0;
+        $remainingHours = 0;
+        $neededHours = 0;
+
+        if ($student) {
+            $totalRenderedHours = Journal::where('studentID', $student->id)->sum('hoursRendered');
+            $neededHours = $student->neededHours;
+            $remainingHours = $neededHours - $totalRenderedHours;
+            if ($remainingHours === 0) {
+                $student->status = 3;
+                $student->save();
+            }
+        }
+
+        if ($user->role === 2) {
+            return view('coordinator.profile');
+        }
+
+        $companies = null;
+        if ($user->role !== 1) {
+            $companies = Company::where('id', $hiredCompany)->first();
         }
 
         return view('student.dashboard', [
             'companyName' => $companyName,
             'student' => $student,
+            'totalRenderedHours' => $totalRenderedHours,
+            'remainingHours' => $remainingHours,
+            'neededHours' => $neededHours,
+            'companies' => $companies
         ]);
     }
+
 
     public function getAdminDashboardData()
     {
