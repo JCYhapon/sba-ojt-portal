@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Tailwindcss CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -68,44 +69,60 @@
     <!-- END OF NAVBAR -->
 
     <div class="w-full lg:container mx-auto lg:max-w-screen-xl  mt-8 p-12 h-auto">
+        @foreach (explode(',',Auth::user()->schoolID) as $studentID)
+        @php
+        $student = \App\Models\Student::where('studentID', $studentID)->first();
+        @endphp
 
-        <div class="grid grid-rows-3 lg:gap-12 md:gap-6 gap-4">
+        <div class="flex flex-col gap-8">
             <!--  FIRST ROW -->
-            <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 ss:grid-cols-2 xs:grid-cols-1 p-8 shadow-md rounded-md lg:h-40">
-                <div class="grid lg:gap-2 md:gap-0 ss:gap-0">
-                    <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em] ss:text-[18px] xs:text-[18px]"><span class="font-bold text-[#AD974F]">Welcome,</span> <span class="capitalize"> {{$student->firstName }}</span></h1>
-                    <p class="lg:text-lg md:text-[18px] md:mt-3 ss:text-[15px] xs:text-[15px] ss:mt-0">
-                        @if(($companyName == 0))
-                        Do well on your internship
-                        @else
-                        Do well on your internship at {{ $companyName }}
-                        @endif
-                    </p>
-                </div>
-                <div class="flex flex-col lg:justify-end lg:row-span-2 md:row-span-2  md:justify-end sm:justify-end ss:justify-end lg:items-end md:items-end sm:items-end ss:items-end items-end xs:items-center xs:justify-end">
-                    <div class=" grid justify-items-end">
-                        <a href=" {{ route('student_profile') }}"><button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem] ss:text-[13px] ss:w-[9rem] xs:text-[13px] xs:w-[9rem]">Go to your
-                                Profile</button></a>
+            <div class=" flex justify-between  h-[30rem]">
+                <div class="flex flex-col gap-8 bg-white p-6 w-[68%] shadow-md rounded-md">
+                    <div class="grid lg:gap-2 md:gap-0 ss:gap-0 border-b">
+                        <div class="flex justify-between">
+                            <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em] ss:text-[18px] xs:text-[18px]"><span class="font-bold text-[#AD974F]">Welcome,</span> <span class="capitalize"> {{$student->firstName }}</span> 👋</h1>
+                            <div>
+                                <a href=" {{ route('student_profile') }}"><button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm lg:w-40 md:text-[14px] md:w-[9rem] sm:text-[13px] sm:w-[9rem] ss:text-[13px] ss:w-[9rem] xs:text-[13px] xs:w-[9rem]">Go to your
+                                        Profile</button></a>
+                            </div>
+                        </div>
+                        <p class="lg:text-lg md:text-[18px] md:mt-3 ss:text-[15px] xs:text-[15px] ss:mt-0">
+                            @if(($companyName == 0))
+                            Do well on your internship
+                            @else
+                            Do well on your internship at {{ $companyName }}
+                            @endif
+                        </p>
                     </div>
-                </div>
-            </div>
 
-
-
-            <!--  SECOND ROW -->
-            <div class="lg:row-span-1">
-                <div class="bg-white  p-8 shadow-md rounded-md h-40 flex flex-col justify-center items-center gap-6">
                     <div>
                         <h1 class="lg:text-2xl md:text-lg sm:text-lg ss:text-lg font-semibold">View Partner Companies Here:</h1>
                     </div>
                     <div><button class="bg-[#AD974F] text-white p-1 rounded-md lg:text-sm lg:w-36 md:text-[14px] md:w-[9rem] sm:text-[14px] sm:w-[9rem] ss:text-[14px] ss:w-[9rem] xs:text-[14px] xs:w-[9rem]">
                             <a href="{{ route('student_company-list') }}">Company List</a></button></div>
                 </div>
+
+                <div class="flex flex-col gap-6 bg-white p-6 items-center shadow-lg rounded-md">
+                    <div>
+                        <h1 class="text-lg font-bold ">Total Hours Tracker</h1>
+                        <div class="">
+                            <canvas data-te-chart="doughnut" data-te-dataset-data='[
+                                        {{ $totalRenderedHours }},
+                                        {{ $remainingHours }}]' data-te-dataset-background-color='["#AD974F", "#1F2937"]'>
+                            </canvas>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-md font-semibold ">Hours Rendered: <span class="">{{ $totalRenderedHours }}</span></p>
+                        <p class="text-md font-semibold ">Hours Left: <span class="">{{ $remainingHours }}</span></p>
+                        <p class="text-md font-semibold ">Needed Hours: <span class="">{{ $neededHours }}</span></p>
+                    </div>
+                </div>
             </div>
 
-            <!--  THIRD ROW -->
             <div class="lg:row-span-3">
-                <div class="grid grid-cols-2 lg:gap-16 md:gap-10 gap-6">
+                <div class="grid grid-cols-2 md:gap-10 gap-2">
                     <div class="bg-white shadow-md rounded-md h-auto flex flex-col items-center justify-center gap-6">
                         <div>
                             <h1 class="font-semibold lg:text-2xl md:text-2xl sm:text-xl ss:text-2xl xs:text-xl text-[13px] mt-5">Journal Entry</h1>
@@ -132,9 +149,20 @@
                     </div>
                 </div>
             </div>
-
+            @endforeach
             <!--  END OF THIRD ROW -->
         </div>
+    </div>
+
+    <footer class="w-full bg-gray-800 relative bottom-0  h-[5rem]">
+        <div class="container mx-auto">
+            <div>
+                <img src="" alt="">
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ asset('js/student/dashboard.js') }}"></script>
 
 
 </body>
