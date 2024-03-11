@@ -73,7 +73,7 @@
             <!--  FIRST ROW -->
             <div class="bg-white grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 ss:grid-cols-2 xs:grid-cols-1 p-8 shadow-md rounded-md lg:h-40">
                 <div class="grid lg:gap-2 md:gap-0 ss:gap-0">
-                    <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em] ss:text-[18px] xs:text-[18px]"><span class="font-bold text-[#AD974F]">Welcome,</span> {{ $student->lastName }}, {{$student->firstName }}</h1>
+                    <h1 class="lg:text-3xl md:text-[1.5em] sm:text-[1.5em] ss:text-[18px] xs:text-[18px]"><span class="font-bold text-[#AD974F]">Welcome,</span> <span class="capitalize"> {{$student->firstName }}</span></h1>
                     <p class="lg:text-lg md:text-[18px] md:mt-3 ss:text-[15px] xs:text-[15px] ss:mt-0">
                         @if(($companyName == 0))
                         Do well on your internship
@@ -89,6 +89,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             <!--  SECOND ROW -->
             <div class="lg:row-span-1">

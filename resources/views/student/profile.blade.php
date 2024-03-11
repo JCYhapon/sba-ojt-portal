@@ -74,6 +74,12 @@
     <!-- END OF NAVBAR -->
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto overflow-x-auto ">
+        <!-- Display Success Message -->
+        @if(session()->has('success'))
+        <div class="bg-green-200 text-green-800 p-4 mb-4">
+            {{ session('success') }}
+        </div>
+        @endif
         @foreach (explode(',',Auth::user()->schoolID) as $studentID)
         @php
         $student = \App\Models\Student::where('studentID', $studentID)->first();
@@ -174,8 +180,8 @@
                         <h1 class="text-lg font-bold">Total Hours Tracker</h1>
                         <div class="mx-auto w-11/12 overflow-hidden md:w-3/5 h-22">
                             <canvas data-te-chart="doughnut" data-te-dataset-data='[
-                                    {{ $totalRenderedHours }},
-                                    {{ $remainingHours }}]' data-te-dataset-background-color='["#AD974F", "#1F2937"]'>
+                                        {{ $totalRenderedHours }},
+                                        {{ $remainingHours }}]' data-te-dataset-background-color='["#AD974F", "#1F2937"]'>
                             </canvas>
                         </div>
                     </div>
@@ -222,8 +228,9 @@
             </div>
 
             <!--  END OF THIRD ROW -->
-            @endforeach
+
         </div>
+        @endforeach
     </div>
 
     <script src="{{ asset('js/student/profile.js') }}"></script>

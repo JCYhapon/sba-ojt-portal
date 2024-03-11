@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
             password
         );
         const isConfirmed = password === confirm;
+        const isValid =
+            isLengthValid &&
+            hasUpperCase &&
+            hasNumber &&
+            hasSpecialChar &&
+            isConfirmed;
 
         checkboxes[0].checked = isLengthValid;
         checkboxes[1].checked = hasUpperCase;
@@ -24,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         checkboxes[3].checked = hasSpecialChar;
         checkboxes[4].checked = isConfirmed;
 
-        // Enable/disable submit button based on password requirements
         submitButton.disabled = !(
             isLengthValid &&
             hasUpperCase &&
@@ -33,16 +38,15 @@ document.addEventListener("DOMContentLoaded", function () {
             isConfirmed
         );
 
-        // Change button color based on password requirements and confirmation
-        if (isConfirmed) {
-            submitButton.classList.remove("bg-gray-800"); // Remove gray background
-            submitButton.classList.add("bg-[#AD974F]"); // Add custom background color
+        if (isConfirmed && isValid) {
+            submitButton.classList.remove("bg-gray-800");
+            submitButton.classList.add("bg-[#AD974F]");
         } else {
-            submitButton.classList.remove("bg-[#AD974F]"); // Remove custom background color
-            submitButton.classList.add("bg-gray-800"); // Add gray background
+            submitButton.classList.remove("bg-[#AD974F]");
+            submitButton.classList.add("bg-gray-800");
         }
     }
 
     passwordInput.addEventListener("input", validatePassword);
-    confirmInput.addEventListener("input", validatePassword); // Update confirmation status when confirm input changes
+    confirmInput.addEventListener("input", validatePassword);
 });

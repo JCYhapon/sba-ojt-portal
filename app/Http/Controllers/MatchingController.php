@@ -12,13 +12,13 @@ class MatchingController extends Controller
 {
     public function matchStudentsWithCompanies()
     {
-        Log::info('Matching Controlle Being Called');
+        Log::info('Matching Controller Being Called');
         $userId = auth()->user()->schoolID;
         $student = Student::where('studentID', $userId)->first();
 
         $isWorkTypeNull = $student->workType === null;
         $isEmptyPosition = empty($student->position);
-        $isHiredNotNull = $student->hired !== null;
+        $isHiredNotNull = $student->hiredCompany !== null;
 
         $isInvalidStudent = $isWorkTypeNull || $isEmptyPosition || $isHiredNotNull;
 
@@ -41,19 +41,30 @@ class MatchingController extends Controller
             ->get();
 
         $matchingResults = [];
+        $matchFound = false;
 
         foreach ($companies as $company) {
-            Log::info('Company Retrieved :' . $company->name);
             $companyPosition = $this->preprocessPosition($company->position);
-            Log::info('Student Tokens: ' . print_r($studentPosition, true));
-            Log::info('Company Tokens: ' . print_r($companyPosition, true));
-            if ($this->tokenBasedMatching($studentPosition, $companyPosition)) {
-                $matchingResults[] = [
-                    'student' => $student,
-                    'company' => $company,
-                ];
-                $student->suggestedCompany = array_merge($student->suggestedCompany, [$company->id]);
-                $student->save();
+
+            if ($companyPosition === false) {
+                continue;
+            }
+
+            foreach ($companyPosition as $companyPos) {
+                if ($this->tokenBasedMatching($studentPosition, $companyPos)) {
+                    $matchingResults[] = [
+                        'student' => $student,
+                        'company' => $company,
+                    ];
+                    $student->suggestedCompany = array_merge($student->suggestedCompany, [$company->id]);
+                    $student->save();
+                    $matchFound = true;
+                    break;
+                }
+            }
+
+            if ($matchFound) {
+                break;
             }
         }
 
@@ -63,24 +74,35 @@ class MatchingController extends Controller
     private function preprocessPosition($position)
     {
         Log::info('Preprocess Occurs');
-        foreach ($position as $positions)
-            $position = strtolower($positions);
-        return $position;
+        $processedPositions = [];
+        foreach($position as $pos) {
+            $processedPositions[] = strtolower($pos);
+        }
+        return $processedPositions;
     }
 
-    private function tokenBasedMatching($studentPosition, $companyPosition)
+
+    private function tokenBasedMatching($studentPositions, $companyPosition)
     {
-        Log::info('Token Based Occurs');
-        $studentTokens = preg_split('/\s+/', $studentPosition);
-        $companyTokens = preg_split('/\s+/', $companyPosition);
+        $levenshteinThreshold = 5;
 
-        Log::info('Student Tokens: ' . print_r($studentTokens, true));
-        Log::info('Company Tokens: ' . print_r($companyTokens, true));
+        $studentPositions = array_map(function ($pos) {
+            return str_replace(['junior ', 'senior '], '', $pos);
+        }, $studentPositions);
 
-        $commonTokens = array_intersect($studentTokens, $companyTokens);
-        Log::info('Common Tokens: ' . print_r($commonTokens, true));
-        $threshold = 1;
+        $companyPosition = str_replace(['junior ', 'senior '], '', $companyPosition);
 
-        return count($commonTokens) >= $threshold;
+        $matchingResults = [];
+
+        foreach ($studentPositions as $studentPos) {
+                $levenshteinDistance = levenshtein($studentPos, $companyPosition);
+
+                Log::info('The distance between ' . $studentPos . ' and ' . $companyPosition . ': ' . $levenshteinDistance);
+
+                if ($levenshteinDistance <= $levenshteinThreshold) {
+                    return true;
+                }
+            }
+
+        return false;
     }
-}

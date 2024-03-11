@@ -88,17 +88,12 @@
 
         <!-- SEARCH AND FILTER -->
         <div class="flex gap-6 w-full">
-
-
-
           <!-- FILTERING -->
           @php
           $uniqueJournalNumbers = [];
           @endphp
-
           <div>
             <form method="GET" action="{{ route('journals.index') }}" class="flex gap-4" id="filterForm">
-
               <select id="sectionDropdown" name="sectionDropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
                 <option value="">All Sections</option>
                 @php
@@ -117,18 +112,12 @@
               <select id="dropdown" name="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
                 <option value="">All Journal</option>
                 @php
-                $uniqueJournalNumbers = [];
+                $uniqueJournalNumbers = App\Models\Journal::distinct()->pluck('journalNumber');
                 @endphp
-                @foreach($journals as $journal)
-                @if(!in_array($journal->journalNumber, $uniqueJournalNumbers))
-                <option value="{{ $journal->journalNumber }}" {{ request('dropdown') == $journal->journalNumber ? 'selected' : '' }}>Journal {{ $journal->journalNumber }}</option>
-                @php
-                $uniqueJournalNumbers[] = $journal->journalNumber;
-                @endphp
-                @endif
+                @foreach($uniqueJournalNumbers as $uniqueJournalNumber)
+                <option value="{{ $uniqueJournalNumber }}" {{ request('dropdown') == $uniqueJournalNumber ? 'selected' : '' }}>Journal {{ $uniqueJournalNumber }}</option>
                 @endforeach
               </select>
-
 
               <select id="dropdown-status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
                 <option value="">All Status</option>
@@ -140,8 +129,6 @@
               <button type="submit" name="reset" value="reset" class="bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Reset</button>
             </form>
           </div>
-
-
         </div>
       </div>
 
@@ -203,5 +190,3 @@
 
 
 </body>
-
-</html>
