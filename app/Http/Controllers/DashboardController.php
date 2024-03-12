@@ -94,7 +94,8 @@ class DashboardController extends Controller
             'remainingHours' => $remainingHours,
             'neededHours' => $neededHours,
             'companies' => $companies,
-            'major' => $major // Pass the $major variable to the view
+            'major' => $major, // Pass the $major variable to the view
+
         ]);
     }
 

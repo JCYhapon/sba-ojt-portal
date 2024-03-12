@@ -56,7 +56,7 @@ class StudentController extends Controller
 
     public function displayCompany()
     {
-        $companies = Company::orderBy('id', 'asc')->paginate(10);
+        $companies = Company::orderBy('id', 'asc')->paginate(9);
         return view('student.company_list', compact('companies'));
     }
 

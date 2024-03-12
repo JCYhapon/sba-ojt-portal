@@ -159,6 +159,7 @@
 
         </div>
 
+        
         <script src="{{ asset('js/coordinator.js') }}">
         </script>
 </body>
