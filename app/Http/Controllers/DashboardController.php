@@ -75,6 +75,9 @@ class DashboardController extends Controller
             }
         }
 
+        // Fetch the major of the authenticated student
+        $major = $student->major;
+
         if ($user->role === 2) {
             return view('coordinator.profile');
         }
@@ -90,7 +93,8 @@ class DashboardController extends Controller
             'totalRenderedHours' => $totalRenderedHours,
             'remainingHours' => $remainingHours,
             'neededHours' => $neededHours,
-            'companies' => $companies
+            'companies' => $companies,
+            'major' => $major // Pass the $major variable to the view
         ]);
     }
 
