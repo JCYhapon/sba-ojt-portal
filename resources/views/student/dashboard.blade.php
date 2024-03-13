@@ -106,7 +106,13 @@
                         </div>
                     </div>
 
-                    <h2 class="mt-8 text-lg font-semibold text-[#AD974F]">TITLE</h2>
+                    <h2 class="mt-8 text-lg font-semibold text-[#AD974F]">Coordinator:
+                        @if ($major === 'Accounting')
+                        <span>Robin G. Santos</span>
+                        @elseif ($major === 'Management')
+                        <span>Michelle M. Estralla</span>
+                        @endif
+                    </h2>
                     <div class="grid grid-cols-2 ">
                         <div class="flex flex-col gap-5">
                             <h2 class="border-b w-[80%]">Coordinator Contact Details</h2>
