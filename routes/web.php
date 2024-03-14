@@ -70,11 +70,11 @@ Route::get('/company-list', function () {
 
 Route::get('/journal', function () {
     return view('student.journal');
-})->name('student_journal'); // STUDENT JOURNAL PAGE
+})->name('student_journal')->middleware('student'); // STUDENT JOURNAL PAGE
 
 Route::get('/student-profile', function () {
     return view('student.profile');
-})->name('student_profile'); // STUDENT PROFILE PAGE
+})->name('student_profile')->middleware('student'); // STUDENT PROFILE PAGE
 
 
 
@@ -85,7 +85,7 @@ Route::get('/coordinator', function () {
 
 Route::get('/coordinator_company-list', function () {
     return view('coordinator.company_list');
-})->name('coordinator_company-list'); // COORDINATOR COMPANY-LIST PAGE
+})->name('coordinator_company-list')->middleware('coordinator'); // COORDINATOR COMPANY-LIST PAGE
 
 Route::get('/coordinator_student-list', [CoordinatorUserController::class, 'studentlist'])->name('coordinator_student-list')->middleware('coordinator'); // COORDINATOR STUDENT-LIST
 
@@ -160,21 +160,21 @@ Route::get('/admin', [DashboardController::class, 'getAdminDashboardData'])->nam
 | All Functions in Journalr Controller                          |
 |----------------------------------------------------------------
 */
-Route::get('/journal',  [JournalController::class, 'journalStudent'])->name('student_journal');
+Route::get('/journal',  [JournalController::class, 'journalStudent'])->name('student_journal')->middleware('student');
 
-Route::get('/coordinator_student-journal', [JournalController::class, 'journalCoordinator'])->name('coordinator_student-journal');
+Route::get('/coordinator_student-journal', [JournalController::class, 'journalCoordinator'])->name('coordinator_student-journal')->middleware('coordinator');
 
-Route::get('/journal/create',  [JournalController::class, 'createJournal'])->name('create_journal');
+Route::get('/journal/create',  [JournalController::class, 'createJournal'])->name('create_journal')->middleware('student');
 
 Route::post('/journal/store',  [JournalController::class, 'storeJournal'])->name('store_journal');
 
-Route::get('/edit-journal/{journal}', [JournalController::class, 'editJournal'])->name('edit_journal');
+Route::get('/edit-journal/{journal}', [JournalController::class, 'editJournal'])->name('edit_journal')->middleware('student');
 
 Route::put('/update-journal/{journalID}', [JournalController::class, 'updateJournal'])->name('update_journal');
 
-Route::get('/coordinator/student-journal-grade/{journal}', [JournalController::class, 'studentJournalGrade'])->name('student.journal.grade');
+Route::get('/coordinator/student-journal-grade/{journal}', [JournalController::class, 'studentJournalGrade'])->name('student.journal.grade')->middleware('coordinator');
 
-Route::post('/grade-journal/{journalID}', [JournalController::class, 'gradeJournal'])->name('grade.journal');
+Route::post('/grade-journal/{journalID}', [JournalController::class, 'gradeJournal'])->name('grade.journal')->middleware('coordinator');
 
 Route::get('/mark-as-unread/{journalID}', [JournalController::class, 'markAsUnread'])->name('mark.unread');
 
@@ -185,31 +185,31 @@ Route::get('/mark-as-unread/{journalID}', [JournalController::class, 'markAsUnre
 | All Functions in Student Controller                          |
 |----------------------------------------------------------------
 */
-Route::get('/coordinator/student-list', [StudentController::class, 'studentHiredCompany'])->name('coordinator.student-list');
+Route::get('/coordinator/student-list', [StudentController::class, 'studentHiredCompany'])->name('coordinator.student-list')->middleware('student');
 
-Route::get('/student-profile', [StudentController::class, 'journalRenderedHours'])->name('student_profile');
+Route::get('/student-profile', [StudentController::class, 'journalRenderedHours'])->name('student_profile')->middleware('student');
 
-Route::get('/company-list', [StudentController::class, 'displayCompany'])->name('student_company-list');
+Route::get('/company-list', [StudentController::class, 'displayCompany'])->name('student_company-list')->middleware('student');
 
-Route::get('/matched-company', [StudentController::class, 'displayMatchedCompany'])->name('matched.company.list');
+Route::get('/matched-company', [StudentController::class, 'displayMatchedCompany'])->name('matched.company.list')->middleware('student');
 
-Route::get('/profile/edit/', [StudentController::class, 'editProfile'])->name('profile.edit');
+Route::get('/profile/edit/', [StudentController::class, 'editProfile'])->name('profile.edit')->middleware('student');
 
-Route::put('/profile/update', [StudentController::class, 'updateProfile'])->name('profile.update');
+Route::put('/profile/update', [StudentController::class, 'updateProfile'])->name('profile.update')->middleware('student');
 
-Route::get('/password/edit/', [StudentController::class, 'editPassword'])->name('password.edit');
+Route::get('/password/edit/', [StudentController::class, 'editPassword'])->name('password.edit')->middleware('student');
 
-Route::put('/password/update', [StudentController::class, 'updatePassword'])->name('password.update');
+Route::put('/password/update', [StudentController::class, 'updatePassword'])->name('password.update')->middleware('student');
 
-Route::get('/profile', [StudentController::class, 'journalRenderedHours'])->name('profile');
+Route::get('/profile', [StudentController::class, 'journalRenderedHours'])->name('profile')->middleware('student');
 
-Route::get('/coordinator/student-list', [StudentController::class, 'studentHiredCompany'])->name('coordinator.student-list');
+Route::get('/coordinator/student-list', [StudentController::class, 'studentHiredCompany'])->name('coordinator.student-list')->middleware('student');
 
-Route::post('/removeStudentPosition', [StudentController::class, 'removePositions'])->name('student.remove-positions');
+Route::post('/removeStudentPosition', [StudentController::class, 'removePositions'])->name('student.remove-positions')->middleware('student');
 
-Route::post('/add-supervisor', [StudentController::class, 'addSupervisor'])->name('add.supervisor');
+Route::post('/add-supervisor', [StudentController::class, 'addSupervisor'])->name('add.supervisor')->middleware('student');
 
-Route::get('/student/company/{id}', [StudentController::class, 'companyInformation'])->name('student_company_information');
+Route::get('/student/company/{id}', [StudentController::class, 'companyInformation'])->name('student_company_information')->middleware('student');
 
 /*
 |----------------------------------------------------------------
@@ -218,19 +218,19 @@ Route::get('/student/company/{id}', [StudentController::class, 'companyInformati
 | All Functions in Admin Controller                             |
 |----------------------------------------------------------------
 */
-Route::get('/admin_company-list', [AdminController::class, 'companyAdmin'])->name('admin_company-page');
+Route::get('/admin_company-list', [AdminController::class, 'companyAdmin'])->name('admin_company-page')->middleware('admin');
 
-Route::get('/admin_coordinator-list', [AdminController::class, 'coordinatorList'])->name('admin_coordinator-page');
+Route::get('/admin_coordinator-list', [AdminController::class, 'coordinatorList'])->name('admin_coordinator-page')->middleware('admin');
 
-Route::get('/admin_student-list', [AdminController::class, 'studentList'])->name('admin_student-page');
+Route::get('/admin_student-list', [AdminController::class, 'studentList'])->name('admin_student-page')->middleware('admin');
 
-Route::get('/admin_create', [AdminController::class, 'createCoordinator'])->name('admin-coordinator_create');
+Route::get('/admin_create', [AdminController::class, 'createCoordinator'])->name('admin-coordinator_create')->middleware('admin');
 
-Route::post('/admin_store', [AdminController::class, 'storeCoordinator'])->name('admin-coordinator_store');
+Route::post('/admin_store', [AdminController::class, 'storeCoordinator'])->name('admin-coordinator_store')->middleware('admin');
 
-Route::get('/admin_coordinator/{user}/edit', [AdminController::class, 'editCoordinator'])->name('admin-coordinator_edit');
+Route::get('/admin_coordinator/{user}/edit', [AdminController::class, 'editCoordinator'])->name('admin-coordinator_edit')->middleware('admin');
 
-Route::put('/admin/coordinator/{user}/update',  [AdminController::class, 'updateCoordinator'])->name('admin-coordinator_update');
+Route::put('/admin/coordinator/{user}/update',  [AdminController::class, 'updateCoordinator'])->name('admin-coordinator_update')->middleware('admin');
 
 
 
