@@ -87,7 +87,7 @@
                 @endphp
 
                 @if(!$disableCreateJournal)
-                <a href="{{ route('create_journal') }}" class="bg-[#AD974F] text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
+                <a href="{{ route('create_journal') }}" class="bg-[#AD974F] hover:bg-[#736023] text-white px-4 py-2 rounded-xl  text-sm">
                     <p type="button" class="flex items-center justify-center text-white font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                         <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
@@ -97,7 +97,7 @@
                 </a>
                 @else
                 {{-- Modify this to redirect to set hiredCompany --}}
-                <p class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm"><a href="{{ route('profile.edit') }}">Add Company</a></p>
+                <p class="bg-[#AD974F] text-white px-4 py-2 rounded-xl hover:bg-[#736023] text-sm"><a href="{{ route('profile.edit') }}">Add Company</a></p>
                 @endif
             </div>
 

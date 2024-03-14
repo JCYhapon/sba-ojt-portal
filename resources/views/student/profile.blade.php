@@ -205,7 +205,7 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Ensure your account is using a long, random password to stay secure.</p>
                         </div>
                         <div>
-                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
+                            <button class="bg-[#AD974F] hover:bg-[#736023] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('password.edit') }}">Update Password</a></button>
                         </div>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
                             <p class="lg:text-lg text-sm xs:text-sm">Edit Profile to match into a company</p>
                         </div>
                         <div>
-                            <button class="bg-[#AD974F] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
+                            <button class="bg-[#AD974F] hover:bg-[#736023] text-white p-1 rounded-md text-sm w-36 mb-4"><a href="{{ route('profile.edit') }}">Edit Profile</a></button>
 
 
                         </div>
