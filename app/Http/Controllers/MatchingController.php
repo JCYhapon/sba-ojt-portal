@@ -75,7 +75,7 @@ class MatchingController extends Controller
     {
         Log::info('Preprocess Occurs');
         $processedPositions = [];
-        foreach($position as $pos) {
+        foreach ($position as $pos) {
             $processedPositions[] = strtolower($pos);
         }
         return $processedPositions;
@@ -95,14 +95,15 @@ class MatchingController extends Controller
         $matchingResults = [];
 
         foreach ($studentPositions as $studentPos) {
-                $levenshteinDistance = levenshtein($studentPos, $companyPosition);
+            $levenshteinDistance = levenshtein($studentPos, $companyPosition);
 
-                Log::info('The distance between ' . $studentPos . ' and ' . $companyPosition . ': ' . $levenshteinDistance);
+            Log::info('The distance between ' . $studentPos . ' and ' . $companyPosition . ': ' . $levenshteinDistance);
 
-                if ($levenshteinDistance <= $levenshteinThreshold) {
-                    return true;
-                }
+            if ($levenshteinDistance <= $levenshteinThreshold) {
+                return true;
             }
+        }
 
         return false;
     }
+}
