@@ -16,20 +16,20 @@ class Coordinator
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/login');
         }
 
-        $user=Auth::user();
-        if($user->role==2){
+        $user = Auth::user();
+        if ($user->role == 2) {
             return $next($request);
         }
 
-        if($user->role==1){
+        if ($user->role == 1) {
             return redirect('/admin');
         }
 
-        if($user->role==3){
+        if ($user->role == 3) {
             return redirect('/student');
         }
     }

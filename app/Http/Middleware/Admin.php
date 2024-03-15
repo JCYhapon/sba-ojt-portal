@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response; // Import the Response class
+use Symfony\Component\HttpFoundation\Response; // Import the RedirectResponse class
 use Illuminate\Support\Facades\Auth;
 
 class Admin
@@ -14,7 +14,7 @@ class Admin
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse  // Correct the return type
      */
     public function handle(Request $request, Closure $next): Response // Correct the return type
     {
