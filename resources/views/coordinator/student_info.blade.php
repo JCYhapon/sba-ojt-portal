@@ -156,7 +156,7 @@
                 @if($journals->count() > 0)
                 @foreach($journals as $journal)
                 <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="block hover:no-underline">
-                    <div class="bg-white p-8 shadow-md rounded-md mb-8">
+                    <div class="bg-white hover:bg-[#AD974F] hover:text-white p-8 shadow-md rounded-md mb-8">
                         <h2 class="text-lg mb-4">Journal Number: {{ $journal->journalNumber }}</h2>
                         <p class="text-lg mb-4"><strong>Date Submitted:</strong> {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</p>
                         <p class="text-lg mb-4"><strong>Status:</strong>

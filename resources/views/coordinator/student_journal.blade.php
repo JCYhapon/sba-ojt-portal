@@ -126,7 +126,7 @@
                 <option value="seen" {{ request('status') == 'seen' ? 'selected' : '' }}>Seen</option>
               </select>
 
-              <button type="submit" name="reset" value="reset" class="bg-[#AD974F] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Reset</button>
+              <button type="submit" name="reset" value="reset" class="bg-[#AD974F] hover:bg-[#736023] text-white font-bold py-2 px-4 rounded-lg">Reset</button>
             </form>
           </div>
         </div>
@@ -135,7 +135,7 @@
       <div class="flex flex-col flex-wrap gap-2 mt-4">
 
         @foreach($journals as $journal)
-        <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}">
+        <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class=" hover:text-[#736023]">
           @php
           $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
           @endphp

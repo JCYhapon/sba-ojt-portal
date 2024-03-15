@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <button type="submit" style="margin-top: 25px" class="text-white bg-gray-800 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    <button type="submit" style="margin-top: 25px" class="text-white bg-[#AD974F] hover:bg-[#736023] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                         Update Coordinator
                     </button>
                 </div>
