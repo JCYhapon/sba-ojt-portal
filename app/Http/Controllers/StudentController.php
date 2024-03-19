@@ -119,7 +119,7 @@ class StudentController extends Controller
             'hiredCompany' => $hiredCompany,
         ]);
 
-        return redirect()->back()->with('success', 'Student has been updated successfully.');
+        return redirect()->route('student_profile')->with('success', 'Student has been updated successfully.');
     }
 
     public function removePositions(Request $request)
