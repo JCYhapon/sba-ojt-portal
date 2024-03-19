@@ -22,6 +22,11 @@ class MatchingController extends Controller
 
         $isInvalidStudent = $isWorkTypeNull || $isEmptyPosition || $isHiredNotNull;
 
+        // Empty student Suggested company
+        $student->update([
+            'suggestedCompany' => [],
+        ]);
+
         if ($isInvalidStudent) {
             Log::info('Inside the first RULE');
             return view('student.matched_company-list', compact('student'));
@@ -37,7 +42,6 @@ class MatchingController extends Controller
         $companies = Company::where('status', 1)
             ->where('workType', $studentWorkType)
             ->whereNotIn('id', $studentSuggestedCompanyIds)
-            ->whereNot('position', '[]')
             ->get();
 
         $matchingResults = [];
@@ -45,6 +49,7 @@ class MatchingController extends Controller
 
         foreach ($companies as $company) {
             $companyPosition = $this->preprocessPosition($company->position);
+            Log::info('Company :' . $company);
 
             if ($companyPosition === false) {
                 continue;
@@ -62,10 +67,6 @@ class MatchingController extends Controller
                     break;
                 }
             }
-
-            if ($matchFound) {
-                break;
-            }
         }
 
         return view('student.matched_company-list', compact('student'));
@@ -75,6 +76,7 @@ class MatchingController extends Controller
     {
         Log::info('Preprocess Occurs');
         $processedPositions = [];
+
         foreach ($position as $pos) {
             $processedPositions[] = strtolower($pos);
         }
