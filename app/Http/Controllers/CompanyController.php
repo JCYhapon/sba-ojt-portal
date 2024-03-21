@@ -15,18 +15,25 @@ class CompanyController extends Controller
 {
     public function getCompany(Request $request)
     {
-        $searchQuery = $request->query('search');
+        $searchQuery = $request->query('search'); // Retrieving search query from request
 
-        $companies = Company::query();
+        $companies = Company::query(); // Starting the query for companies
 
         if ($searchQuery) {
-            $companies->where('name', 'like', '%' . $searchQuery . '%');
+            $companies->where('name', 'like', '%' . $searchQuery . '%'); // Filtering by company name if search query exists
         }
 
-        $companies = $companies->orderBy('id', 'asc')->paginate(7);
+        if ($request->has('filter') && $request->filter === 'active') {
+            $companies->where('status', 1);
+        } else if ($request->has('filter') && $request->filter === 'inactive') {
+            $companies->where('status', 2);
+        }
 
-        return view('coordinator.company_list', compact('companies'));
+        $companies = $companies->orderBy('id', 'asc')->paginate(7); // Paginate the results
+
+        return view('coordinator.company_list', compact('companies')); // Returning the view with paginated company data
     }
+
 
     public function companyInfo($id)
     {
