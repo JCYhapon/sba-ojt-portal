@@ -25,3 +25,31 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 });
+
+document.getElementById("deployedCount").addEventListener("click", function () {
+    var baseUrl = "coordinator_student-list";
+    var url = baseUrl + "?filter=deployed";
+    window.location.href = url;
+});
+
+document
+    .getElementById("undeployedCount")
+    .addEventListener("click", function () {
+        var baseUrl = "coordinator_student-list";
+        var url = baseUrl + "?filter=undeployed";
+        window.location.href = url;
+    });
+
+document.getElementById("activeCompany").addEventListener("click", function () {
+    var baseUrl = "coordinator_company-list";
+    var url = baseUrl + "?filter=active";
+    window.location.href = url;
+});
+
+document
+    .getElementById("inactiveCompany")
+    .addEventListener("click", function () {
+        var baseUrl = "coordinator_company-list";
+        var url = baseUrl + "?filter=inactive";
+        window.location.href = url;
+    });
