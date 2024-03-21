@@ -75,7 +75,7 @@
     <!-- END OF NAVBAR -->
 
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2">
         <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5">
             @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -88,7 +88,7 @@
             <form action="{{ route('store_journal') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- Date --}}
-                <div class="flex flex-row justify-between mb-[1.5rem]">
+                <div class="flex lg:flex-row md:flex-row sm:flex-row flex-col-reverse justify-between mb-[1.5rem]">
                     <div class="flex items-end">
                         <div class="form-group w-[10rem]">
                             <label for="" class="text-md font-medium">Journal Number</label>
@@ -119,12 +119,12 @@
 
                 <div class="form-group mb-4">
                     <label for="studentSignature" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white" for="file_input">Student Signature <span class="text-red-600">*</span></label>
-                    <input type="file" name="studentSignature" accept="image/*" class="form-control-file w-[30rem]  block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
+                    <input type="file" name="studentSignature" accept="image/*" class="form-control-file lg:w-[30rem] w-auto  block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
                 </div>
 
                 <div class="form-group">
                     <label for="supervisorSignature" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Documentation <span class="text-red-600">*</span></label>
-                    <input type="file" name="supervisorSignature" accept="image/*" class="form-control-file block w-[30rem] text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
+                    <input type="file" name="supervisorSignature" accept="image/*" class="form-control-file block lg:w-[30rem] w-auto text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
                 </div>
 
                 <div class="flex align-middle justify-end mt-8">

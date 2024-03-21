@@ -70,7 +70,7 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <div class="">
 
@@ -92,17 +92,17 @@
             <!-- coordinator_company_info.blade.php -->
 
             <table class="w-full border-grey-500 border-b-[1px] ">
-                <tr>
-                    <td class="font-semibold">Email:</td>
-                    <td>{{ $companies->email }}</td>
+                <tr class="flex gap-3">
+                    <td class="font-medium">Email:</td>
+                    <td class="text-[15px] ml-1">{{ $companies->email }}</td>
                 </tr>
-                <tr>
-                    <td class="font-semibold">Address:</td>
-                    <td>{{ $companies->address }}</td>
+                <tr class="flex gap-3">
+                    <td class="font-medium mr-2">Address:</td>
+                    <td class="text-[15px] ">{{ $companies->address }}</td>
                 </tr>
-                <tr>
-                    <td class="font-semibold">Status:</td>
-                    <td>
+                <tr class="flex gap-3">
+                    <td class="font-medium">Status:</td>
+                    <td class="text-[15px]">
                         @if($companies->status == 1)
                         Active
                         @elseif($companies->status == 2)
@@ -110,11 +110,11 @@
                         @endif
                     </td>
                 </tr>
-                <tr>
-                    <td class="font-semibold">Position:</td>
+                <tr class="flex gap-3">
+                    <td class="font-medium">Position:</td>
                     <td>
                         @if ($companies->position)
-                        <ul class="flex flex-wrap dark:border-gray-600">
+                        <ul class="flex flex-wrap dark:border-gray-600 gap-1">
                             @foreach($companies->position as $position)
                             <li style="background-color: #202c34; color: white;" class="rounded-md text-sm p-[5px] dark:placeholder-gray-400 m-2 my-auto">{{ $position }}</li>
                             @endforeach

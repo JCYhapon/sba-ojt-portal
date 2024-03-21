@@ -75,12 +75,16 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12 ">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2">
         <div class="min-h-80vh bg-white rounded-md border-0 shadow-md p-5 ">
+             <!-- BACK BUTTON -->
+            <button class="mb-8">
+                <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
+            </button>
             <form method="POST" action="{{ route('update_journal', ['journalID' => $journal->journalID]) }}" class="overflow-x-auto">
                 @csrf
                 @method('PUT')
-                <div class="flex lg:flex-row justify-between mb-[1.5rem] xs:flex-col">
+                <div class="flex lg:flex-row md:flex-row sm:flex-row flex-col-reverse justify-between mb-[1.5rem]">
                     <div class="flex items-end">
                         <div class="form-group w-[10rem]">
                             <label for="" class="text-md font-medium">Journal Number</label>
@@ -101,7 +105,7 @@
                     <textarea name="reflection" class="form-control block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" rows="10">{{ $journal->reflection }}</textarea>
                 </div>
 
-                <div class="flex lg:flex-row justify-between xs:flex-col xs:mb-6">
+                <div class="flex lg:flex-row flex-col gap-4 justify-between xs:flex-col xs:mb-6">
                     <div class="form-group">
                         <label for="hoursRendered" class="text-md font-medium">Hours Rendered</label>
                         <input type="text" name="hoursRendered" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" value="{{ $journal->hoursRendered }}" required>
@@ -133,16 +137,10 @@
                             <img src="" class="modal-content p-4" id="modalImage">
                         </div>
                     </div>
-
-
                     <script src="{{ asset('js/student/journal-edit.js') }}"></script>
-
-
-
                 </div>
 
-
-                <div class="form-group flex flex-row items-center gap-4 mb-4">
+                <div class="form-group flex flex-row items-center gap-4 my-4">
                     <label for="grade" class="text-md font-medium">Grade</label>
                     <input type="text" name="grade" class="form-control rounded-md bg-gray-50 text-gray-400 overflow-x-auto" value="{{ $journal->grade ?: 'Not Graded Yet' }}/30" readonly>
                 </div>
@@ -152,16 +150,7 @@
                     <textarea name="comments" class="form-control rounded-md bg-gray-50 text-gray-400" readonly>{{ $journal->comments }}</textarea>
                 </div>
 
-                <div class="flex align-middle justify-end mt-8">
-                    <a class="bg-gray-800 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm">
-                        <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                            @if($journal->grade !== null)
-                            Back
-                            @else
-                            Update Journal
-                            @endif
-                        </button>
-                    </a>
+              
 
                     @if($journal->grade !== null)
                     <script src="{{ asset('js/student/journal-edit.js') }}">

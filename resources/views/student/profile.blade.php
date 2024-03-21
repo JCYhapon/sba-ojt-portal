@@ -73,7 +73,7 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto overflow-x-auto ">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2 h-auto overflow-x-auto ">
         <!-- Display Success Message -->
         @if(session()->has('success'))
         <div class="bg-green-200 text-green-800 p-4 mb-4">
@@ -85,9 +85,9 @@
         $student = \App\Models\Student::where('studentID', $studentID)->first();
         @endphp
 
-        <div class="grid grid-rows-3 lg:max-h-auto  xs:max-h-screen xs:gap-8 gap-0 h-auto">
+        <div class="flex flex-col xs:max-h-screen xs:gap-8 gap-4 h-auto">
             <!--  FIRST ROW -->
-            <div class="bg-white row-span-1 grid grid-cols-3 x p-8 shadow-md rounded-md h-48 py-12">
+            <div class="bg-white row-span-1 flex justify-between lg:flex-row md:flex-row sm:flex-row flex-col gap-4 p-8 shadow-md rounded-md h-auto py-12">
                 <div class="flex flex-col justify-between">
                     <div class="flex flex-row gap-10">
                         <h1 class="text-3xl">{{ $student->lastName }} {{ $student->firstName }}</h1>
@@ -95,7 +95,6 @@
                     <div>
                         <p class="text-lg capitalize"><span class="font-semibold">Section:</span> {{ $student->section }}</p>
                     </div>
-
                 </div>
                 <div class="flex items-end">
                     <div>
@@ -109,8 +108,7 @@
             </div>
 
             <!-- SECOND ROW -->
-            <div class="row-span-1 bg-white p-8 shadow-md rounded-md grid grid-cols-2">
-
+            <div class=" bg-white p-8 shadow-md rounded-md flex justify-between lg:flex-row md:flex-row sm:flex-row flex-col">
                 <div class="flex flex-col justify-between gap-2">
                     <div>
                         @if(isset($companies->name) && !empty($companies->name))
@@ -196,7 +194,7 @@
 
             <!--  THIRD ROW -->
             <div class="grid lg:grid-cols-2 xs:grid-rows-2 xs:gap-10 gap-10">
-                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 flex">
                     <div class="flex flex-col gap-4">
                         <div>
                             <h1 class="text-lg font-semibold">Update Password</h1>
@@ -210,7 +208,7 @@
                     </div>
                 </div>
 
-                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 my-6 flex">
+                <div class="xs:row-span-1 bg-white p-8 shadow-md rounded-md h-48 flex">
                     <div class="flex flex-col gap-4">
                         <div>
                             <h1 class="text-lg font-semibold">Update Profile</h1>

@@ -78,7 +78,7 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <!-- Display Success Message -->
             @if(session()->has('success'))
@@ -151,7 +151,7 @@
                     </table>
                 </div>
                 <div>
-                    <div>
+                    <div class="mt-2">
                         {!! $companies->links() !!}
                     </div>
                 </div>
