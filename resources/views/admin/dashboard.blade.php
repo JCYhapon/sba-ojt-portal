@@ -65,7 +65,7 @@
   </div>
   <!-- {{-- End of Nav Bar --}} -->
 
-  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-4">
     <div class="min-h-[80vh] border-0 flex flex-col gap-6">
       <div class="bg-white text-center text-3xl p-8 rounded-md font-medium border-gray-800">
         <span>All Courses and Section</span>

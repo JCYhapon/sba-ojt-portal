@@ -72,7 +72,7 @@
     </div>
   </div>
   {{-- End of NavBar --}}
-  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
     <div class="min-h-[70vh] bg-white rounded-md border-0 shadow-md p-5">
       <!-- Display Success Message -->
       @if(session()->has('success'))
@@ -84,10 +84,10 @@
 
       <!-- Add New Student Button -->
       <div class="mb-4 w-full flex justify-between">
-        <div class="w-2/4">
-          <form class="flex items-center">
+        <div class="relative z-0 w-2/4">
+          <form class="flex items-center z-0">
             <label for="simple-search" class="sr-only">Search</label>
-            <div class="relative w-full">
+            <div class=" w-full">
               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
@@ -99,7 +99,7 @@
         </div>
 
         <div class="flex align-middle justify-center">
-          <a href="{{ route('admin-coordinator_create') }}" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="bg-[#AD974F] hover:bg-[#736023] text-white px-4 py-2 rounded-xl  text-sm">
+          <a href="{{ route('admin-coordinator_create') }}" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="bg-[#AD974F] hover:bg-[#736023] text-white lg:px-4 py-2 rounded-xl  text-sm">
             <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
               <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
@@ -111,7 +111,7 @@
       </div>
 
 
-      <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto">
+      <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto ">
 
         <!-- Coordinators Table -->
         <div class="">
