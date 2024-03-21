@@ -13,13 +13,30 @@ use Illuminate\Support\Facades\Log;
 
 class CoordinatorUserController extends Controller
 {
-    public function studentlist()
+    public function studentlist(Request $request)
     {
         $userMajor = auth()->user()->major;
-        $users = User::where('major', $userMajor)->where('role', 3)->paginate(12);
+        $usersQuery = User::where('major', $userMajor)->where('role', 3);
 
-        return view('coordinator.student_list', ['users' => $users]);
+        if ($request->has('filter') && $request->filter === 'deployed') {
+            $students = Student::whereIn('studentID', $usersQuery->pluck('id'))
+                ->whereNotNull('hiredCompany')
+                ->pluck('id');
+
+            $usersQuery = User::whereIn('schoolID', $students)->paginate(12);
+        } else if ($request->has('filter') && $request->filter === 'undeployed') {
+            $students = Student::whereIn('studentID', $usersQuery->pluck('id'))
+                ->whereNull('hiredCompany')
+                ->pluck('id');
+
+            $usersQuery = User::whereIn('schoolID', $students)->paginate(12);
+        } else {
+            $usersQuery = $usersQuery->paginate(12);
+        }
+
+        return view('coordinator.student_list', ['users' => $usersQuery]);
     }
+
 
     // Retrieve information for the hired students
     private function userStudentsInfo($user)
