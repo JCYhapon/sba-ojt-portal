@@ -77,7 +77,7 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
             <!-- Display Success Message -->
             @if(session()->has('success'))
@@ -87,8 +87,8 @@
             @endif
 
             <!-- Add New Student Button -->
-            <div class="mb-4 w-full flex justify-between">
-                <div class="w-2/4">
+            <div class="mb-4 w-full flex justify-between lg:flex-row md:flex-row   flex-col gap-2">
+                <div class="lg:w-2/4 md:w-2/4">
                     <form class="flex items-center">
                         <label for="simple-search" class="sr-only">Search</label>
                         <div class="relative w-full">
@@ -102,7 +102,7 @@
                     </form>
                 </div>
 
-                <div class="flex gap-4">
+                <div class="flex lg:flex-row lg:gap-4 gap-2 justify-center">
                     <div class="flex align-middle justify-center">
                         <a href="{{ route('company_bulk_list') }}" class="bg-[#AD974F] hover:bg-[#736023] text-white px-4 py-2 rounded-xl  text-sm">
                             <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -125,7 +125,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
 
             <div class="flex flex-col justify-between min-h-[70vh] ">
@@ -201,7 +200,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="">
+                <div class="mt-2">
                     {!! $companies->links() !!}
                 </div>
 

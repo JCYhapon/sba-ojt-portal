@@ -99,7 +99,7 @@
 
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
 
             <div class="">
@@ -125,15 +125,15 @@
 
             <table class=" ">
                 <tr class="flex gap-8">
-                    <td>Email:</td>
+                    <td class="font-semibold">Email:</td>
                     <td class="">{{ $companies->email }}</td>
                 </tr>
                 <tr class="flex gap-3">
-                    <td>Address:</td>
+                    <td class="font-semibold"> Address:</td>
                     <td>{{ $companies->address }}</td>
                 </tr>
                 <tr class="flex gap-6">
-                    <td>Status:</td>
+                    <td class="font-semibold">Status:</td>
                     <td>
                         @if($companies->status == 1)
                         Active
@@ -149,7 +149,7 @@
                 {{-- No display if company has no position --}}
                 @else
                 <tr class="flex gap-2">
-                    <td>We are looking for:</td>
+                    <td class="font-semibold">We are looking for:</td>
                     <td>
                         @foreach($positions as $position)
                         <p>{{ $position }}</p>
@@ -160,7 +160,7 @@
 
                 @if($companies->description !== null)
                 <tr class="flex gap-6">
-                    <td>Description:</td>
+                    <td class="font-semibold">Description:</td>
                     <td>
                         {{ $companies->description }}
                     </td>

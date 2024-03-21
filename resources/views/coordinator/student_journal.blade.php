@@ -78,14 +78,10 @@
   </div>
   <!-- END OF NAVBAR -->
 
-  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+  <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
     <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 overflow-auto">
 
       <div class="container overflow-x-auto">
-        {{-- Left-aligned h1 --}}
-
-        {{-- Loop through journals --}}
-
         <!-- SEARCH AND FILTER -->
         <div class="flex gap-6 w-full">
           <!-- FILTERING -->
@@ -93,19 +89,19 @@
           $uniqueJournalNumbers = [];
           @endphp
           <div>
-            <form method="GET" action="{{ route('journals.index') }}" class="flex gap-4" id="filterForm">
+            <form method="GET" action="{{ route('journals.index') }}" class="flex gap-4 lg:flex-row md:flex-row sm:flex-row ss:flex-row xs:flex-row flex-col" id="filterForm">
               <select id="sectionDropdown" name="sectionDropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onchange="this.form.submit()">
                 <option value="">All Sections</option>
                 @php
-                $uniqueSections = [];
+                    $uniqueSections = [];
                 @endphp
                 @foreach($students as $student)
-                @if(!in_array($student->section, $uniqueSections))
-                <option value="{{ $student->section }}" {{ request('sectionDropdown') == $student->section ? 'selected' : '' }}>{{ $student->section }}</option>
-                @php
-                $uniqueSections[] = $student->section;
-                @endphp
-                @endif
+                    @if(!in_array($student->section, $uniqueSections))
+                    <option value="{{ $student->section }}" {{ request('sectionDropdown') == $student->section ? 'selected' : '' }}>{{ $student->section }}</option>
+                    @php
+                        $uniqueSections[] = $student->section;
+                    @endphp
+                    @endif
                 @endforeach
               </select>
 
@@ -135,7 +131,7 @@
       <div class="flex flex-col flex-wrap gap-2 mt-4">
 
         @foreach($journals as $journal)
-        <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class=" hover:text-[#736023]">
+        <div onclick="window.location='{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}';" class=" hover:bg-[#AD974F] hover:text-white cursor-pointer">
           @php
           $student = \App\Models\Student::where('studentID', $journal->studentID)->first();
           @endphp
@@ -174,7 +170,7 @@
             </div>
             @endif
           </div>
-        </a>
+        </div>
         @endforeach
       </div>
     </div>

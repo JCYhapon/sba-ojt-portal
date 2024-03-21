@@ -74,7 +74,7 @@
     <!-- END OF NAVBAR -->
 
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2">
         <!-- Display Success Message -->
         @if(session()->has('success'))
         <div class="bg-green-200 text-green-800 p-4 mb-4">
@@ -95,34 +95,40 @@
                 </div>
                 <div class="lg:flex flex-row gap-5 ">
                     <div>
-                        <p class="text-lg capitalize"><span class="font-semibold">School ID:</span> {{ $user->schoolID }}</p>
+                        <p class="lg:text-lg capitalize"><span class="font-medium">School ID:</span> {{ $user->schoolID }}</p>
                     </div>
                     <div>
-                        <p class="text-lg capitalize"><span class="font-semibold">Handled Students:</span> {{ $user->major }}</p>
+                        <p class="lg:text-lg capitalize"><span class="font-medium">Handled Students:</span> {{ $user->major }}</p>
                     </div>
                     <div>
-                        <p class="text-lg"><span class="font-semibold">Email:</span> {{ $user->email }}</p>
+                        <p class="lg:text-lg"><span class="font-medium">Email:</span> {{ $user->email }}</p>
                     </div>
                 </div>
             </div>
 
             {{-- 2nd Row --}}
             <div class="flex flex-col gap-4">
-                <div class="flex flex-row justify-between items-center">
-                    <h1 class="text-lg font-medium">Student Grades</h1>
+                <div class="flex lg:flex-row flex-col-reverse justify-between gap-4">
+                    <h1 class="lg:text-lg font-medium">Student Grades</h1>
+                   
                     <form action="{{ route('export.journal.grades') }}" method="GET">
                         @csrf
-                        <label for="section">Select Section:</label>
-                        <select name="section" id="section">
-                            <option value="all">Choose Section</option>
-                            @foreach($coordinatorSections as $section)
-                            <option value="{{ $section }}">{{ $section }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit" class="bg-[#AD974F] hover:bg-[#736023] text-white flex p-1 rounded-md gap-2">
-                            Download Grades
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOhJREFUSEvtlb0NwjAQhe8nrECJREVFn4oV2AJmYARGIIMwQKrUsAC0WYHcHTKCKESx4iRKgYI7y/b37t2dbYSRB47Mh4kJiIi5lDJzsPPgjQ78F2jt2ImnyGdfRE4AsPPkL2HmfXWtzinb1CdgZjMRSRExroLMLGPmDSI+Bgm4w2Y2V9UrAMzfsJyI1oiY1511dvABmFmsqqmbE5GLPGtKW28BByuK4lWLKIoSX08PEmi9KA3PSWuRQ6ChRb4DwKIr0LP/xsxLt1Y6MLOtqh4BYDVQ5EJEB0Q8fwkMhHqPd/oP+gTx+wJPnBaIGYHM7lgAAAAASUVORK5CYII=" />
-                        </button>
+                    <div class="flex gap-6 lg:flex-row md:flex-row sm:flex-row ss:flex-row flex-col">
+                        <div class="flex items-center gap-2">
+                            <label for="section">Select Section:</label>
+                            <select name="section" id="section" class="border rounded-md bg-[#AD974F] text-white p-1">
+                                <option value="all">Choose Section</option>
+                                @foreach($coordinatorSections as $section)
+                                <option value="{{ $section }}">{{ $section }}</option>  
+                                @endforeach
+                            </select>
+                        </div>
+                            <button type="submit" class="bg-[#AD974F] hover:bg-[#736023] text-white flex p-1 rounded-md gap-2 lg:w-auto md:w-auto sm:w-auto ss:w-full w-[55%]">
+                                Download Grades
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOhJREFUSEvtlb0NwjAQhe8nrECJREVFn4oV2AJmYARGIIMwQKrUsAC0WYHcHTKCKESx4iRKgYI7y/b37t2dbYSRB47Mh4kJiIi5lDJzsPPgjQ78F2jt2ImnyGdfRE4AsPPkL2HmfXWtzinb1CdgZjMRSRExroLMLGPmDSI+Bgm4w2Y2V9UrAMzfsJyI1oiY1511dvABmFmsqqmbE5GLPGtKW28BByuK4lWLKIoSX08PEmi9KA3PSWuRQ6ChRb4DwKIr0LP/xsxLt1Y6MLOtqh4BYDVQ5EJEB0Q8fwkMhHqPd/oP+gTx+wJPnBaIGYHM7lgAAAAASUVORK5CYII=" />
+                            </button>
+                    </div>
+                       
                 </div>
 
                 <div class="overflow-x-auto">

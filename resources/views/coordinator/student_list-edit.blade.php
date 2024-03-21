@@ -66,7 +66,7 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
         <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5 ">
             <!-- Back Button -->
             <button class="mb-8">
@@ -244,8 +244,8 @@
 
                     {{-- Student Table Hired Company --}}
                     <div class="w-full">
-                        <label for="hiredCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hired Company</label>
-                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600">
+                        <label for="hiredCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hired Company:</label>
+                        <ul class="flex flex-wrap p-2.5 dark:border-gray-600 align-items-center">
                             @php
                             $company = \App\Models\Company::find($students->hiredCompany);
                             @endphp
@@ -257,7 +257,7 @@
                             @endif
 
                             <li>
-                                <select name="hiredCompany" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <select name="hiredCompany" class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="">Choose a Hired Company</option>
                                     @foreach($companies as $company)
                                     <option value="{{ $company->id }}" @if($students->hiredCompany == $company->id) selected @endif>{{ $company->name }}</option>

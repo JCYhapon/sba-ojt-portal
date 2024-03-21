@@ -68,13 +68,13 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12 h-auto">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:p-12 p-2 h-auto">
 
         <div class="lg:grid lg:grid-rows-3 gap-12 flex flex-col">
             <!--  FIRST ROW -->
             <div class="bg-white flex flex-col gap-4 p-8 shadow-md rounded-md h-auto">
                 <div class="flex flex-col gap-4">
-                    <h1 class="lg:text-3xl text-md"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
+                    <h1 class="lg:text-3xl text-2xl"><span class="font-bold">Welcome,</span> {{ Auth::user()->name }}</h1>
                     <p class="lg:text-lg text-sm">You are using <span class="capitalize">{{ Auth::user()->major }}</span> Coordinator Account</p>
                 </div>
                 <div class="flex flex-col justify-end">
@@ -113,8 +113,8 @@
                     </div>
                     <div class="grid grid-rows-2 gap-8 col-span-2">
                         <div class="bg-white shadow-md rounded-md p-8">
-                            <div class="grid grid-cols-4 justify-center text-center ">
-                                <div class="flex flex-col gap-7">
+                            <div class="lg:grid lg:grid-cols-2 justify-center text-center flex flex-col">
+                                <div class="flex flex-col lg:gap-7 gap-2 mb-3">
                                     <div>
                                         <p>Partner Companies</p>
                                     </div>
@@ -124,34 +124,36 @@
                                     </div>
                                 </div>
 
-                                <div id="activeCompany" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
-                                    <div>
-                                        <p>Active</p>
+                                <div class="flex flex-row justify-center gap-10">
+                                    <div id="activeCompany" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
+                                        <div>
+                                            <p>Active</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-xl">{{ $totalCompaniesWithStatus1 }}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-xl">{{ $totalCompaniesWithStatus1 }}</p>
+
+                                    <div id="inactiveCompany" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
+                                        <div>
+                                            <p>Inactive</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-xl">{{ $totalCompaniesWithStatus2 }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div onclick="window.location='{{ route('coordinator_company-list') }}';" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
+                                        <div>
+                                            <p>Total</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-xl">{{ $totalCompanies }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div id="inactiveCompany" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
-                                    <div>
-                                        <p>Inactive</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-xl">{{ $totalCompaniesWithStatus2 }}</p>
-                                    </div>
-                                </div>
-
-                                <div onclick="window.location='{{ route('coordinator_company-list') }}';" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
-                                    <div>
-                                        <p>Total</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-xl">{{ $totalCompanies }}</p>
-                                    </div>
-                                </div>
                             </div>
-
                         </div>
 
                         <div class="bg-white shadow-md rounded-md p-8">

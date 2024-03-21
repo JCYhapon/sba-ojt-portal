@@ -117,7 +117,7 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8 p-12">
+    <div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2">
         <button class="mb-8">
             <a href="{{ url()->previous() }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMNJREFUSEvtlDEKwkAQRV8OIWiv4BlE8BaCteB1xFrwMArewcZe8BD6wYUtss5Mku2SMizv/fnZSUPlp6nMZxSYDUcqmgI74GhSswNegeBXYAEcgLNX4hEIfgPmwBNYAa+hBDn8AWwicIX4N8EEuP+SC74G3t7k6VxJILg6X34/bGd4aYIcHgncGrbtZXWBUletKNUyiMTag943yRJoml674BEkSfpV7IGL93p5BeLNgC1w8sKtTY5wimcjE3QSjgKztg/ExiAZuzHo1gAAAABJRU5ErkJggg==" /></a>
         </button>
@@ -152,14 +152,14 @@
             </div>
 
             <!-- SECOND ROW -->
-            <div class="col-span-3 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="col-span-3 md:col-span-3 grid  md:grid-cols-2 lg:gap-8 gap-4">
                 @if($journals->count() > 0)
                 @foreach($journals as $journal)
                 <a href="{{ route('student.journal.grade', ['journal' => $journal->journalID]) }}" class="block hover:no-underline">
                     <div class="bg-white hover:bg-[#AD974F] hover:text-white p-8 shadow-md rounded-md mb-8">
-                        <h2 class="text-lg mb-4">Journal Number: {{ $journal->journalNumber }}</h2>
-                        <p class="text-lg mb-4"><strong>Date Submitted:</strong> {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</p>
-                        <p class="text-lg mb-4"><strong>Status:</strong>
+                        <h2 class="text-lg mb-4 font-bold">Journal Number: {{ $journal->journalNumber }}</h2>
+                        <p class="text-lg mb-4"><span class="font-medium">Date Submitted:</span> {{ \Carbon\Carbon::parse($journal->created_at)->format('M j, Y') }}</p>
+                        <p class="text-lg mb-4"><span class="font-medium">Status:</span>
                             @if($journal->status == 1)
                             Unread
                             @elseif($journal->status == 2)
@@ -168,7 +168,7 @@
                             Graded
                             @endif
                         </p>
-                        <p class="text-lg mb-4"><strong>Grade:</strong> {{ $journal->grade ?? 'Not graded yet' }}</p>
+                        <p class="text-lg mb-4"><span class="font-medium">Grade:</span> {{ $journal->grade ?? 'Not graded yet' }}</p>
                     </div>
                 </a>
                 @endforeach
