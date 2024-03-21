@@ -74,12 +74,7 @@
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mb-4">
-                            <label class="flex items-center">
-                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="text-black focus:black border-gray-700 rounded">
-                                <span class="ml-2 text-sm text-gray-500">Remember me</span>
-                            </label>
-                        </div>
+
                         <button type="submit" class="w-full mb-8 font-semibold bg-[#AD974F] text-white p-2 rounded-md hover:bg-[#736023] focus:outline-none focus:shadow-outline-blue">
                             Login
                         </button>
