@@ -106,9 +106,9 @@
 
                         {{-- Display for Student Tracker --}}
                         <div>
-                            <p class="font-semibold">Deployed: {{ $totalHiredStudents }} Counts</p>
-                            <p class="font-semibold">Undeployed: {{ $totalNonHiredStudents }} Counts</p>
-                            <p class="text-[#AD974F] font-semibold">Total Enrolled Students: {{ $totalEnrolledStudents }} Students</p>
+                            <p id="deployedCount" class="font-semibold cursor-pointer hover:underline">Deployed: {{ $totalHiredStudents }} Counts</p>
+                            <p id="undeployedCount" class="font-semibold cursor-pointer hover:underline">Undeployed: {{ $totalNonHiredStudents }} Counts</p>
+                            <p onclick="window.location='{{ route('coordinator_student-list') }}';" class="text-[#AD974F] font-semibold  cursor-pointer hover:underline">Total Enrolled Students: {{ $totalEnrolledStudents }} Students</p>
                         </div>
                     </div>
                     <div class="grid grid-rows-2 gap-8 col-span-2">
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col gap-7">
+                                <div id="activeCompany" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
                                     <div>
                                         <p>Active</p>
                                     </div>
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col gap-7">
+                                <div id="inactiveCompany" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
                                     <div>
                                         <p>Inactive</p>
                                     </div>
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col gap-7">
+                                <div onclick="window.location='{{ route('coordinator_company-list') }}';" class="flex flex-col gap-7 cursor-pointer hover:border-black border-2 border-transparent p-1 rounded-md">
                                     <div>
                                         <p>Total</p>
                                     </div>
