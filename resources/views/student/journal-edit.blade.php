@@ -112,11 +112,6 @@
                     </div>
 
                     <div>
-                        <label for="" class="text-md font-medium">Student Signature</label>
-                        <img src="/{{ $journal->studentSignature }}" class="clickable-image rounded cursor-pointer transition duration-300 hover:opacity-70" style="max-width:100px;" data-toggle="modal" data-target="#imageModal">
-                    </div>
-
-                    <div>
                         <label for="" class="text-md font-medium">Documentation</label>
                         <img src="/{{ $journal->supervisorSignature }}" class="clickable-image rounded cursor-pointer transition duration-300 hover:opacity-70" style="max-width:100px;" data-toggle="modal" data-target="#imageModal">
                     </div>
@@ -150,7 +145,7 @@
                     <textarea name="comments" class="form-control rounded-md bg-gray-50 text-gray-400" readonly>{{ $journal->comments }}</textarea>
                 </div>
 
-              
+
 
                     @if($journal->grade !== null)
                     <script src="{{ asset('js/student/journal-edit.js') }}">
