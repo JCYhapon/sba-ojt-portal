@@ -74,7 +74,7 @@ class StudentController extends Controller
         $student = Student::where('studentID', $userSchoolID)->first();
 
         $request->validate([
-            'profilePicture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profilePicture' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'positions' => 'array',
             'positions.*' => 'string',
             'supervisor',
