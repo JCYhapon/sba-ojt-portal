@@ -9,6 +9,7 @@ class Journal extends Model
 {
     use HasFactory;
 
+    //Remove once Migrated new Database
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,7 +19,6 @@ class Journal extends Model
         'reflection',
         'hoursRendered',
         'status',
-        'studentSignature',
         'supervisorSignature',
         'grade',
         'comments',
