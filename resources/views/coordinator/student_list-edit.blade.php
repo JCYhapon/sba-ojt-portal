@@ -253,12 +253,12 @@
                             @if ($students->hiredCompany && $company)
                             <li style="background-color: #AD974F; color: white;" class="rounded-lg text-sm p-2.5  dark:placeholder-gray-400 m-2 my-auto">{{ $company->name }}</li>
                             @else
-                            <li style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Not Yet Hired</li>
+                            <li style="background-color: #AD974F; color: white;" class="rounded-lg p-2.5 dark:placeholder-gray-400 m-2">Undeployed</li>
                             @endif
 
                             <li>
                                 <select name="hiredCompany" class="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-[25vh] p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option value="">Choose a Hired Company</option>
+                                    <option value="">Choose Deployed company</option>
                                     @foreach($companies as $company)
                                     <option value="{{ $company->id }}" @if($students->hiredCompany == $company->id) selected @endif>{{ $company->name }}</option>
                                     @endforeach
