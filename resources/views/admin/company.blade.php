@@ -104,7 +104,6 @@
                 <th scope="col" class="px-4 py-4">Company Name</th>
                 <th scope="col" class="px-4 py-4">Email</th>
                 <th scope="col" class="px-4 py-4">Address</th>
-                <th scope="col" class="px-4 py-4">Status</th>
                 <th scope="col" class="px-4 py-4">Position</th>
 
               </tr>
@@ -115,9 +114,6 @@
                 <td class="py-2 px-4 border-b">{{ $company->name }}</td>
                 <td class="py-2 px-4 border-b">{{ $company->email }}</td>
                 <td class="py-2 px-4 border-b">{{ $company->address }}</td>
-                <td class="py-2 px-4 border-b">
-                  {{ $company->status === 1 ? 'Active' : 'For Renewal' }}
-                </td>
 
                 <td class="py-2 px-4 border-b">
                   @if ($company->position)
