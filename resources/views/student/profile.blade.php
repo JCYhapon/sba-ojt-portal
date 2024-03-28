@@ -114,7 +114,7 @@
                         @if(isset($companies->name) && !empty($companies->name))
                         <p class="text-lg "><span class="font-semibold">Company:</span> {{ $companies->name }}</p>
                         @else
-                        <p class="text-lg font-semibold"><span class="font-semibold">Company:</span> Not Hired</p>
+                        <p class="text-lg font-semibold"><span class="font-semibold">Company:</span>Undeployed</p>
                         @endif
                     </div>
 
