@@ -113,7 +113,6 @@
                                 <th scope="col" class="px-4 py-4">Company Name</th>
                                 <th scope="col" class="px-4 py-4">Email</th>
                                 <th scope="col" class="px-4 py-4">Address</th>
-                                <th scope="col" class="px-4 py-4">Status</th>
                                 <th scope="col" class="px-4 py-4">Position</th>
                             </tr>
                         </thead>
@@ -123,9 +122,6 @@
                                 <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
                                 <td class="py-2 px-4 border-b">{{ $company->email }}</td>
                                 <td class="py-2 px-4 border-b">{{ $company->address }}</td>
-                                <td class="py-2 px-4 border-b">
-                                    {{ $company->status === 1 ? 'Active' : 'For Renewal' }}
-                                </td>
 
                                 <td class="py-2 px-4 border-b">
                                     @if ($company->position)
@@ -133,17 +129,6 @@
                                     @else
                                     No Available Position
                                     @endif
-                                </td>
-
-                                <td class="py-2 px-4 border-b">
-                                    {{-- <a class="btn btn-primary" href="{{ route('coordinator.company_edit', $company->id) }}"><box-icon name='edit' color='#1f2937'></box-icon></a> --}}
-                                    {{-- Toggle Status Button --}}
-
-                                    {{-- <form action="{{ route('coordinator.company_toggle_status', $company->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="btn btn-warning"><box-icon name='message-alt-x' color='#1f2937'></box-icon></button>
-                                    </form> --}}
                                 </td>
                             </tr>
                             @endforeach
