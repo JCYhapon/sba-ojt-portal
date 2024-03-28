@@ -32,7 +32,7 @@ class ExportReportController extends Controller
 
         $highestJournalNumber = $highestJournalNumber ?? 0;
 
-        return view('coordinator.profile', compact('users', 'coordinatorSections', 'sortedStudents', 'highestJournalNumber'));
+        return view('coordinator.download_grade', compact('users', 'coordinatorSections', 'sortedStudents', 'highestJournalNumber'));
     }
 
     public function exportJournalGrades(Request $request)
