@@ -120,7 +120,7 @@
                                 <li class="flex items-center"> <!-- Added flex and items-center -->
                                     <p class="text-lg font-semibold">Company:</p>
                                     <select name="hiredCompany" class="text-lg font-semibold ml-2"> <!-- Added ml-2 for margin -->
-                                        <option value="">Choose a Hired Company</option>
+                                        <option value="">Choose a Deployed Company</option>
                                         @php
                                         $companies = \App\Models\Company::all();
                                         @endphp
