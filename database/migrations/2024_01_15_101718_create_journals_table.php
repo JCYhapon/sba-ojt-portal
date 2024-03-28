@@ -19,10 +19,10 @@ return new class extends Migration
             $table->text('reflection');
             $table->integer('hoursRendered');
             $table->integer('status')->default(1);
-            $table->string('studentSignature')->nullable();
             $table->string('supervisorSignature')->nullable();
             $table->integer('grade')->nullable();
             $table->text('comments')->nullable();
+            $table->timestamps();
         });
     }
 
