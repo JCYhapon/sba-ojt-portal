@@ -180,8 +180,12 @@
 
                                 {{-- This is the Status --}}
                                 <td onclick="window.location='{{ route('coordinator_student_info', ['id' => $student->id]) }}';" class="py-2 px-4 border-b">
-                                    @if (in_array($student->status, [1, 2]))
-                                    {{ $student->status === 1 ? 'Active' : 'Inactive' }}
+                                    @if ($student->status === 1)
+                                        Active
+                                    @elseif ($student->status === 2)
+                                        Inactive
+                                    @elseif ($student->status === 3)
+                                        Completed
                                     @endif
                                 </td>
 
