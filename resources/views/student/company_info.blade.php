@@ -110,6 +110,18 @@
                         @endif
                     </td>
                 </tr>
+                @if ($companies->workType !== null)
+                <tr class="flex gap-3">
+                    <td class="font-semibold">Work Type:</td>
+                    @if ($companies->workType === 1)
+                        <td>On Site</td>
+                    @elseif ($companies->workType === 2)
+                        <td>Work From Home</td>
+                    @elseif ($companies->workType === 3)
+                        <td>Hybrid</td>
+                    @endif
+                </tr>
+                @endif
                 <tr class="flex gap-3">
                     <td class="font-medium">Position:</td>
                     <td>
