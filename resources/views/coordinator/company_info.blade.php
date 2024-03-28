@@ -129,7 +129,7 @@
                     <td class="">{{ $companies->email }}</td>
                 </tr>
                 <tr class="flex gap-3">
-                    <td class="font-semibold"> Address:</td>
+                    <td class="font-semibold">Address:</td>
                     <td>{{ $companies->address }}</td>
                 </tr>
                 <tr class="flex gap-6">
@@ -142,6 +142,18 @@
                         @endif
                     </td>
                 </tr>
+                @if ($companies->workType !== null)
+                <tr class="flex gap-3">
+                    <td class="font-semibold">Work Type:</td>
+                    @if ($companies->workType === 1)
+                        <td>On Site</td>
+                    @elseif ($companies->workType === 2)
+                        <td>Work From Home</td>
+                    @elseif ($companies->workType === 3)
+                        <td>Hybrid</td>
+                    @endif
+                </tr>
+                @endif
                 @php
                 $positions = $companies->position ?? [];
                 @endphp
@@ -174,7 +186,7 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-6 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th class="px-4 py-4">Hired Students</th>
+                            <th class="px-4 py-4">Deployed Students</th>
                             <th class="px-4 py-4">Section & Major</th>
                             <th class="px-4 py-4">Email</th>
                         </tr>
@@ -207,7 +219,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="3">No hired students</td>
+                        <td colspan="3">No Deployed students</td>
                     </tr>
                     @endif
                 </table>
