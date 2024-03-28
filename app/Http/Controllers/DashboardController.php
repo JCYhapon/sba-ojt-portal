@@ -66,7 +66,7 @@ class DashboardController extends Controller
         $neededHours = 0;
 
         if ($student) {
-            $totalRenderedHours = Journal::where('studentID', $student->id)->sum('hoursRendered');
+            $totalRenderedHours = \App\Models\Journal::where('studentID', $student->id)->where('status', 3)->sum('hoursRendered');
             $neededHours = $student->neededHours;
             $remainingHours = $neededHours - $totalRenderedHours;
             if ($remainingHours === 0) {
@@ -102,6 +102,18 @@ class DashboardController extends Controller
 
     public function getAdminDashboardData()
     {
+        // Get Total Student Count
+        $totalStudentCounts = User::where('role', 3)
+            ->where('status', 1)
+            ->count();
+
+        // Get Deployed Students Count
+        $totalDeployedStudents = Student::whereNotNull('hiredCompany')->count();
+
+        // Get Deployed Students Count
+        $totalCompleteStudents = Student::where('status', 3)->count();
+
+
         // Get Students Count
         $accountingTotalStudents = Student::where('major', 'Accounting')->count();
         $managementTotalStudents = Student::where('major', 'Management')->count();
@@ -141,10 +153,6 @@ class DashboardController extends Controller
             ->get();
 
 
-        // Get Company Count
-        $totalCompanies = Company::count();
-        $totalCompaniesWithStatus1 = Company::where('status', 1)->count();
-        $totalCompaniesWithStatus2 = Company::where('status', 2)->count();
 
         return view('admin.dashboard', [
             'accountingTotalStudents' => $accountingTotalStudents,
@@ -155,6 +163,9 @@ class DashboardController extends Controller
             'managementTotalSections' => $managementTotalSections,
             'accountingStudentSection' => $accountingStudentSection,
             'managementStudentSection' => $managementStudentSection,
+            'totalStudentCounts' => $totalStudentCounts,
+            'totalDeployedStudents' => $totalDeployedStudents,
+            'totalCompleteStudents' => $totalCompleteStudents,
         ]);
     }
 }
