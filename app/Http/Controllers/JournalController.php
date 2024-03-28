@@ -118,20 +118,11 @@ class JournalController extends Controller
             'journalNumber',
             'reflection' => 'required',
             'hoursRendered' => 'required',
-            'studentSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'supervisorSignature' => 'required|image|mimes:jpeg,png,jpg,gif,svg ',
             'coverage_start_date' => 'required',
         ]);
 
         $user = Auth::user();
-
-        // Get the student signature file
-        if ($studentSignature = $request->file('studentSignature')) {
-            $studentSignaturePath = 'studentSignature/';
-            $studentSignatureImage = date('YmdHis') . "." . $studentSignature->getClientOriginalExtension();
-            $studentSignature->move($studentSignaturePath, $studentSignatureImage);
-            $input['studentSignature'] = $studentSignaturePath . $studentSignatureImage; // Full path
-        }
 
         // Get the supervisor signature file
         if ($supervisorSignature = $request->file('supervisorSignature')) {
@@ -147,7 +138,6 @@ class JournalController extends Controller
             'journalNumber' => $journalCount,
             'reflection' => $request->input('reflection'),
             'hoursRendered' => $request->input('hoursRendered'),
-            'studentSignature' => $input['studentSignature'],
             'supervisorSignature' => $input['supervisorSignature'],
             'coverage_start_date' => $request->input('coverage_start_date'),
             'grade' => null,
