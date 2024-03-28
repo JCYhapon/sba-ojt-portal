@@ -125,7 +125,7 @@
                                     Graded
                                     @endif
                                 </td>
-                                <td class="py-2 px-4 border-b"> {{ $journal->grade ?? 'Not graded yet' }}</td>
+                                <td class="py-2 px-4 border-b"> {{ $journal->grade ?? 'Ungraded' }}</td>
                                 <td class="py-2 px-4 border-b">
                                     {{-- <a href="{{ route('edit_journal',['journalID' => $journal->journalID]) }}"> --}}
                                     <a href="{{ route('edit_journal', ['journal' => $journal->journalID]) }}">
