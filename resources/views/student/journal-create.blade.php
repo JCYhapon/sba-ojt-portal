@@ -98,8 +98,8 @@
 
                     <div class="flex flex-col">
                         <div class="">
-                            <label for="coverage_start_date" class="text-md font-medium">Start Date <span class="text-red-600">*</span></label>
-                            <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3" required>
+                            <label for="coverage_start_date" class="text-md font-medium">Date Covered<span class="text-red-600">*</span></label>
+                            <input type="date" name="coverage_start_date" id="coverage_start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-[15rem] mb-3" required max="{{ date('Y-m-d') }}">
                         </div>
                     </div>
                 </div>
@@ -116,15 +116,17 @@
                     <input type="number" class="form-control rounded-md w-[15rem] border-neutral-400 bg-gray-50" name="hoursRendered" placeholder="Hours rendered" required max="10">
                 </div>
 
-
-                <div class="form-group mb-4">
-                    <label for="studentSignature" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white" for="file_input">Student Signature <span class="text-red-600">*</span></label>
-                    <input type="file" name="studentSignature" accept="image/*" class="form-control-file lg:w-[30rem] w-auto  block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
+                <div class="form-group mb-8">
+                    <label for="supervisorSignature" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="file_input">Documentation <span class="text-red-600">*</span></label>
+                    <input type="file" name="supervisorSignature" accept="image/*" class="form-control-file block lg:w-[30rem] w-auto text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
                 </div>
 
+
                 <div class="form-group">
-                    <label for="supervisorSignature" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Documentation <span class="text-red-600">*</span></label>
-                    <input type="file" name="supervisorSignature" accept="image/*" class="form-control-file block lg:w-[30rem] w-auto text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" required>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="studentSignature" required>
+                        <label for="studentSignature" class="ml-2 text-sm font-medium text-gray-900 dark:text-black">Check If All Entries Are Correct.</label>
+                    </div>
                 </div>
 
                 <div class="flex align-middle justify-end mt-8">
