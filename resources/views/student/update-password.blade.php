@@ -157,13 +157,13 @@
                 <!-- Label and Input for New Password -->
                 <div class="flex flex-col">
                     <label for="new_password" class="mb-2 font-semibold">New Password:</label>
-                    <input type="password" id="new_password" name="new_password" placeholder="Enter your new password" class="border rounded-md px-3 py-2">
+                    <input type="password" id="new_password" name="new_password" placeholder="Enter your new password" class="border rounded-md px-3 py-2"  maxlength="12">
                 </div>
 
                 <!-- Label and Input for Re-enter New Password -->
                 <div class="flex flex-col">
                     <label for="confirm_password" class="mb-2 font-semibold">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Enter your confirm password" class="border rounded-md px-3 py-2">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Enter your confirm password" class="border rounded-md px-3 py-2"  maxlength="12">
                 </div>
 
                 <div id="passwordRequirements" class="flex-col">
@@ -173,19 +173,19 @@
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" id="checkbox2" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
-                        <label for="checkbox2" class="ml-2">Capital Letter</label>
+                        <label for="checkbox2" class="ml-2">Contain Capital Letter</label>
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" id="checkbox3" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
-                        <label for="checkbox3" class="ml-2">Numerical</label>
+                        <label for="checkbox3" class="ml-2">Contain Numerical</label>
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" id="checkbox4" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" class="bg-gray-800" disabled>
-                        <label for="checkbox4" class="ml-2">With Special character</label>
+                        <label for="checkbox4" class="ml-2">Contain Special character</label>
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" id="checkbox5" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid gray;" disabled>
-                        <label for="checkbox5" class="ml-2">Confirm Password</label>
+                        <label for="checkbox5" class="ml-2">Match Password</label>
                     </div>
                 </div>
 
