@@ -38,7 +38,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// FOR FILTERING COORDINATOR - STUDENT JOURNAL 
+// FOR FILTERING COORDINATOR - STUDENT JOURNAL
 Route::get('/journals', [JournalController::class, 'journalCoordinator'])->name('journals.index');
 
 //Company Filtering
@@ -53,16 +53,20 @@ Route::get('/forgot-password', function () {
 //FOR ADMIN
 // Route::get('/admin', function () {
 //     return view('admin.dashboard');
-// })->name('admin'); 
+// })->name('admin');
 
 Route::get('/coordinator-profile', function () {
     return view('coordinator.profile');
 })->name('coordinator_profile');
 
+// Route::get('/coordinator-journal-grade', function () {
+//     return view('coordinator.download_grade');
+// })->name('coordinator_download_grade');
+
 //FOR STUDENT
 // Route::get('/student', function () {
 //     return view('student.dashboard');
-// })->name('student'); 
+// })->name('student');
 
 Route::get('/company-list', function () {
     return view('student.company_list');
