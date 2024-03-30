@@ -122,7 +122,7 @@
             <!-- Add file input for upload -->
             <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data" class="mt-4">
                 @csrf
-                <div class="flex justify-center mt-4">
+                <div class="flex justify-end mt-8">
                     <input type="file" name="file" accept=".xls,.xlsx">
                     <button type="submit" class="ml-4 bg-[#AD974F] hover:bg-[#736023] text-white px-4 py-2 rounded-lg ">Upload</button>
                 </div>
