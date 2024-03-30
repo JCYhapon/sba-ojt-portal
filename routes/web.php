@@ -59,10 +59,6 @@ Route::get('/coordinator-profile', function () {
     return view('coordinator.profile');
 })->name('coordinator_profile');
 
-// Route::get('/coordinator-journal-grade', function () {
-//     return view('coordinator.download_grade');
-// })->name('coordinator_download_grade');
-
 //FOR STUDENT
 // Route::get('/student', function () {
 //     return view('student.dashboard');
@@ -255,8 +251,9 @@ Route::get('/match-students', [MatchingController::class, 'matchStudentsWithComp
 | All Routes for ExportReportController                         |
 |----------------------------------------------------------------
 */
+Route::get('/coordinator-profile', [ExportReportController::class, 'coordinatorProfile'])->name('coordinator_profile')->middleware('coordinator');
 
-Route::get('/coordinator-profile', [ExportReportController::class, 'journalGrade'])->name('coordinator_profile')->middleware('coordinator');
+Route::get('/coordinator-grade-journal', [ExportReportController::class, 'journalGrade'])->name('coordinator_grade')->middleware('coordinator');
 
 Route::get('/export-journal-grades', [ExportReportController::class, 'exportJournalGrades'])->name('export.journal.grades');
 
