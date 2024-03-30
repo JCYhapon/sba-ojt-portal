@@ -14,6 +14,27 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportReportController extends Controller
 {
+    public function coordinatorProfile()
+    {
+        $userMajor = auth()->user()->major;
+        $users = User::where('major', $userMajor)->where('role', 3)->get();
+        $studentIDs = $users->pluck('schoolID')->flatten()->toArray();
+
+        $coordinatorSections = Student::where('major', $userMajor)
+            ->distinct('section')
+            ->pluck('section');
+
+        $sortedStudents = Student::whereIn('studentID', $studentIDs)
+            ->orderBy('lastName', 'asc')
+            ->get();
+
+        $highestJournalNumber = Journal::max('journalNumber');
+
+        $highestJournalNumber = $highestJournalNumber ?? 0;
+
+        return view('coordinator.profile', compact('users', 'coordinatorSections', 'sortedStudents', 'highestJournalNumber'));
+    }
+
     public function journalGrade()
     {
         $userMajor = auth()->user()->major;
