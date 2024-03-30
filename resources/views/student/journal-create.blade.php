@@ -129,6 +129,7 @@
                     </div>
                 </div>
 
+                
                 <div class="flex align-middle justify-end mt-8">
                     <a class="bg-[#AD974F] hover:bg-[#736023] text-white px-4 py-2 rounded-xl  text-sm">
                         <button type="submit" class=" btn btn-primary flex items-center justify-center text-white   font-medium rounded-lg text-sm px-2 py-0 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -137,8 +138,60 @@
                     </a>
                 </div>
             </form>
+
+
+    <!-- Button to toggle visibility -->
+    <button id="toggleTableBtn" class="bg-[#AD974F] hover:bg-[#736023] text-white px-4 py-2 rounded-xl mb-2">Show Rubrics</button>
+
+    <!-- Table hidden by default -->
+    <table id="rubricTable" class="w-full hidden">
+        <thead>
+            <tr>
+                <th class="bg-gray-200 border px-4 py-2">Criteria</th>
+                <th class="bg-gray-200 border px-4 py-2">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="border px-4 py-2">Timely Submission</td>
+                <td class="border px-4 py-2">
+                    <ul class="list-disc list-inside">
+                        <li>10 points: Submitted on or before the deadline</li>
+                        <li>7 points: 1-2 Days Delayed Submission</li>
+                        <li>5 points: 3-4 Days Delayed Submission</li>
+                        <li>0 points: 5 Days and Beyond</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="border px-4 py-2">Journal Length (Number of Sentences)</td>
+                <td class="border px-4 py-2">
+                    <ul class="list-disc list-inside">
+                        <li>10 points: Journal contains 7 or more sentences</li>
+                        <li>7 points: Journal contains 5-6 sentences</li>
+                        <li>5 points: Journal contains 3-4 sentences</li>
+                        <li>0 points: Journal contains fewer than 3 sentences or none</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+<script>
+    // Get references to the button and table
+    const toggleBtn = document.getElementById('toggleTableBtn');
+    const table = document.getElementById('rubricTable');
+
+    // Add click event listener to the button
+    toggleBtn.addEventListener('click', function() {
+        // Toggle the visibility of the table
+        table.classList.toggle('hidden');
+    });
+</script>
         </div>
     </div>
+
+    
 
     <!-- FOR BUTTON SUCCESS MESSAGE -->
     <script src="{{ asset('js/button.js') }}"></script>
