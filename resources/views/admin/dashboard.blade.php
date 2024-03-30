@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{----alphinejs----}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Tailwindcss CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -145,35 +147,53 @@
             </div>
         </div>
 
-        <div class="flex flex-col lg:flex-row justify-between gap-8 sm:flex-col ss:flex-col xs:flex-col">
-            <div class="grid grid-cols-2 lg:w-[100%] bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center overflow-auto">
-                <div class="w-[100%]">
-                    {{-- Dito ko nilagay ung mga kakailangan mo para sa
-                        Admin summary of reports done by all. --}}
-                    <span class="text-xl font-semibold text-center">Holder</span>
-                </div>
-                <div class="flex flex-row gap-[50px]">
-                    <div class="flex flex-col items-center gap-4">
-                    <label>Total Students</label>
-                    <span>{{ $totalStudentCounts }}</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-4">
-                    <label>Total Deployed Students</label>
-                    <span>{{ $totalDeployedStudents }}</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-4">
-                    <label>Total Complete Students</label>
-                    <span> {{ $totalCompleteStudents }}</span>
-                    </div>
-                </div>
-            </div>
 
-        </div>
+       
 
-        <!-- 2ND BOX -->
-        </div>
-        <!-- 1ST BOX -->
-    </div>
+<!-- Chart Canvas -->
+<canvas id="myChart" style="max-height: 300px;" class="bg-white rounded-md p-2"></canvas>
+
+<script>
+   
+    const totalStudentCounts = <?= $totalStudentCounts ?>;
+    const totalDeployedStudents = <?= $totalDeployedStudents ?>;
+    const totalCompleteStudents = <?= $totalCompleteStudents ?>;
+
+    const labels = ['Total Students', 'Total Deployed Students', 'Total Complete Students'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Holder',
+            data: [totalStudentCounts, totalDeployedStudents, totalCompleteStudents],
+            fill: false,
+            backgroundColor: [
+                '#736023',
+                '#AD974F',
+                '#1F2937'
+            ],
+            borderColor: [
+                '#736023',
+                '#AD974F',
+                '#1F2937'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'y'
+        }
+    };
+
+    // Create chart
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, config);
+</script>
+
+
 
 </body>
 
