@@ -135,7 +135,7 @@
                         </form>
                     </div>
 
-                    <a href="{{ route('coordinator_profile') }}" class="bg-[#AD974F] hover:bg-[#736023] text-white font-bold py-2 px-4 rounded-lg">Download Journal Grades</a>
+                    <a href="{{ route('coordinator_grade') }}" class="bg-[#AD974F] hover:bg-[#736023] text-white font-bold py-2 px-4 rounded-lg">Download Journal Grades</a>
                 </div>
             </div>
 
