@@ -146,7 +146,7 @@
         </div>
 
         <div class="flex flex-col lg:flex-row justify-between gap-8 sm:flex-col ss:flex-col xs:flex-col">
-            <div class="grid grid-cols-2 lg:w-[70%] bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center overflow-auto">
+            <div class="grid grid-cols-2 lg:w-[100%] bg-white text-center p-12 rounded-md font-medium border-gray-800 justify-between items-center overflow-auto">
                 <div class="w-[100%]">
                     {{-- Dito ko nilagay ung mga kakailangan mo para sa
                         Admin summary of reports done by all. --}}
