@@ -173,7 +173,7 @@
                                     @if ($company)
                                     {{ $company->name }}
                                     @else
-                                    Unemployed for OJT
+                                    Not Yet Deployed
                                     @endif
                                 </td>
                                 @endforeach
