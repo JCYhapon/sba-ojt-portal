@@ -244,7 +244,7 @@
 
                     {{-- Student Table Hired Company --}}
                     <div class="w-full">
-                        <label for="hiredCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hired Company:</label>
+                        <label for="hiredCompany" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deployed Company:</label>
                         <ul class="flex flex-wrap p-2.5 dark:border-gray-600 align-items-center">
                             @php
                             $company = \App\Models\Company::find($students->hiredCompany);
