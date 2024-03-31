@@ -119,6 +119,14 @@ class StudentController extends Controller
             'hiredCompany' => $hiredCompany,
         ]);
 
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Student Edited Their Profile';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         return redirect()->route('student_profile')->with('success', 'Student has been updated successfully.');
     }
 
@@ -138,6 +146,14 @@ class StudentController extends Controller
             'position' => $updatedPositions,
         ]);
 
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Student Edited Their Preferred Position';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         return back()->with('success', 'Positions updated successfully');
     }
 
@@ -153,6 +169,14 @@ class StudentController extends Controller
         $updateStudent = $student->update([
             'supervisor' => $request->input('supervisor'),
         ]);
+
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Student Add Their Supervisor';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
 
         return back()->with('success', 'Supervisor updated successfully');
     }
@@ -192,6 +216,22 @@ class StudentController extends Controller
         $updateStudent = $user->update([
             'password' => Hash::make($request->new_password),
         ]);
+
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+
+        if ($role === 3) {
+            $activity = 'Student Updated Their Password';
+        } else if ($role === 2) {
+            $activity = 'Coordinator Updated Their Password';
+        } else if ($role === 1) {
+            $activity = 'Admin Updated Their Password';
+        }
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         Log::info($user->role);
         if ($user->role === 3) {
             Log::info('It goes here');
