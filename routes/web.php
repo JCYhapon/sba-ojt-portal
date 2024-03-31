@@ -9,6 +9,7 @@ use App\Http\Controllers\MatchingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ExportReportController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\HistoryLogController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -286,3 +287,15 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'forgetPasswor
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
 
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
+
+/*
+|----------------------------------------------------------------
+|   History Log Controller                                      |
+|---------------------------------------------------------------|
+| All Routes for HistoryLogController                           |
+|----------------------------------------------------------------
+*/
+
+Route::post('/history-log-create', [HistoryLogController::class, 'logCreate']);
+
+Route::get('/history-activity-logs', [HistoryLogController::class, 'logDisplay'])->name('history_logs')->middleware('admin');
