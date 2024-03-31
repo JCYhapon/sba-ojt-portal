@@ -66,6 +66,14 @@ class ExportReportController extends Controller
             return Excel::download(new JournalGradesExport, 'journal_grades.xlsx');
         }
 
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Downloaded Grades';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         return Excel::download(new JournalGradesExport($request->section), 'journal_grades_' . $request->section . '.xlsx');
     }
 }
