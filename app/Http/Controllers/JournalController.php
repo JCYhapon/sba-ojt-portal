@@ -144,6 +144,14 @@ class JournalController extends Controller
             'comments' => null,
         ]);
 
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Student Created a Journal';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         return redirect()->route('student_journal')->with('success', 'Journal has been updated successfully');
     }
 
@@ -170,6 +178,14 @@ class JournalController extends Controller
             'hoursRendered' => $request->input('hoursRendered'),
 
         ]);
+
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Student Updated a Journal';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
 
         return redirect()->route('student_journal')->with('success', 'Journal has been updated successfully');
     }
@@ -209,6 +225,14 @@ class JournalController extends Controller
                 'status' => 3,
             ]);
         }
+
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Graded a Journal';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
 
         return redirect()->route('coordinator_student-journal')->with('success', 'Journal has been graded');
     }
