@@ -102,6 +102,14 @@ class CoordinatorUserController extends Controller
             'updated_at' => now(),
         ]);
 
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Created a Student';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         return redirect(route('coordinator_student-list'))->with('success', 'Student created successfully.');
     }
 
@@ -205,6 +213,13 @@ class CoordinatorUserController extends Controller
             'updated_at' => now(),
         ]);
 
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Updated a Student';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
 
         return redirect(route('coordinator_student-list'))->with('success', 'Student updated successfully.');
     }
@@ -225,6 +240,15 @@ class CoordinatorUserController extends Controller
         $message = ($newStatus == 2) ? 'Student updated status to Inactive.' : 'Student updated status to Active.';
 
         // Redirect back or wherever you need
+
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Updated a Student Status';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
+
         return redirect(route('coordinator_student-list'))->with('success', $message);
     }
 
