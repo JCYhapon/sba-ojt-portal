@@ -31,6 +31,13 @@ class ImportController extends Controller
         $file = $request->file('file');
 
         Excel::import(new StudentImport, $file);
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Add Multiple Students';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
 
         return redirect()->back()->with('success', 'Students imported successfully.');
     }
@@ -45,6 +52,14 @@ class ImportController extends Controller
         $file = $request->file('file');
 
         Excel::import(new CompanyImport, $file);
+
+        // History Log
+        $userId = auth()->user()->id;
+        $role = auth()->user()->role;
+        $activity = 'Coordinator Add Multiple Company';
+
+        $historyLogController = new HistoryLogController();
+        $response = $historyLogController->logCreate($userId, $role, $activity);
 
         return redirect()->back()->with('success', 'Students imported successfully.');
     }
