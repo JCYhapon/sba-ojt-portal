@@ -59,9 +59,11 @@ class StudentController extends Controller
     public function displayCompany()
     {
         $companies = Company::orderBy('id', 'asc')->get();
-        $positions = Company::distinct()->pluck('position')->filter()->toArray();
+        $positions = Company::distinct()->pluck('position')->toArray(); // Convert to array
         return view('student.company_list', compact('companies', 'positions'));
     }
+
+
 
     public function editProfile(Student $student)
     {
