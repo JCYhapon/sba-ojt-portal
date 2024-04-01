@@ -54,10 +54,13 @@ class StudentController extends Controller
         ));
     }
 
+
+
     public function displayCompany()
     {
-        $companies = Company::orderBy('id', 'asc')->paginate(9);
-        return view('student.company_list', compact('companies'));
+        $companies = Company::orderBy('id', 'asc')->get();
+        $positions = Company::distinct()->pluck('position')->filter()->toArray();
+        return view('student.company_list', compact('companies', 'positions'));
     }
 
     public function editProfile(Student $student)
