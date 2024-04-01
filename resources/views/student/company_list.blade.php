@@ -79,15 +79,14 @@
     <!-- END OF NAVBAR -->
 
     <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
-        <div class="min-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
+       
+        <div class="max-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
             <!-- Display Success Message -->
             @if(session()->has('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4">
                 {{ session('success') }}
             </div>
             @endif
-
-
             <div class="mb-4 w-full flex justify-between">
                 <div class="w-2/4">
                     <form class="flex items-center" action="{{ route('company.search') }}" method="GET">
@@ -103,11 +102,10 @@
                     </form>
                 </div>
             </div>
-
             <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto">
                 <!-- Company Table -->
-                <div>
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <div class="max-h-[70vh] overflow-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
                             <tr>
                                 <th scope="col" class="px-4 py-4">Company Name</th>
@@ -116,7 +114,7 @@
                                 <th scope="col" class="px-4 py-4">Position</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="overflow-auto">
                             @foreach ($companies as $company)
                             <tr class="cursor-pointer" onclick="window.location='{{ route('student_company_information', ['id' => $company->id]) }}'">
                                 <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
@@ -135,15 +133,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div>
-                    <div class="mt-2">
-                        {!! $companies->links() !!}
-                    </div>
-                </div>
             </div>
-
         </div>
-
+    </div>
 
         <script src="{{ asset('js/coordinator.js') }}">
         </script>
