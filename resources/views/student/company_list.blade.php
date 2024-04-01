@@ -78,64 +78,65 @@
     </div>
     <!-- END OF NAVBAR -->
 
-    <div class="w-full container mx-auto max-w-screen-xl mt-8  lg:px-12 px-2">
-       
-        <div class="max-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
-            <!-- Display Success Message -->
-            @if(session()->has('success'))
-            <div class="bg-green-200 text-green-800 p-4 mb-4">
-                {{ session('success') }}
-            </div>
-            @endif
-            <div class="mb-4 w-full flex justify-between">
-                <div class="w-2/4">
-                    <form class="flex items-center" action="{{ route('company.search') }}" method="GET">
-                        <label for="simple-search" class="sr-only">Search</label>
-                        <div class="relative w-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <input type="text" id="simple-search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+<div class="w-full container mx-auto max-w-screen-xl mt-8 lg:px-12 px-2">
+    <div class="max-h-[80vh] bg-white rounded-md border-0 shadow-md p-5">
+        <!-- Display Success Message -->
+        @if(session()->has('success'))
+        <div class="bg-green-200 text-green-800 p-4 mb-4">
+            {{ session('success') }}
+        </div>
+        @endif
+        <div class="mb-4 w-full flex justify-between">
+            <div class="w-2/4">
+                <!-- Search Form -->
+                <form class="flex items-center" action="{{ route('company.search') }}" method="GET">
+                    <label for="simple-search" class="sr-only">Search</label>
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
                         </div>
-                    </form>
-                </div>
+                        <input type="text" id="simple-search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                    </div>
+                </form>
             </div>
-            <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto">
-                <!-- Company Table -->
-                <div class="max-h-[70vh] overflow-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
-                            <tr>
-                                <th scope="col" class="px-4 py-4">Company Name</th>
-                                <th scope="col" class="px-4 py-4">Email</th>
-                                <th scope="col" class="px-4 py-4">Address</th>
-                                <th scope="col" class="px-4 py-4">Position</th>
-                            </tr>
-                        </thead>
-                        <tbody class="overflow-auto">
-                            @foreach ($companies as $company)
-                            <tr class="cursor-pointer" onclick="window.location='{{ route('student_company_information', ['id' => $company->id]) }}'">
-                                <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
-                                <td class="py-2 px-4 border-b">{{ $company->email }}</td>
-                                <td class="py-2 px-4 border-b">{{ $company->address }}</td>
+        </div>
+        <div class="flex flex-col justify-between min-h-[70vh] overflow-x-auto">
+            <!-- Company Table -->
+            <div class="max-h-[70vh] overflow-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
+                        <tr>
+                            <th scope="col" class="px-4 py-4">Company Name</th>
+                            <th scope="col" class="px-4 py-4">Email</th>
+                            <th scope="col" class="px-4 py-4">Address</th>
+                            <th scope="col" class="px-4 py-4">Position</th>
+                        </tr>
+                    </thead>
+                    <tbody class="overflow-auto">
+                        @foreach ($companies as $company)
+                        <tr class="cursor-pointer" onclick="window.location='{{ route('student_company_information', ['id' => $company->id]) }}'">
+                            <td class="py-2 px-4 border-b cursor-pointer hover:text-black hover:font-semibold">{{ $company->name }}</td>
+                            <td class="py-2 px-4 border-b">{{ $company->email }}</td>
+                            <td class="py-2 px-4 border-b">{{ $company->address }}</td>
 
-                                <td class="py-2 px-4 border-b">
-                                    @if ($company->position)
+                            <td class="py-2 px-4 border-b">
+                                @if ($company->position)
                                     {{ implode(', ', $company->position) }}
-                                    @else
+                                @else
                                     No Available Position
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+
 
         <script src="{{ asset('js/coordinator.js') }}">
         </script>
