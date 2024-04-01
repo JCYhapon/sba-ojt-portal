@@ -62,7 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 .join(" ");
 
             // Check if the row text includes the search term
-            if (rowText.includes(searchTerm)) {
+            if (searchTerm === "available") {
+                const hasPosition = rowText.includes("no available position")
+                    ? false
+                    : true;
+                row.style.display = hasPosition ? "" : "none"; // Show the row if it has positions, otherwise hide it
+            } else if (rowText.includes(searchTerm)) {
                 row.style.display = ""; // Show the row if it matches the search term
             } else {
                 row.style.display = "none"; // Hide the row if it doesn't match the search term
@@ -73,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial search functionality
     const searchInput = document.getElementById("simple-search");
     searchInput.addEventListener("input", () => {
-        const searchTerm = searchInput.value.toLowerCase();
+        const searchTerm = searchInput.value.trim().toLowerCase();
         applySearchFilter(searchTerm);
     });
 });
